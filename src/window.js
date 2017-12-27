@@ -3,7 +3,7 @@
  * Contract: i@hust.cc
  */
 
-import canvas from './canvas';
+import createCanvas from './canvas';
 
 export default win => {
   const d = win.document;
@@ -18,6 +18,6 @@ export default win => {
 
   // if ctx not exist, mock it.
   // just mock canvas creator.
-  win.document.createElement = (param) => param === 'canvas' ? canvas : f.call(d, param);
+  win.document.createElement = (param) => param === 'canvas' ? createCanvas('canvas') : f.call(d, param);
   return win;
 };

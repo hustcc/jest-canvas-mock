@@ -3,15 +3,15 @@
  * Contract: i@hust.cc
  */
 
-export default {
+const context2d = {
   fillRect: () => {},
   clearRect: () => {},
-  getImageData: (x, y, w, h) => ({
+  getImageData: (x = 0, y = 0, w = 0, h = 0) => ({
     data: new Array(w * h * 4)
   }),
   setLineDash: () => {},
   getLineDash: () => [],
-  measureText: text => ({
+  measureText: (text = '') => ({
     width:  12 * (text.length || 0),
     height: 14,
   }),
@@ -54,3 +54,14 @@ export default {
   isPointInPath: () => true,
   isPointInStroke: () => true,
 };
+
+const jestWrapper = obj => {
+  Object.keys(obj).forEach(key => {
+    obj[key] = jest.fn(obj[key]);
+  });
+  return obj;
+};
+
+const createContext2d = jest.fn(() => jestWrapper(context2d));
+
+export default createContext2d;

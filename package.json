@@ -1,11 +1,12 @@
 {
   "name": "jest-canvas-mock",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A module to mock canvas in Jest.",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,15 @@
   "homepage": "https://github.com/hustcc/jest-canvas-mock#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-jest": "^22.0.4",
+    "babel-preset-env": "^1.6.1",
+    "coveralls": "^3.0.0",
+    "jest": "^21.2.1"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "setupFiles": [
+      "./src/index.js"
+    ]
   }
 }
