@@ -2,7 +2,10 @@
 
 > Mock `canvas` when run unit test cases with jest. [Reference](https://github.com/Cristy94/canvas-mock/issues/2).
 
-[![npm](https://img.shields.io/npm/v/jest-canvas-mock.svg?style=flat-square)](https://www.npmjs.com/package/jest-canvas-mock) [![npm](https://img.shields.io/npm/dm/jest-canvas-mock.svg?style=flat-square)](https://www.npmjs.com/package/jest-canvas-mock)
+[![Build Status](https://travis-ci.org/hustcc/jest-canvas-mock.svg?branch=master)](https://travis-ci.org/hustcc/jest-canvas-mock)
+[![Coverage Status](https://coveralls.io/repos/github/hustcc/jest-canvas-mock/badge.svg?branch=master)](https://coveralls.io/github/hustcc/jest-canvas-mock)
+[![npm](https://img.shields.io/npm/v/jest-canvas-mock.svg)](https://www.npmjs.com/package/jest-canvas-mock)
+[![npm](https://img.shields.io/npm/dm/jest-canvas-mock.svg)](https://www.npmjs.com/package/jest-canvas-mock)
 
 
 ## Install
