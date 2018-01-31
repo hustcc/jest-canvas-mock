@@ -19,7 +19,7 @@ describe('canvas', () => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     expect(typeof ctx).toEqual('object');
-    expect(createContext2d).toHaveBeenLastCalledWith('2d');
+    expect(createContext2d).toHaveBeenLastCalledWith('2d', canvas);
 
     expect(canvas.getContext('webgl')).toEqual({});
   });
@@ -31,7 +31,9 @@ describe('canvas', () => {
     expect(typeof ctx).toBe('object');
 
     Object.keys(ctx).forEach(key => {
-      ctx[key]();
+      if(typeof ctx[key] === "function"){
+        ctx[key]();
+      }
     });
 
     [
