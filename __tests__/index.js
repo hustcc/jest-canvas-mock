@@ -29,7 +29,8 @@ describe('canvas', () => {
     const ctx = canvas.getContext('2d');
 
     expect(typeof ctx).toBe('object');
-    expect(ctx.canvas).toBeDefined();
+
+    expect(ctx.canvas).toBe(canvas);
 
     Object.keys(ctx).forEach(key => {
       if(typeof ctx[key] === "function"){
@@ -81,5 +82,16 @@ describe('canvas', () => {
     ].forEach((key) => {
       expect(ctx[key]).toBeCalled();
     });
+  });
+
+  test('different instances', () => {
+    const canvas1 = document.createElement('canvas');
+    const ctx1 = canvas.getContext('2d');
+
+    const canvas2 = document.createElement('canvas');
+    const ctx2 = canvas.getContext('2d');
+
+    expect(canvas1).not.toBe(canvas2);
+    expect(ctx1).not.toBe(ctx2);
   });
 });
