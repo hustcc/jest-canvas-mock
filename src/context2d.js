@@ -3,8 +3,6 @@
  * Contract: i@hust.cc
  */
 
- import canvas from './canvas';
-
 const context2d = {
   fillRect: () => {},
   clearRect: () => {},
@@ -59,10 +57,11 @@ const context2d = {
 
 
 const jestWrapper = (fs) => {
+  const ctx = {}; // immutable
   Object.keys(fs).forEach(key => {
-      fs[key] = jest.fn(fs[key]);
+      ctx[key] = jest.fn(fs[key]);
   });
-  return fs;
+  return ctx;
 };
 
 const createContext2d = jest.fn((type, canvas) => {

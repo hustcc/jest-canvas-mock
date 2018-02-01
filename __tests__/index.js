@@ -30,8 +30,6 @@ describe('canvas', () => {
 
     expect(typeof ctx).toBe('object');
 
-    expect(ctx.canvas).toBe(canvas);
-
     Object.keys(ctx).forEach(key => {
       if(typeof ctx[key] === "function"){
         ctx[key]();
@@ -86,10 +84,12 @@ describe('canvas', () => {
 
   test('different instances', () => {
     const canvas1 = document.createElement('canvas');
-    const ctx1 = canvas.getContext('2d');
+    const ctx1 = canvas1.getContext('2d');
+    expect(ctx1.canvas).toBe(canvas1);
 
     const canvas2 = document.createElement('canvas');
-    const ctx2 = canvas.getContext('2d');
+    const ctx2 = canvas2.getContext('2d');
+    expect(ctx2.canvas).toBe(canvas2);
 
     expect(canvas1).not.toBe(canvas2);
     expect(ctx1).not.toBe(ctx2);
