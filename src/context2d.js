@@ -3,6 +3,8 @@
  * Contract: i@hust.cc
  */
 
+ import canvas from './canvas';
+
 const context2d = {
   fillRect: () => {},
   clearRect: () => {},
@@ -55,13 +57,18 @@ const context2d = {
   isPointInStroke: () => true,
 };
 
-const jestWrapper = obj => {
-  Object.keys(obj).forEach(key => {
-    obj[key] = jest.fn(obj[key]);
+
+const jestWrapper = (fs) => {
+  Object.keys(fs).forEach(key => {
+      fs[key] = jest.fn(fs[key]);
   });
-  return obj;
+  return fs;
 };
 
-const createContext2d = jest.fn(() => jestWrapper(context2d));
+const createContext2d = jest.fn((type, canvas) => {
+  const ctx = jestWrapper(context2d);
+  ctx.canvas = canvas;
+  return ctx;
+});
 
 export default createContext2d;
