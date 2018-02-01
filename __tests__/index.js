@@ -29,6 +29,7 @@ describe('canvas', () => {
     const ctx = canvas.getContext('2d');
 
     expect(typeof ctx).toBe('object');
+    expect(ctx.canvas).toBeDefined();
 
     Object.keys(ctx).forEach(key => {
       if(typeof ctx[key] === "function"){

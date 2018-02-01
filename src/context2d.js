@@ -58,14 +58,17 @@ const context2d = {
 };
 
 
-const jestWrapper = (fs, originalCanvas) => {
+const jestWrapper = (fs) => {
   Object.keys(fs).forEach(key => {
       fs[key] = jest.fn(fs[key]);
   });
-  fs["canvas"] = originalCanvas;
   return fs;
 };
 
-const createContext2d = jest.fn((_, canvas) => jestWrapper(context2d, canvas));
+const createContext2d = jest.fn((type, canvas) => {
+  const ctx = jestWrapper(context2d);
+  ctx.canvas = canvas;
+  return ctx;
+});
 
 export default createContext2d;
