@@ -12,18 +12,20 @@ export default win => {
   try {
     // get the context 2d.
     const ctx = d.createElement('canvas').getContext('2d');
+
+    // if canvas and context2d all exist, means mock is not needed.
     if (ctx) {
       console.warn('Context 2d of canvas is exist! No need to mock');
       return win;
     }
-
-    // if ctx not exist, mock it.
-    // just mock canvas creator.
-    win.document.createElement = (param) => param === 'canvas' ? createCanvas('canvas') : f.call(d, param);
-    return win;
   } catch (_) {
     // catch the throw `Error: Not implemented: HTMLCanvasElement.prototype.getContext`
     // https://github.com/jsdom/jsdom/blob/4c7698f760fc64f20b2a0ddff450eddbdd193176/lib/jsdom/living/nodes/HTMLCanvasElement-impl.js
-    return win;
+    // when throw error, means mock is needed.
+    // code continue
   }
+  // if ctx not exist, mock it.
+  // just mock canvas creator.
+  win.document.createElement = (param) => param === 'canvas' ? createCanvas('canvas') : f.call(d, param);
+  return win;
 };
