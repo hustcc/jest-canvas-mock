@@ -24,9 +24,10 @@ describe('canvas', () => {
     expect(canvas.getContext('webgl')).toEqual({});
   });
 
-  test('canvas.toDataURL returns an empty string', () => {
+  test('canvas.toDataURL()', () => {
     const canvas = document.createElement('canvas');
-    expect(canvas.toDataURL()).toEqual('');
+    expect(canvas.toDataURL('image/jpeg', 1.0)).toEqual('');
+    expect(canvas.toDataURL).toHaveBeenLastCalledWith('image/jpeg', 1.0);
   });
 
   test('ctx.functions', () => {
