@@ -30,6 +30,8 @@ export default win => {
   // if ctx not exist, mock it.
   // just mock canvas creator.
 
-  win.document.createElement = (param) => param === 'canvas' ? createCanvas('canvas') : f.call(d, param);
+  win.document.createElement = (param) => param.toString().toLowerCase() === 'canvas' 
+    ? createCanvas('canvas') 
+    : f.call(d, param);
   return win;
 };
