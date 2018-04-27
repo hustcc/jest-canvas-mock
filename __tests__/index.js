@@ -6,6 +6,10 @@ import createCanvas from '../src/canvas';
 import createContext2d from '../src/context2d';
 
 describe('canvas', () => {
+  beforeEach(() => {
+    createCanvas.mockClear();
+  });
+
   test('document.createElement(canvas)', () => {
     const canvas = document.createElement('canvas');
     expect(canvas.getContext).not.toBe(undefined);
@@ -13,6 +17,12 @@ describe('canvas', () => {
 
     const div = document.createElement('div');
     expect(div.getContext).toBe(undefined);
+  });
+
+  test('document.createElement(CANVAS)', () => {
+    const canvas = document.createElement('CANVAS');
+    expect(canvas.getContext).not.toBe(undefined);
+    expect(createCanvas).toHaveBeenLastCalledWith('canvas');
   });
 
   test('canvas.getContext(2d)', () => {
