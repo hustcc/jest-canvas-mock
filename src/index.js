@@ -6,4 +6,6 @@
 import mockWindow  from './window';
 
 // mock global window
-global.window = mockWindow(window);
+if (typeof window !== 'undefined') {
+  global.window = mockWindow(window);
+}
