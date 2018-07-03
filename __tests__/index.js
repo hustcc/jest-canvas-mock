@@ -4,6 +4,7 @@
 
 import createCanvas from '../src/canvas';
 import createContext2d from '../src/context2d';
+import mockWindow  from '../src/window';
 
 describe('canvas', () => {
   beforeEach(() => {
@@ -136,5 +137,11 @@ describe('canvas', () => {
     ].forEach((key) => {
       expect(path[key]).toBeCalled();
     });
+  });
+
+  test('Path2D not override', () => {
+    const saved = window.Path2D;
+    mockWindow(window);
+    expect(saved === window.Path2D).toBe(true);
   });
 });
