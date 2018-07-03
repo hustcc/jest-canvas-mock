@@ -33,5 +33,24 @@ export default win => {
   win.document.createElement = (param) => param.toString().toLowerCase() === 'canvas' 
     ? createCanvas('canvas') 
     : f.call(d, param);
+
+  if (!win.Path2D) {
+    win.Path2D = class Path2D {};
+    [
+      'addPath',
+      'closePath',
+      'moveTo',
+      'lineTo',
+      'bezierCurveTo',
+      'quadraticCurveTo',
+      'arc',
+      'arcTo',
+      'ellipse',
+      'rect',
+    ].forEach((key) => {
+      win.Path2D.prototype[key] = jest.fn();
+    })
+  }
+
   return win;
 };
