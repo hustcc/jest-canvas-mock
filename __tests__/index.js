@@ -4,6 +4,7 @@
 
 import createCanvas from '../src/canvas';
 import createContext2d from '../src/context2d';
+import mockWindow  from '../src/window';
 
 describe('canvas', () => {
   beforeEach(() => {
@@ -109,5 +110,38 @@ describe('canvas', () => {
 
     expect(canvas1).not.toBe(canvas2);
     expect(ctx1).not.toBe(ctx2);
+  });
+
+  test('Path2D', () => {
+    const path = new Path2D();
+
+    expect(path).toBeDefined();
+
+    Object.keys(path.constructor.prototype).forEach(key => {
+      if(typeof path[key] === "function"){
+        path[key]();
+      }
+    });
+
+    [
+      'addPath',
+      'closePath',
+      'moveTo',
+      'lineTo',
+      'bezierCurveTo',
+      'quadraticCurveTo',
+      'arc',
+      'arcTo',
+      'ellipse',
+      'rect',
+    ].forEach((key) => {
+      expect(path[key]).toBeCalled();
+    });
+  });
+
+  test('Path2D not override', () => {
+    const saved = window.Path2D;
+    mockWindow(window);
+    expect(saved === window.Path2D).toBe(true);
   });
 });
