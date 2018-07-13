@@ -4,7 +4,7 @@
  */
 
 import createCanvas from './canvas';
-import mockPath2D from './path2d';
+import Path2D from './path2d';
 
 export default win => {
   const d = win.document;
@@ -35,7 +35,8 @@ export default win => {
     ? createCanvas('canvas')
     : f.call(d, param);
 
-  mockPath2D(win);
+  // if not exist, then mock it.
+  if (!win.Path2D) win.Path2D = Path2D;
 
   return win;
 };

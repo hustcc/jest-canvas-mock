@@ -12,16 +12,10 @@ const Path2DFunc = [
   'rect',
 ];
 
-class Path2D {
+export default class Path2D {
   constructor() {
     Path2DFunc.forEach((key) => {
       this[key] = jest.fn();
     });
   }
 }
-
-export default win => {
-  if (!win.Path2D) {
-    win.Path2D = Path2D;
-  }
-};
