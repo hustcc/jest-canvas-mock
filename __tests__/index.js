@@ -4,7 +4,7 @@
 
 import createCanvas from '../src/canvas';
 import createContext2d from '../src/context2d';
-import mockWindow  from '../src/window';
+import mockWindow from '../src/window';
 
 describe('canvas', () => {
   beforeEach(() => {
@@ -48,7 +48,7 @@ describe('canvas', () => {
     expect(typeof ctx).toBe('object');
 
     Object.keys(ctx).forEach(key => {
-      if(typeof ctx[key] === "function"){
+      if (typeof ctx[key] === "function") {
         ctx[key]();
       }
     });
@@ -74,7 +74,7 @@ describe('canvas', () => {
       'closePath',
       'stroke',
       'strokeRect',
-      'strokeText', 
+      'strokeText',
       't2',
       'transform',
       'translate',
@@ -117,13 +117,7 @@ describe('canvas', () => {
 
     expect(path).toBeDefined();
 
-    Object.keys(path.constructor.prototype).forEach(key => {
-      if(typeof path[key] === "function"){
-        path[key]();
-      }
-    });
-
-    [
+    const pathFunctions = [
       'addPath',
       'closePath',
       'moveTo',
@@ -134,8 +128,21 @@ describe('canvas', () => {
       'arcTo',
       'ellipse',
       'rect',
-    ].forEach((key) => {
+    ];
+
+    pathFunctions.forEach(key => {
+      if (typeof path[key] === "function") {
+        path[key]();
+      }
+    });
+
+    pathFunctions.forEach((key) => {
       expect(path[key]).toBeCalled();
+    });
+
+    const otherPath = new Path2D();
+    pathFunctions.forEach((key) => {
+      expect(otherPath[key]).not.toBeCalled();
     });
   });
 

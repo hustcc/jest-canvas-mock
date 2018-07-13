@@ -4,6 +4,7 @@
  */
 
 import createCanvas from './canvas';
+import addPath2D from './path2d';
 
 export default win => {
   const d = win.document;
@@ -34,23 +35,7 @@ export default win => {
     ? createCanvas('canvas') 
     : f.call(d, param);
 
-  if (!win.Path2D) {
-    win.Path2D = class Path2D {};
-    [
-      'addPath',
-      'closePath',
-      'moveTo',
-      'lineTo',
-      'bezierCurveTo',
-      'quadraticCurveTo',
-      'arc',
-      'arcTo',
-      'ellipse',
-      'rect',
-    ].forEach((key) => {
-      win.Path2D.prototype[key] = jest.fn();
-    })
-  }
+  addPath2D(win);
 
   return win;
 };
