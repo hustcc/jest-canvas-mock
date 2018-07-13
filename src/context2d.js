@@ -56,7 +56,7 @@ const context2d = {
 };
 
 
-const jestWrapper = (fs) => {
+const jestWrapper = fs => {
   const ctx = {}; // immutable
   Object.keys(fs).forEach(key => {
       ctx[key] = jest.fn(fs[key]);

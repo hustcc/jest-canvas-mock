@@ -4,7 +4,7 @@
  */
 
 import createCanvas from './canvas';
-import addPath2D from './path2d';
+import mockPath2D from './path2d';
 
 export default win => {
   const d = win.document;
@@ -31,11 +31,11 @@ export default win => {
   // if ctx not exist, mock it.
   // just mock canvas creator.
 
-  win.document.createElement = (param) => param.toString().toLowerCase() === 'canvas' 
-    ? createCanvas('canvas') 
+  win.document.createElement = param => param.toString().toLowerCase() === 'canvas'
+    ? createCanvas('canvas')
     : f.call(d, param);
 
-  addPath2D(win);
+  mockPath2D(win);
 
   return win;
 };

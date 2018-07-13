@@ -131,7 +131,7 @@ describe('canvas', () => {
     ];
 
     pathFunctions.forEach(key => {
-      if (typeof path[key] === "function") {
+      if (typeof path[key] === 'function') {
         path[key]();
       }
     });
@@ -144,6 +144,12 @@ describe('canvas', () => {
     pathFunctions.forEach((key) => {
       expect(otherPath[key]).not.toBeCalled();
     });
+  });
+
+  test('Path2D different instance', () => {
+    const path1 = new Path2D();
+    const path2 = new Path2D();
+    expect(path1.addPath).not.toBe(path2.addPath);
   });
 
   test('Path2D not override', () => {
