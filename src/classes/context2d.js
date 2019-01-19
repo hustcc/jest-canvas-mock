@@ -3,6 +3,9 @@
  * Contract: i@hust.cc
  */
 
+import CanvasGradient from './CanvasGradient';
+import CanvasPattern from './CanvasPattern';
+
 const context2d = {
   fillRect: () => {},
   clearRect: () => {},
@@ -40,13 +43,9 @@ const context2d = {
   fill: () => {},
   rect: () => {},
   quadraticCurveTo: () => {},
-  createLinearGradient: () => ({
-    addColorStop: () => {},
-  }),
-  createPattern: () => ({}),
-  createRadialGradient: () => ({
-    addColorStop: () => {},
-  }),
+  createPattern: () => new CanvasPattern(),
+  createLinearGradient: () => new CanvasGradient(),
+  createRadialGradient: () => new CanvasGradient(),
   bezierCurveTo: () => {},
   drawFocusIfNeeded: () => {},
   clip: () => {},

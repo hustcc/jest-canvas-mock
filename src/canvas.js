@@ -3,7 +3,7 @@
  * Contract: i@hust.cc
  */
 
-import createContext2d from './context2d';
+import createContext2d from './classes/context2d';
 
 const createCanvas = () => {
   const div = document.createElement('div'); // use div to mock it's api

@@ -9,3 +9,5 @@ import mockWindow  from './window';
 if (typeof window !== 'undefined') {
   global.window = mockWindow(window);
 }
+
+export const ver = '__VERSION__';

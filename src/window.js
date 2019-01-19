@@ -4,7 +4,9 @@
  */
 
 import createCanvas from './canvas';
-import Path2D from './path2d';
+import Path2D from './classes/Path2D';
+import CanvasGradient from './classes/CanvasGradient';
+import CanvasPattern from './classes/CanvasPattern';
 
 export default win => {
   const d = win.document;
@@ -37,6 +39,8 @@ export default win => {
 
   // if not exist, then mock it.
   if (!win.Path2D) win.Path2D = Path2D;
+  if (!win.CanvasGradient) win.CanvasGradient = CanvasGradient;
+  if (!win.CanvasPattern) win.CanvasPattern = CanvasPattern;
 
   return win;
 };

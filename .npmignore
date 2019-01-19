@@ -1,0 +1,7 @@
+.babelrc
+.travis.yml
+__tests__
+.idea
+coverage
+src
+*.tgz
