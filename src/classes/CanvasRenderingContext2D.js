@@ -1,19 +1,27 @@
 import DOMMatrix from "./DOMMatrix";
 import CanvasPattern from "./CanvasPattern";
 import parseColor from "parse-color";
-import * as font from "css-font";
+import cssfontparser from "cssfontparser";
 
 function parseCSSColor(value) {
   var result = parseColor(value);
+  if (result.rgba && result.rgba[3] !== 1) {
+    return "rgba(" + result.rgba.join(", ") + ")";
+  }
   if (result.hex) {
     return result.hex;
-  }
-  if (result.rgba) {
-    return "rgba(" + result.rgba.join(", ") + ")";
   }
   return void 0;
 }
 
+var testFuncs = [
+  "getTransform",
+  "getImageData",
+  "save",
+  "restore",
+  "createPattern",
+  "createRadialGradient",
+];
 
 export default class CanvasRenderingContext2D {
   _stackIndex = 0;
@@ -26,10 +34,8 @@ export default class CanvasRenderingContext2D {
   _globalAlphaStack = [1.0];
 
   constructor(canvas) {
-    Object.keys(CanvasRenderingContext2D.prototype).forEach((key) => {
-      if (typeof CanvasRenderingContext2D.prototype[key] === "function" && key !== "constructor") {
-        this[key] = jest.fn(CanvasRenderingContext2D.prototype[key].bind(this));
-      }
+    testFuncs.forEach((key) => {
+      this[key] = jest.fn(CanvasRenderingContext2D.prototype[key].bind(this));
     });
     this._canvas = canvas;
   }
@@ -39,6 +45,10 @@ export default class CanvasRenderingContext2D {
   }
 
   get currentTransform() {
+    return new DOMMatrix(this._transformStack[this._stackIndex]);
+  }
+
+  getTransform() {
     return new DOMMatrix(this._transformStack[this._stackIndex]);
   }
 
@@ -83,7 +93,7 @@ export default class CanvasRenderingContext2D {
   }
 
   set filter(value) {
-    console.warn("jest-canvas-mock: The filter property is experimental, and is unsupported in many browsers. jest-canvas-mock also does not parse and verify your input to this property.");
+    if (value === "") value = "none";
     this._filterStack[this._stackIndex] = typeof value === "string" ? value : "none";
   }
 
@@ -94,8 +104,8 @@ export default class CanvasRenderingContext2D {
   set font(value) {
     var ex;
     try {
-      var result = font.parse(value);
-      this._fontStack[this._stackIndex] = font.stringify(result);
+      var result = cssfontparser(value);
+      this._fontStack[this._stackIndex] = result.toString();
     } catch(ex) {}
   }
 
@@ -105,7 +115,9 @@ export default class CanvasRenderingContext2D {
 
   set globalAlpha(value) {
     if (!Number.isFinite(value)) return;
-    this._globalAlphaStack[this._stackIndex] = Math.max(1.0, Math.min(0.0, value));
+    if (value < 0) return;
+    if (value > 1) return;
+    this._globalAlphaStack[this._stackIndex] = value;
   }
 
   getImageData() {
@@ -147,5 +159,18 @@ export default class CanvasRenderingContext2D {
       throw new TypeError("Failed to execute 'createPattern' on 'CanvasRenderingContext2D': The provided type ('" + type + "') is not one of 'repeat', 'no-repeat', 'repeat-x', or 'repeat-y'.");
     }
     throw new TypeError("Failed to execute 'createPattern' on 'CanvasRenderingContext2D': The provided value is not of type '(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)'");
+  }
+
+  createRadialGradient(x0, y0, r0, x1, y1, r1) {
+    if (arguments.length < 6) throw new TypeError("Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': 6 arguments required, but only " + arguments.length + " present.");
+    if (!Number.isFinite(x0)) throw new TypeError("Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
+    if (!Number.isFinite(y0)) throw new TypeError("Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
+    if (!Number.isFinite(r0)) throw new TypeError("Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
+    if (!Number.isFinite(x1)) throw new TypeError("Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
+    if (!Number.isFinite(y1)) throw new TypeError("Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
+    if (!Number.isFinite(r1)) throw new TypeError("Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
+    if (r0 < 0) throw new DOMException("DataError", "Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The r0 provided is less than 0.");
+    if (r1 < 0) throw new DOMException("DataError", "Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The r0 provided is less than 1.");
+    return new CanvasPattern();
   }
 }

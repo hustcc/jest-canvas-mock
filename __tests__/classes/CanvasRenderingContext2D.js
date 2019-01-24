@@ -67,10 +67,41 @@ describe("CanvasRenderingContext2D prototype", () => {
     });
   });
 
+  it("should not create a radial gradient when the argument length is < 6", () => {
+    expect(() => ctx.createRadialGradient(0, 1, 2, 3, 4)).toThrow(TypeError);
+  });
+
+  it("should not create a radial gradient when any argument is not finite", () => {
+    expect(() => ctx.createRadialGradient(Infinity, 1, 2, 3, 4, 5)).toThrow(TypeError);
+    expect(() => ctx.createRadialGradient(0, Infinity, 2, 3, 4, 5)).toThrow(TypeError);
+    expect(() => ctx.createRadialGradient(0, 1, Infinity, 3, 4, 5)).toThrow(TypeError);
+    expect(() => ctx.createRadialGradient(0, 1, 2, Infinity, 4, 5)).toThrow(TypeError);
+    expect(() => ctx.createRadialGradient(0, 1, 2, 3, Infinity, 5)).toThrow(TypeError);
+    expect(() => ctx.createRadialGradient(0, 1, 2, 3, 4, Infinity)).toThrow(TypeError);
+  });
+
+  it("should not create a radial gradient if any of the radius values are < 0", () => {
+    expect(() => ctx.createRadialGradient(0, 0, -1, 0, 0, 0)).toThrow(DOMException);
+    expect(() => ctx.createRadialGradient(0, 0, 0, 0, 0, -1)).toThrow(DOMException);
+  });
+
   it("should return a DOMMatrix when accessing the currentTransform property", () => {
     expect(ctx.currentTransform).toBeInstanceOf(DOMMatrix);
   });
 
+  it("should ignore setting currentTransform if it's not a valid DOMMatrix", () => {
+    ctx.currentTransform = null;
+    expect(ctx._transformStack[0][0]).toBe(1);
+    expect(ctx._transformStack[0][1]).toBe(0);
+    expect(ctx._transformStack[0][2]).toBe(0);
+    expect(ctx._transformStack[0][3]).toBe(1);
+    expect(ctx._transformStack[0][4]).toBe(0);
+    expect(ctx._transformStack[0][5]).toBe(0);
+  });
+
+  it("should return a DOMMatrix when calling getTransform()", () => {
+    expect(ctx.getTransform()).toBeInstanceOf(DOMMatrix);
+  });
 
   it("should set the current transform of the context when setting the currentTransform property", () => {
     var matrix = new DOMMatrix([1, 2, 3, 4, 5, 6]);
@@ -121,7 +152,6 @@ describe("CanvasRenderingContext2D prototype", () => {
     expect(data.data.length).toBe(400 * 300 * 4);
   });
 
-  // this test just verifies that any kind of color changes the fillStyle property
   it("should parse a css color string 'blue'", () => {
     ctx.fillStyle = "blue";
     expect(ctx.fillStyle).toBe("#0000ff");
@@ -130,6 +160,11 @@ describe("CanvasRenderingContext2D prototype", () => {
   it("should not parse invalid colors", () => {
     ctx.fillStyle = "invalid!";
     expect(ctx.fillStyle).toBe("#000");
+  });
+
+  it("should parse css colors with alpha values", () => {
+    ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
+    expect(ctx.fillStyle).toBe("rgba(255, 255, 255, 0.4)");
   });
 
   it("should save and restore fillStyle values", () => {
@@ -141,4 +176,86 @@ describe("CanvasRenderingContext2D prototype", () => {
     expect(ctx.fillStyle).toBe("#008000");
   });
 
+  it("should accept CanvasPatterns as valid fillStyle values", () => {
+    var image = new Image();
+    image.src = "test.png";
+    var pattern = ctx.createPattern(image, "no-repeat");
+    ctx.fillStyle = pattern;
+    expect(ctx.fillStyle).toBe(pattern);
+  });
+
+  it("should accept CanvasGradients as valid fillStyle values", () => {
+    var grd = ctx.createRadialGradient(1, 2, 3, 4, 5, 6);
+    ctx.fillStyle = grd;
+    expect(ctx.fillStyle).toBe(grd);
+  });
+
+  it("should ignore invalid fillStyle values", () => {
+    ctx.fillStyle = null;
+    expect(ctx.fillStyle).toBe("#000");
+  });
+
+  it("should not accept invalid fonts", () => {
+    ctx.font = "invalid";
+    expect(ctx.font).toBe("10px sans-serif");
+  });
+
+  it("should accept valid fonts", () => {
+    ctx.font = "12pt Times New Roman";
+    expect(ctx.font).toBe("16px \"Times New Roman\"");
+  });
+
+  it("should save and restore font values", () => {
+    ctx.save();
+    ctx.font = "12pt Times New Roman";
+    ctx.restore();
+    expect(ctx.font).toBe("10px sans-serif");
+  });
+
+  it("should ignore non finite globalAlpha values", () => {
+    [Infinity, -Infinity, null, void 0, NaN].forEach(e => {
+      ctx.globalAlpha = e;
+      expect(ctx.globalAlpha).toBe(1);
+    });
+  });
+
+  it("should ignore out of range values", () => {
+    [-1, 1.1].forEach(e => {
+      ctx.globalAlpha = e;
+      expect(ctx.globalAlpha).toBe(1);
+    });
+  });
+
+  it("should not ignore globalAlpha values that are within range", () => {
+    [0.1, 0.2, 0.3, 0.4].forEach(e => {
+      ctx.globalAlpha = e;
+      expect(ctx.globalAlpha).toBe(e);
+    });
+  });
+
+  it("should have a filter property default value 'none'", () => {
+    expect(ctx.filter).toBe("none");
+  });
+
+  it("should set the filter property", () => {
+    ctx.filter = "sepia(100%)";
+    expect(ctx.filter).toBe("sepia(100%)");
+  });
+
+  it("should ignore non-string values", () => {
+    ctx.filter = 2;
+    expect(ctx.filter).toBe("none");
+  });
+
+  it("should set empty string to none", () => {
+    ctx.filter = "";
+    expect(ctx.filter).toBe("none");
+  });
+
+  it("should save and restore filter values", () => {
+    ctx.save();
+    ctx.filter = "sepia(100%)";
+    ctx.restore();
+    expect(ctx.filter).toBe("none");
+  });
 });
