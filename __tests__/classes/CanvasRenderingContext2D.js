@@ -13,6 +13,13 @@ describe("CanvasRenderingContext2D prototype", () => {
     expect(ctx.canvas).toBe(canvas);
   });
 
+  it("should createImagePatterns", () => {
+    var img = new Image();
+    img.src = "http://some-domain.com/my-image.png";
+    var result = ctx.createPattern(img, "no-repeat");
+    expect(result).toBeInstanceOf(CanvasPattern);
+  });
+
   it("should return a DOMMatrix when accessing the currentTransform property", () => {
     expect(ctx.currentTransform).toBeInstanceOf(DOMMatrix);
   });
@@ -46,6 +53,15 @@ describe("CanvasRenderingContext2D prototype", () => {
     expect(ctx.direction).toBe("inherit");
   });
 
+  it("should save and restore direction values", () => {
+    ctx.direction = "ltr";
+    ctx.save();
+    ctx.direction = "rtl";
+    expect(ctx.direction).toBe("rtl");
+    ctx.restore();
+    expect(ctx.direction).toBe("ltr");
+  });
+
   it("should return a image data from getImageData", () => {
     expect(ctx.getImageData()).toBeInstanceOf(ImageData);
   });
@@ -55,6 +71,26 @@ describe("CanvasRenderingContext2D prototype", () => {
     expect(data.width).toBe(400);
     expect(data.height).toBe(300);
     expect(data.data.length).toBe(400 * 300 * 4);
+  });
+
+  // this test just verifies that any kind of color changes the fillStyle property
+  it("should parse a css color string 'blue'", () => {
+    ctx.fillStyle = "blue";
+    expect(ctx.fillStyle).toBe("#0000ff");
+  });
+
+  it("should not parse invalid colors", () => {
+    ctx.fillStyle = "invalid!";
+    expect(ctx.fillStyle).toBe("#000");
+  });
+
+  it("should save and restore fillStyle values", () => {
+    ctx.fillStyle = "green";
+    ctx.save();
+    ctx.fillStyle = "red";
+    expect(ctx.fillStyle).toBe("#ff0000");
+    ctx.restore();
+    expect(ctx.fillStyle).toBe("#008000");
   });
 
 });

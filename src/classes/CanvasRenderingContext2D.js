@@ -1,5 +1,4 @@
 import DOMMatrix from "./DOMMatrix";
-import ImageData from "./ImageData";
 import CanvasPattern from "./CanvasPattern";
 import parseColor from "parse-color";
 import * as font from "css-font";
@@ -28,7 +27,7 @@ export default class CanvasRenderingContext2D {
 
   constructor(canvas) {
     Object.keys(CanvasRenderingContext2D.prototype).forEach((key) => {
-      if (typeof CanvasRenderingContext2D.prototype[key] === "function") {
+      if (typeof CanvasRenderingContext2D.prototype[key] === "function" && key !== "constructor") {
         this[key] = jest.fn(CanvasRenderingContext2D.prototype[key].bind(this));
       }
     });
@@ -111,5 +110,29 @@ export default class CanvasRenderingContext2D {
 
   getImageData() {
     return new ImageData(this._canvas.width, this.canvas.height);
+  }
+
+  save() {
+    this._transformStack.push(this._transformStack[this._stackIndex]);
+    this._directionStack.push(this._directionStack[this._stackIndex]);
+    this._fillStyleStack.push(this._fillStyleStack[this._stackIndex]);
+    this._filterStack.push(this._filterStack[this._stackIndex]);
+    this._fontStack.push(this._fontStack[this._stackIndex]);
+    this._globalAlphaStack.push(this._globalAlphaStack[this._stackIndex]);
+    this._stackIndex += 1;
+  }
+
+  restore() {
+    this._transformStack.pop();
+    this._directionStack.pop();
+    this._fillStyleStack.pop();
+    this._filterStack.pop();
+    this._fontStack.pop();
+    this._globalAlphaStack.pop();
+    this._stackIndex -= 1;
+  }
+
+  createPattern(image, type = "repeat") {
+    return new CanvasPattern();
   }
 }

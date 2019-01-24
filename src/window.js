@@ -8,7 +8,7 @@ import CanvasGradient from './classes/CanvasGradient';
 import CanvasPattern from './classes/CanvasPattern';
 import CanvasRenderingContext2D from "./classes/CanvasRenderingContext2D";
 import DOMMatrix from './classes/DOMMatrix';
-import ImageData from './classes/ImageData';
+import ImageData from "./classes/ImageData";
 
 export default win => {
   const d = win.document;
@@ -46,11 +46,14 @@ export default win => {
   if (!win.CanvasRenderingContext2D) win.CanvasRenderingContext2D = CanvasRenderingContext2D;
   if (!win.DOMMatrix) win.DOMMatrix = DOMMatrix;
   if (!win.ImageData) win.ImageData = ImageData;
+
   var getContextExternal = win.HTMLCanvasElement.prototype.getContext;
-  win.HTMLCanvasElement.prototype.getContext = jest.fn(function getContext(type) {
-    if (type === "2d") return new CanvasRenderingContext2D(this);
-    return getContextExternal.call(this, type);
-  });
+  if (!jest.isMockFunction(getContextExternal)) {
+    win.HTMLCanvasElement.prototype.getContext = jest.fn(function getContext(type) {
+      if (type === "2d") return new CanvasRenderingContext2D(this);
+      return getContextExternal.call(this, type);
+    });
+  }
 
   return win;
 };
