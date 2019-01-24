@@ -297,4 +297,44 @@ export default class CanvasRenderingContext2D {
     }
     this._lineDashStack[this._stackIndex] = (result.length % 2 === 1) ? result.concat(result) : result;
   }
+
+  setTransform(a, b, c, d, e, f) {
+    if (arguments.length === 0) {
+      this._transformStack[this._stackIndex][0] = 1;
+      this._transformStack[this._stackIndex][1] = 0;
+      this._transformStack[this._stackIndex][2] = 0;
+      this._transformStack[this._stackIndex][3] = 1;
+      this._transformStack[this._stackIndex][4] = 0;
+      this._transformStack[this._stackIndex][5] = 0;
+      return;
+    }
+    if (arguments.length === 1) {
+      if (a instanceof DOMMatrix) {
+        this.currentTransform = a;
+      } else {
+        throw new TypeError("Failed to execute 'setTransform' on 'CanvasRenderingContext2D': parameter " + a + " ('transform') is not an object.");
+      }
+      return;
+    }
+    if (arguments.length < 6) throw new TypeError("Failed to execute 'setTransform' on 'CanvasRenderingContext2D': Valid arities are: [0, 1, 6], but " + arguments.length + " arguments provided.")
+
+    a = Number(a);
+    b = Number(b);
+    c = Number(c);
+    d = Number(d);
+    e = Number(e);
+    f = Number(f);
+    if (!Number.isFinite(a)) return;
+    if (!Number.isFinite(b)) return;
+    if (!Number.isFinite(c)) return;
+    if (!Number.isFinite(d)) return;
+    if (!Number.isFinite(e)) return;
+    if (!Number.isFinite(f)) return;
+    this._transformStack[this._stackIndex][0] = a;
+    this._transformStack[this._stackIndex][1] = b;
+    this._transformStack[this._stackIndex][2] = c;
+    this._transformStack[this._stackIndex][3] = d;
+    this._transformStack[this._stackIndex][4] = e;
+    this._transformStack[this._stackIndex][5] = f;
+  }
 }

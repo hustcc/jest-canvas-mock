@@ -456,5 +456,21 @@ describe("CanvasRenderingContext2D prototype", () => {
     expect(ctx.getLineDash()).toEqual([1, 2, 3, 1, 2, 3]);
     ctx.restore();
     expect(ctx.getLineDash()).toEqual([]);
-  })
+  });
+
+  it("should validate setTransform input", () => {
+    [
+      [1, 2, 3, 4, 5, 6],
+      [-1, 2, 3, 4, 5, 6],
+      [Infinity, null, "test", "bad", NaN, 34],
+    ].forEach(e => {
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.setTransform(...e);
+      if (every(e, val => Number.isFinite(Number(val)))) {
+        expect(ctx.getTransform()).toEqual(new DOMMatrix(e));
+      } else {
+        expect(ctx.getTransform().isIdentity).toBeTruthy();
+      }
+    });
+  });
 });
