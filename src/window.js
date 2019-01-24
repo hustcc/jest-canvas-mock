@@ -10,6 +10,7 @@ import CanvasRenderingContext2D from "./classes/CanvasRenderingContext2D";
 import DOMMatrix from './classes/DOMMatrix';
 import ImageData from "./classes/ImageData";
 
+
 export default win => {
   const d = win.document;
   const f = win.document.createElement;
@@ -46,13 +47,13 @@ export default win => {
   if (!win.CanvasRenderingContext2D) win.CanvasRenderingContext2D = CanvasRenderingContext2D;
   if (!win.DOMMatrix) win.DOMMatrix = DOMMatrix;
   if (!win.ImageData) win.ImageData = ImageData;
-
-  var getContextExternal = win.HTMLCanvasElement.prototype.getContext;
-  if (!jest.isMockFunction(getContextExternal)) {
-    win.HTMLCanvasElement.prototype.getContext = jest.fn(function getContext(type) {
+  if (!win.__canvas_implemented) {
+    var getContextExternal = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function getContext2d(type) {
       if (type === "2d") return new CanvasRenderingContext2D(this);
       return getContextExternal.call(this, type);
-    });
+    };
+    win.__canvas_implemented = true;
   }
 
   return win;

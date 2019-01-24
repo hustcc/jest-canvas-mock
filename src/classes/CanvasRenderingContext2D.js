@@ -132,7 +132,20 @@ export default class CanvasRenderingContext2D {
     this._stackIndex -= 1;
   }
 
-  createPattern(image, type = "repeat") {
-    return new CanvasPattern();
+  createPattern(image, type) {
+    if (arguments.length === 1)
+      throw new TypeError("Failed to execute 'createPattern' on 'CanvasRenderingContext2D': 2 arguments required, but only 1 present.");
+    if (type === null) type = "repeat";
+    if (type === "") type = "repeat";
+    if (type === "repeat" || type === "repeat-x" || type === "repeat-y" || type === "no-repeat") {
+      if (image instanceof HTMLImageElement) return new CanvasPattern();
+      // if (image instanceof SVGImageElement) return new CanvasPattern();
+      if (image instanceof HTMLVideoElement) return new CanvasPattern();
+      if (image instanceof HTMLCanvasElement) return new CanvasPattern();
+      // if (image instanceof ImageBitmap) return new CanvasPattern();
+    } else {
+      throw new TypeError("Failed to execute 'createPattern' on 'CanvasRenderingContext2D': The provided type ('" + type + "') is not one of 'repeat', 'no-repeat', 'repeat-x', or 'repeat-y'.");
+    }
+    throw new TypeError("Failed to execute 'createPattern' on 'CanvasRenderingContext2D': The provided value is not of type '(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)'");
   }
 }

@@ -4,7 +4,6 @@
 
 import { ver } from '../src';
 import pkg from '../package.json';
-import CanvasRenderingContext2D from "../src/classes/CanvasRenderingContext2D";
 
 describe('canvas', () => {
   test('version', () => {
