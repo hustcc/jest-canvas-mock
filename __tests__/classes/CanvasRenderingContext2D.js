@@ -308,4 +308,40 @@ describe("CanvasRenderingContext2D prototype", () => {
     ctx.restore();
     expect(ctx.globalCompositeOperation).toBe("source-over");
   });
+
+  it("should set the imageSmoothingEnabled values to truthy values", () => {
+    [true, false, 1, 0, null, "", Infinity, void 0, NaN].forEach(e => {
+      ctx.imageSmoothingEnabled = e;
+      expect(ctx.imageSmoothingEnabled).toBe(!!e);
+    });
+  });
+
+  it("should save and restore to modify the imageSmoothingEnabled values", () => {
+    ctx.save();
+    ctx.imageSmoothingEnabled = false;
+    expect(ctx.imageSmoothingEnabled).toBeFalsy();
+    ctx.restore();
+    expect(ctx.imageSmoothingEnabled).toBeTruthy();
+  });
+
+  it("should accept valid imageSmoothingQuality values", () => {
+    ["high", "medium", "low"].forEach(e => {
+      ctx.imageSmoothingQuality = e;
+      expect(ctx.imageSmoothingQuality).toBe(e);
+    });
+  });
+
+  it("should ignore invalid imageSmoothingQuality values", () => {
+    [true, false, 1, 0, null, "", Infinity, void 0, NaN, "invalid!"].forEach(e => {
+      ctx.imageSmoothingQuality = e;
+      expect(ctx.imageSmoothingQuality).toBe("low");
+    });
+  });
+
+  it("should save and restore imageSmoothingQuality values", () => {
+    ctx.save();
+    ctx.imageSmoothingQuality = "high";
+    ctx.restore();
+    expect(ctx.imageSmoothingQuality).toBe("low");
+  });
 });

@@ -61,6 +61,8 @@ export default class CanvasRenderingContext2D {
   _fontStack = ["10px sans-serif"];
   _globalAlphaStack = [1.0];
   _globalCompositeOperationStack = ["source-over"];
+  _imageSmoothingEnabledStack = [true];
+  _imageSmoothingQualityStack = ["low"];
 
   constructor(canvas) {
     testFuncs.forEach((key) => {
@@ -160,6 +162,9 @@ export default class CanvasRenderingContext2D {
     this._filterStack.push(this._filterStack[this._stackIndex]);
     this._fontStack.push(this._fontStack[this._stackIndex]);
     this._globalAlphaStack.push(this._globalAlphaStack[this._stackIndex]);
+    this._globalCompositeOperationStack.push(this._globalCompositeOperationStack[this._stackIndex]);
+    this._imageSmoothingEnabledStack.push(this._imageSmoothingEnabledStack[this._stackIndex]);
+    this._imageSmoothingQualityStack.push(this._imageSmoothingQualityStack[this._stackIndex]);
     this._stackIndex += 1;
   }
 
@@ -170,6 +175,9 @@ export default class CanvasRenderingContext2D {
     this._filterStack.pop();
     this._fontStack.pop();
     this._globalAlphaStack.pop();
+    this._globalCompositeOperationStack.pop();
+    this._imageSmoothingEnabledStack.pop();
+    this._imageSmoothingQualityStack.pop();
     this._stackIndex -= 1;
   }
 
@@ -208,8 +216,26 @@ export default class CanvasRenderingContext2D {
   }
 
   set globalCompositeOperation(value) {
-    if (compositeOperations.includes(value)) {
+    if (compositeOperations.indexOf(value) !== -1) {
       this._globalCompositeOperationStack[this._stackIndex] = value;
+    }
+  }
+
+  get imageSmoothingEnabled() {
+    return this._imageSmoothingEnabledStack[this._stackIndex];
+  }
+
+  set imageSmoothingEnabled(value) {
+    this._imageSmoothingEnabledStack[this._stackIndex] = Boolean(value);
+  }
+
+  get imageSmoothingQuality() {
+    return this._imageSmoothingQualityStack[this._stackIndex];
+  }
+
+  set imageSmoothingQuality(value) {
+    if (value === "high" || value === "medium" || value === "low") {
+      this._imageSmoothingQualityStack[this._stackIndex] = value;
     }
   }
 }
