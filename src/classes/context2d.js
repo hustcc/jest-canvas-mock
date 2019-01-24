@@ -19,7 +19,11 @@ const context2d = {
     height: 14,
   }),
   putImageData: () => {},
-  createImageData: () => [],
+  createImageData: (width = 1, height = 1, imageData) => ({
+    width,
+    height,
+    data: imageData || new Array((width * height * 4))
+  }),
   setTransform: () => {},
   resetTransform: () => {},
   drawImage: () => {},
