@@ -23,15 +23,44 @@ var testFuncs = [
   "createRadialGradient",
 ];
 
+var compositeOperations = [
+  "source-over",
+  "source-in",
+  "source-out",
+  "source-atop",
+  "destination-over",
+  "destination-in",
+  "destination-out",
+  "destination-atop",
+  "lighter",
+  "copy",
+  "xor",
+  "multiply",
+  "screen",
+  "overlay",
+  "darken",
+  "lighten",
+  "color-dodge",
+  "color-burn",
+  "hard-light",
+  "soft-light",
+  "difference",
+  "exclusion",
+  "hue",
+  "saturation",
+  "color",
+  "luminosity",
+];
+
 export default class CanvasRenderingContext2D {
   _stackIndex = 0;
-  _stackLength = 1;
   _transformStack = [[1, 0, 0, 1, 0, 0]];
   _directionStack = ["inherit"];
   _fillStyleStack = ["#000"];
   _filterStack = ["none"];
   _fontStack = ["10px sans-serif"];
   _globalAlphaStack = [1.0];
+  _globalCompositeOperationStack = ["source-over"];
 
   constructor(canvas) {
     testFuncs.forEach((key) => {
@@ -172,5 +201,15 @@ export default class CanvasRenderingContext2D {
     if (r0 < 0) throw new DOMException("DataError", "Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The r0 provided is less than 0.");
     if (r1 < 0) throw new DOMException("DataError", "Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The r0 provided is less than 1.");
     return new CanvasPattern();
+  }
+
+  get globalCompositeOperation() {
+    return this._globalCompositeOperationStack[this._stackIndex];
+  }
+
+  set globalCompositeOperation(value) {
+    if (compositeOperations.includes(value)) {
+      this._globalCompositeOperationStack[this._stackIndex] = value;
+    }
   }
 }
