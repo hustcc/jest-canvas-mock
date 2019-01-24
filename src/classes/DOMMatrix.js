@@ -24,7 +24,7 @@ export default class DOMMatrix {
       this.m21 = transform[2];
       this.m22 = transform[3];
       this.m41 = transform[4];
-      this.m41 = transform[5];
+      this.m42 = transform[5];
       this._is2D = true;
       return this;
     }

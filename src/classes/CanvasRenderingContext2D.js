@@ -1,4 +1,5 @@
 import DOMMatrix from "./DOMMatrix";
+import ImageData from "./ImageData";
 import CanvasPattern from "./CanvasPattern";
 import parseColor from "parse-color";
 import * as font from "css-font";
@@ -42,11 +43,24 @@ export default class CanvasRenderingContext2D {
     return new DOMMatrix(this._transformStack[this._stackIndex]);
   }
 
+  set currentTransform(value) {
+    if (value instanceof DOMMatrix) {
+      this._transformStack[this._stackIndex][0] = value.a;
+      this._transformStack[this._stackIndex][1] = value.b;
+      this._transformStack[this._stackIndex][2] = value.c;
+      this._transformStack[this._stackIndex][3] = value.d;
+      this._transformStack[this._stackIndex][4] = value.e;
+      this._transformStack[this._stackIndex][5] = value.f;
+    }
+  }
+
   get direction() {
-    this._directionStack[this._stackIndex];
+    console.log(this._directionStack);
+    return this._directionStack[this._stackIndex];
   }
 
   set direction(value) {
+    console.log(value);
     if (value === "rtl" || value === "ltr" || value === "inherit") {
       this._directionStack[this._stackIndex] = value;
     }
@@ -95,5 +109,9 @@ export default class CanvasRenderingContext2D {
   set globalAlpha(value) {
     if (!Number.isFinite(value)) return;
     this._globalAlphaStack[this._stackIndex] = Math.max(1.0, Math.min(0.0, value));
+  }
+
+  createImageData() {
+    return new ImageData(this._canvas.width, this.canvas.height);
   }
 }

@@ -6,6 +6,16 @@ describe("DOMMatrix class", () => {
     expect(matrix).toBeInstanceOf(DOMMatrix);
   });
 
+  it ("should construct a 2d matrix properly", () => {
+    var matrix = new DOMMatrix([1, 2, 3, 4, 5, 6]);
+    expect(matrix.a).toBe(1);
+    expect(matrix.b).toBe(2);
+    expect(matrix.c).toBe(3);
+    expect(matrix.d).toBe(4);
+    expect(matrix.e).toBe(5);
+    expect(matrix.f).toBe(6);
+  });
+
   it("should be a 3d matrix if constructed without a parameter", () => {
     var matrix = new DOMMatrix();
     expect(matrix.is2D).toBeFalsy();
