@@ -41,5 +41,9 @@
     "setupFiles": [
       "./src/index.js"
     ]
+  },
+  "dependencies": {
+    "css-font": "^1.2.0",
+    "parse-color": "^1.0.0"
   }
 }

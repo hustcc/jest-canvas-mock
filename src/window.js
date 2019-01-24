@@ -7,6 +7,7 @@ import createCanvas from './canvas';
 import Path2D from './classes/Path2D';
 import CanvasGradient from './classes/CanvasGradient';
 import CanvasPattern from './classes/CanvasPattern';
+import CanvasRenderingContext2D from "./classes/CanvasRenderingContext2D";
 
 export default win => {
   const d = win.document;
@@ -41,6 +42,6 @@ export default win => {
   if (!win.Path2D) win.Path2D = Path2D;
   if (!win.CanvasGradient) win.CanvasGradient = CanvasGradient;
   if (!win.CanvasPattern) win.CanvasPattern = CanvasPattern;
-
+  if (!win.CanvasRenderingContext2D) win.CanvasRenderingContext2D = CanvasRenderingContext2D;
   return win;
 };
