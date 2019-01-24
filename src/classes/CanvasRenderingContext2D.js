@@ -55,12 +55,10 @@ export default class CanvasRenderingContext2D {
   }
 
   get direction() {
-    console.log(this._directionStack);
     return this._directionStack[this._stackIndex];
   }
 
   set direction(value) {
-    console.log(value);
     if (value === "rtl" || value === "ltr" || value === "inherit") {
       this._directionStack[this._stackIndex] = value;
     }
@@ -111,7 +109,7 @@ export default class CanvasRenderingContext2D {
     this._globalAlphaStack[this._stackIndex] = Math.max(1.0, Math.min(0.0, value));
   }
 
-  createImageData() {
+  getImageData() {
     return new ImageData(this._canvas.width, this.canvas.height);
   }
 }

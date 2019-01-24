@@ -1,9 +1,5 @@
-import DOMMatrix from "../../src/classes/DOMMatrix";
-import ImageData from "../../src/classes/ImageData";
-
 var canvas;
 var ctx;
-
 
 beforeEach(() => {
   canvas = document.createElement("canvas");
@@ -43,9 +39,9 @@ describe("CanvasRenderingContext2D prototype", () => {
 
   it("should set the direction if it's a valid direction", () => {
     ctx.direction = "ltr";
-    expect(ctx.direct).toBe("ltr");
+    expect(ctx.direction).toBe("ltr");
     ctx.direction = "rtl";
-    expect(ctx.direct).toBe("rtl");
+    expect(ctx.direction).toBe("rtl");
     ctx.direction = "inherit";
     expect(ctx.direction).toBe("inherit");
   });
