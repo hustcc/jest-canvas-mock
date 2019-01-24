@@ -42,6 +42,19 @@ describe('canvas', () => {
     expect(canvas.toDataURL).toHaveBeenLastCalledWith('image/jpeg', 1.0);
   });
 
+  test('canvas.createImageData()', () => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const imageData = ctx.createImageData(100, 50);
+    expect(imageData.width).toBe(100);
+    expect(imageData.height).toBe(50);
+    expect(imageData.data).toBeDefined();
+    expect(imageData.data).toHaveLength(20000);
+
+    const imageData2 = ctx.createImageData({width: 120, height: 100});
+    expect(imageData2.data).toHaveLength(48000);
+  });
+
   test('ctx.functions', () => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
