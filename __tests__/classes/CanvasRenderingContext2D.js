@@ -8,6 +8,36 @@ beforeEach(() => {
   canvas.height = 300;
 });
 
+var isSequence = (value) => [
+  Array,
+  Int8Array,
+  Uint8Array,
+  Int16Array,
+  Uint16Array,
+  Int32Array,
+  Uint32Array,
+  Float32Array,
+  Float64Array,
+].reduce((left, right) => left || value instanceof right, false);
+
+function map(items, callback) {
+  var result = [];
+  for(let i = 0; i < items.length; i++) {
+    result.push(callback(items[i]));
+  }
+  return result;
+}
+
+function every(items, callback) {
+  for (let i = 0; i < items.length; i++) {
+    if (callback(items[i])) {
+      continue;
+    }
+    return false;
+  }
+  return true;
+}
+
 describe("CanvasRenderingContext2D prototype", () => {
   it("should have a canvas property", () => {
     expect(ctx.canvas).toBe(canvas);
@@ -344,4 +374,87 @@ describe("CanvasRenderingContext2D prototype", () => {
     ctx.restore();
     expect(ctx.imageSmoothingQuality).toBe("low");
   });
+
+  it("should accept valid lineCap values", () => {
+    ["butt", "round", "square"].forEach(e => {
+      ctx.lineCap = e;
+      expect(ctx.lineCap).toBe(e);
+    });
+  });
+
+  it("should ignore invalid lineCap values", () => {
+    [true, false, 1, 0, null, "", Infinity, void 0, NaN, "invalid!"].forEach(e => {
+      ctx.lineCap = e;
+      expect(ctx.lineCap).toBe("butt");
+    });
+  });
+
+  it("should save and restore lineCap values", () => {
+    ctx.save();
+    ctx.lineCap = "round";
+    ctx.restore();
+    expect(ctx.lineCap).toBe("butt");
+  });
+
+  it("should cast js values to numbers and ignore non-finite values when setting the lineDashOffset property", () => {
+    [0, 10, -Infinity, "null", null, NaN].forEach(e => {
+      ctx.lineDashOffset = 0;
+      ctx.lineDashOffset = e;
+      var cast = Number(e);
+      if (Number.isFinite(cast)) {
+        expect(ctx.lineDashOffset).toBe(cast);
+      } else {
+        expect(ctx.lineDashOffset).toBe(0);
+      }
+    });
+  });
+
+  it("should save and restore lineDashOffset values when calling save() and restore()", () => {
+    ctx.save();
+    ctx.lineDashOffset = 30;
+    expect(ctx.lineDashOffset).toBe(30);
+    ctx.restore();
+    expect(ctx.lineDashOffset).toBe(0);
+  });
+
+  it("should accept valid lineDash values ignore invalid lineDash values", () => {
+    var examples = [
+      [1, 2, 3, 4],
+      [1, 2, 3],
+      [null, 4, 2],
+      [Infinity, -1, 4],
+      ["1", "2", "3"],
+      new Float64Array([1, 2, 3, 4]),
+      "blah",
+      0,
+      -1,
+      Infinity,
+      null,
+    ];
+
+    examples.forEach(e => {
+      ctx.setLineDash([]); // reset the linedash
+      if(!isSequence(e)) {
+        expect(() => ctx.setLineDash(e)).toThrow(TypeError);
+      } else {
+        ctx.setLineDash(e);
+        var result = map(e, val => Number(val));
+        var containsFiniteValues = every(result, val => Number.isFinite(val));
+        if (containsFiniteValues) {
+          result = result.length % 2 === 1 ? result.concat(result) : result;
+        } else {
+          result = [];
+        }
+        expect(ctx.getLineDash()).toEqual(result);
+      }
+    });
+  });
+
+  it("should save and restore lineDash values", () => {
+    ctx.save();
+    ctx.setLineDash([1, 2, 3]);
+    expect(ctx.getLineDash()).toEqual([1, 2, 3, 1, 2, 3]);
+    ctx.restore();
+    expect(ctx.getLineDash()).toEqual([]);
+  })
 });

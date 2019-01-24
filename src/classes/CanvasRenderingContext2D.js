@@ -63,6 +63,9 @@ export default class CanvasRenderingContext2D {
   _globalCompositeOperationStack = ["source-over"];
   _imageSmoothingEnabledStack = [true];
   _imageSmoothingQualityStack = ["low"];
+  _lineCapStack = ["butt"];
+  _lineDashStack = [[]];
+  _lineDashOffsetStack = [0];
 
   constructor(canvas) {
     testFuncs.forEach((key) => {
@@ -165,6 +168,9 @@ export default class CanvasRenderingContext2D {
     this._globalCompositeOperationStack.push(this._globalCompositeOperationStack[this._stackIndex]);
     this._imageSmoothingEnabledStack.push(this._imageSmoothingEnabledStack[this._stackIndex]);
     this._imageSmoothingQualityStack.push(this._imageSmoothingQualityStack[this._stackIndex]);
+    this._lineCapStack.push(this._lineCapStack[this._stackIndex]);
+    this._lineDashStack.push(this._lineDashStack[this._stackIndex]);
+    this._lineDashOffsetStack.push(this._lineDashOffsetStack[this._stackIndex]);
     this._stackIndex += 1;
   }
 
@@ -178,6 +184,9 @@ export default class CanvasRenderingContext2D {
     this._globalCompositeOperationStack.pop();
     this._imageSmoothingEnabledStack.pop();
     this._imageSmoothingQualityStack.pop();
+    this._lineCapStack.pop();
+    this._lineDashStack.pop();
+    this._lineDashOffsetStack.pop();
     this._stackIndex -= 1;
   }
 
@@ -237,5 +246,55 @@ export default class CanvasRenderingContext2D {
     if (value === "high" || value === "medium" || value === "low") {
       this._imageSmoothingQualityStack[this._stackIndex] = value;
     }
+  }
+
+  get lineCap() {
+    return this._lineCapStack[this._stackIndex];
+  }
+
+  set lineCap(value) {
+    if (value === "butt" || value === "round" || value === "square") {
+      this._lineCapStack[this._stackIndex] = value;
+    }
+  }
+
+  get lineDashOffset() {
+    return this._lineDashOffsetStack[this._stackIndex];
+  }
+
+  set lineDashOffset(value) {
+    var result = Number(value);
+    if (Number.isFinite(result)) {
+      this._lineDashOffsetStack[this._stackIndex] = result;
+    }
+  }
+
+  getLineDash() {
+    return this._lineDashStack[this._stackIndex];
+  }
+
+  setLineDash(lineDash) {
+    var isSequence = [
+      Array,
+      Int8Array,
+      Uint8Array,
+      Int16Array,
+      Uint16Array,
+      Int32Array,
+      Uint32Array,
+      Float32Array,
+      Float64Array,
+    ].reduce((left, right) => left || lineDash instanceof right, false);
+    if (!isSequence) throw new TypeError("Failed to execute 'setLineDash' on 'CanvasRenderingContext2D': The provided value cannot be converted to a sequence.")
+    var result = [];
+    for (var i = 0; i < lineDash.length; i++) {
+      var value = Number(lineDash[i]);
+      if (Number.isFinite(value) && value >= 0) {
+        result.push(value);
+      } else {
+        return;
+      }
+    }
+    this._lineDashStack[this._stackIndex] = (result.length % 2 === 1) ? result.concat(result) : result;
   }
 }
