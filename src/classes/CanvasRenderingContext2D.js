@@ -21,6 +21,7 @@ var testFuncs = [
   "restore",
   "createPattern",
   "createRadialGradient",
+  "addHitRegion",
 ];
 
 var compositeOperations = [
@@ -479,5 +480,11 @@ export default class CanvasRenderingContext2D {
     if (value === "top" || value === "hanging" || value === "middle" || value === "alphabetic" || value === "ideographic" || value === "bottom") {
       this._textBaselineStack[this._stackIndex] = value;
     }
+  }
+
+  addHitRegion(options = {}) {
+    var { path, fillRule, id, parentID, cursor, control, label, role } = options;
+    if (!path && !id) throw new DOMException("ConstraintError", "Failed to execute 'addHitRegion' on 'CanvasRenderingContext2D': Both id and control are null.");
+    if (fillRule && fillRule !== "evenodd" && fillRule !== "nonzero") throw new TypeError("Failed to execute 'addHitRegion' on 'CanvasRenderingContext2D': The provided value '" + fillRule + "' is not a valid enum value of type CanvasFillRule.")
   }
 }
