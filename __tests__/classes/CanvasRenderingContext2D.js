@@ -473,4 +473,93 @@ describe("CanvasRenderingContext2D prototype", () => {
       }
     });
   });
+
+  it("should accept a 2d matrix as a valid setTransform parameter", () => {
+    var m = new DOMMatrix([1, 2, 3, 4, 5, 6]);
+    ctx.setTransform(m);
+    expect(ctx.getTransform()).toEqual(new DOMMatrix([1, 2, 3, 4, 5, 6]));
+  });
+
+  it("should throw when setTransform doesn't receive valid DOMMatrix", () => {
+    expect(() => ctx.setTransform({})).toThrow(TypeError);
+  });
+
+  it("should accept 0 parameters for the setTransform function (resetTransform)", () => {
+    ctx.setTransform(1, 2, 3, 4, 5, 6);
+    expect(ctx.getTransform()).toEqual(new DOMMatrix([1, 2, 3, 4, 5, 6]));
+    ctx.setTransform();
+    expect(ctx.getTransform()).toEqual(new DOMMatrix([1, 0, 0, 1, 0, 0]));
+  });
+
+  it("should not throw but return if any value provided to setTransform is not finite", () => {
+    var identity = new DOMMatrix([1, 0, 0, 1, 0, 0]);
+    [
+      [NaN, 2, 3, 4, 5, 6],
+      [1, NaN, 3, 4, 5, 6],
+      [1, 2, NaN, 4, 5, 6],
+      [1, 2, 3, NaN, 5, 6],
+      [1, 2, 3, 4, NaN, 6],
+      [1, 2, 3, 4, 5, NaN],
+    ].forEach(e => {
+      ctx.setTransform(...e);
+      expect(ctx.getTransform()).toEqual(identity);
+    });
+  });
+
+  it("should throw if setTransform receives 3-5 parameters", () => {
+    expect(() => ctx.setTransform(1, 2, 3, 4)).toThrow(TypeError);
+  });
+
+  it("should set the default value lineJoin to 'miter'", () => {
+    expect(ctx.lineJoin).toBe("miter");
+  });
+
+  it("should set the lineJoin if it's a valid lineJoin", () => {
+    ctx.lineJoin = "wrong!";
+    expect(ctx.lineJoin).toBe("miter");
+  });
+
+  it("should set the lineJoin if it's a valid lineJoin", () => {
+    ctx.lineJoin = "round";
+    expect(ctx.lineJoin).toBe("round");
+    ctx.lineJoin = "bevel";
+    expect(ctx.lineJoin).toBe("bevel");
+    ctx.lineJoin = "miter";
+    expect(ctx.lineJoin).toBe("miter");
+  });
+
+  it("should save and restore lineJoin values", () => {
+    ctx.lineJoin = "round";
+    ctx.save();
+    ctx.lineJoin = "bevel";
+    expect(ctx.lineJoin).toBe("bevel");
+    ctx.restore();
+    expect(ctx.lineJoin).toBe("round");
+  });
+
+  it("should have a default lineWidth value", () => {
+    expect(ctx.lineWidth).toBe(1);
+  })
+
+  it("should ignore non finite lineWidth values", () => {
+    [Infinity, -Infinity, null, void 0, NaN].forEach(e => {
+      ctx.lineWidth = e;
+      expect(ctx.lineWidth).toBe(1);
+    });
+  });
+
+  it("should ignore out of range lineWidth values", () => {
+    [-1, -10, -300, 0].forEach(e => {
+      ctx.lineWidth = e;
+      expect(ctx.lineWidth).toBe(1);
+    });
+  });
+
+  it("should not ignore lineWidth values that are within range", () => {
+    [1, 10, "30", "10.2"].forEach(e => {
+      ctx.lineWidth = e;
+      expect(ctx.lineWidth).toBe(Number(e));
+    });
+  });
+
 });

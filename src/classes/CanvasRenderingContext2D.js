@@ -66,6 +66,8 @@ export default class CanvasRenderingContext2D {
   _lineCapStack = ["butt"];
   _lineDashStack = [[]];
   _lineDashOffsetStack = [0];
+  _lineJoinStack = ["miter"];
+  _lineWidthStack = [1];
 
   constructor(canvas) {
     testFuncs.forEach((key) => {
@@ -171,6 +173,8 @@ export default class CanvasRenderingContext2D {
     this._lineCapStack.push(this._lineCapStack[this._stackIndex]);
     this._lineDashStack.push(this._lineDashStack[this._stackIndex]);
     this._lineDashOffsetStack.push(this._lineDashOffsetStack[this._stackIndex]);
+    this._lineJoinStack.push(this._lineJoinStack[this._stackIndex]);
+    this._lineWidthStack.push(this._lineWidthStack[this.stackIndex]);
     this._stackIndex += 1;
   }
 
@@ -187,6 +191,8 @@ export default class CanvasRenderingContext2D {
     this._lineCapStack.pop();
     this._lineDashStack.pop();
     this._lineDashOffsetStack.pop();
+    this._lineJoinStack.pop();
+    this._lineWidthStack.pop();
     this._stackIndex -= 1;
   }
 
@@ -336,5 +342,26 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][3] = d;
     this._transformStack[this._stackIndex][4] = e;
     this._transformStack[this._stackIndex][5] = f;
+  }
+
+  get lineJoin() {
+    return this._lineJoinStack[this._stackIndex];
+  }
+
+  set lineJoin(value) {
+    if (value === "round" || value === "bevel" || value === "miter") {
+      this._lineJoinStack[this._stackIndex] = value;
+    }
+  }
+
+  get lineWidth() {
+    return this._lineWidthStack[this._stackIndex];
+  }
+
+  set lineWidth(value) {
+    var result = Number(value);
+    if (Number.isFinite(result) && result > 0) {
+      this._lineWidthStack[this._stackIndex] = result;
+    }
   }
 }
