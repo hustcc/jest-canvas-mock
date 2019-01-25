@@ -22,6 +22,11 @@ var testFuncs = [
   "createPattern",
   "createRadialGradient",
   "addHitRegion",
+  "arc",
+  "arcTo",
+  "beginPath",
+  "clip",
+  "closePath",
 ];
 
 var compositeOperations = [
@@ -487,4 +492,32 @@ export default class CanvasRenderingContext2D {
     if (!path && !id) throw new DOMException("ConstraintError", "Failed to execute 'addHitRegion' on 'CanvasRenderingContext2D': Both id and control are null.");
     if (fillRule && fillRule !== "evenodd" && fillRule !== "nonzero") throw new TypeError("Failed to execute 'addHitRegion' on 'CanvasRenderingContext2D': The provided value '" + fillRule + "' is not a valid enum value of type CanvasFillRule.")
   }
+
+  arc(x, y, radius, startAngle, endAngle, anticlockwise = false) {
+    if (arguments.length < 5) throw new TypeError("Failed to execute 'arc' on 'CanvasRenderingContext2D': 5 arguments required, but only " + arguments.length + " present.");
+    var xResult = Number(x);
+    var yResult = Number(y);
+    if (Number.isFinite(xResult) && Number.isFinite(yResult)) {
+      var radiusResult = Number(radius);
+      if (Number.isFinite(radiusResult) && radiusResult < 0) throw new TypeError("Failed to execute 'arc' on 'CanvasRenderingContext2D': The radius provided (" + radius + ") is negative.");
+    }
+  }
+
+  arcTo(cpx1, cpy1, cpx2, cpy2, radius) {
+    if (arguments.length < 5) throw new TypeError("Failed to execute 'arcTo' on 'CanvasRenderingContext2D': 5 arguments required, but only " + arguments.length + " present.");
+    var cpx1Result = Number(cpx1);
+    var cpy1Result = Number(cpy1);
+    var cpx2Result = Number(cpx2);
+    var cpy2Result = Number(cpy2);
+    if (Number.isFinite(cpx1Result) && Number.isFinite(cpx2Result) && Number.isFinite(cpy1Result) && Number.isFinite(cpy2Result)) {
+      var radiusResult = Number(radius);
+      if (Number.isFinite(radiusResult) && radiusResult < 0) throw new TypeError("Failed to execute 'arc' on 'CanvasRenderingContext2D': The radius provided (" + radius + ") is negative.");
+    }
+  }
+
+  beginPath() {}
+
+  clip() {}
+
+  closePath() {}
 }

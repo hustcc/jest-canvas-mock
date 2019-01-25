@@ -12,8 +12,18 @@ describe("addHitRegion", () => {
   it("should be a function", () => {
     expect(ctx.addHitRegion).toBeTruthy();
   });
+  it("should be callable", () => {
+    ctx.addHitRegion({ id: "test" });
+    expect(ctx.addHitRegion).toBeCalled();
+  });
 
   it("should throw if called with no parameters", () => {
     expect(() => ctx.addHitRegion()).toThrow(DOMException);
+  });
+
+  it("should throw if fillRule is set and isn't 'evenodd' or 'nonzero'", () => {
+    expect(() => ctx.addHitRegion({ id: "test", fillRule: "wrong!" })).toThrow();
+    expect(() => ctx.addHitRegion({ id: "test", fillRule: "evenodd", })).not.toThrow();
+    expect(() => ctx.addHitRegion({ id: "test", fillRule: "nonzero", })).not.toThrow();
   });
 });
