@@ -27,6 +27,8 @@ var testFuncs = [
   "beginPath",
   "clip",
   "closePath",
+  "scale",
+  "stroke",
 ];
 
 var compositeOperations = [
@@ -520,4 +522,20 @@ export default class CanvasRenderingContext2D {
   clip() {}
 
   closePath() {}
+
+  scale(x, y) {
+    if (arguments.length < 2) throw new TypeError("TypeError: Failed to execute 'scale' on 'CanvasRenderingContext2D': 2 arguments required, but only " + arguments.length + " present.");
+    var xResult = Number(x);
+    var yResult = Number(y);
+    if (Number.isFinite(xResult) && Number.isFinite(yResult)) {
+      this._transformStack[this._stackIndex][0] *= xResult;
+      this._transformStack[this._stackIndex][1] *= xResult;
+      this._transformStack[this._stackIndex][2] *= yResult;
+      this._transformStack[this._stackIndex][3] *= yResult;
+    }
+  }
+
+  stroke(path) {
+    if (arguments.length > 0 && !(path instanceof Path2D)) throw new TypeError("Failed to execute 'stroke' on 'CanvasRenderingContext2D': parameter 1 is not of type 'Path2D'.");
+  }
 }
