@@ -68,6 +68,12 @@ export default class CanvasRenderingContext2D {
   _lineDashOffsetStack = [0];
   _lineJoinStack = ["miter"];
   _lineWidthStack = [1];
+  _miterLimitStack = [10];
+  _shadowBlurStack = [0];
+  _shadowOffsetXStack = [0];
+  _shadowOffsetYStack = [0];
+  _shadowColorStack = ["rgba(0, 0, 0, 0)"];
+  _strokeStyleStack = ["#000"];
 
   constructor(canvas) {
     testFuncs.forEach((key) => {
@@ -175,6 +181,12 @@ export default class CanvasRenderingContext2D {
     this._lineDashOffsetStack.push(this._lineDashOffsetStack[this._stackIndex]);
     this._lineJoinStack.push(this._lineJoinStack[this._stackIndex]);
     this._lineWidthStack.push(this._lineWidthStack[this.stackIndex]);
+    this._miterLimitStack.push(this._miterLimitStack[this._stackIndex]);
+    this._shadowBlurStack.push(this._shadowBlurStack[this._stackIndex]);
+    this._shadowColorStack.push(this._shadowColorStack[this._stackIndex]);
+    this._shadowOffsetXStack.push(this._shadowOffsetXStack[this._stackIndex]);
+    this._shadowOffsetYStack.push(this._shadowOffsetYStack[this._stackIndex]);
+    this._strokeStyleStack.push(this._strokeStyleStack[this._stackIndex]);
     this._stackIndex += 1;
   }
 
@@ -193,6 +205,12 @@ export default class CanvasRenderingContext2D {
     this._lineDashOffsetStack.pop();
     this._lineJoinStack.pop();
     this._lineWidthStack.pop();
+    this._miterLimitStack.pop();
+    this._shadowBlurStack.pop();
+    this._shadowColorStack.pop();
+    this._shadowOffsetXStack.pop();
+    this._shadowOffsetYStack.pop();
+    this._strokeStyleStack.pop();
     this._stackIndex -= 1;
   }
 
@@ -362,6 +380,78 @@ export default class CanvasRenderingContext2D {
     var result = Number(value);
     if (Number.isFinite(result) && result > 0) {
       this._lineWidthStack[this._stackIndex] = result;
+    }
+  }
+
+  get miterLimit() {
+    return this._miterLimitStack[this._stackIndex];
+  }
+
+  set miterLimit(value) {
+    var result = Number(value);
+    if (Number.isFinite(result) && result > 0) {
+      this._miterLimitStack[this._stackIndex] = result;
+    }
+  }
+
+  get shadowBlur() {
+    return this._shadowBlurStack[this._stackIndex];
+  }
+
+  set shadowBlur(value) {
+    var result = Number(value);
+    if (Number.isFinite(result) && result > 0) {
+      this._shadowBlurStack[this._stackIndex] = result;
+    }
+  }
+
+  get shadowColor() {
+    return this._shadowColorStack[this._stackIndex];
+  }
+
+  set shadowColor(value) {
+    if (typeof value === "string") {
+      var result = parseCSSColor(value);
+      if (result) {
+        this._shadowColorStack[this._stackIndex] = result;
+      }
+    }
+  }
+
+  get shadowOffsetX() {
+    return this._shadowOffsetXStack[this._stackIndex];
+  }
+
+  set shadowOffsetX(value) {
+    var result = Number(value);
+    if (Number.isFinite(result)) {
+      this._shadowOffsetXStack[this._stackIndex] = result;
+    }
+  }
+
+  get shadowOffsetY() {
+    return this._shadowOffsetXStack[this._stackIndex];
+  }
+
+  set shadowOffsetY(value) {
+    var result = Number(value);
+    if (Number.isFinite(result)) {
+      this._shadowOffsetXStack[this._stackIndex] = result;
+    }
+  }
+
+  get strokeStyle() {
+    return this._strokeStyleStack[this._stackIndex];
+  }
+
+  set strokeStyle(value) {
+    if (typeof value === "string") {
+      var result = parseCSSColor(value);
+      if (result) {
+        this._strokeStyleStack[this._stackIndex] = result;
+      }
+    } else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
+      this._strokeStyleStack[this._stackIndex] = value;
     }
   }
 }
