@@ -35,6 +35,9 @@ var testFuncs = [
   "strokeRect",
   "rect",
   "resetTransform",
+  "translate",
+  "moveTo",
+  "lineTo",
 ];
 
 var compositeOperations = [
@@ -570,5 +573,27 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][3] = 1;
     this._transformStack[this._stackIndex][4] = 0;
     this._transformStack[this._stackIndex][5] = 0;
+  }
+
+  translate(x, y) {
+    if (arguments.length < 2) throw new TypeError("TypeError: Failed to execute 'translate' on 'CanvasRenderingContext2D': 2 arguments required, but only " + arguments.length + " present.");
+    var xResult = Number(x);
+    var yResult = Number(y);
+    var a = this._transformStack[this._stackIndex][0];
+    var b = this._transformStack[this._stackIndex][1];
+    var c = this._transformStack[this._stackIndex][2];
+    var d = this._transformStack[this._stackIndex][3];
+    if (Number.isFinite(xResult) && Number.isFinite(yResult)) {
+      this._transformStack[this._stackIndex][4] += a * xResult + c * yResult;
+      this._transformStack[this._stackIndex][5] += b * xResult + d * yResult;
+    }
+  }
+
+  moveTo(x, y) {
+    if (arguments.length < 2) throw new TypeError("Uncaught TypeError: Failed to execute 'moveTo' on 'CanvasRenderingContext2D': 2 arguments required, but only " + arguments.length + " present.")
+  }
+
+  lineTo(x, y) {
+    if (arguments.length < 2) throw new TypeError("Uncaught TypeError: Failed to execute 'lineTo' on 'CanvasRenderingContext2D': 2 arguments required, but only " + arguments.length + " present.")
   }
 }
