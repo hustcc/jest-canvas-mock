@@ -74,6 +74,8 @@ export default class CanvasRenderingContext2D {
   _shadowOffsetYStack = [0];
   _shadowColorStack = ["rgba(0, 0, 0, 0)"];
   _strokeStyleStack = ["#000"];
+  _textAlignStack = ["start"];
+  _textBaselineStack = ["alphabetic"];
 
   constructor(canvas) {
     testFuncs.forEach((key) => {
@@ -187,6 +189,8 @@ export default class CanvasRenderingContext2D {
     this._shadowOffsetXStack.push(this._shadowOffsetXStack[this._stackIndex]);
     this._shadowOffsetYStack.push(this._shadowOffsetYStack[this._stackIndex]);
     this._strokeStyleStack.push(this._strokeStyleStack[this._stackIndex]);
+    this._textAlignStack.push(this._textAlignStack[this._stackIndex]);
+    this._textBaselineStack.push(this._textBaselineStack[this._stackIndex]);
     this._stackIndex += 1;
   }
 
@@ -211,6 +215,8 @@ export default class CanvasRenderingContext2D {
     this._shadowOffsetXStack.pop();
     this._shadowOffsetYStack.pop();
     this._strokeStyleStack.pop();
+    this._textAlignStack.pop();
+    this._textBaselineStack.pop();
     this._stackIndex -= 1;
   }
 
@@ -452,6 +458,26 @@ export default class CanvasRenderingContext2D {
       }
     } else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
       this._strokeStyleStack[this._stackIndex] = value;
+    }
+  }
+
+  get textAlign() {
+    return this._textAlignStack[this._stackIndex];
+  }
+
+  set textAlign(value) {
+    if (value === "left" || value === "right" || value === "center" || value === "start" || value === "end") {
+      this._textAlignStack[this._stackIndex] = value;
+    }
+  }
+
+  get textBaseline() {
+    return this._textBaselineStack[this._stackIndex];
+  }
+
+  set textBaseline(value) {
+    if (value === "top" || value === "hanging" || value === "middle" || value === "alphabetic" || value === "ideographic" || value === "bottom") {
+      this._textBaselineStack[this._stackIndex] = value;
     }
   }
 }

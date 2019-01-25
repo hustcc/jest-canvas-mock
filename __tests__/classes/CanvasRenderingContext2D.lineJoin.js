@@ -35,4 +35,4 @@ describe("lineJoin", () => {
     ctx.restore();
     expect(ctx.lineJoin).toBe("round");
   });
-})
+});
