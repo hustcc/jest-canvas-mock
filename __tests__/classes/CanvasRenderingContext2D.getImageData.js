@@ -9,6 +9,15 @@ beforeEach(() => {
 });
 
 describe("getImageData", () => {
+  it("should be a function", () => {
+    expect(typeof ctx.getImageData).toBe("function");
+  });
+
+  it("should be callable", () => {
+    ctx.getImageData();
+    expect(ctx.getImageData).toBeCalled();
+  });
+
   it("should return a image data from getImageData", () => {
     expect(ctx.getImageData()).toBeInstanceOf(ImageData);
   });

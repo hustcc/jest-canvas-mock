@@ -29,6 +29,12 @@ var testFuncs = [
   "closePath",
   "scale",
   "stroke",
+  "clearHitRegions",
+  "clearRect",
+  "fillRect",
+  "strokeRect",
+  "rect",
+  "resetTransform",
 ];
 
 var compositeOperations = [
@@ -537,5 +543,32 @@ export default class CanvasRenderingContext2D {
 
   stroke(path) {
     if (arguments.length > 0 && !(path instanceof Path2D)) throw new TypeError("Failed to execute 'stroke' on 'CanvasRenderingContext2D': parameter 1 is not of type 'Path2D'.");
+  }
+
+  clearHitRegions() { }
+
+  clearRect(x, y, width, height) {
+    if (arguments.length < 4) throw new TypeError("Uncaught TypeError: Failed to execute 'clearRect' on 'CanvasRenderingContext2D': 4 arguments required, but only " + arguments.length + " present.")
+  }
+
+  fillRect(x, y, width, height) {
+    if (arguments.length < 4) throw new TypeError("Uncaught TypeError: Failed to execute 'fillRect' on 'CanvasRenderingContext2D': 4 arguments required, but only " + arguments.length + " present.")
+  }
+
+  strokeRect(x, y, width, height) {
+    if (arguments.length < 4) throw new TypeError("Uncaught TypeError: Failed to execute 'strokeRect' on 'CanvasRenderingContext2D': 4 arguments required, but only " + arguments.length + " present.")
+  }
+
+  rect(x, y, width, height) {
+    if (arguments.length < 4) throw new TypeError("Uncaught TypeError: Failed to execute 'rect' on 'CanvasRenderingContext2D': 4 arguments required, but only " + arguments.length + " present.")
+  }
+
+  resetTransform() {
+    this._transformStack[this._stackIndex][0] = 1;
+    this._transformStack[this._stackIndex][1] = 0;
+    this._transformStack[this._stackIndex][2] = 0;
+    this._transformStack[this._stackIndex][3] = 1;
+    this._transformStack[this._stackIndex][4] = 0;
+    this._transformStack[this._stackIndex][5] = 0;
   }
 }

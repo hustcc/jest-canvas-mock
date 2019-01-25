@@ -9,6 +9,15 @@ beforeEach(() => {
 });
 
 describe("createRadialGradient", () => {
+  it("should be a function", () => {
+    expect(typeof ctx.createRadialGradient).toBe("function");
+  });
+
+  it("should be callable", () => {
+    ctx.createRadialGradient(1, 2, 3, 4, 5, 6);
+    expect(ctx.createRadialGradient).toBeCalled();
+  });
+
   it("should not create a radial gradient when the argument length is < 6", () => {
     expect(() => ctx.createRadialGradient(0, 1, 2, 3, 4)).toThrow(TypeError);
   });
