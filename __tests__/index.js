@@ -45,7 +45,10 @@ describe('canvas', () => {
   test('canvas.toBlob()', () => {
     const canvas = document.createElement('canvas');
     const callback = jest.fn();
-    expect(canvas.toBlob(callback));
+    canvas.toBlob();
+    expect(canvas.toBlob).toHaveBeenLastCalledWith();
+
+    canvas.toBlob(callback);
     expect(canvas.toBlob).toHaveBeenLastCalledWith(callback);
   });
 
