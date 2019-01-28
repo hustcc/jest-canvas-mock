@@ -18,26 +18,27 @@ describe("arc", () => {
     expect(ctx.arc).toBeCalled();
   });
 
-  it("shouldn't accept parameters less than 5", () => {
+  it("shouldn't accept parameters less than 7", () => {
+    expect(() => ctx.arc()).toThrow(TypeError);
+    expect(() => ctx.arc(1)).toThrow(TypeError);
+    expect(() => ctx.arc(1, 2,)).toThrow(TypeError);
     expect(() => ctx.arc(1, 2, 3)).toThrow(TypeError);
+    expect(() => ctx.arc(1, 2, 3, 4)).toThrow(TypeError);
   });
 
   it("should throw when radius is negative", () => {
-    expect(() => ctx.arc(1, 2, -1, 3, 4)).toThrow(TypeError);
+    expect(() => ctx.arc(1, 2, -1, 4, 5)).toThrow(DOMException);
   });
 
-  it("should accept 5 parameters regardless of type", () => {
+  it("should not throw if any value is `NaN`", () => {
     [
-      [1, 2, 3, 4, 5],
-      [null, void 0, "", NaN, Infinity],
-      [-100, -100, 100, 0, 0, true],
+      [NaN, 2, 3, 4, 5],
+      [1, NaN, 3, 4, 5],
+      [1, 2, NaN, 4, 5],
+      [1, 2, 3, NaN, 5],
+      [1, 2, 3, 4, NaN],
     ].forEach(e => {
       expect(() => ctx.arc(...e)).not.toThrow();
     });
   });
-
-  it("should not throw for negative radius values if x or y aren't finite numbers", () => {
-    expect(() => ctx.arc(1, NaN, -1, 0, Math.PI)).not.toThrow();
-  });
-
 });

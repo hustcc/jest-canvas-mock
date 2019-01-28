@@ -2,6 +2,7 @@ import DOMMatrix from "./DOMMatrix";
 import CanvasPattern from "./CanvasPattern";
 import parseColor from "parse-color";
 import cssfontparser from "cssfontparser";
+import TextMetrics from "./TextMetrics";
 
 function parseCSSColor(value) {
   var result = parseColor(value);
@@ -38,6 +39,11 @@ var testFuncs = [
   "translate",
   "moveTo",
   "lineTo",
+  "bezierCurveTo",
+  "createLinearGradient",
+  "ellipse",
+  "measureText",
+  "rotate",
 ];
 
 var compositeOperations = [
@@ -237,6 +243,11 @@ export default class CanvasRenderingContext2D {
     this._stackIndex -= 1;
   }
 
+  measureText(text) {
+    if (arguments.length < 1) throw new TypeError("VM5906 pen.js:2 Uncaught TypeError: Failed to execute 'measureText' on 'CanvasRenderingContext2D': 1 argument required, but only 0 present.");
+    return new TextMetrics(String(text));
+  }
+
   createPattern(image, type) {
     if (arguments.length === 1)
       throw new TypeError("Failed to execute 'createPattern' on 'CanvasRenderingContext2D': 2 arguments required, but only 1 present.");
@@ -264,6 +275,15 @@ export default class CanvasRenderingContext2D {
     if (!Number.isFinite(r1)) throw new TypeError("Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
     if (r0 < 0) throw new DOMException("DataError", "Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The r0 provided is less than 0.");
     if (r1 < 0) throw new DOMException("DataError", "Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The r0 provided is less than 1.");
+    return new CanvasPattern();
+  }
+
+  createLinearGradient(x0, y0, x1, y1) {
+    if (arguments.length < 4) throw new TypeError("Failed to execute 'createLinearGradient' on 'CanvasRenderingContext2D': 4 arguments required, but only " + arguments.length + " present.");
+    if (!Number.isFinite(x0)) throw new TypeError("Failed to execute 'createLinearGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
+    if (!Number.isFinite(y0)) throw new TypeError("Failed to execute 'createLinearGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
+    if (!Number.isFinite(x1)) throw new TypeError("Failed to execute 'createLinearGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
+    if (!Number.isFinite(y1)) throw new TypeError("Failed to execute 'createLinearGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
     return new CanvasPattern();
   }
 
@@ -506,12 +526,10 @@ export default class CanvasRenderingContext2D {
 
   arc(x, y, radius, startAngle, endAngle, anticlockwise = false) {
     if (arguments.length < 5) throw new TypeError("Failed to execute 'arc' on 'CanvasRenderingContext2D': 5 arguments required, but only " + arguments.length + " present.");
-    var xResult = Number(x);
-    var yResult = Number(y);
-    if (Number.isFinite(xResult) && Number.isFinite(yResult)) {
-      var radiusResult = Number(radius);
-      if (Number.isFinite(radiusResult) && radiusResult < 0) throw new TypeError("Failed to execute 'arc' on 'CanvasRenderingContext2D': The radius provided (" + radius + ") is negative.");
+    for (var i = 0; i < 5; i++) {
+      if (!Number.isFinite(Number(arguments[i]))) return;
     }
+    if (Number(radius) < 0) throw new DOMException("IndexSizeError", "Failed to execute 'arc' on 'CanvasRenderingContext2D': The radius provided (" + radius + ") is negative.");
   }
 
   arcTo(cpx1, cpy1, cpx2, cpy2, radius) {
@@ -552,6 +570,15 @@ export default class CanvasRenderingContext2D {
 
   clearRect(x, y, width, height) {
     if (arguments.length < 4) throw new TypeError("Uncaught TypeError: Failed to execute 'clearRect' on 'CanvasRenderingContext2D': 4 arguments required, but only " + arguments.length + " present.")
+  }
+
+  ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise = false) {
+    if (arguments.length < 7) throw new TypeError("Failed to execute 'ellipse' on 'CanvasRenderingContext2D': 6 arguments required, but only " + arguments.length + " present.");
+    for (var i = 0; i < 7; i++) {
+      if (!Number.isFinite(Number(arguments[i]))) return;
+    }
+    if (Number(radiusX) < 0) throw new DOMException("IndexSizeError", "Failed to execute 'ellipse' on 'CanvasRenderingContext2D': The major-axis radius provided (" + radiusX + ") is negative.");
+    if (Number(radiusY) < 0) throw new DOMException("IndexSizeError", "Failed to execute 'ellipse' on 'CanvasRenderingContext2D': The minor-axis radius provided (" + radiusY + ") is negative.");
   }
 
   fillRect(x, y, width, height) {
@@ -595,5 +622,25 @@ export default class CanvasRenderingContext2D {
 
   lineTo(x, y) {
     if (arguments.length < 2) throw new TypeError("Uncaught TypeError: Failed to execute 'lineTo' on 'CanvasRenderingContext2D': 2 arguments required, but only " + arguments.length + " present.")
+  }
+
+  bezierCurveTo(cpx1, cpy1, cpx2, cpy2, x, y) {
+    if (arguments.length < 6) throw new TypeError("Uncaught TypeError: Failed to execute 'bezierCurveTo' on 'CanvasRenderingContext2D': 6 arguments required, but only " + arguments.length + " present.")
+  }
+
+  rotate(angle) {
+    if (arguments.length < 1) throw new TypeError("VM6715 pen.js:2 Uncaught TypeError: Failed to execute 'rotate' on 'CanvasRenderingContext2D': 1 argument required, but only 0 present.");
+    angle = Number(angle);
+    if (!Number.isFinite(angle)) return;
+    var a = this._transformStack[this._stackIndex][0];
+    var b = this._transformStack[this._stackIndex][1];
+    var c = this._transformStack[this._stackIndex][2];
+    var d = this._transformStack[this._stackIndex][3];
+    var cos = Math.cos(angle);
+    var sin = Math.sin(angle);
+    this._transformStack[this._stackIndex][0] = a * cos + c * sin;
+    this._transformStack[this._stackIndex][1] = b * cos + d * sin;
+    this._transformStack[this._stackIndex][2] = c * cos - a * sin;
+    this._transformStack[this._stackIndex][3] = d * cos - b * sin;
   }
 }

@@ -35,4 +35,4 @@ describe("createRadialGradient", () => {
     expect(() => ctx.createRadialGradient(0, 0, -1, 0, 0, 0)).toThrow(DOMException);
     expect(() => ctx.createRadialGradient(0, 0, 0, 0, 0, -1)).toThrow(DOMException);
   });
-})
+});

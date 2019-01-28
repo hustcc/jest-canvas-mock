@@ -9,6 +9,7 @@ import CanvasPattern from './classes/CanvasPattern';
 import CanvasRenderingContext2D from "./classes/CanvasRenderingContext2D";
 import DOMMatrix from './classes/DOMMatrix';
 import ImageData from "./classes/ImageData";
+import TextMetrics from './classes/TextMetrics';
 
 
 export default win => {
@@ -47,6 +48,7 @@ export default win => {
   if (!win.CanvasRenderingContext2D) win.CanvasRenderingContext2D = CanvasRenderingContext2D;
   if (!win.DOMMatrix) win.DOMMatrix = DOMMatrix;
   if (!win.ImageData) win.ImageData = ImageData;
+  if (!win.TextMetrics) win.TextMetrics = TextMetrics;
   if (!win.__canvas_implemented) {
     var getContextExternal = HTMLCanvasElement.prototype.getContext;
     HTMLCanvasElement.prototype.getContext = function getContext2d(type) {
