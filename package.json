@@ -38,7 +38,9 @@
   },
   "jest": {
     "collectCoverage": true,
-    "collectCoverageFrom": ["src/classes/**/*.js"],
+    "collectCoverageFrom": [
+      "src/classes/**/*.js"
+    ],
     "setupFiles": [
       "./src/index.js"
     ]
