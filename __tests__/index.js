@@ -42,6 +42,13 @@ describe('canvas', () => {
     expect(canvas.toDataURL).toHaveBeenLastCalledWith('image/jpeg', 1.0);
   });
 
+  test('canvas.toBlob()', () => {
+    const canvas = document.createElement('canvas');
+    const callback = jest.fn();
+    expect(canvas.toBlob(callback));
+    expect(canvas.toBlob).toHaveBeenLastCalledWith(callback);
+  });
+
   test('canvas.createImageData()', () => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
