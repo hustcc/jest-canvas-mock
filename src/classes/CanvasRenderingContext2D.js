@@ -48,6 +48,14 @@ var testFuncs = [
   "drawFocusIfNeeded",
   "isPointInPath",
   "isPointInStroke",
+  "putImageData",
+  "strokeText",
+  "fillText",
+  "quadraticCurveTo",
+  "removeHitRegion",
+  "fill",
+  "transform",
+  "scrollPathIntoView",
 ];
 
 var compositeOperations = [
@@ -77,6 +85,8 @@ var compositeOperations = [
   "saturation",
   "color",
   "luminosity",
+  "fillText",
+  "strokeText",
 ];
 
 export default class CanvasRenderingContext2D {
@@ -677,4 +687,64 @@ export default class CanvasRenderingContext2D {
     if (arguments.length < 2) throw new TypeError("Failed to execute 'isPointInStroke' on 'CanvasRenderingContext2D': 2 arguments required, but only " + arguments.length + " present.");
     return false; // return false in a mocking environment, unless I can verify a point is actually within the path
   }
+
+  putImageData(data, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight) {
+    if (arguments.length < 3) throw new TypeError("Failed to execute 'putImageData' on 'CanvasRenderingContext2D': 3 arguments required, but only " + arguments.length + " present.");
+    if (arguments.length > 3 && arguments.length < 7) throw new TypeError("Failed to execute 'putImageData' on 'CanvasRenderingContext2D': Valid arities are: [3, 7], but " + arguments.length + " arguments provided.");
+    if (!(data instanceof ImageData)) throw new TypeError("Failed to execute 'putImageData' on 'CanvasRenderingContext2D': parameter 1 is not of type 'ImageData'.");
+  }
+
+  fillText(text, x, y, maxWidth) {
+    if (arguments.length < 3) throw new TypeError("Failed to execute 'fillText' on 'CanvasRenderingContext2D': 3 arguments required, but only " + arguments.length + " present.");
+  }
+
+  strokeText(text, x, y, maxWidth) {
+    if (arguments.length < 3) throw new TypeError("Failed to execute 'strokeText' on 'CanvasRenderingContext2D': 3 arguments required, but only " + arguments.length + " present.");
+  }
+
+  quadraticCurveTo(cpx, cpy, x, y) {
+    if (arguments.length < 4) throw new TypeError("Failed to execute 'quadraticCurveTo' on 'CanvasRenderingContext2D': 4 arguments required, but only " + arguments.length + " present.");
+  }
+
+  removeHitRegion(id) {
+    if (arguments.length < 1) throw new TypeError("Failed to execute 'removeHitRegion' on 'CanvasRenderingContext2D': 1 argument required, but only " + arguments.length + " present.");
+  }
+
+  fill(path, fillRule) {
+    if (arguments.length === 0) return;
+
+    if (path instanceof Path2D) {
+      fillRule = String(fillRule);
+      if (fillRule !== "nonzero" && fillRule !== "evenodd") throw new TypeError("Failed to execute 'fill' on 'CanvasRenderingContext2D': The provided value '" + fillRule + "' is not a valid enum value of type CanvasFillRule.");
+    } else {
+      path = String(path);
+      if (path !== "nonzero" && path !== "evenodd") throw new TypeError("Failed to execute 'fill' on 'CanvasRenderingContext2D': The provided value '" + path + "' is not a valid enum value of type CanvasFillRule.");
+    }
+  }
+
+  transform(a, b, c, d, e, f) {
+    if (arguments.length < 6) throw new TypeError("Failed to execute 'transform' on 'CanvasRenderingContext2D': 6 arguments required, but only " + arguments.length + " present.");
+    for (var i = 0; i < 6; i++) if (!Number.isFinite(Number(arguments[i]))) return;
+    a = Number(a);
+    b = Number(b);
+    c = Number(c);
+    d = Number(d);
+    e = Number(e);
+    f = Number(f);
+    var sa = this._transformStack[this._stackIndex][0];
+    var sb = this._transformStack[this._stackIndex][1];
+    var sc = this._transformStack[this._stackIndex][2];
+    var sd = this._transformStack[this._stackIndex][3];
+    var se = this._transformStack[this._stackIndex][4];
+    var sf = this._transformStack[this._stackIndex][5];
+
+    this._transformStack[this._stackIndex][0] = sa * a + sc * b;
+    this._transformStack[this._stackIndex][1] = sb * a + sd * b;
+    this._transformStack[this._stackIndex][2] = sa * c + sc * d;
+    this._transformStack[this._stackIndex][3] = sb * c + sd * d;
+    this._transformStack[this._stackIndex][4] = sa * e + sc * f + se;
+    this._transformStack[this._stackIndex][5] = sb * e + sd * f + sf;
+  }
+
+  scrollPathIntoView() {}
 }
