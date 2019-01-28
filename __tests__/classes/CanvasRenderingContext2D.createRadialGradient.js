@@ -35,4 +35,9 @@ describe("createRadialGradient", () => {
     expect(() => ctx.createRadialGradient(0, 0, -1, 0, 0, 0)).toThrow(DOMException);
     expect(() => ctx.createRadialGradient(0, 0, 0, 0, 0, -1)).toThrow(DOMException);
   });
+
+  it("should be instance of CanvasGradient", () => {
+    expect(ctx.createRadialGradient(1, 2, 3, 4, 5, 6)).toBeInstanceOf(CanvasGradient);
+  });
+
 });

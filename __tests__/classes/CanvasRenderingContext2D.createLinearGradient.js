@@ -31,4 +31,9 @@ describe("createLinearGradient", () => {
     expect(() => ctx.createLinearGradient(0, 1, Infinity, 3)).toThrow(TypeError);
     expect(() => ctx.createLinearGradient(0, 1, 2, Infinity)).toThrow(TypeError);
   });
+
+  it("should be instance of CanvasGradient", () => {
+    expect(ctx.createLinearGradient(1, 2, 3, 4)).toBeInstanceOf(CanvasGradient);
+  });
+
 });

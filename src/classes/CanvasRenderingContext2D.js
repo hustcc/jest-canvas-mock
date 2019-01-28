@@ -289,7 +289,7 @@ export default class CanvasRenderingContext2D {
     if (!Number.isFinite(r1)) throw new TypeError("Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
     if (r0 < 0) throw new DOMException("DataError", "Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The r0 provided is less than 0.");
     if (r1 < 0) throw new DOMException("DataError", "Failed to execute 'createRadialGradient' on 'CanvasRenderingContext2D': The r0 provided is less than 1.");
-    return new CanvasPattern();
+    return new CanvasGradient();
   }
 
   createLinearGradient(x0, y0, x1, y1) {
@@ -298,7 +298,7 @@ export default class CanvasRenderingContext2D {
     if (!Number.isFinite(y0)) throw new TypeError("Failed to execute 'createLinearGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
     if (!Number.isFinite(x1)) throw new TypeError("Failed to execute 'createLinearGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
     if (!Number.isFinite(y1)) throw new TypeError("Failed to execute 'createLinearGradient' on 'CanvasRenderingContext2D': The provided double value is non-finite.");
-    return new CanvasPattern();
+    return new CanvasGradient();
   }
 
   get globalCompositeOperation() {
