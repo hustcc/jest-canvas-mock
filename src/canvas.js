@@ -10,6 +10,7 @@ const createCanvas = () => {
 
   div.getContext = param => param === '2d' ? createContext2d('2d', div) : {};
   div.toDataURL = jest.fn(() => '');
+  div.toBlob = jest.fn(callback => (callback ? callback() : ''));
   return div;
 };
 
