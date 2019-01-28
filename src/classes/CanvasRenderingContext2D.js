@@ -44,6 +44,10 @@ var testFuncs = [
   "ellipse",
   "measureText",
   "rotate",
+  "drawImage",
+  "drawFocusIfNeeded",
+  "isPointInPath",
+  "isPointInStroke",
 ];
 
 var compositeOperations = [
@@ -642,5 +646,35 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][1] = b * cos + d * sin;
     this._transformStack[this._stackIndex][2] = c * cos - a * sin;
     this._transformStack[this._stackIndex][3] = d * cos - b * sin;
+  }
+
+  drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
+    if (arguments.length < 3) throw new TypeError("Failed to execute 'drawImage' on 'CanvasRenderingContext2D': 3 arguments required, but only " + arguments.length + " present.");
+    if (arguments.length === 4 || (arguments.length > 5 && arguments.length < 9)) throw new TypeError("Failed to execute 'drawImage' on 'CanvasRenderingContext2D': Valid arities are: [3, 5, 9], but 4 arguments provided.");
+    if (img instanceof HTMLImageElement || img instanceof HTMLCanvasElement || img instanceof HTMLVideoElement) {
+      return;
+    }
+    throw new TypeError("Failed to execute 'drawImage' on 'CanvasRenderingContext2D': The provided value is not of type '(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)'");
+  }
+
+  drawFocusIfNeeded(path, element) {
+    if (arguments.length === 0) throw new TypeError("Failed to execute 'drawFocusIfNeeded' on 'CanvasRenderingContext2D': 1 argument required, but only 0 present.");
+    if (arguments.length === 2 && !(path instanceof Path2D)) throw new TypeError("Failed to execute 'drawFocusIfNeeded' on 'CanvasRenderingContext2D': parameter 1 is not of type 'Path2D'.");
+    if (arguments.length === 1) {
+      element = path;
+    }
+    if (!(element instanceof Element)) throw new TypeError(" Failed to execute 'drawFocusIfNeeded' on 'CanvasRenderingContext2D': parameter " + arguments.length + " is not of type 'Element'.");
+  }
+
+  isPointInPath(path, x, y, fillRule = "nonzero") {
+    if (arguments.length < 2) throw new TypeError("Failed to execute 'isPointInPath' on 'CanvasRenderingContext2D': 2 arguments required, but only " + arguments.length + " present.");
+    if (arguments.length === 3 && !(path instanceof Path2D)) fillRule = y;
+    if (fillRule !== "nonzero" && fillRule !== "evenodd") throw new TypeError("Failed to execute 'isPointInPath' on 'CanvasRenderingContext2D': The provided value '" + fillRule + "' is not a valid enum value of type CanvasFillRule.");
+    return false; // return false in a mocking environment, unless I can verify a point is actually within the path
+  }
+
+  isPointInStroke(path, x, y, fillRule = "nonzero") {
+    if (arguments.length < 2) throw new TypeError("Failed to execute 'isPointInStroke' on 'CanvasRenderingContext2D': 2 arguments required, but only " + arguments.length + " present.");
+    return false; // return false in a mocking environment, unless I can verify a point is actually within the path
   }
 }
