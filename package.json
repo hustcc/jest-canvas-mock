@@ -29,9 +29,9 @@
   "homepage": "https://github.com/hustcc/jest-canvas-mock#readme",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/preset-env": "^7.3.1",
     "babel-jest": "^24.0.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-version": "^0.2.3",
     "coveralls": "^3.0.2",
     "jest": "^24.0.0"

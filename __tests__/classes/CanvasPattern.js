@@ -29,6 +29,11 @@ describe('CanvasPattern', () => {
     expect(canvasPattern.setTransform).toBeCalled();
   });
 
+  it('should throw if arguments.length > 0 and transform not instanceof Object', () => {
+    const canvasPattern = ctx.createPattern(img, 'no-repeat');
+    expect(() => canvasPattern.setTransform(1)).toThrow(TypeError);
+  });
+
   test('CanvasPattern different instance', () => {
     const canvasPattern1 = ctx.createPattern(img, 'no-repeat');
     const canvasPattern2 = ctx.createPattern(img, 'no-repeat');
