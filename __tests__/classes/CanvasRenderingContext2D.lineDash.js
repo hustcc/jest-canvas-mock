@@ -1,9 +1,9 @@
-var canvas;
-var ctx;
+let canvas;
+let ctx;
 
 beforeEach(() => {
-  canvas = document.createElement("canvas");
-  ctx = canvas.getContext("2d");
+  canvas = document.createElement('canvas');
+  ctx = canvas.getContext('2d');
   canvas.width = 400;
   canvas.height = 300;
 });
@@ -19,14 +19,14 @@ function every(items, callback) {
 }
 
 function map(items, callback) {
-  var result = [];
+  const result = [];
   for(let i = 0; i < items.length; i++) {
     result.push(callback(items[i]));
   }
   return result;
 }
 
-var isSequence = (value) => [
+const isSequence = (value) => [
   Array,
   Int8Array,
   Uint8Array,
@@ -38,16 +38,16 @@ var isSequence = (value) => [
   Float64Array,
 ].reduce((left, right) => left || value instanceof right, false);
 
-describe("lineDash", () => {
-  it("should accept valid lineDash values ignore invalid lineDash values", () => {
-    var examples = [
+describe('lineDash', () => {
+  it('should accept valid lineDash values ignore invalid lineDash values', () => {
+    const examples = [
       [1, 2, 3, 4],
       [1, 2, 3],
       [null, 4, 2],
       [Infinity, -1, 4],
-      ["1", "2", "3"],
+      ['1', '2', '3'],
       new Float64Array([1, 2, 3, 4]),
-      "blah",
+      'blah',
       0,
       -1,
       Infinity,
@@ -60,8 +60,8 @@ describe("lineDash", () => {
         expect(() => ctx.setLineDash(e)).toThrow(TypeError);
       } else {
         ctx.setLineDash(e);
-        var result = map(e, val => Number(val));
-        var containsFiniteValues = every(result, val => Number.isFinite(val));
+        let result = map(e, val => Number(val));
+        const containsFiniteValues = every(result, val => Number.isFinite(val));
         if (containsFiniteValues) {
           result = result.length % 2 === 1 ? result.concat(result) : result;
         } else {
@@ -72,7 +72,7 @@ describe("lineDash", () => {
     });
   });
 
-  it("should save and restore lineDash values", () => {
+  it('should save and restore lineDash values', () => {
     ctx.save();
     ctx.setLineDash([1, 2, 3]);
     expect(ctx.getLineDash()).toEqual([1, 2, 3, 1, 2, 3]);

@@ -51,7 +51,7 @@ export default class DOMMatrix {
     }
 
     if (transform) {
-      throw new TypeError("Failed to construct 'DOMMatrix': The sequence must contain 6 elements for a 2D matrix or 16 elements for a 3D matrix.");
+      throw new TypeError('Failed to construct \'DOMMatrix\': The sequence must contain 6 elements for a 2D matrix or 16 elements for a 3D matrix.');
     }
     this._is2D = false;
   }

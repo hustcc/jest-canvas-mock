@@ -1,29 +1,26 @@
-import mockWindow from '../../src/window';
+let ctx;
+let grd;
+
+beforeEach(() => {
+  ctx = document.createElement('canvas').getContext('2d');
+  grd = ctx.createLinearGradient(1, 2, 3, 4);
+});
 
 describe('CanvasGradient', () => {
 
   test('CanvasGradient', () => {
-    const canvasGradient = new CanvasGradient();
 
-    expect(canvasGradient).toBeDefined();
+    expect(grd).toBeDefined();
+    grd.addColorStop();
+    expect(grd.addColorStop).toBeCalled();
 
-    canvasGradient.addColorStop();
-
-    expect(canvasGradient.addColorStop).toBeCalled();
-
-    const other = new CanvasGradient();
-    expect(other.addColorStop).not.toBeCalled();
+    const grd2 = ctx.createLinearGradient(2, 3, 4, 5);
+    expect(grd2.addColorStop).not.toBeCalled();
   });
 
   test('CanvasGradient different instance', () => {
     const canvasGradient1 = new CanvasGradient();
     const canvasGradient2 = new CanvasGradient();
     expect(canvasGradient1.addColorStop).not.toBe(canvasGradient2.addColorStop);
-  });
-
-  test('CanvasGradient not override', () => {
-    const saved = window.CanvasGradient;
-    mockWindow(window);
-    expect(saved === window.CanvasGradient).toBe(true);
   });
 });
