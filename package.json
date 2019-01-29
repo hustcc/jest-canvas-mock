@@ -38,8 +38,15 @@
   },
   "jest": {
     "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/classes/**/*.js"
+    ],
     "setupFiles": [
       "./src/index.js"
     ]
+  },
+  "dependencies": {
+    "cssfontparser": "^1.2.1",
+    "parse-color": "^1.0.0"
   }
 }

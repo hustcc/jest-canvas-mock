@@ -3,10 +3,14 @@
  * Contract: i@hust.cc
  */
 
-import createCanvas from './canvas';
 import Path2D from './classes/Path2D';
 import CanvasGradient from './classes/CanvasGradient';
 import CanvasPattern from './classes/CanvasPattern';
+import CanvasRenderingContext2D from "./classes/CanvasRenderingContext2D";
+import DOMMatrix from './classes/DOMMatrix';
+import ImageData from "./classes/ImageData";
+import TextMetrics from './classes/TextMetrics';
+
 
 export default win => {
   const d = win.document;
@@ -32,15 +36,27 @@ export default win => {
   // }
   // if ctx not exist, mock it.
   // just mock canvas creator.
-
+  /*
   win.document.createElement = param => param.toString().toLowerCase() === 'canvas'
     ? createCanvas('canvas')
     : f.call(d, param);
-
+  */
   // if not exist, then mock it.
   if (!win.Path2D) win.Path2D = Path2D;
   if (!win.CanvasGradient) win.CanvasGradient = CanvasGradient;
   if (!win.CanvasPattern) win.CanvasPattern = CanvasPattern;
+  if (!win.CanvasRenderingContext2D) win.CanvasRenderingContext2D = CanvasRenderingContext2D;
+  if (!win.DOMMatrix) win.DOMMatrix = DOMMatrix;
+  if (!win.ImageData) win.ImageData = ImageData;
+  if (!win.TextMetrics) win.TextMetrics = TextMetrics;
+  if (!win.__canvas_implemented) {
+    var getContextExternal = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function getContext2d(type) {
+      if (type === "2d") return new CanvasRenderingContext2D(this);
+      return getContextExternal.call(this, type);
+    };
+    win.__canvas_implemented = true;
+  }
 
   return win;
 };
