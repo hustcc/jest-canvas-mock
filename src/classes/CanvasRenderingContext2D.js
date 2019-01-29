@@ -64,22 +64,22 @@ export default class CanvasRenderingContext2D {
       label,
       role
     } = options;
-    if (!path && !id) throw new DOMException('ConstraintError', 'Failed to execute \'addHitRegion\' on \'CanvasRenderingContext2D\': Both id and control are null.');
-    if (fillRule && fillRule !== 'evenodd' && fillRule !== 'nonzero') throw new TypeError('Failed to execute \'addHitRegion\' on \'CanvasRenderingContext2D\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
+    if (!path && !id) throw new DOMException('ConstraintError', 'Failed to execute \'addHitRegion\' on \'' + this.constructor.name + '\': Both id and control are null.');
+    if (fillRule && fillRule !== 'evenodd' && fillRule !== 'nonzero') throw new TypeError('Failed to execute \'addHitRegion\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
   }
 
   arc(x, y, radius, startAngle, endAngle, anticlockwise = false) {
-    if (arguments.length < 5) throw new TypeError('Failed to execute \'arc\' on \'CanvasRenderingContext2D\': 5 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 5) throw new TypeError('Failed to execute \'arc\' on \'' + this.constructor.name + '\': 5 arguments required, but only ' + arguments.length + ' present.');
 
     for (let i = 0; i < 5; i++) {
       if (!Number.isFinite(Number(arguments[i]))) return;
     }
 
-    if (Number(radius) < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'arc\' on \'CanvasRenderingContext2D\': The radius provided (' + radius + ') is negative.');
+    if (Number(radius) < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'arc\' on \'' + this.constructor.name + '\': The radius provided (' + radius + ') is negative.');
   }
 
   arcTo(cpx1, cpy1, cpx2, cpy2, radius) {
-    if (arguments.length < 5) throw new TypeError('Failed to execute \'arcTo\' on \'CanvasRenderingContext2D\': 5 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 5) throw new TypeError('Failed to execute \'arcTo\' on \'' + this.constructor.name + '\': 5 arguments required, but only ' + arguments.length + ' present.');
     const cpx1Result = Number(cpx1);
     const cpy1Result = Number(cpy1);
     const cpx2Result = Number(cpx2);
@@ -87,14 +87,14 @@ export default class CanvasRenderingContext2D {
 
     if (Number.isFinite(cpx1Result) && Number.isFinite(cpx2Result) && Number.isFinite(cpy1Result) && Number.isFinite(cpy2Result)) {
       const radiusResult = Number(radius);
-      if (Number.isFinite(radiusResult) && radiusResult < 0) throw new TypeError('Failed to execute \'arc\' on \'CanvasRenderingContext2D\': The radius provided (' + radius + ') is negative.');
+      if (Number.isFinite(radiusResult) && radiusResult < 0) throw new TypeError('Failed to execute \'arc\' on \'' + this.constructor.name + '\': The radius provided (' + radius + ') is negative.');
     }
   }
 
   beginPath() {}
 
   bezierCurveTo(cpx1, cpy1, cpx2, cpy2, x, y) {
-    if (arguments.length < 6) throw new TypeError('Uncaught TypeError: Failed to execute \'bezierCurveTo\' on \'CanvasRenderingContext2D\': 6 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 6) throw new TypeError('Uncaught TypeError: Failed to execute \'bezierCurveTo\' on \'' + this.constructor.name + '\': 6 arguments required, but only ' + arguments.length + ' present.');
   }
 
   get canvas() {
@@ -104,7 +104,7 @@ export default class CanvasRenderingContext2D {
   clearHitRegions() {}
 
   clearRect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'clearRect\' on \'CanvasRenderingContext2D\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'clearRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
   }
 
   clip() {}
@@ -112,16 +112,16 @@ export default class CanvasRenderingContext2D {
   closePath() {}
 
   createLinearGradient(x0, y0, x1, y1) {
-    if (arguments.length < 4) throw new TypeError('Failed to execute \'createLinearGradient\' on \'CanvasRenderingContext2D\': 4 arguments required, but only ' + arguments.length + ' present.');
-    if (!Number.isFinite(x0)) throw new TypeError('Failed to execute \'createLinearGradient\' on \'CanvasRenderingContext2D\': The provided double value is non-finite.');
-    if (!Number.isFinite(y0)) throw new TypeError('Failed to execute \'createLinearGradient\' on \'CanvasRenderingContext2D\': The provided double value is non-finite.');
-    if (!Number.isFinite(x1)) throw new TypeError('Failed to execute \'createLinearGradient\' on \'CanvasRenderingContext2D\': The provided double value is non-finite.');
-    if (!Number.isFinite(y1)) throw new TypeError('Failed to execute \'createLinearGradient\' on \'CanvasRenderingContext2D\': The provided double value is non-finite.');
+    if (arguments.length < 4) throw new TypeError('Failed to execute \'createLinearGradient\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (!Number.isFinite(x0)) throw new TypeError('Failed to execute \'createLinearGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
+    if (!Number.isFinite(y0)) throw new TypeError('Failed to execute \'createLinearGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
+    if (!Number.isFinite(x1)) throw new TypeError('Failed to execute \'createLinearGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
+    if (!Number.isFinite(y1)) throw new TypeError('Failed to execute \'createLinearGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
     return new CanvasGradient();
   }
 
   createPattern(image, type) {
-    if (arguments.length === 1) throw new TypeError('Failed to execute \'createPattern\' on \'CanvasRenderingContext2D\': 2 arguments required, but only 1 present.');
+    if (arguments.length === 1) throw new TypeError('Failed to execute \'createPattern\' on \'' + this.constructor.name + '\': 2 arguments required, but only 1 present.');
     if (type === null) type = 'repeat';
     if (type === '') type = 'repeat';
 
@@ -131,22 +131,22 @@ export default class CanvasRenderingContext2D {
       if (image instanceof HTMLVideoElement) return new CanvasPattern();
       if (image instanceof HTMLCanvasElement) return new CanvasPattern(); // if (image instanceof ImageBitmap) return new CanvasPattern();
     } else {
-      throw new TypeError('Failed to execute \'createPattern\' on \'CanvasRenderingContext2D\': The provided type (\'' + type + '\') is not one of \'repeat\', \'no-repeat\', \'repeat-x\', or \'repeat-y\'.');
+      throw new TypeError('Failed to execute \'createPattern\' on \'' + this.constructor.name + '\': The provided type (\'' + type + '\') is not one of \'repeat\', \'no-repeat\', \'repeat-x\', or \'repeat-y\'.');
     }
 
-    throw new TypeError('Failed to execute \'createPattern\' on \'CanvasRenderingContext2D\': The provided value is not of type \'(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)\'');
+    throw new TypeError('Failed to execute \'createPattern\' on \'' + this.constructor.name + '\': The provided value is not of type \'(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)\'');
   }
 
   createRadialGradient(x0, y0, r0, x1, y1, r1) {
-    if (arguments.length < 6) throw new TypeError('Failed to execute \'createRadialGradient\' on \'CanvasRenderingContext2D\': 6 arguments required, but only ' + arguments.length + ' present.');
-    if (!Number.isFinite(x0)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'CanvasRenderingContext2D\': The provided double value is non-finite.');
-    if (!Number.isFinite(y0)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'CanvasRenderingContext2D\': The provided double value is non-finite.');
-    if (!Number.isFinite(r0)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'CanvasRenderingContext2D\': The provided double value is non-finite.');
-    if (!Number.isFinite(x1)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'CanvasRenderingContext2D\': The provided double value is non-finite.');
-    if (!Number.isFinite(y1)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'CanvasRenderingContext2D\': The provided double value is non-finite.');
-    if (!Number.isFinite(r1)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'CanvasRenderingContext2D\': The provided double value is non-finite.');
-    if (r0 < 0) throw new DOMException('DataError', 'Failed to execute \'createRadialGradient\' on \'CanvasRenderingContext2D\': The r0 provided is less than 0.');
-    if (r1 < 0) throw new DOMException('DataError', 'Failed to execute \'createRadialGradient\' on \'CanvasRenderingContext2D\': The r0 provided is less than 1.');
+    if (arguments.length < 6) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': 6 arguments required, but only ' + arguments.length + ' present.');
+    if (!Number.isFinite(x0)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
+    if (!Number.isFinite(y0)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
+    if (!Number.isFinite(r0)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
+    if (!Number.isFinite(x1)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
+    if (!Number.isFinite(y1)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
+    if (!Number.isFinite(r1)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
+    if (r0 < 0) throw new DOMException('DataError', 'Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The r0 provided is less than 0.');
+    if (r1 < 0) throw new DOMException('DataError', 'Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The r0 provided is less than 1.');
     return new CanvasGradient();
   }
 
@@ -176,36 +176,36 @@ export default class CanvasRenderingContext2D {
   }
 
   drawFocusIfNeeded(path, element) {
-    if (arguments.length === 0) throw new TypeError('Failed to execute \'drawFocusIfNeeded\' on \'CanvasRenderingContext2D\': 1 argument required, but only 0 present.');
-    if (arguments.length === 2 && !(path instanceof Path2D)) throw new TypeError('Failed to execute \'drawFocusIfNeeded\' on \'CanvasRenderingContext2D\': parameter 1 is not of type \'Path2D\'.');
+    if (arguments.length === 0) throw new TypeError('Failed to execute \'drawFocusIfNeeded\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
+    if (arguments.length === 2 && !(path instanceof Path2D)) throw new TypeError('Failed to execute \'drawFocusIfNeeded\' on \'' + this.constructor.name + '\': parameter 1 is not of type \'Path2D\'.');
 
     if (arguments.length === 1) {
       element = path;
     }
 
-    if (!(element instanceof Element)) throw new TypeError(' Failed to execute \'drawFocusIfNeeded\' on \'CanvasRenderingContext2D\': parameter ' + arguments.length + ' is not of type \'Element\'.');
+    if (!(element instanceof Element)) throw new TypeError(' Failed to execute \'drawFocusIfNeeded\' on \'' + this.constructor.name + '\': parameter ' + arguments.length + ' is not of type \'Element\'.');
   }
 
   drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
-    if (arguments.length < 3) throw new TypeError('Failed to execute \'drawImage\' on \'CanvasRenderingContext2D\': 3 arguments required, but only ' + arguments.length + ' present.');
-    if (arguments.length === 4 || arguments.length > 5 && arguments.length < 9) throw new TypeError('Failed to execute \'drawImage\' on \'CanvasRenderingContext2D\': Valid arities are: [3, 5, 9], but 4 arguments provided.');
+    if (arguments.length < 3) throw new TypeError('Failed to execute \'drawImage\' on \'' + this.constructor.name + '\': 3 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length === 4 || arguments.length > 5 && arguments.length < 9) throw new TypeError('Failed to execute \'drawImage\' on \'' + this.constructor.name + '\': Valid arities are: [3, 5, 9], but 4 arguments provided.');
 
     if (img instanceof HTMLImageElement || img instanceof HTMLCanvasElement || img instanceof HTMLVideoElement) {
       return;
     }
 
-    throw new TypeError('Failed to execute \'drawImage\' on \'CanvasRenderingContext2D\': The provided value is not of type \'(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)\'');
+    throw new TypeError('Failed to execute \'drawImage\' on \'' + this.constructor.name + '\': The provided value is not of type \'(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)\'');
   }
 
   ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise = false) {
-    if (arguments.length < 7) throw new TypeError('Failed to execute \'ellipse\' on \'CanvasRenderingContext2D\': 6 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 7) throw new TypeError('Failed to execute \'ellipse\' on \'' + this.constructor.name + '\': 6 arguments required, but only ' + arguments.length + ' present.');
 
     for (let i = 0; i < 7; i++) {
       if (!Number.isFinite(Number(arguments[i]))) return;
     }
 
-    if (Number(radiusX) < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'ellipse\' on \'CanvasRenderingContext2D\': The major-axis radius provided (' + radiusX + ') is negative.');
-    if (Number(radiusY) < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'ellipse\' on \'CanvasRenderingContext2D\': The minor-axis radius provided (' + radiusY + ') is negative.');
+    if (Number(radiusX) < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'ellipse\' on \'' + this.constructor.name + '\': The major-axis radius provided (' + radiusX + ') is negative.');
+    if (Number(radiusY) < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'ellipse\' on \'' + this.constructor.name + '\': The minor-axis radius provided (' + radiusY + ') is negative.');
   }
 
   fill(path, fillRule) {
@@ -213,15 +213,15 @@ export default class CanvasRenderingContext2D {
 
     if (path instanceof Path2D) {
       fillRule = String(fillRule);
-      if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'fill\' on \'CanvasRenderingContext2D\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
+      if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'fill\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
     } else {
       path = String(path);
-      if (path !== 'nonzero' && path !== 'evenodd') throw new TypeError('Failed to execute \'fill\' on \'CanvasRenderingContext2D\': The provided value \'' + path + '\' is not a valid enum value of type CanvasFillRule.');
+      if (path !== 'nonzero' && path !== 'evenodd') throw new TypeError('Failed to execute \'fill\' on \'' + this.constructor.name + '\': The provided value \'' + path + '\' is not a valid enum value of type CanvasFillRule.');
     }
   }
 
   fillRect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'fillRect\' on \'CanvasRenderingContext2D\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'fillRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
   }
 
   set fillStyle(value) {
@@ -241,7 +241,7 @@ export default class CanvasRenderingContext2D {
   }
 
   fillText(text, x, y, maxWidth) {
-    if (arguments.length < 3) throw new TypeError('Failed to execute \'fillText\' on \'CanvasRenderingContext2D\': 3 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 3) throw new TypeError('Failed to execute \'fillText\' on \'' + this.constructor.name + '\': 3 arguments required, but only ' + arguments.length + ' present.');
   }
 
   set filter(value) {
@@ -318,14 +318,14 @@ export default class CanvasRenderingContext2D {
   }
 
   isPointInPath(path, x, y, fillRule = 'nonzero') {
-    if (arguments.length < 2) throw new TypeError('Failed to execute \'isPointInPath\' on \'CanvasRenderingContext2D\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2) throw new TypeError('Failed to execute \'isPointInPath\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
     if (arguments.length === 3 && !(path instanceof Path2D)) fillRule = y;
-    if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'isPointInPath\' on \'CanvasRenderingContext2D\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
+    if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'isPointInPath\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
     return false; // return false in a mocking environment, unless I can verify a point is actually within the path
   }
 
   isPointInStroke(path, x, y, fillRule = 'nonzero') {
-    if (arguments.length < 2) throw new TypeError('Failed to execute \'isPointInStroke\' on \'CanvasRenderingContext2D\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2) throw new TypeError('Failed to execute \'isPointInStroke\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
     return false; // return false in a mocking environment, unless I can verify a point is actually within the path
   }
 
@@ -362,7 +362,7 @@ export default class CanvasRenderingContext2D {
   }
 
   lineTo(x, y) {
-    if (arguments.length < 2) throw new TypeError('Uncaught TypeError: Failed to execute \'lineTo\' on \'CanvasRenderingContext2D\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2) throw new TypeError('Uncaught TypeError: Failed to execute \'lineTo\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
   }
 
   set lineWidth(value) {
@@ -378,7 +378,7 @@ export default class CanvasRenderingContext2D {
   }
 
   measureText(text) {
-    if (arguments.length < 1) throw new TypeError('VM5906 pen.js:2 Uncaught TypeError: Failed to execute \'measureText\' on \'CanvasRenderingContext2D\': 1 argument required, but only 0 present.');
+    if (arguments.length < 1) throw new TypeError('VM5906 pen.js:2 Uncaught TypeError: Failed to execute \'measureText\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
     return new TextMetrics(String(text));
   }
 
@@ -395,25 +395,25 @@ export default class CanvasRenderingContext2D {
   }
 
   moveTo(x, y) {
-    if (arguments.length < 2) throw new TypeError('Uncaught TypeError: Failed to execute \'moveTo\' on \'CanvasRenderingContext2D\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2) throw new TypeError('Uncaught TypeError: Failed to execute \'moveTo\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
   }
 
   putImageData(data, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight) {
-    if (arguments.length < 3) throw new TypeError('Failed to execute \'putImageData\' on \'CanvasRenderingContext2D\': 3 arguments required, but only ' + arguments.length + ' present.');
-    if (arguments.length > 3 && arguments.length < 7) throw new TypeError('Failed to execute \'putImageData\' on \'CanvasRenderingContext2D\': Valid arities are: [3, 7], but ' + arguments.length + ' arguments provided.');
-    if (!(data instanceof ImageData)) throw new TypeError('Failed to execute \'putImageData\' on \'CanvasRenderingContext2D\': parameter 1 is not of type \'ImageData\'.');
+    if (arguments.length < 3) throw new TypeError('Failed to execute \'putImageData\' on \'' + this.constructor.name + '\': 3 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length > 3 && arguments.length < 7) throw new TypeError('Failed to execute \'putImageData\' on \'' + this.constructor.name + '\': Valid arities are: [3, 7], but ' + arguments.length + ' arguments provided.');
+    if (!(data instanceof ImageData)) throw new TypeError('Failed to execute \'putImageData\' on \'' + this.constructor.name + '\': parameter 1 is not of type \'ImageData\'.');
   }
 
   quadraticCurveTo(cpx, cpy, x, y) {
-    if (arguments.length < 4) throw new TypeError('Failed to execute \'quadraticCurveTo\' on \'CanvasRenderingContext2D\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4) throw new TypeError('Failed to execute \'quadraticCurveTo\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
   }
 
   rect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'rect\' on \'CanvasRenderingContext2D\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'rect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
   }
 
   removeHitRegion(id) {
-    if (arguments.length < 1) throw new TypeError('Failed to execute \'removeHitRegion\' on \'CanvasRenderingContext2D\': 1 argument required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 1) throw new TypeError('Failed to execute \'removeHitRegion\' on \'' + this.constructor.name + '\': 1 argument required, but only ' + arguments.length + ' present.');
   }
 
   resetTransform() {
@@ -452,7 +452,7 @@ export default class CanvasRenderingContext2D {
   }
 
   rotate(angle) {
-    if (arguments.length < 1) throw new TypeError('VM6715 pen.js:2 Uncaught TypeError: Failed to execute \'rotate\' on \'CanvasRenderingContext2D\': 1 argument required, but only 0 present.');
+    if (arguments.length < 1) throw new TypeError('VM6715 pen.js:2 Uncaught TypeError: Failed to execute \'rotate\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
     angle = Number(angle);
     if (!Number.isFinite(angle)) return;
     const a = this._transformStack[this._stackIndex][0];
@@ -494,7 +494,7 @@ export default class CanvasRenderingContext2D {
   }
 
   scale(x, y) {
-    if (arguments.length < 2) throw new TypeError('TypeError: Failed to execute \'scale\' on \'CanvasRenderingContext2D\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2) throw new TypeError('TypeError: Failed to execute \'scale\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
     const xResult = Number(x);
     const yResult = Number(y);
 
@@ -510,7 +510,7 @@ export default class CanvasRenderingContext2D {
 
   setLineDash(lineDash) {
     const isSequence = [Array, Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, Float64Array].reduce((left, right) => left || lineDash instanceof right, false);
-    if (!isSequence) throw new TypeError('Failed to execute \'setLineDash\' on \'CanvasRenderingContext2D\': The provided value cannot be converted to a sequence.');
+    if (!isSequence) throw new TypeError('Failed to execute \'setLineDash\' on \'' + this.constructor.name + '\': The provided value cannot be converted to a sequence.');
     const result = [];
 
     for (let i = 0; i < lineDash.length; i++) {
@@ -541,13 +541,13 @@ export default class CanvasRenderingContext2D {
       if (a instanceof DOMMatrix) {
         this.currentTransform = a;
       } else {
-        throw new TypeError('Failed to execute \'setTransform\' on \'CanvasRenderingContext2D\': parameter ' + a + ' (\'transform\') is not an object.');
+        throw new TypeError('Failed to execute \'setTransform\' on \'' + this.constructor.name + '\': parameter ' + a + ' (\'transform\') is not an object.');
       }
 
       return;
     }
 
-    if (arguments.length < 6) throw new TypeError('Failed to execute \'setTransform\' on \'CanvasRenderingContext2D\': Valid arities are: [0, 1, 6], but ' + arguments.length + ' arguments provided.');
+    if (arguments.length < 6) throw new TypeError('Failed to execute \'setTransform\' on \'' + this.constructor.name + '\': Valid arities are: [0, 1, 6], but ' + arguments.length + ' arguments provided.');
     a = Number(a);
     b = Number(b);
     c = Number(c);
@@ -619,11 +619,11 @@ export default class CanvasRenderingContext2D {
   }
 
   stroke(path) {
-    if (arguments.length > 0 && !(path instanceof Path2D)) throw new TypeError('Failed to execute \'stroke\' on \'CanvasRenderingContext2D\': parameter 1 is not of type \'Path2D\'.');
+    if (arguments.length > 0 && !(path instanceof Path2D)) throw new TypeError('Failed to execute \'stroke\' on \'' + this.constructor.name + '\': parameter 1 is not of type \'Path2D\'.');
   }
 
   strokeRect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'strokeRect\' on \'CanvasRenderingContext2D\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'strokeRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
   }
 
   set strokeStyle(value) {
@@ -643,7 +643,7 @@ export default class CanvasRenderingContext2D {
   }
 
   strokeText(text, x, y, maxWidth) {
-    if (arguments.length < 3) throw new TypeError('Failed to execute \'strokeText\' on \'CanvasRenderingContext2D\': 3 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 3) throw new TypeError('Failed to execute \'strokeText\' on \'' + this.constructor.name + '\': 3 arguments required, but only ' + arguments.length + ' present.');
   }
 
   set textAlign(value) {
@@ -667,7 +667,7 @@ export default class CanvasRenderingContext2D {
   }
 
   transform(a, b, c, d, e, f) {
-    if (arguments.length < 6) throw new TypeError('Failed to execute \'transform\' on \'CanvasRenderingContext2D\': 6 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 6) throw new TypeError('Failed to execute \'transform\' on \'' + this.constructor.name + '\': 6 arguments required, but only ' + arguments.length + ' present.');
 
     for (let i = 0; i < 6; i++) if (!Number.isFinite(Number(arguments[i]))) return;
 
@@ -692,7 +692,7 @@ export default class CanvasRenderingContext2D {
   }
 
   translate(x, y) {
-    if (arguments.length < 2) throw new TypeError('TypeError: Failed to execute \'translate\' on \'CanvasRenderingContext2D\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2) throw new TypeError('TypeError: Failed to execute \'translate\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
     const xResult = Number(x);
     const yResult = Number(y);
     const a = this._transformStack[this._stackIndex][0];
