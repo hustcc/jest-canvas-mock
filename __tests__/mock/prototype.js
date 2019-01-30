@@ -1,4 +1,3 @@
-import mockRequire from 'mock-require';
 let canvas;
 
 beforeEach(() => {

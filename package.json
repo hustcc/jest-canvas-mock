@@ -34,8 +34,7 @@
     "babel-jest": "^24.0.0",
     "babel-plugin-version": "^0.2.3",
     "coveralls": "^3.0.2",
-    "jest": "^24.0.0",
-    "mock-require": "^3.0.3"
+    "jest": "^24.0.0"
   },
   "jest": {
     "collectCoverage": true,
