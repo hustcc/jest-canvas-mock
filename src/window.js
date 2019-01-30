@@ -10,7 +10,7 @@ import CanvasRenderingContext2D from './classes/CanvasRenderingContext2D';
 import DOMMatrix from './classes/DOMMatrix';
 import ImageData from './classes/ImageData';
 import TextMetrics from './classes/TextMetrics';
-
+import mockPrototype from './mock/prototype';
 
 export default win => {
   const d = win.document;
@@ -50,21 +50,6 @@ export default win => {
   if (!win.ImageData) win.ImageData = ImageData;
   if (!win.TextMetrics) win.TextMetrics = TextMetrics;
 
-  const getContext2D = jest.fn(function getContext2d(type) {
-    if (type === '2d') return new CanvasRenderingContext2D(this);
-    try {
-      require('canvas');
-    } catch {
-      return null;
-    }
-    return getContext2D.internal.call(this, type);
-  });
-  if (!jest.isMockFunction(HTMLCanvasElement.prototype.getContext)) {
-    getContext2D.internal = HTMLCanvasElement.prototype.getContext;
-  } else {
-    getContext2D.internal = HTMLCanvasElement.prototype.getContext.internal;
-  }
-  HTMLCanvasElement.prototype.getContext = getContext2D;
-
+  mockPrototype();
   return win;
-};
+}
