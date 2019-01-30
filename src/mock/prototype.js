@@ -7,7 +7,7 @@ export default function mockPrototype() {
   const getContext2D = jest.fn(function getContext2d(type) {
     if (type === '2d') return new CanvasRenderingContext2D(this);
     try {
-      require('canvas');
+      if (!this.dataset.internalRequireTest) require('canvas');
     } catch {
       return null;
     }
