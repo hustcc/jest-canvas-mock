@@ -18,7 +18,7 @@ function parseCSSColor(value) {
   return void 0;
 }
 
-const testFuncs = ['getTransform', 'getImageData', 'save', 'restore', 'createPattern', 'createRadialGradient', 'addHitRegion', 'arc', 'arcTo', 'beginPath', 'clip', 'closePath', 'scale', 'stroke', 'clearHitRegions', 'clearRect', 'fillRect', 'strokeRect', 'rect', 'resetTransform', 'translate', 'moveTo', 'lineTo', 'bezierCurveTo', 'createLinearGradient', 'ellipse', 'measureText', 'rotate', 'drawImage', 'drawFocusIfNeeded', 'isPointInPath', 'isPointInStroke', 'putImageData', 'strokeText', 'fillText', 'quadraticCurveTo', 'removeHitRegion', 'fill', 'transform', 'scrollPathIntoView'];
+const testFuncs = ['getTransform', 'getImageData', 'save', 'restore', 'createPattern', 'createRadialGradient', 'addHitRegion', 'arc', 'arcTo', 'beginPath', 'clip', 'closePath', 'scale', 'stroke', 'clearHitRegions', 'clearRect', 'fillRect', 'strokeRect', 'rect', 'resetTransform', 'translate', 'moveTo', 'lineTo', 'bezierCurveTo', 'createLinearGradient', 'ellipse', 'measureText', 'rotate', 'drawImage', 'drawFocusIfNeeded', 'isPointInPath', 'isPointInStroke', 'putImageData', 'strokeText', 'fillText', 'quadraticCurveTo', 'removeHitRegion', 'fill', 'transform', 'scrollPathIntoView', 'createImageData'];
 const compositeOperations = ['source-over', 'source-in', 'source-out', 'source-atop', 'destination-over', 'destination-in', 'destination-out', 'destination-atop', 'lighter', 'copy', 'xor', 'multiply', 'screen', 'overlay', 'darken', 'lighten', 'color-dodge', 'color-burn', 'hard-light', 'soft-light', 'difference', 'exclusion', 'hue', 'saturation', 'color', 'luminosity', 'fillText', 'strokeText'];
 
 export default class CanvasRenderingContext2D {
@@ -110,6 +110,22 @@ export default class CanvasRenderingContext2D {
   clip() {}
 
   closePath() {}
+
+  createImageData(width, height) {
+    if (arguments.length < 1) throw new TypeError('Failed to execute \'createImageData\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
+    else if (arguments.length === 1) {
+      if (!(width instanceof ImageData)) throw new TypeError('Failed to execute \'createImageData\' on \'' + this.constructor.name + '\': parameter 1 is not of type \'ImageData\'.');
+      let result = new ImageData(width.width, width.height);
+      result.data.set(width.data);
+      return result;
+    } else {
+      width = Math.abs(Number(width));
+      height = Math.abs(Number(height));
+      if (!Number.isFinite(width) || width === 0) throw new TypeError('Failed to execute \'createImageData\' on \'' + this.constructor.name + '\': The source width is 0.');
+      if (!Number.isFinite(height) || height === 0) throw new TypeError('Failed to execute \'createImageData\' on \'' + this.constructor.name + '\': The source height is 0.');
+      return new ImageData(width, height);
+    }
+  }
 
   createLinearGradient(x0, y0, x1, y1) {
     if (arguments.length < 4) throw new TypeError('Failed to execute \'createLinearGradient\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
