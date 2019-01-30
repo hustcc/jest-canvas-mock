@@ -107,7 +107,17 @@ export default class CanvasRenderingContext2D {
     if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'clearRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
   }
 
-  clip() {}
+  clip(path, fillRule) {
+    if (arguments.length === 0) return;
+    if (arguments.length === 1) fillRule = 'nonzero';
+    if (path instanceof Path2D) {
+      fillRule = String(fillRule);
+      if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'clip\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
+    } else {
+      path = String(path);
+      if (path !== 'nonzero' && path !== 'evenodd') throw new TypeError('Failed to execute \'clip\' on \'' + this.constructor.name + '\': The provided value \'' + path + '\' is not a valid enum value of type CanvasFillRule.');
+    }
+  }
 
   closePath() {}
 
@@ -226,7 +236,7 @@ export default class CanvasRenderingContext2D {
 
   fill(path, fillRule) {
     if (arguments.length === 0) return;
-
+    if (arguments.length === 1) fillRule = 'nonzero';
     if (path instanceof Path2D) {
       fillRule = String(fillRule);
       if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'fill\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');

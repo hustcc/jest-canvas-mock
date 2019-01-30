@@ -18,6 +18,10 @@ describe('fill', () => {
     expect(ctx.fill).toBeCalled();
   });
 
+  it('should fill paths', () => {
+      expect(() => ctx.fill(p)).not.toThrow();
+  });
+
   it('should throw if fillRule is not valid fillRule', () => {
     [null, 1, Infinity, NaN, void 0, 'bad!'].forEach(e => {
       expect(() => ctx.fill(p, e)).toThrow(TypeError);

@@ -7,9 +7,7 @@ beforeEach(() => {
 });
 
 describe('CanvasGradient', () => {
-
   test('CanvasGradient', () => {
-
     expect(grd).toBeDefined();
     grd.addColorStop();
     expect(grd.addColorStop).toBeCalled();
@@ -19,8 +17,8 @@ describe('CanvasGradient', () => {
   });
 
   test('CanvasGradient different instance', () => {
-    const canvasGradient1 = new CanvasGradient();
-    const canvasGradient2 = new CanvasGradient();
-    expect(canvasGradient1.addColorStop).not.toBe(canvasGradient2.addColorStop);
+    const grd1 = ctx.createLinearGradient(1, 2, 3, 4);
+    const grd2 = ctx.createLinearGradient(1, 2, 3, 4);
+    expect(grd1.addColorStop).not.toBe(grd2.addColorStop);
   });
 });
