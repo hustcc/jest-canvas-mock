@@ -10,7 +10,7 @@ beforeEach(() => {
 
 describe('arcTo', () => {
   it('should be a function', () => {
-    expect(typeof ctx.arcTo === 'function').toBeTruthy();
+    expect(typeof ctx.arcTo).toBe('function');
   });
 
   it('should be callable', () => {

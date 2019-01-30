@@ -12,6 +12,7 @@ describe('addHitRegion', () => {
   it('should be a function', () => {
     expect(ctx.addHitRegion).toBeTruthy();
   });
+
   it('should be callable', () => {
     ctx.addHitRegion({ id: 'test' });
     expect(ctx.addHitRegion).toBeCalled();
