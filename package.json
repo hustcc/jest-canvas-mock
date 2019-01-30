@@ -28,13 +28,13 @@
   },
   "homepage": "https://github.com/hustcc/jest-canvas-mock#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-jest": "^22.0.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
+    "@babel/cli": "^7.2.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "babel-jest": "^24.0.0",
     "babel-plugin-version": "^0.2.3",
-    "babel-preset-env": "^1.6.1",
-    "coveralls": "^3.0.0",
-    "jest": "^21.2.1"
+    "coveralls": "^3.0.2",
+    "jest": "^24.0.0"
   },
   "jest": {
     "collectCoverage": true,

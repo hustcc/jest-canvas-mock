@@ -6,9 +6,9 @@
 import Path2D from './classes/Path2D';
 import CanvasGradient from './classes/CanvasGradient';
 import CanvasPattern from './classes/CanvasPattern';
-import CanvasRenderingContext2D from "./classes/CanvasRenderingContext2D";
+import CanvasRenderingContext2D from './classes/CanvasRenderingContext2D';
 import DOMMatrix from './classes/DOMMatrix';
-import ImageData from "./classes/ImageData";
+import ImageData from './classes/ImageData';
 import TextMetrics from './classes/TextMetrics';
 
 
@@ -49,14 +49,22 @@ export default win => {
   if (!win.DOMMatrix) win.DOMMatrix = DOMMatrix;
   if (!win.ImageData) win.ImageData = ImageData;
   if (!win.TextMetrics) win.TextMetrics = TextMetrics;
-  if (!win.__canvas_implemented) {
-    var getContextExternal = HTMLCanvasElement.prototype.getContext;
-    HTMLCanvasElement.prototype.getContext = function getContext2d(type) {
-      if (type === "2d") return new CanvasRenderingContext2D(this);
-      return getContextExternal.call(this, type);
-    };
-    win.__canvas_implemented = true;
+
+  const getContext2D = jest.fn(function getContext2d(type) {
+    if (type === '2d') return new CanvasRenderingContext2D(this);
+    try {
+      require('canvas');
+    } catch {
+      return null;
+    }
+    return getContext2D.internal.call(this, type);
+  });
+  if (!jest.isMockFunction(HTMLCanvasElement.prototype.getContext)) {
+    getContext2D.internal = HTMLCanvasElement.prototype.getContext;
+  } else {
+    getContext2D.internal = HTMLCanvasElement.prototype.getContext.internal;
   }
+  HTMLCanvasElement.prototype.getContext = getContext2D;
 
   return win;
 };

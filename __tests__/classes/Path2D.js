@@ -1,38 +1,50 @@
 import mockWindow from '../../src/window';
 
+let borrowedFromCanvas = [
+  'closePath',
+  'moveTo',
+  'lineTo',
+  'bezierCurveTo',
+  'quadraticCurveTo',
+  'arc',
+  'arcTo',
+  'ellipse',
+  'rect',
+];
+
 describe('Path2D', () => {
 
   test('Path2D', () => {
     const path = new Path2D();
+    expect(path).toBeInstanceOf(Path2D);
+  });
 
-    expect(path).toBeDefined();
+  it('should have addPath function', () => {
+    const p = new Path2D();
+    expect(typeof p.addPath).toBe('function');
+  });
 
-    const pathFunctions = [
-      'addPath',
-      'closePath',
-      'moveTo',
-      'lineTo',
-      'bezierCurveTo',
-      'quadraticCurveTo',
-      'arc',
-      'arcTo',
-      'ellipse',
-      'rect',
-    ];
+  it('should have a callable addPath function', () => {
+    const p = new Path2D();
+    p.addPath(new Path2D());
+    expect(p.addPath).toBeCalled();
+  });
 
-    pathFunctions.forEach(key => {
-      if (typeof path[key] === 'function') {
-        path[key]();
-      }
+  it('should borrow some path functions from CanvasRenderingContext2D', () => {
+    const p = new Path2D();
+    borrowedFromCanvas.forEach(func => {
+      expect(typeof p[func]).toBe('function');
     });
+  });
 
-    pathFunctions.forEach((key) => {
-      expect(path[key]).toBeCalled();
-    });
+  it('should throw if addPath is called with no parameters', () => {
+    expect(() => new Path2D().addPath()).toThrow(TypeError);
+  });
 
-    const otherPath = new Path2D();
-    pathFunctions.forEach((key) => {
-      expect(otherPath[key]).not.toBeCalled();
+  it('should throw if first argument is not Path2D', () => {
+    const p = new Path2D();
+    [null, 1, void 0, NaN, Infinity, {}, []].forEach(item => {
+      expect(() => p.addPath(item)).toThrow(TypeError);
     });
   });
 

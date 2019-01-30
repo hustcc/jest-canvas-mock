@@ -65,6 +65,36 @@ Add that file to your `setupFiles` array:
 }
 ```
 
+## Mock Strategy
+
+This mock strategy implements all the canvas functions and actually verifies the parameters. If a
+known condition would cause the browser to throw a `TypeError` or a `DOMException`, it emulates the
+error. For instance, the `CanvasRenderingContext2D#arc` function will throw a `TypeError` if the
+radius is negative, or if it was not provided with enough parameters.
+
+```ts
+expect(() => ctx.arc(1, 2, 3, 4)).toThrow(TypeError);
+expect(() => ctx.arc(0, 0, -10, 0, Math.PI * 2)).toThrow(TypeError);
+```
+
+The function will do `Number` type coercion and verify the inputs exactly like the browser does. So
+this is valid input.
+
+```ts
+expect(() => ctx.arc("10", "10", "20", "0", "6.14")).not.toThrow();
+```
+
+Another part of the strategy is to validate input types. When using the
+`CanvasRenderingContext2D#fill` function, if you pass it an invalid `fillRule` it will throw a
+`TypeError` just like the browser does.
+
+```ts
+expect(() => ctx.fill("invalid!")).toThrow(TypeError);
+expect(() => ctx.fill(new Path2D(), "invalid!")).toThrow(TypeError);
+```
+
+We try to follow the ECMAScript specification as closely as possible.
+
 
 ## License
 

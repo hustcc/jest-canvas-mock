@@ -1,4 +1,10 @@
 
+
 export default class CanvasGradient {
-  addColorStop = jest.fn(() => {});
+  constructor() {
+    this.addColorStop = jest.fn(this.addColorStop.bind(this));
+  }
+  addColorStop() {
+
+  }
 }

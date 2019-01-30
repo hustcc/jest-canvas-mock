@@ -1,29 +1,42 @@
-import mockWindow from '../../src/window';
+let ctx;
+let canvas;
+const img = new Image();
+img.src = 'https://placekitten.com/400/300';
+
+beforeEach(() => {
+  canvas = document.createElement('canvas');
+  canvas.width = 400;
+  canvas.height = 300;
+  ctx = canvas.getContext('2d');
+});
 
 describe('CanvasPattern', () => {
 
   test('CanvasPattern', () => {
-    const canvasPattern = new CanvasPattern();
-
+    const canvasPattern = ctx.createPattern(img, 'no-repeat');
     expect(canvasPattern).toBeDefined();
+    expect(canvasPattern).toBeInstanceOf(CanvasPattern);
+  });
 
-    canvasPattern.setTransform();
+  it('should have a setTransform function', () => {
+    const canvasPattern = ctx.createPattern(img, 'no-repeat');
+    expect(typeof canvasPattern.setTransform).toBe('function');
+  });
 
+  it('should have callable setTransform', () => {
+    const canvasPattern = ctx.createPattern(img, 'no-repeat');
+    canvasPattern.setTransform(ctx.getTransform());
     expect(canvasPattern.setTransform).toBeCalled();
+  });
 
-    const other = new CanvasPattern();
-    expect(other.setTransform).not.toBeCalled();
+  it('should throw if arguments.length > 0 and transform not instanceof Object', () => {
+    const canvasPattern = ctx.createPattern(img, 'no-repeat');
+    expect(() => canvasPattern.setTransform(1)).toThrow(TypeError);
   });
 
   test('CanvasPattern different instance', () => {
-    const canvasPattern1 = new CanvasPattern();
-    const canvasPattern2 = new CanvasPattern();
+    const canvasPattern1 = ctx.createPattern(img, 'no-repeat');
+    const canvasPattern2 = ctx.createPattern(img, 'no-repeat');
     expect(canvasPattern1.setTransform).not.toBe(canvasPattern2.setTransform);
-  });
-
-  test('CanvasPattern not override', () => {
-    const saved = window.CanvasPattern;
-    mockWindow(window);
-    expect(saved === window.CanvasPattern).toBe(true);
   });
 });
