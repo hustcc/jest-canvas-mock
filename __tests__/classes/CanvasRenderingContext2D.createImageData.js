@@ -41,7 +41,7 @@ describe('createImageData', () => {
       [0, 0],
       [NaN, 1],
       [1, NaN],
-      ["test", null],
+      ['test', null],
     ].forEach(value => {
       expect(() => ctx.createImageData(...value)).toThrow(TypeError);
     });
