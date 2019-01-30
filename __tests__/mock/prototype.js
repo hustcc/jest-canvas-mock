@@ -39,7 +39,7 @@ describe('mock', () => {
   });
 
   it('should throw if toBlob is provided less than 1 argument', () => {
-    expect(() => canvas.toBlob()).toThrow(Error);
+    expect(() => canvas.toBlob()).toThrow(TypeError);
   });
 
   it('should throw if toBlob is provided with no callback', () => {
