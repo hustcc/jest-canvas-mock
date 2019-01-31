@@ -44,7 +44,7 @@ describe('image bitmaps', () => {
   });
 
   it('should reject non images', () => {
-    return Promise.all([0, null, void 0, "", "test", window, Infinity, document]
+    return Promise.all([0, null, void 0, '', 'test', window, Infinity, document]
       .map(e => createImageBitmap(e).then(throwError).catch(expectTypeError))
     );
   });
