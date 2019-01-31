@@ -19,6 +19,15 @@ function every(items, callback) {
 }
 
 describe('setTransform', () => {
+  it('should be a function', () => {
+    expect(typeof ctx.setTransform).toBe('function');
+  });
+
+  it('should be callable', () => {
+    ctx.setTransform(1, 2, 3, 4, 5, 6);
+    expect(ctx.setTransform).toBeCalled();
+  });
+
   it('should validate setTransform input', () => {
     [
       [1, 2, 3, 4, 5, 6],
