@@ -1,4 +1,4 @@
-import CanvasRenderingContext2D from "./CanvasRenderingContext2D";
+import CanvasRenderingContext2D from './CanvasRenderingContext2D';
 
 // Path2D.prototype
 const Path2DFunc = [

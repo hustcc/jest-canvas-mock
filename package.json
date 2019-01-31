@@ -39,7 +39,8 @@
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/classes/**/*.js"
+      "src/classes/**/*.js",
+      "src/mock/**/*.js"
     ],
     "setupFiles": [
       "./src/index.js"
