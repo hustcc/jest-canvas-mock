@@ -21,7 +21,7 @@ export default jest.fn(function createImageBitmap(img, sx, sy, sWidth, sHeight, 
       }
       if (length === 5) options = null;
       if (options !== null && options !== void 0) {
-        if (typeof options !== "object") throw new TypeError('Failed to execute \'createImageBitmap\' on \'Window\': parameter ' + index + ' (\'options\') is not an object.');
+        if (typeof options !== 'object') throw new TypeError('Failed to execute \'createImageBitmap\' on \'Window\': parameter ' + index + ' (\'options\') is not an object.');
       }
     }
 
