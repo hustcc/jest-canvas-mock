@@ -1,6 +1,6 @@
 # jest-canvas-mock
 
-> Mock `canvas` when run unit test cases with jest. [Reference](https://github.com/Cristy94/canvas-mock/issues/2).
+> Mock `canvas` when run unit test cases with jest.
 
 [![Build Status](https://travis-ci.org/hustcc/jest-canvas-mock.svg?branch=master)](https://travis-ci.org/hustcc/jest-canvas-mock)
 [![Coverage Status](https://coveralls.io/repos/github/hustcc/jest-canvas-mock/badge.svg?branch=master)](https://coveralls.io/github/hustcc/jest-canvas-mock)
