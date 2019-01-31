@@ -29,6 +29,16 @@ describe('drawImage', () => {
     expect(() => ctx.drawImage(canvas, 1, 2)).not.toThrow();
   });
 
+  it('should draw when image is ImageBitmap', () => {
+    expect(() => ctx.drawImage(new ImageBitmap(100, 100), 1, 2)).not.toThrow();
+  });
+
+  it('should not draw if the image bitmap is closed', () => {
+    const bmp = new ImageBitmap(100, 100);
+    bmp.close();
+    expect(() => ctx.drawImage(bmp, 1, 2)).toThrow(DOMException);
+  });
+
   it('should accept 3, 5, and 9 parameters', () => {
     expect(() => ctx.drawImage(img, 1, 2)).not.toThrow();
     expect(() => ctx.drawImage(img, 1, 2, 3, 4)).not.toThrow();
@@ -54,4 +64,3 @@ describe('drawImage', () => {
     });
   });
 });
-
