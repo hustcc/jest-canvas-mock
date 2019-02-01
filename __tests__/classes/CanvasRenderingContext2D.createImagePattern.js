@@ -54,6 +54,16 @@ describe('createImagePattern', () => {
     expect(ctx.createPattern(canvas, 'repeat')).toBeInstanceOf(CanvasPattern);
   });
 
+  it('should create a pattern when image is ImageBitmap', () => {
+    expect(ctx.createPattern(new ImageBitmap(400, 300), 'repeat')).toBeInstanceOf(CanvasPattern);
+  });
+
+  it('should not create a pattern if the image bitmap is closed', () => {
+    const bmp = new ImageBitmap(400, 300);
+    bmp.close();
+    expect(() => ctx.createPattern(bmp, 'repeat')).toThrow(DOMException);
+  });
+
   it('should create a valid pattern for all repeat types', () => {
     const image = new Image();
     image.src = 'test/myImage.jpg';

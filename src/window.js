@@ -10,7 +10,9 @@ import CanvasRenderingContext2D from './classes/CanvasRenderingContext2D';
 import DOMMatrix from './classes/DOMMatrix';
 import ImageData from './classes/ImageData';
 import TextMetrics from './classes/TextMetrics';
+import ImageBitmap from './classes/ImageBitmap';
 import mockPrototype from './mock/prototype';
+import createImageBitmap from './mock/createImageBitmap';
 
 export default win => {
   const d = win.document;
@@ -49,7 +51,10 @@ export default win => {
   if (!win.DOMMatrix) win.DOMMatrix = DOMMatrix;
   if (!win.ImageData) win.ImageData = ImageData;
   if (!win.TextMetrics) win.TextMetrics = TextMetrics;
+  if (!win.ImageBitmap) win.ImageBitmap = ImageBitmap;
+  if (!win.createImageBitmap) win.createImageBitmap = createImageBitmap;
 
   mockPrototype();
+
   return win;
 }

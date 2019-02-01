@@ -18,7 +18,7 @@ function parseCSSColor(value) {
   return void 0;
 }
 
-const testFuncs = ['getTransform', 'getImageData', 'save', 'restore', 'createPattern', 'createRadialGradient', 'addHitRegion', 'arc', 'arcTo', 'beginPath', 'clip', 'closePath', 'scale', 'stroke', 'clearHitRegions', 'clearRect', 'fillRect', 'strokeRect', 'rect', 'resetTransform', 'translate', 'moveTo', 'lineTo', 'bezierCurveTo', 'createLinearGradient', 'ellipse', 'measureText', 'rotate', 'drawImage', 'drawFocusIfNeeded', 'isPointInPath', 'isPointInStroke', 'putImageData', 'strokeText', 'fillText', 'quadraticCurveTo', 'removeHitRegion', 'fill', 'transform', 'scrollPathIntoView', 'createImageData'];
+const testFuncs = ['setTransform', 'getTransform', 'getImageData', 'save', 'restore', 'createPattern', 'createRadialGradient', 'addHitRegion', 'arc', 'arcTo', 'beginPath', 'clip', 'closePath', 'scale', 'stroke', 'clearHitRegions', 'clearRect', 'fillRect', 'strokeRect', 'rect', 'resetTransform', 'translate', 'moveTo', 'lineTo', 'bezierCurveTo', 'createLinearGradient', 'ellipse', 'measureText', 'rotate', 'drawImage', 'drawFocusIfNeeded', 'isPointInPath', 'isPointInStroke', 'putImageData', 'strokeText', 'fillText', 'quadraticCurveTo', 'removeHitRegion', 'fill', 'transform', 'scrollPathIntoView', 'createImageData'];
 const compositeOperations = ['source-over', 'source-in', 'source-out', 'source-atop', 'destination-over', 'destination-in', 'destination-out', 'destination-atop', 'lighter', 'copy', 'xor', 'multiply', 'screen', 'overlay', 'darken', 'lighten', 'color-dodge', 'color-burn', 'hard-light', 'soft-light', 'difference', 'exclusion', 'hue', 'saturation', 'color', 'luminosity', 'fillText', 'strokeText'];
 
 export default class CanvasRenderingContext2D {
@@ -152,10 +152,13 @@ export default class CanvasRenderingContext2D {
     if (type === '') type = 'repeat';
 
     if (type === 'repeat' || type === 'repeat-x' || type === 'repeat-y' || type === 'no-repeat') {
-      if (image instanceof HTMLImageElement) return new CanvasPattern(); // if (image instanceof SVGImageElement) return new CanvasPattern();
-
+      if (image instanceof HTMLImageElement) return new CanvasPattern();
+      if (image instanceof ImageBitmap) {
+        if (image._closed) throw new DOMException('ValidationError', 'DOMException: Failed to execute \'createPattern\' on \'CanvasRenderingContext2D\': The image source is detached.');
+        return new CanvasPattern();
+      }
       if (image instanceof HTMLVideoElement) return new CanvasPattern();
-      if (image instanceof HTMLCanvasElement) return new CanvasPattern(); // if (image instanceof ImageBitmap) return new CanvasPattern();
+      if (image instanceof HTMLCanvasElement) return new CanvasPattern();
     } else {
       throw new TypeError('Failed to execute \'createPattern\' on \'' + this.constructor.name + '\': The provided type (\'' + type + '\') is not one of \'repeat\', \'no-repeat\', \'repeat-x\', or \'repeat-y\'.');
     }
@@ -216,10 +219,13 @@ export default class CanvasRenderingContext2D {
     if (arguments.length < 3) throw new TypeError('Failed to execute \'drawImage\' on \'' + this.constructor.name + '\': 3 arguments required, but only ' + arguments.length + ' present.');
     if (arguments.length === 4 || arguments.length > 5 && arguments.length < 9) throw new TypeError('Failed to execute \'drawImage\' on \'' + this.constructor.name + '\': Valid arities are: [3, 5, 9], but 4 arguments provided.');
 
-    if (img instanceof HTMLImageElement || img instanceof HTMLCanvasElement || img instanceof HTMLVideoElement) {
+    if (img instanceof HTMLImageElement) return;
+    if (img instanceof ImageBitmap) {
+      if (img._closed) throw new DOMException('ValidationError', 'DOMException: Failed to execute \'drawImage\' on \'CanvasRenderingContext2D\': The image source is detached.');
       return;
     }
-
+    if (img instanceof HTMLVideoElement) return;
+    if (img instanceof HTMLCanvasElement) return;
     throw new TypeError('Failed to execute \'drawImage\' on \'' + this.constructor.name + '\': The provided value is not of type \'(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)\'');
   }
 
