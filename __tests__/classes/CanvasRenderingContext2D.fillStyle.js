@@ -11,7 +11,7 @@ beforeEach(() => {
 describe('fillStyle', () => {
   it('should parse a css color string \'blue\'', () => {
     ctx.fillStyle = 'blue';
-    expect(ctx.fillStyle).toBe('#0000ff');
+    expect(ctx.fillStyle).toBe('#00f');
   });
 
   it('should not parse invalid colors', () => {
@@ -28,7 +28,7 @@ describe('fillStyle', () => {
     ctx.fillStyle = 'green';
     ctx.save();
     ctx.fillStyle = 'red';
-    expect(ctx.fillStyle).toBe('#ff0000');
+    expect(ctx.fillStyle).toBe('#f00');
     ctx.restore();
     expect(ctx.fillStyle).toBe('#008000');
   });
