@@ -11,7 +11,7 @@ beforeEach(() => {
 describe('shadowColor', () => {
   it('should parse a css color string \'blue\'', () => {
     ctx.shadowColor = 'blue';
-    expect(ctx.shadowColor).toBe('#0000ff');
+    expect(ctx.shadowColor).toBe('#00f');
   });
 
   it('should not parse invalid colors', () => {
@@ -28,7 +28,7 @@ describe('shadowColor', () => {
     ctx.shadowColor = 'green';
     ctx.save();
     ctx.shadowColor = 'red';
-    expect(ctx.shadowColor).toBe('#ff0000');
+    expect(ctx.shadowColor).toBe('#f00');
     ctx.restore();
     expect(ctx.shadowColor).toBe('#008000');
   });

@@ -9,7 +9,8 @@ export default jest.fn(function createImageBitmap(img, sx, sy, sWidth, sHeight, 
     if (img instanceof HTMLImageElement) validImage = true;
     if (img instanceof HTMLVideoElement) validImage = true;
     if (img instanceof HTMLCanvasElement) validImage = true;
-    if (img instanceof Blob) validImage = true;
+    // checking constructor name is the only reliable way to verify the object's constructing class is "blob-like"
+    if (img instanceof Blob || (img && img.constructor && img.constructor.name === "Blob")) validImage = true;
     if (img instanceof ImageBitmap) validImage = true;
     if (img instanceof ImageData) validImage = true;
     if (!validImage) return reject(new TypeError('Failed to execute \'createImageBitmap\' on \'Window\': The provided value is not of type \'(HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or Blob or ImageData or ImageBitmap or OffscreenCanvas)\''));
