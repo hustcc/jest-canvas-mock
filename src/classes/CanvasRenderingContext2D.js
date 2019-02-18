@@ -93,7 +93,7 @@ export default class CanvasRenderingContext2D {
 
     if (Number.isFinite(cpx1Result) && Number.isFinite(cpx2Result) && Number.isFinite(cpy1Result) && Number.isFinite(cpy2Result)) {
       const radiusResult = Number(radius);
-      if (Number.isFinite(radiusResult) && radiusResult < 0) throw new TypeError('Failed to execute \'arc\' on \'' + this.constructor.name + '\': The radius provided (' + radius + ') is negative.');
+      if (Number.isFinite(radiusResult) && radiusResult < 0) throw new TypeError('Failed to execute \'arcTo\' on \'' + this.constructor.name + '\': The radius provided (' + radius + ') is negative.');
     }
   }
 
