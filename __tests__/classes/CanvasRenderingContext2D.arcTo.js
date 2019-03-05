@@ -19,7 +19,7 @@ describe('arcTo', () => {
   });
 
   it('shouldn\'t accept parameters less than 5', () => {
-    expect(() => ctx.arcTo(1, 2, 3)).toThrow(TypeError);
+    expect(() => ctx.arcTo(1, 2, 3)).toThrow(DOMException);
   });
 
   it('should throw when radius is negative', () => {
