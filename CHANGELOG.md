@@ -68,7 +68,7 @@ For all these reasons, the `jest-canvas-mock` package was bumped a major version
 
 ## CanvasRenderingContext2D prototype
 
-- Implemented Stack for Properties:
+- Implemented Stack Properties for the following items:
   - `direction`
   - `fillStyle`
   - `filter`
