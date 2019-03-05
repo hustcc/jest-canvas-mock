@@ -18,7 +18,7 @@ expect(ctx).toBeInstanceOf(CanvasRenderingContext2D);
 
 When each `CanvasRenderingContext2D` object is created, all the methods are properly mocked with the `jest.fn()` method, and bound to the instance. It's still possible to verify that a function was called on the context. The main difference now is that the methods actually perform runtime checks on the passed parameters.
 
-The following examples demonstrates that canvas methods can be called, and parameters are verified.
+The following example demonstrates that canvas methods can be called, and parameters are verified.
 
 ```ts
 const PI_2 = Math.PI * 2;
