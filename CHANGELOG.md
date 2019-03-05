@@ -35,7 +35,7 @@ expect(() => ctx.arc(0, 0, -10, 0, PI_2)).toThrow(DOMExpection);
 
 Another really big change is that the mocking strategy now attempts to conform to the html living specification. In order to do this, two packages were added as dependencies so that css colors and fonts can be more properly parsed. This is not perfect, and any problems with the color parser or font parser should be reported in the Issues tab.
 
-Along with this change came with overhauled `ctx.save()` and `ctx.restore()` functions. Now these function calls work almost entirely as intended. For instance, `ctx.save()` actually pushes all the property values to a stack, and when `ctx.restore()` is called, the values are popped off of the stack, effectively restoring the context's state to a previously saved state. Take the following snippet of code as an example.
+This change comes with overhauled `ctx.save()` and `ctx.restore()` functions. These function calls work almost entirely as intended. For instance, `ctx.save()` actually pushes all the current property values to a stack, and this operation is undone when `ctx.restore()` is called. Take the following snippet of code as an example.
 
 ```ts
 // create a context
