@@ -16,7 +16,7 @@ function parseCSSColor(value) {
 
     // shorthand #ABC
     if (hex[1] === hex[2] && hex[3] === hex[4] && hex[5] === hex[6]) {
-      return "#" + hex[1] + hex[3] + hex[5];
+      return '#' + hex[1] + hex[3] + hex[5];
     }
     return result.hex;
   }
@@ -93,7 +93,7 @@ export default class CanvasRenderingContext2D {
 
     if (Number.isFinite(cpx1Result) && Number.isFinite(cpx2Result) && Number.isFinite(cpy1Result) && Number.isFinite(cpy2Result)) {
       const radiusResult = Number(radius);
-      if (Number.isFinite(radiusResult) && radiusResult < 0) throw new TypeError('Failed to execute \'arc\' on \'' + this.constructor.name + '\': The radius provided (' + radius + ') is negative.');
+      if (Number.isFinite(radiusResult) && radiusResult < 0) throw new TypeError('Failed to execute \'arcTo\' on \'' + this.constructor.name + '\': The radius provided (' + radius + ') is negative.');
     }
   }
 
@@ -160,7 +160,7 @@ export default class CanvasRenderingContext2D {
     if (type === 'repeat' || type === 'repeat-x' || type === 'repeat-y' || type === 'no-repeat') {
       if (image instanceof HTMLImageElement) return new CanvasPattern();
       if (image instanceof ImageBitmap) {
-        if (image._closed) throw new DOMException('ValidationError', 'DOMException: Failed to execute \'createPattern\' on \'CanvasRenderingContext2D\': The image source is detached.');
+        if (image._closed) throw new DOMException('SyntaxError', 'DOMException: Failed to execute \'createPattern\' on \'CanvasRenderingContext2D\': The image source is detached.');
         return new CanvasPattern();
       }
       if (image instanceof HTMLVideoElement) return new CanvasPattern();
@@ -227,7 +227,7 @@ export default class CanvasRenderingContext2D {
 
     if (img instanceof HTMLImageElement) return;
     if (img instanceof ImageBitmap) {
-      if (img._closed) throw new DOMException('ValidationError', 'DOMException: Failed to execute \'drawImage\' on \'CanvasRenderingContext2D\': The image source is detached.');
+      if (img._closed) throw new DOMException('InvalidStateError', 'DOMException: Failed to execute \'drawImage\' on \'CanvasRenderingContext2D\': The image source is detached.');
       return;
     }
     if (img instanceof HTMLVideoElement) return;
@@ -416,7 +416,7 @@ export default class CanvasRenderingContext2D {
   }
 
   measureText(text) {
-    if (arguments.length < 1) throw new TypeError('VM5906 pen.js:2 Uncaught TypeError: Failed to execute \'measureText\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
+    if (arguments.length < 1) throw new TypeError('Failed to execute \'measureText\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
     return new TextMetrics(String(text));
   }
 
@@ -447,7 +447,7 @@ export default class CanvasRenderingContext2D {
   }
 
   rect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'rect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4) throw new TypeError('Failed to execute \'rect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
   }
 
   removeHitRegion(id) {
@@ -490,7 +490,7 @@ export default class CanvasRenderingContext2D {
   }
 
   rotate(angle) {
-    if (arguments.length < 1) throw new TypeError('VM6715 pen.js:2 Uncaught TypeError: Failed to execute \'rotate\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
+    if (arguments.length < 1) throw new TypeError('Failed to execute \'rotate\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
     angle = Number(angle);
     if (!Number.isFinite(angle)) return;
     const a = this._transformStack[this._stackIndex][0];
@@ -532,7 +532,7 @@ export default class CanvasRenderingContext2D {
   }
 
   scale(x, y) {
-    if (arguments.length < 2) throw new TypeError('TypeError: Failed to execute \'scale\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2) throw new TypeError('Failed to execute \'scale\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
     const xResult = Number(x);
     const yResult = Number(y);
 
@@ -661,7 +661,7 @@ export default class CanvasRenderingContext2D {
   }
 
   strokeRect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'strokeRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4) throw new TypeError('Failed to execute \'strokeRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
   }
 
   set strokeStyle(value) {
@@ -730,7 +730,7 @@ export default class CanvasRenderingContext2D {
   }
 
   translate(x, y) {
-    if (arguments.length < 2) throw new TypeError('TypeError: Failed to execute \'translate\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2) throw new TypeError('Failed to execute \'translate\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
     const xResult = Number(x);
     const yResult = Number(y);
     const a = this._transformStack[this._stackIndex][0];
