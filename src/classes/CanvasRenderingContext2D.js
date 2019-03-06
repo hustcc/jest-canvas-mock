@@ -85,7 +85,7 @@ export default class CanvasRenderingContext2D {
   }
 
   arcTo(cpx1, cpy1, cpx2, cpy2, radius) {
-    if (arguments.length < 5) throw new TypeError('Failed to execute \'arcTo\' on \'' + this.constructor.name + '\': 5 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 5) throw new DOMException('IndexSizeError', 'Failed to execute \'arcTo\' on \'' + this.constructor.name + '\': 5 arguments required, but only ' + arguments.length + ' present.');
     const cpx1Result = Number(cpx1);
     const cpy1Result = Number(cpy1);
     const cpx2Result = Number(cpx2);
@@ -100,7 +100,7 @@ export default class CanvasRenderingContext2D {
   beginPath() {}
 
   bezierCurveTo(cpx1, cpy1, cpx2, cpy2, x, y) {
-    if (arguments.length < 6) throw new TypeError('Uncaught TypeError: Failed to execute \'bezierCurveTo\' on \'' + this.constructor.name + '\': 6 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 6) throw new TypeError('Failed to execute \'bezierCurveTo\' on \'' + this.constructor.name + '\': 6 arguments required, but only ' + arguments.length + ' present.');
   }
 
   get canvas() {
@@ -110,7 +110,7 @@ export default class CanvasRenderingContext2D {
   clearHitRegions() {}
 
   clearRect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'clearRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4) throw new TypeError('Failed to execute \'clearRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
   }
 
   clip(path, fillRule) {
@@ -160,7 +160,7 @@ export default class CanvasRenderingContext2D {
     if (type === 'repeat' || type === 'repeat-x' || type === 'repeat-y' || type === 'no-repeat') {
       if (image instanceof HTMLImageElement) return new CanvasPattern();
       if (image instanceof ImageBitmap) {
-        if (image._closed) throw new DOMException('SyntaxError', 'DOMException: Failed to execute \'createPattern\' on \'CanvasRenderingContext2D\': The image source is detached.');
+        if (image._closed) throw new DOMException('InvalidStateError', 'Failed to execute \'createPattern\' on \'CanvasRenderingContext2D\': The image source is detached.');
         return new CanvasPattern();
       }
       if (image instanceof HTMLVideoElement) return new CanvasPattern();
@@ -180,8 +180,8 @@ export default class CanvasRenderingContext2D {
     if (!Number.isFinite(x1)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
     if (!Number.isFinite(y1)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
     if (!Number.isFinite(r1)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
-    if (r0 < 0) throw new DOMException('DataError', 'Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The r0 provided is less than 0.');
-    if (r1 < 0) throw new DOMException('DataError', 'Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The r0 provided is less than 1.');
+    if (r0 < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The r0 provided is less than 0.');
+    if (r1 < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The r0 provided is less than 1.');
     return new CanvasGradient();
   }
 
@@ -218,7 +218,7 @@ export default class CanvasRenderingContext2D {
       element = path;
     }
 
-    if (!(element instanceof Element)) throw new TypeError(' Failed to execute \'drawFocusIfNeeded\' on \'' + this.constructor.name + '\': parameter ' + arguments.length + ' is not of type \'Element\'.');
+    if (!(element instanceof Element)) throw new TypeError('Failed to execute \'drawFocusIfNeeded\' on \'' + this.constructor.name + '\': parameter ' + arguments.length + ' is not of type \'Element\'.');
   }
 
   drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
@@ -259,7 +259,7 @@ export default class CanvasRenderingContext2D {
   }
 
   fillRect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Uncaught TypeError: Failed to execute \'fillRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4) throw new TypeError('Failed to execute \'fillRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
   }
 
   set fillStyle(value) {
@@ -305,7 +305,7 @@ export default class CanvasRenderingContext2D {
   }
 
   getImageData() {
-    return new ImageData(this._canvas.width, this.canvas.height);
+    return new ImageData(this._canvas.width, this._canvas.height);
   }
 
   getLineDash() {
@@ -362,7 +362,7 @@ export default class CanvasRenderingContext2D {
     return false; // return false in a mocking environment, unless I can verify a point is actually within the path
   }
 
-  isPointInStroke(path, x, y, fillRule = 'nonzero') {
+  isPointInStroke(path, x, y) {
     if (arguments.length < 2) throw new TypeError('Failed to execute \'isPointInStroke\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
     return false; // return false in a mocking environment, unless I can verify a point is actually within the path
   }
@@ -400,7 +400,7 @@ export default class CanvasRenderingContext2D {
   }
 
   lineTo(x, y) {
-    if (arguments.length < 2) throw new TypeError('Uncaught TypeError: Failed to execute \'lineTo\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2) throw new TypeError('Failed to execute \'lineTo\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
   }
 
   set lineWidth(value) {
@@ -433,7 +433,7 @@ export default class CanvasRenderingContext2D {
   }
 
   moveTo(x, y) {
-    if (arguments.length < 2) throw new TypeError('Uncaught TypeError: Failed to execute \'moveTo\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2) throw new TypeError('Failed to execute \'moveTo\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
   }
 
   putImageData(data, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight) {
@@ -547,7 +547,8 @@ export default class CanvasRenderingContext2D {
   scrollPathIntoView() {}
 
   setLineDash(lineDash) {
-    const isSequence = [Array, Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, Float64Array].reduce((left, right) => left || lineDash instanceof right, false);
+    const isSequence = [Array, Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, Float64Array]
+      .reduce((left, right) => left || lineDash instanceof right, false);
     if (!isSequence) throw new TypeError('Failed to execute \'setLineDash\' on \'' + this.constructor.name + '\': The provided value cannot be converted to a sequence.');
     const result = [];
 
