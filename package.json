@@ -1,6 +1,6 @@
 {
   "name": "jest-canvas-mock",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0",
   "description": "A module to mock canvas in Jest.",
   "main": "lib/index.js",
   "scripts": {

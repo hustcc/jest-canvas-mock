@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# Version 2.0.0
+
+Just publish a stable version.
+
+
 # Version 2.0.0-beta.1
 
 ## Class Instances
