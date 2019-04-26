@@ -1,11 +1,26 @@
 export default function mockPrototype() {
   /**
+   * This weakmap is designed to contain all of the generated canvas contexts. It's keys are the
+   * jsdom canvases obtained by using the `this` keyword inside the `#getContext('2d')` function
+   * call. It's values are the generated `CanvasRenderingContext2D` objects.
+   */
+  const generatedContexts = new WeakMap();
+  /**
    * Overrides getContext. Every test run will create a new function that overrides the current
    * value of getContext. It attempts to preserve the original getContext function by storing it on
    * the callback as a property.
    */
   const getContext2D = jest.fn(function getContext2d(type) {
-    if (type === '2d') return new CanvasRenderingContext2D(this);
+    if (type === '2d') {
+      /**
+       * Contexts must be indempotent. Once they are generated, they should be returned when
+       * getContext() is called on the same canvas object multiple times.
+       */
+      if (generatedContexts.has(this)) return generatedContexts.get(this);
+      const ctx = new CanvasRenderingContext2D(this);
+      generatedContexts.set(this, ctx);
+      return ctx;
+    }
     try {
       if (!this.dataset.internalRequireTest) require('canvas');
     } catch {
