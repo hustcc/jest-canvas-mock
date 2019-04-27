@@ -111,4 +111,10 @@ describe('mock', () => {
     canvas.getContext('webgl');
     console.error = error;
   });
+
+  it('should return the same context if getContext("2d") is called twice', () => {
+    const first = canvas.getContext("2d");
+    const second = canvas.getContext("2d");
+    expect(first).toBe(second);
+  });
 });
