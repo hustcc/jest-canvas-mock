@@ -1,0 +1,2125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`__getEvents should create an event when currentTransform is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "a": 1,
+      "b": 2,
+      "c": 3,
+      "d": 4,
+      "e": 5,
+      "f": 6,
+    },
+    "transform": Array [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+    ],
+    "type": "currentTransform",
+  },
+]
+`;
+
+exports[`__getEvents should create an event when direction is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "rtl",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "direction",
+  },
+]
+`;
+
+exports[`__getEvents should create an event when drawFocusIfNeeded is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "element": <button />,
+      "path": Array [
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawFocusIfNeeded",
+  },
+]
+`;
+
+exports[`__getEvents should create an event when the drawFocusIsNeeded function is called without a path 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "element": <button />,
+      "path": null,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawFocusIfNeeded",
+  },
+]
+`;
+
+exports[`__getEvents should have a event when drawImage is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "dHeight": 300,
+      "dWidth": 400,
+      "dx": 0,
+      "dy": 0,
+      "img": <img
+        height="300"
+        src="https://placekitten.com/400/300"
+        width="400"
+      />,
+      "sHeight": 300,
+      "sWidth": 400,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;
+
+exports[`__getEvents should have a event when drawImage is called with size parameters 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "dHeight": 300,
+      "dWidth": 400,
+      "dx": 0,
+      "dy": 0,
+      "img": <img
+        height="300"
+        src="https://placekitten.com/400/300"
+        width="400"
+      />,
+      "sHeight": 300,
+      "sWidth": 400,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;
+
+exports[`__getEvents should have a event when drawImage is called with source parameters 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "dHeight": 200,
+      "dWidth": 200,
+      "dx": 0,
+      "dy": 0,
+      "img": <img
+        height="300"
+        src="https://placekitten.com/400/300"
+        width="400"
+      />,
+      "sHeight": 100,
+      "sWidth": 100,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;
+
+exports[`__getEvents should have a event when fill() is called 1`] = `
+Array [
+  Object {
+    "props": Object {},
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "beginPath",
+  },
+  Object {
+    "props": Object {
+      "anticlockwise": false,
+      "endAngle": 6.283185307179586,
+      "radius": 10,
+      "startAngle": 0,
+      "x": 100,
+      "y": 101,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "arc",
+  },
+  Object {
+    "props": Object {
+      "fillRule": "nonzero",
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fill",
+  },
+]
+`;
+
+exports[`__getEvents should have a event when fill() is called with a fillRule 1`] = `
+Array [
+  Object {
+    "props": Object {},
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "beginPath",
+  },
+  Object {
+    "props": Object {
+      "anticlockwise": false,
+      "endAngle": 6.283185307179586,
+      "radius": 10,
+      "startAngle": 0,
+      "x": 100,
+      "y": 101,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "arc",
+  },
+  Object {
+    "props": Object {
+      "fillRule": "evenodd",
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fill",
+  },
+]
+`;
+
+exports[`__getEvents should have a event when fillRect is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fillRect",
+  },
+]
+`;
+
+exports[`__getEvents should have a event when fillRule is valid 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "fillRule": "evenodd",
+      "path": Array [
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fill",
+  },
+]
+`;
+
+exports[`__getEvents should have a event when fillText has valid maxWidth 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "maxWidth": 100,
+      "text": "hello world",
+      "x": 0,
+      "y": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fillText",
+  },
+]
+`;
+
+exports[`__getEvents should have a event when fillText is valid 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "maxWidth": null,
+      "text": "hello world",
+      "x": 0,
+      "y": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fillText",
+  },
+]
+`;
+
+exports[`__getEvents should have a event when using a path 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "fillRule": "nonzero",
+      "path": Array [
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fill",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when addHitRegion is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "control": undefined,
+      "cursor": undefined,
+      "fillRule": undefined,
+      "id": "test",
+      "label": undefined,
+      "parentID": undefined,
+      "path": undefined,
+      "role": undefined,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "addHitRegion",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when arc is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "anticlockwise": true,
+      "endAngle": 5,
+      "radius": 3,
+      "startAngle": 4,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "arc",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when arcTo is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "cpx1": 1,
+      "cpx2": 3,
+      "cpy1": 2,
+      "cpy2": 4,
+      "radius": 5,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "arcTo",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when beginPath is called 1`] = `
+Array [
+  Object {
+    "props": Object {},
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "beginPath",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when bezierCurveTo is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "cpx1": 1,
+      "cpx2": 3,
+      "cpy1": 2,
+      "cpy2": 4,
+      "x": 5,
+      "y": 6,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "bezierCurveTo",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when clearHitRegions is called 1`] = `
+Array [
+  Object {
+    "props": Object {},
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearHitRegions",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when clearRect is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when clip is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "rect",
+  },
+  Object {
+    "props": Object {
+      "fillRule": "nonzero",
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+        Object {
+          "props": Object {
+            "height": 4,
+            "width": 3,
+            "x": 1,
+            "y": 2,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "rect",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clip",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when clip is called with a fillRule 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "rect",
+  },
+  Object {
+    "props": Object {
+      "fillRule": "evenodd",
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+        Object {
+          "props": Object {
+            "height": 4,
+            "width": 3,
+            "x": 1,
+            "y": 2,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "rect",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clip",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when clip is called with a path 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "fillRule": "nonzero",
+      "path": Array [
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clip",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when clip is called with a path 2`] = `
+Array [
+  Object {
+    "props": Object {
+      "fillRule": "evenodd",
+      "path": Array [
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clip",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when closePath is called 1`] = `
+Array [
+  Object {
+    "props": Object {},
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "closePath",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when createImageData is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 100,
+      "width": 100,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "createImageData",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when createLinearGradient is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "x0": 1,
+      "x1": 3,
+      "y0": 2,
+      "y1": 4,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "createLinearGradient",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when createPattern is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "image": <img
+        height="300"
+        src="https://placekitten.com/400/300"
+        width="400"
+      />,
+      "type": "no-repeat",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "createPattern",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when createRadialGradient is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "x0": 1,
+      "x1": 3,
+      "y0": 2,
+      "y1": 4,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "createLinearGradient",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when ellipse is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "anticlockwise": true,
+      "endAngle": 7,
+      "radiusX": 3,
+      "radiusY": 4,
+      "rotation": 5,
+      "startAngle": 6,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "ellipse",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when fillStyle is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "#00f",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fillStyle",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when filter is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "test",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "filter",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when font is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "16px \\"Comic Sans\\"",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "font",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when globalAlpha is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": 0.5,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "globalAlpha",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when isPointInPath is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "fillRule": "nonzero",
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+      ],
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "isPointInPath",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when isPointInStroke is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+      ],
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "isPointInPath",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when lineCap is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "round",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "lineCap",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when lineDashOffset is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": 10,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "lineDashOffset",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when lineJoin is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "round",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "lineJoin",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when lineTo is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "lineTo",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when lineWidth is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": 10,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "lineWidth",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when measureText is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "text": "hello world!",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "measureText",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when miterLimit is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": 12,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "lineWidth",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when moveTo is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "moveTo",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when putImageData is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "dirtyHeight": NaN,
+      "dirtyWidth": NaN,
+      "dirtyX": NaN,
+      "dirtyY": NaN,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "putImageData",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when putImageData with a dirty rectangle is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "dirtyHeight": 6,
+      "dirtyWidth": 5,
+      "dirtyX": 3,
+      "dirtyY": 4,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "putImageData",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when quadraticCurveTo is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "cpx": 1,
+      "cpy": 2,
+      "x": 3,
+      "y": 4,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "quadraticCurveTo",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when rect is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "rect",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when removeHitRegion is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "id": "test",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "removeHitRegion",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when resetTransform is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "a": 1,
+      "b": 0,
+      "c": 0,
+      "d": 1,
+      "e": 0,
+      "f": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "resetTransform",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when restore is called after a save 1`] = `
+Array [
+  Object {
+    "props": Object {},
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "save",
+  },
+  Object {
+    "props": Object {},
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "restore",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when rotate is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "angle": 3.141592653589793,
+    },
+    "transform": Array [
+      -1,
+      1.2246467991473532e-16,
+      -1.2246467991473532e-16,
+      -1,
+      0,
+      0,
+    ],
+    "type": "rotate",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when save is called 1`] = `
+Array [
+  Object {
+    "props": Object {},
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "save",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when scale is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      2,
+      0,
+      0,
+    ],
+    "type": "scale",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when scrollPathIntoView is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "scrollPathIntoView",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when setLineDash is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": Array [
+        1,
+        2,
+        3,
+        1,
+        2,
+        3,
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "setLineDash",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when setTransform is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "a": 1,
+      "b": 2,
+      "c": 3,
+      "d": 4,
+      "e": 5,
+      "f": 6,
+    },
+    "transform": Array [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+    ],
+    "type": "setTransform",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when shadowBlur is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": 1,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "shadowBlur",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when stroke is called 1`] = `
+Array [
+  Object {
+    "props": Object {},
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "beginPath",
+  },
+  Object {
+    "props": Object {
+      "anticlockwise": false,
+      "endAngle": 6.283185307179586,
+      "radius": 10,
+      "startAngle": 0,
+      "x": 100,
+      "y": 101,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "arc",
+  },
+  Object {
+    "props": Object {
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "stroke",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when stroke is called with a path 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "path": Array [
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "stroke",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when strokeRect is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "strokeRect",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when strokeText has valid maxWidth 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "maxWidth": 100,
+      "text": "hello world",
+      "x": 0,
+      "y": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "strokeText",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when strokeText is valid 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "maxWidth": null,
+      "text": "hello world",
+      "x": 0,
+      "y": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "strokeText",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when the globalCompositeOperation is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "source-in",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "globalCompositeOperation",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when the imageSmoothingEnabled property is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": true,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "imageSmoothingEnabled",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when the imageSmoothingQuality property is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "high",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "imageSmoothingQuality",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when the shadowColor is valid 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "#f00",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "shadowColor",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when the shadowOffsetX is valid 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": 10,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "shadowOffsetX",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when the shadowOffsetY is valid 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": 10,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "shadowOffsetY",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when the strokeStyle is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "#00f",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "strokeStyle",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when the textAlign is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "right",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "textAlign",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when the textBaseline is set 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "value": "hanging",
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "textBaseline",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when transform is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "a": 1,
+      "b": 2,
+      "c": 3,
+      "d": 4,
+      "e": 5,
+      "f": 6,
+    },
+    "transform": Array [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+    ],
+    "type": "transform",
+  },
+]
+`;
+
+exports[`__getEvents should have an event when translate is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      1,
+      2,
+    ],
+    "type": "translate",
+  },
+]
+`;
+
+exports[`__getEvents should not create an event when direction is invalid 1`] = `Array []`;
+
+exports[`__getEvents should not have a event when drawImage is called with non-finite numbers 1`] = `Array []`;
+
+exports[`__getEvents should not have a event when drawImage is called with non-finite numbers and size parameters 1`] = `Array []`;
+
+exports[`__getEvents should not have a event when drawImage is called with non-finite numbers and source parameters 1`] = `Array []`;
+
+exports[`__getEvents should not have a event when fillRect is passed bad values 1`] = `Array []`;
+
+exports[`__getEvents should not have a event when fillText is not valid 1`] = `Array []`;
+
+exports[`__getEvents should not have a event when fillText is not valid 2`] = `Array []`;
+
+exports[`__getEvents should not have an event when arc is called with a non-finite number 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when arcTo is called with a non-finite number 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when bezierCurveTo is called with a non-finite number 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when clearRect is passed bad values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when ellipse is called with non-finite numbers 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when fillStyle is set with invalid input 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when globalAlpha is invalid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when imageSmoothingQuality is invalid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when lineCap is invalid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when lineDashOffset is invalid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when lineJoin is invalid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when lineTo is called with non-finite values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when lineWidth is invalid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when miterLimit is negative 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when miterLimit is not finite 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when moveTo is called with non-finite values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when putImageData is called with non-finite values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when putImageData with a dirty rectangle is called with non-finite values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when quadraticCurveTo is called with non-finite values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when rect is called with non-finite values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when restore is called and the stack is empty 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when rotate is called with a non-finite value 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when scale is called with non-finite values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when setLineDash is called with negative values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when setLineDash is called with non-finite values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when setTransform is called with non-finite values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when shadowBlur is negative 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when shadowBlur is not finite 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when strokeRect is passed bad values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when strokeText is not valid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when strokeText is not valid 2`] = `Array []`;
+
+exports[`__getEvents should not have an event when the font is not valid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when the globalCompositeOperation is invalid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when the shadowColor is not valid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when the shadowOffsetX is not finite 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when the shadowOffsetY is not finite 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when the strokeStyle is not valid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when the textAlign is not valid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when the textBaseline is not valid 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when transform is called with non-finite values 1`] = `Array []`;
+
+exports[`__getEvents should not have an event when translate is called with non-finite values 1`] = `Array []`;

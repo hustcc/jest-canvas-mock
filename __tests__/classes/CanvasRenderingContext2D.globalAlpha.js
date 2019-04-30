@@ -10,7 +10,7 @@ beforeEach(() => {
 
 describe('globalAlpha', () => {
   it('should ignore non finite globalAlpha values', () => {
-    [Infinity, -Infinity, null, void 0, NaN].forEach(e => {
+    [Infinity, -Infinity, void 0, NaN].forEach(e => {
       ctx.globalAlpha = e;
       expect(ctx.globalAlpha).toBe(1);
     });
@@ -28,5 +28,10 @@ describe('globalAlpha', () => {
       ctx.globalAlpha = e;
       expect(ctx.globalAlpha).toBe(e);
     });
+  });
+
+  it('should be 0 when globalAlpha is set to null', () => {
+    ctx.globalAlpha = null;
+    expect(ctx.globalAlpha).toBe(0);
   });
 });
