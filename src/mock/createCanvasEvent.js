@@ -13,6 +13,6 @@
  *   };
  * }
  */
-export function createCanvasEvent(type, transform, props) {
+export default function createCanvasEvent(type, transform, props) {
   return { type, transform, props };
 }

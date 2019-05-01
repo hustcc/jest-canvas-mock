@@ -122,8 +122,8 @@ describe('__getEvents', () => {
     ctx.direction = 'testing';
   });
 
-  it("should create an event when the drawFocusIsNeeded function is called without a path", () => {
-    const button = document.createElement("button");
+  it('should create an event when the drawFocusIsNeeded function is called without a path', () => {
+    const button = document.createElement('button');
     ctx.drawFocusIfNeeded(button);
   });
 

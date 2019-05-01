@@ -3,7 +3,7 @@ import CanvasPattern from './CanvasPattern';
 import parseColor from 'parse-color';
 import cssfontparser from 'cssfontparser';
 import TextMetrics from './TextMetrics';
-import { createCanvasEvent } from '../mock/createCanvasEvent';
+import createCanvasEvent from '../mock/createCanvasEvent';
 
 function parseCSSColor(value) {
   const result = parseColor(value);
@@ -870,7 +870,7 @@ export default class CanvasRenderingContext2D {
 
   measureText(text) {
     if (arguments.length < 1) throw new TypeError('Failed to execute \'measureText\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
-    text = text == null ? "" : text;
+    text = text == null ? '' : text;
     text = text.toString();
     const event = createCanvasEvent(
       'measureText',

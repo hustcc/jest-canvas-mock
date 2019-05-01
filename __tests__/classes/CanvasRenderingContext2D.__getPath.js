@@ -13,7 +13,7 @@ afterEach(() => {
   expect(drawCalls).toMatchSnapshot();
 });
 
-describe("__getPath", () => {
+describe('__getPath', () => {
   it('should have a path item when arc is called', () => {
     ctx.arc(1, 2, 3, 4, 5, true);
   });
