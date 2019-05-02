@@ -73,8 +73,11 @@ error. For instance, the `CanvasRenderingContext2D#arc` function will throw a `T
 radius is negative, or if it was not provided with enough parameters.
 
 ```ts
+// arc throws a TypeError when the argument length is less than 5
 expect(() => ctx.arc(1, 2, 3, 4)).toThrow(TypeError);
-expect(() => ctx.arc(0, 0, -10, 0, Math.PI * 2)).toThrow(TypeError);
+
+// when radius is negative, arc throws a dom exception when all parameters are finite
+expect(() => ctx.arc(0, 0, -10, 0, Math.PI * 2)).toThrow(DOMException);
 ```
 
 The function will do `Number` type coercion and verify the inputs exactly like the browser does. So
