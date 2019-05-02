@@ -1,9 +1,33 @@
 # CHANGELOG
 
+# Version 2.1.0
+
+This minor version bump now has some major snapshot support but is backwards compatible.
+
+Changes:
+
+- Feature: Add `static` `CanvasRenderingContext2D` method: `#.__getEvents(ctx)`
+  - Feature: Every successful modification of the `CanvasRenderingContext2D` state machine logs an `_event`
+- Feature: Add `static` `CanvasRenderingContext2D` method: `#.__getPath(ctx)`
+  - Feature: Every path call adds a `_path` item and can be accessed via `__getPath(ctx)`
+  - Feature: `beginPath()` empties the `_path`
+- Feature: Add `static` `CanvasRenderingContext2D` method: `#.__getDrawCalls(ctx)`
+  - Feature: Every draw call adds a `_drawCall` item and can be accessed via `__getDrawCall(ctx)`
+- Feature: Add `types/index.d.ts` file for tooling types (in jest environment)
+- Feature: Support node 12
+- Docs
+  - Updated arc example
+  - Added snapshot testing documentation
+- Bug: `createLinearGradient` now accepts strings
+- Bug: `createRadialGradient` now accepts strings
+- Bug: `globalAlpha` now accepts `null` per `Number` coercion
+- Feature: Faster finite values checks
+- Feature: Add `_path` and `_events` to `Path2D`
+- Testing: Add and test snapshot outputs
+
 # Version 2.0.0
 
 Just publish a stable version.
-
 
 # Version 2.0.0-beta.1
 
