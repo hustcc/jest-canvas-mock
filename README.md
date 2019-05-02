@@ -95,6 +95,51 @@ expect(() => ctx.fill(new Path2D(), "invalid!")).toThrow(TypeError);
 
 We try to follow the ECMAScript specification as closely as possible.
 
+# Snapshots
+
+There are multiple ways to validate canvas state. There are currently three `static` methods attached
+to the `CanvasRenderingContext2D` class. The first way to use this feature is by using the `__getEvents`
+method.
+
+```ts
+/**
+ * In order to see which functions and properties were used for the test, you can use `__getEvents`
+ * to gather this information.
+ */
+const events = CanvasRenderingContext2D.__getEvents(ctx);
+
+expect(events).toMatchSnapshot(); // jest will assert the events match the snapshot
+```
+
+The second way is to inspect the current path associated with the context.
+
+```ts
+ctx.beginPath();
+ctx.arc(1, 2, 3, 4, 5);
+ctx.moveTo(6, 7);
+ctx.rect(6, 7, 8, 9);
+ctx.closePath();
+
+/**
+ * Any method that modifies the current path (and subpath) will be pushed to an event array. When
+ * using the `__getPath` method, that array will sliced and usable for snapshots.
+ */
+const path = CanvasRenderingContext2D.__getPath(ctx);
+expect(path).toMatchSnapshot();
+```
+
+The third way is to inspect all of the success draw calls submitted to the context.
+
+```ts
+ctx.drawImage(img, 0, 0);
+
+/**
+ * Every drawImage, fill, stroke, fillText, or strokeText function call will be logged in an event
+ * array. This method will return those events here for inspection.
+ */
+const calls = CanvasRenderingContext2D.__getDrawCalls(ctx);
+expect(calls).toMatchSnapshot();
+```
 
 ## License
 
