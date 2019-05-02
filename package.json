@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "A module to mock canvas in Jest.",
   "main": "lib/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "jest --no-cache",
     "build": "babel src --out-dir lib",
