@@ -1,0 +1,542 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`__getDrawCalls should have a draw call when clearRect is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clearRect",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when drawImage is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "dHeight": 300,
+      "dWidth": 400,
+      "dx": 0,
+      "dy": 0,
+      "img": <img
+        height="300"
+        src="https://placekitten.com/400/300"
+        width="400"
+      />,
+      "sHeight": 300,
+      "sWidth": 400,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when drawImage is called with size parameters 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "dHeight": 300,
+      "dWidth": 400,
+      "dx": 0,
+      "dy": 0,
+      "img": <img
+        height="300"
+        src="https://placekitten.com/400/300"
+        width="400"
+      />,
+      "sHeight": 300,
+      "sWidth": 400,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when drawImage is called with source parameters 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "dHeight": 200,
+      "dWidth": 200,
+      "dx": 0,
+      "dy": 0,
+      "img": <img
+        height="300"
+        src="https://placekitten.com/400/300"
+        width="400"
+      />,
+      "sHeight": 100,
+      "sWidth": 100,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when fill() is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "fillRule": "nonzero",
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fill",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when fill() is called with a fillRule 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "fillRule": "evenodd",
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fill",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when fillRect is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fillRect",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when fillRule is valid 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "fillRule": "evenodd",
+      "path": Array [
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fill",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when fillText has valid maxWidth 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "maxWidth": 100,
+      "text": "hello world",
+      "x": 0,
+      "y": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fillText",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when fillText is valid 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "maxWidth": null,
+      "text": "hello world",
+      "x": 0,
+      "y": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fillText",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when stroke is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "stroke",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when stroke is called with a path 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "path": Array [
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "stroke",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when strokeRect is called 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "strokeRect",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when strokeText has valid maxWidth 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "maxWidth": 100,
+      "text": "hello world",
+      "x": 0,
+      "y": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "strokeText",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when strokeText is valid 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "maxWidth": null,
+      "text": "hello world",
+      "x": 0,
+      "y": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "strokeText",
+  },
+]
+`;
+
+exports[`__getDrawCalls should have a draw call when using a path 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "fillRule": "nonzero",
+      "path": Array [
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 6.283185307179586,
+            "radius": 10,
+            "startAngle": 0,
+            "x": 100,
+            "y": 101,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "fill",
+  },
+]
+`;
+
+exports[`__getDrawCalls should not have a draw call when clearRect is passed bad values 1`] = `Array []`;
+
+exports[`__getDrawCalls should not have a draw call when drawImage is called with non-finite numbers 1`] = `Array []`;
+
+exports[`__getDrawCalls should not have a draw call when drawImage is called with non-finite numbers and size parameters 1`] = `Array []`;
+
+exports[`__getDrawCalls should not have a draw call when drawImage is called with non-finite numbers and source parameters 1`] = `Array []`;
+
+exports[`__getDrawCalls should not have a draw call when fillRect is passed bad values 1`] = `Array []`;
+
+exports[`__getDrawCalls should not have a draw call when fillText is not valid 1`] = `Array []`;
+
+exports[`__getDrawCalls should not have a draw call when fillText is not valid 2`] = `Array []`;
+
+exports[`__getDrawCalls should not have a draw call when strokeRect is passed bad values 1`] = `Array []`;
+
+exports[`__getDrawCalls should not have a draw call when strokeText is not valid 1`] = `Array []`;
+
+exports[`__getDrawCalls should not have a draw call when strokeText is not valid 2`] = `Array []`;
