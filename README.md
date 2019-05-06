@@ -149,11 +149,9 @@ expect(calls).toMatchSnapshot();
 You can override the default mock return value in your test to suit your need. For example, to override return value of `toDataURL`:
 
 ```ts
-HTMLCanvasElement.prototype.toDataURL = jest
-  .fn()
-  .mockReturnValue(
-    'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='
-  );
+canvas.toDataURL.mockReturnValueOnce(
+  'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='
+);
 ```
 
 ## License
