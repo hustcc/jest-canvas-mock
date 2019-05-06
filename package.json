@@ -1,7 +1,7 @@
 {
   "name": "jest-canvas-mock",
-  "version": "2.0.0",
-  "description": "A module to mock canvas in Jest.",
+  "version": "2.1.0",
+  "description": "Mock a canvas in your jest tests.",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "scripts": {
@@ -15,16 +15,17 @@
     "parse-color": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-angular": "^7.5.0",
-    "babel-jest": "^24.0.0",
+    "babel-jest": "^24.8.0",
     "babel-plugin-version": "^0.2.3",
-    "coveralls": "^3.0.2",
-    "husky": "^1.3.1",
-    "jest": "^24.0.0"
+    "coveralls": "^3.0.3",
+    "husky": "^2.2.0",
+    "jest": "^24.8.0"
   },
   "commitlint": {
     "extends": [
@@ -61,7 +62,7 @@
     "unit"
   ],
   "author": "hustcc",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/hustcc/jest-canvas-mock/issues"
   },
