@@ -9,7 +9,7 @@ const path = new Path2D();
 path.arc(100, 101, 10, 0, Math.PI * 2);
 
 afterEach(() => {
-  const drawCalls = CanvasRenderingContext2D.__getPath(ctx);
+  const drawCalls = ctx.__getPath(ctx);
   expect(drawCalls).toMatchSnapshot();
 });
 

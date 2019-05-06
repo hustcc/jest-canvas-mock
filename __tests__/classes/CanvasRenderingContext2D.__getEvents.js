@@ -16,7 +16,7 @@ path.arc(100, 101, 10, 0, Math.PI * 2);
 const imgData = new ImageData(100, 100);
 
 afterEach(() => {
-  const drawCalls = CanvasRenderingContext2D.__getEvents(ctx);
+  const drawCalls = ctx.__getEvents(ctx);
   expect(drawCalls).toMatchSnapshot();
 });
 

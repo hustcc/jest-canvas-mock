@@ -109,7 +109,7 @@ method.
  * In order to see which functions and properties were used for the test, you can use `__getEvents`
  * to gather this information.
  */
-const events = CanvasRenderingContext2D.__getEvents(ctx);
+const events = ctx.__getEvents();
 
 expect(events).toMatchSnapshot(); // jest will assert the events match the snapshot
 ```
@@ -127,7 +127,7 @@ ctx.closePath();
  * Any method that modifies the current path (and subpath) will be pushed to an event array. When
  * using the `__getPath` method, that array will sliced and usable for snapshots.
  */
-const path = CanvasRenderingContext2D.__getPath(ctx);
+const path = ctx.__getPath();
 expect(path).toMatchSnapshot();
 ```
 
@@ -140,7 +140,7 @@ ctx.drawImage(img, 0, 0);
  * Every drawImage, fill, stroke, fillText, or strokeText function call will be logged in an event
  * array. This method will return those events here for inspection.
  */
-const calls = CanvasRenderingContext2D.__getDrawCalls(ctx);
+const calls = ctx.__getDrawCalls();
 expect(calls).toMatchSnapshot();
 ```
 

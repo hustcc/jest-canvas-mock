@@ -14,7 +14,7 @@ const path = new Path2D();
 path.arc(100, 101, 10, 0, Math.PI * 2);
 
 afterEach(() => {
-  const drawCalls = CanvasRenderingContext2D.__getDrawCalls(ctx);
+  const drawCalls = ctx.__getDrawCalls(ctx);
   expect(drawCalls).toMatchSnapshot();
 });
 

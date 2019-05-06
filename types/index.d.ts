@@ -21,22 +21,34 @@ declare global {
     /**
      * Get all the events associated with this CanvasRenderingContext2D object.
      *
-     * @param {CanvasRenderingContext2D} ctx - The canvas context.
+     * This method cannot be used in a production environment, only with `jest` using
+     * `jest-canvas-mock` and should only be used for testing.
+     *
+     * @example
+     * expect(ctx.__getEvents()).toMatchSnapshot();
      */
-    static __getEvents(ctx: CanvasRenderingContext2D): CanvasRenderingContext2DEvent[];
+    __getEvents(): CanvasRenderingContext2DEvent[];
 
     /**
      * Get all the successful draw calls associated with this CanvasRenderingContext2D object.
      *
-     * @param {CanvasRenderingContext2D} ctx - The canvas context.
+     * This method cannot be used in a production environment, only with `jest` using
+     * `jest-canvas-mock` and should only be used for testing.
+     *
+     * @example
+     * expect(ctx.__getDrawCalls()).toMatchSnapshot();
      */
-    static __getDrawCalls(ctx: CanvasRenderingContext2D): CanvasRenderingContext2DEvent[];
+    __getDrawCalls(): CanvasRenderingContext2DEvent[];
 
     /**
      * Get the current path associated with this CanvasRenderingContext2D object.
      *
-     * @param {CanvasRenderingContext2D} ctx - The canvas context.
+     * This method cannot be used in a production environment, only with `jest` using
+     * `jest-canvas-mock` and should only be used for testing.
+     *
+     * @example
+     * expect(ctx.__getPath()).toMatchSnapshot();
      */
-    static __getPath(ctx: CanvasRenderingContext2D): CanvasRenderingContext2DEvent[];
+    __getPath(): CanvasRenderingContext2DEvent[];
   }
 }

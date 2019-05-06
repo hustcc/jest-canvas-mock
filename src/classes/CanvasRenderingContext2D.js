@@ -38,8 +38,8 @@ export default class CanvasRenderingContext2D {
    * This goes for only draw call functions.
    */
   _drawCalls = [];
-  static __getDrawCalls(ctx) {
-    return ctx._drawCalls.slice();
+  __getDrawCalls() {
+    return this._drawCalls.slice();
   }
 
   /**
@@ -47,8 +47,8 @@ export default class CanvasRenderingContext2D {
    * an event is added to this array. This goes for every property set, and draw call.
    */
   _events = [];
-  static __getEvents(ctx) {
-    return ctx._events.slice();
+  __getEvents(ctx) {
+    return this._events.slice();
   }
 
   /**
@@ -56,7 +56,7 @@ export default class CanvasRenderingContext2D {
    * path.
    */
   _path = [createCanvasEvent('beginPath', [1, 0, 0, 1, 0, 0], {})];
-  static __getPath(ctx) {
+  __getPath(ctx) {
     return ctx._path.slice();
   }
 
