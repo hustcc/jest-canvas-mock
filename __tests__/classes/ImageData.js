@@ -98,7 +98,7 @@ describe('ImageData', () => {
     });
 
     it('should throw if height is not finite', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(4), Infinity))
+      expect(() => new ImageData(new Uint8ClampedArray(4), 1, Infinity))
         .toThrow(RangeError);
     });
 
