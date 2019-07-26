@@ -48,10 +48,12 @@ describe('ImageData', () => {
   });
 
   describe('new ImageData(array, width)', () => {
-    it('should construct an ImageData object with the right infered height', () => {
-      const d = new ImageData(new Uint8ClampedArray(800), 200);
+    it('should construct an ImageData object with the right inferred height', () => {
+      const data = new Uint8ClampedArray(800);
+      const d = new ImageData(data, 200);
       expect(d).toBeInstanceOf(ImageData);
       expect(d.height).toBe(1);
+      expect(d.data).toBe(data);
     });
 
     it('should throw if width is not finite', () => {
