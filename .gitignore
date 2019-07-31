@@ -3,4 +3,5 @@ node_modules
 .DS_STORE
 coverage
 package-lock.json
+yarn.lock
 lib
