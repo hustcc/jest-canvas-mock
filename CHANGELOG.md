@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# Version 2.1.1
+
+- Feature: Support for ImageData instantiation using a source array(#45)
+
 # Version 2.1.0
 
 This minor version bump now has some major snapshot support but is backwards compatible.
