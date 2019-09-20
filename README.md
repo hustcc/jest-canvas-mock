@@ -1,6 +1,6 @@
 # jest-canvas-mock
 
-> Mock `canvas` when run unit test cases with jest.
+> Mock `canvas` when run unit test cases with jest. For more browser environment, you can use [jest-electron](https://github.com/hustcc/jest-electron) for real browser runtime.
 
 [![Build Status](https://travis-ci.org/hustcc/jest-canvas-mock.svg?branch=master)](https://travis-ci.org/hustcc/jest-canvas-mock)
 [![Coverage Status](https://coveralls.io/repos/github/hustcc/jest-canvas-mock/badge.svg?branch=master)](https://coveralls.io/github/hustcc/jest-canvas-mock)
