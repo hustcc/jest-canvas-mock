@@ -47,7 +47,7 @@ export default class CanvasRenderingContext2D {
    * an event is added to this array. This goes for every property set, and draw call.
    */
   _events = [];
-  __getEvents(ctx) {
+  __getEvents() {
     return this._events.slice();
   }
 
@@ -56,8 +56,8 @@ export default class CanvasRenderingContext2D {
    * path.
    */
   _path = [createCanvasEvent('beginPath', [1, 0, 0, 1, 0, 0], {})];
-  __getPath(ctx) {
-    return ctx._path.slice();
+  __getPath() {
+    return this._path.slice();
   }
 
   _directionStack = ['inherit'];
