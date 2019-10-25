@@ -144,6 +144,16 @@ const calls = ctx.__getDrawCalls();
 expect(calls).toMatchSnapshot();
 ```
 
+In some cases it may be useful to clear the events or draw calls that have already been logged.
+
+```ts
+// Clear events
+ctx.__clearEvents();
+
+// Clear draw calls
+ctx.__clearDrawCalls();
+```
+
 ## Override default mock return value
 
 You can override the default mock return value in your test to suit your need. For example, to override return value of `toDataURL`:

@@ -43,12 +43,26 @@ export default class CanvasRenderingContext2D {
   }
 
   /**
+   * Clear the list of draw calls
+   */
+  __clearDrawCalls() {
+    this._drawCalls = []
+  }
+
+  /**
    * Every time a function call results in something that would have modified the state of the context,
    * an event is added to this array. This goes for every property set, and draw call.
    */
   _events = [];
   __getEvents() {
     return this._events.slice();
+  }
+
+  /**
+   * Clear the list of events
+   */
+  __clearEvents() {
+    this._events = [];
   }
 
   /**
