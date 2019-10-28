@@ -74,6 +74,18 @@ export default class CanvasRenderingContext2D {
     return this._path.slice();
   }
 
+  /**
+   * Clear the path and reset it to a single beginPath event.
+   */
+  __clearPath() {
+    const event = createCanvasEvent(
+      'beginPath',
+      getTransformSlice(this),
+      { },
+    );
+    this._path = [event];
+  }
+
   _directionStack = ['inherit'];
   _fillStyleStack = ['#000'];
   _filterStack = ['none'];
@@ -173,13 +185,9 @@ export default class CanvasRenderingContext2D {
   }
 
   beginPath() {
-    const event = createCanvasEvent(
-      'beginPath',
-      getTransformSlice(this),
-      { },
-    );
-    this._path = [event];
-    this._events.push(event);
+    this.__clearPath();
+    // push the generated beginPath to the event list
+    this._events.push(this._path[0]);
   }
 
   bezierCurveTo(cpx1, cpy1, cpx2, cpy2, x, y) {
