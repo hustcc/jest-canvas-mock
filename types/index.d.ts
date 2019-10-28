@@ -74,5 +74,13 @@ declare global {
      * expect(ctx.__getPath()).toMatchSnapshot();
      */
     __getPath(): CanvasRenderingContext2DEvent[];
+
+    /**
+     * Clears the current path associated with this CanvasRenderingContext2D object.
+     *
+     * This method cannot be used in a production environment, only with `jest` using
+     * `jest-canvas-mock` and should be only used for testing.
+     */
+    __clearPath(): void;
   }
 }
