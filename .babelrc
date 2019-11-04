@@ -1,4 +1,13 @@
 {
-  "presets": ["@babel/env"],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "node": "8"
+        }
+      }
+    ]
+  ],
   "plugins": ["@babel/proposal-class-properties", "version"]
 }

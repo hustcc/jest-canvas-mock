@@ -1100,7 +1100,7 @@ export default class CanvasRenderingContext2D {
   }
 
   save() {
-    this._transformStack.push(this._transformStack[this._stackIndex]);
+    this._transformStack.push(this._transformStack[this._stackIndex].slice());
     this._directionStack.push(this._directionStack[this._stackIndex]);
     this._fillStyleStack.push(this._fillStyleStack[this._stackIndex]);
     this._filterStack.push(this._filterStack[this._stackIndex]);
@@ -1113,7 +1113,7 @@ export default class CanvasRenderingContext2D {
     this._lineDashStack.push(this._lineDashStack[this._stackIndex]);
     this._lineDashOffsetStack.push(this._lineDashOffsetStack[this._stackIndex]);
     this._lineJoinStack.push(this._lineJoinStack[this._stackIndex]);
-    this._lineWidthStack.push(this._lineWidthStack[this.stackIndex]);
+    this._lineWidthStack.push(this._lineWidthStack[this._stackIndex]);
     this._miterLimitStack.push(this._miterLimitStack[this._stackIndex]);
     this._shadowBlurStack.push(this._shadowBlurStack[this._stackIndex]);
     this._shadowColorStack.push(this._shadowColorStack[this._stackIndex]);

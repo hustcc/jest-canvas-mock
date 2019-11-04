@@ -1,10 +1,19 @@
 # CHANGELOG
 
-# Version 2.1.1
+## Version 2.2.0
 
-- Feature: Support for ImageData instantiation using a source array(#45)
+- Bug: Slice canvas transform value when pushing (#50)
+- Remove support for node 6 and 7
+- switch babel env to target node 8
+- add support for node 13
+- update package versions
+- fix lineWidth bug
 
-# Version 2.1.0
+## Version 2.1.1
+
+- Feature: Support for ImageData instantiation using a source array (#45)
+
+## Version 2.1.0
 
 This minor version bump now has some major snapshot support but is backwards compatible.
 
@@ -29,13 +38,13 @@ Changes:
 - Feature: Add `_path` and `_events` to `Path2D`
 - Testing: Add and test snapshot outputs
 
-# Version 2.0.0
+## Version 2.0.0
 
 Just publish a stable version.
 
-# Version 2.0.0-beta.1
+## Version 2.0.0-beta.1
 
-## Class Instances
+### Class Instances
 
 The Version 2.0.0-beta.1 of `jest-canvas-mock` is a complete overhaul of the mocking strategy entirely. Originally, the `canvas.getCanvas('2d')` method would return a single object that contained a set of methods without any property definitions. This caused problems for people who wanted to use `jest` to test and verify `instanceof` checks.
 
@@ -47,7 +56,7 @@ const ctx = document.createElement('canvas').getContext('2d');
 expect(ctx).toBeInstanceOf(CanvasRenderingContext2D);
 ```
 
-## Bound Mock Functions
+### Bound Mock Functions
 
 When each `CanvasRenderingContext2D` object is created, all the methods are properly mocked with the `jest.fn()` method, and bound to the instance. It's still possible to verify that a function was called on the context. The main difference now is that the methods actually perform runtime checks on the passed parameters.
 
@@ -64,7 +73,7 @@ expect(ctx.arc).toBeCalledWith(0, 0, 100, 0, PI_2);
 expect(() => ctx.arc(0, 0, -10, 0, PI_2)).toThrow(DOMExpection);
 ```
 
-# Parsing Colors and Fonts, Saving, Restoring
+### Parsing Colors and Fonts, Saving, Restoring
 
 Another really big change is that the mocking strategy now attempts to conform to the html living specification. In order to do this, two packages were added as dependencies so that css colors and fonts can be more properly parsed. This is not perfect, and any problems with the color parser or font parser should be reported in the Issues tab.
 
@@ -99,7 +108,7 @@ expect(ctx.font).toBe('10px sans-serif');
 
 For all these reasons, the `jest-canvas-mock` package was bumped a major version to `2.0.0`.
 
-## CanvasRenderingContext2D prototype
+### CanvasRenderingContext2D prototype
 
 - Implemented Stack Properties for the following items:
   - `direction`
@@ -371,7 +380,7 @@ For all these reasons, the `jest-canvas-mock` package was bumped a major version
   - throws `TypeError` if `arguments.length < 2`
   - performs a translate operation on the current `transform` stack value if every parameter is finite
 
-## Other Changes By File
+### Other Changes By File
 
 - src/CanvasGradient.js
   - Added Class for `instanceof` checks
@@ -452,4 +461,3 @@ For all these reasons, the `jest-canvas-mock` package was bumped a major version
     - This function cannot normally be constructed
     - mocked to accept a `text` parameter
     - sets `width` property to `text.length`
-
