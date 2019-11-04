@@ -39,6 +39,10 @@ describe('lineWidth', () => {
     ctx.save();
     ctx.lineWidth = 10;
     expect(ctx.lineWidth).toBe(10);
+    ctx.save();
+    expect(ctx.lineWidth).toBe(10);
+    ctx.restore();
+    expect(ctx.lineWidth).toBe(10);
     ctx.restore();
     expect(ctx.lineWidth).toBe(2);
   });
