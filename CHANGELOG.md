@@ -7,6 +7,7 @@
 - switch babel env to target node 8
 - add support for node 13
 - update package versions
+- fix lineWidth bug
 
 ## Version 2.1.1
 
