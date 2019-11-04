@@ -1078,7 +1078,7 @@ export default class CanvasRenderingContext2D {
   }
 
   save() {
-    this._transformStack.push(this._transformStack[this._stackIndex]);
+    this._transformStack.push(this._transformStack[this._stackIndex].slice());
     this._directionStack.push(this._directionStack[this._stackIndex]);
     this._fillStyleStack.push(this._fillStyleStack[this._stackIndex]);
     this._filterStack.push(this._filterStack[this._stackIndex]);

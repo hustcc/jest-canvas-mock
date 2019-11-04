@@ -15,17 +15,17 @@
     "parse-color": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@commitlint/cli": "^7.5.2",
-    "@commitlint/config-angular": "^7.5.0",
-    "babel-jest": "^24.8.0",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-angular": "^8.2.0",
+    "babel-jest": "^24.9.0",
     "babel-plugin-version": "^0.2.3",
-    "coveralls": "^3.0.3",
-    "husky": "^2.2.0",
-    "jest": "^24.8.0"
+    "coveralls": "^3.0.7",
+    "husky": "^3.0.9",
+    "jest": "^24.9.0"
   },
   "commitlint": {
     "extends": [
