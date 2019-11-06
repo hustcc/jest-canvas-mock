@@ -1,6 +1,6 @@
 {
   "name": "jest-canvas-mock",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Mock a canvas in your jest tests.",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
