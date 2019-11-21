@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/hustcc/jest-canvas-mock/badge.svg?branch=master)](https://coveralls.io/github/hustcc/jest-canvas-mock)
 [![npm](https://img.shields.io/npm/v/jest-canvas-mock.svg)](https://www.npmjs.com/package/jest-canvas-mock)
 [![npm](https://img.shields.io/npm/dm/jest-canvas-mock.svg)](https://www.npmjs.com/package/jest-canvas-mock)
-
+[![Mentioned in Awesome Jest](https://awesome.re/mentioned-badge.svg)](https://github.com/jest-community/awesome-jest)
 
 ## Install
 
@@ -15,7 +15,6 @@ This should only be installed as a development dependency (`devDependencies`) as
 ```bash
 npm i --save-dev jest-canvas-mock
 ```
-
 
 ## Setup
 
@@ -40,7 +39,6 @@ If you already have a `setupFiles` attribute you can also append `jest-canvas-mo
 ```
 
 More about in [configuration section](https://facebook.github.io/jest/docs/en/configuration.html#content).
-
 
 ## Setup file
 
@@ -98,7 +96,7 @@ expect(() => ctx.fill(new Path2D(), "invalid!")).toThrow(TypeError);
 
 We try to follow the ECMAScript specification as closely as possible.
 
-# Snapshots
+## Snapshots
 
 There are multiple ways to validate canvas state. There are currently three `static` methods attached
 to the `CanvasRenderingContext2D` class. The first way to use this feature is by using the `__getEvents`
