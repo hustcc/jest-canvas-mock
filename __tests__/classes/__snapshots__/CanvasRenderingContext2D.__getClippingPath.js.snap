@@ -1,0 +1,267 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`__getClippingRegion should be empty when there are no path elements 1`] = `Array []`;
+
+exports[`__getClippingRegion should save the clipping region correctly when saved 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "rect",
+  },
+  Object {
+    "props": Object {
+      "anticlockwise": false,
+      "endAngle": 5,
+      "radius": 3,
+      "startAngle": 4,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "arc",
+  },
+]
+`;
+
+exports[`__getClippingRegion should save the clipping region correctly when saved 2`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "rect",
+  },
+  Object {
+    "props": Object {
+      "anticlockwise": false,
+      "endAngle": 5,
+      "radius": 3,
+      "startAngle": 4,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "arc",
+  },
+]
+`;
+
+exports[`__getClippingRegion should store the clipping region 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "rect",
+  },
+  Object {
+    "props": Object {
+      "anticlockwise": false,
+      "endAngle": 5,
+      "radius": 3,
+      "startAngle": 4,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "arc",
+  },
+]
+`;
+
+exports[`__getClippingRegion shouldn't store the whole clipping region twice when clip is called twice 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "rect",
+  },
+  Object {
+    "props": Object {
+      "anticlockwise": false,
+      "endAngle": 5,
+      "radius": 3,
+      "startAngle": 4,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "arc",
+  },
+  Object {
+    "props": Object {
+      "fillRule": "nonzero",
+      "path": Array [
+        Object {
+          "props": Object {},
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "beginPath",
+        },
+        Object {
+          "props": Object {
+            "height": 4,
+            "width": 3,
+            "x": 1,
+            "y": 2,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "rect",
+        },
+        Object {
+          "props": Object {
+            "anticlockwise": false,
+            "endAngle": 5,
+            "radius": 3,
+            "startAngle": 4,
+            "x": 1,
+            "y": 2,
+          },
+          "transform": Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ],
+          "type": "arc",
+        },
+      ],
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "clip",
+  },
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "rect",
+  },
+  Object {
+    "props": Object {
+      "anticlockwise": false,
+      "endAngle": 5,
+      "radius": 3,
+      "startAngle": 4,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "arc",
+  },
+]
+`;

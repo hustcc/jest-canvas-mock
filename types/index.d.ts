@@ -82,5 +82,13 @@ declare global {
      * `jest-canvas-mock` and should be only used for testing.
      */
     __clearPath(): void;
+
+    /**
+     * Obtains the current clipping path.
+     *
+     * This method cannot be used in a production environment, only with `jest` using
+     * `jest-canvas-mock` and should be only used for testing.
+     */
+    __getClippingRegion(): CanvasRenderingContext2DEvent[];
   }
 }
