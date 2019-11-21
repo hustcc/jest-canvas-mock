@@ -4,6 +4,7 @@ import parseColor from 'parse-color';
 import cssfontparser from 'cssfontparser';
 import TextMetrics from './TextMetrics';
 import createCanvasEvent from '../mock/createCanvasEvent';
+import Path2D from "./Path2D";
 
 function parseCSSColor(value) {
   const result = parseColor(value);
@@ -83,7 +84,16 @@ export default class CanvasRenderingContext2D {
       getTransformSlice(this),
       { },
     );
+    // The clipping path should start after the initial beginPath instruction
+    this._clipIndex = 1;
     this._path = [event];
+  }
+
+  /**
+   * Get the current clipping region.
+   */
+  __getClippingRegion() {
+    return this._clipStack[this._stackIndex];
   }
 
   _directionStack = ['inherit'];
@@ -109,6 +119,7 @@ export default class CanvasRenderingContext2D {
   _textAlignStack = ['start'];
   _textBaselineStack = ['alphabetic'];
   _transformStack = [[1, 0, 0, 1, 0, 0]];
+  _clipStack=[[]];
 
   constructor(canvas) {
     testFuncs.forEach(key => {
@@ -247,20 +258,32 @@ export default class CanvasRenderingContext2D {
     this._drawCalls.push(event);
   }
 
+  /**
+   * This index points to the next path item that should be written to the clipStack
+   * when ctx.clip() is called.
+   */
+  _clipIndex = 1;
+
   clip(path, fillRule) {
+    let clipPath;
     if (arguments.length === 0) {
       fillRule = 'nonzero';
       path = this._path.slice();
+      clipPath = path.slice(this._clipIndex);
+      this._clipIndex = path.length;
     } else {
       if (arguments.length === 1) fillRule = 'nonzero';
       if (path instanceof Path2D) {
         fillRule = String(fillRule);
         if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'clip\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
         path = path._path.slice();
+        clipPath = path;
       } else {
         fillRule = String(path);
         if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'clip\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
         path = this._path.slice();
+        clipPath = path.slice(this._clipIndex);
+        this._clipIndex = path.length;
       }
     }
 
@@ -272,6 +295,8 @@ export default class CanvasRenderingContext2D {
 
     this._path.push(event);
     this._events.push(event);
+    const currentClip = this._clipStack[this._stackIndex];
+    this._clipStack[this._stackIndex] = currentClip.concat(clipPath);
   }
 
   closePath() {
@@ -1100,29 +1125,31 @@ export default class CanvasRenderingContext2D {
   }
 
   save() {
-    this._transformStack.push(this._transformStack[this._stackIndex].slice());
-    this._directionStack.push(this._directionStack[this._stackIndex]);
-    this._fillStyleStack.push(this._fillStyleStack[this._stackIndex]);
-    this._filterStack.push(this._filterStack[this._stackIndex]);
-    this._fontStack.push(this._fontStack[this._stackIndex]);
-    this._globalAlphaStack.push(this._globalAlphaStack[this._stackIndex]);
-    this._globalCompositeOperationStack.push(this._globalCompositeOperationStack[this._stackIndex]);
-    this._imageSmoothingEnabledStack.push(this._imageSmoothingEnabledStack[this._stackIndex]);
-    this._imageSmoothingQualityStack.push(this._imageSmoothingQualityStack[this._stackIndex]);
-    this._lineCapStack.push(this._lineCapStack[this._stackIndex]);
-    this._lineDashStack.push(this._lineDashStack[this._stackIndex]);
-    this._lineDashOffsetStack.push(this._lineDashOffsetStack[this._stackIndex]);
-    this._lineJoinStack.push(this._lineJoinStack[this._stackIndex]);
-    this._lineWidthStack.push(this._lineWidthStack[this._stackIndex]);
-    this._miterLimitStack.push(this._miterLimitStack[this._stackIndex]);
-    this._shadowBlurStack.push(this._shadowBlurStack[this._stackIndex]);
-    this._shadowColorStack.push(this._shadowColorStack[this._stackIndex]);
-    this._shadowOffsetXStack.push(this._shadowOffsetXStack[this._stackIndex]);
-    this._shadowOffsetYStack.push(this._shadowOffsetYStack[this._stackIndex]);
-    this._strokeStyleStack.push(this._strokeStyleStack[this._stackIndex]);
-    this._textAlignStack.push(this._textAlignStack[this._stackIndex]);
-    this._textBaselineStack.push(this._textBaselineStack[this._stackIndex]);
-    this._stackIndex += 1;
+    const stackIndex = this._stackIndex;
+    this._transformStack.push(this._transformStack[stackIndex].slice());
+    this._directionStack.push(this._directionStack[stackIndex]);
+    this._fillStyleStack.push(this._fillStyleStack[stackIndex]);
+    this._filterStack.push(this._filterStack[stackIndex]);
+    this._fontStack.push(this._fontStack[stackIndex]);
+    this._globalAlphaStack.push(this._globalAlphaStack[stackIndex]);
+    this._globalCompositeOperationStack.push(this._globalCompositeOperationStack[stackIndex]);
+    this._imageSmoothingEnabledStack.push(this._imageSmoothingEnabledStack[stackIndex]);
+    this._imageSmoothingQualityStack.push(this._imageSmoothingQualityStack[stackIndex]);
+    this._lineCapStack.push(this._lineCapStack[stackIndex]);
+    this._lineDashStack.push(this._lineDashStack[stackIndex]);
+    this._lineDashOffsetStack.push(this._lineDashOffsetStack[stackIndex]);
+    this._lineJoinStack.push(this._lineJoinStack[stackIndex]);
+    this._lineWidthStack.push(this._lineWidthStack[stackIndex]);
+    this._miterLimitStack.push(this._miterLimitStack[stackIndex]);
+    this._shadowBlurStack.push(this._shadowBlurStack[stackIndex]);
+    this._shadowColorStack.push(this._shadowColorStack[stackIndex]);
+    this._shadowOffsetXStack.push(this._shadowOffsetXStack[stackIndex]);
+    this._shadowOffsetYStack.push(this._shadowOffsetYStack[stackIndex]);
+    this._strokeStyleStack.push(this._strokeStyleStack[stackIndex]);
+    this._textAlignStack.push(this._textAlignStack[stackIndex]);
+    this._textBaselineStack.push(this._textBaselineStack[stackIndex]);
+    this._clipStack.push(this._clipStack[stackIndex].slice());
+    this._stackIndex = stackIndex + 1;
 
     const event = createCanvasEvent(
       'save',
