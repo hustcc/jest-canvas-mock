@@ -98,9 +98,9 @@ We try to follow the ECMAScript specification as closely as possible.
 
 ## Snapshots
 
-There are multiple ways to validate canvas state. There are currently three `static` methods attached
-to the `CanvasRenderingContext2D` class. The first way to use this feature is by using the `__getEvents`
-method.
+There are multiple ways to validate canvas state using snapshots. There are currently three  methods
+attached to the `CanvasRenderingContext2D` class. The first way to use this feature is by using the
+`__getEvents` method.
 
 ```ts
 /**
@@ -129,7 +129,7 @@ const path = ctx.__getPath();
 expect(path).toMatchSnapshot();
 ```
 
-The third way is to inspect all of the success draw calls submitted to the context.
+The third way is to inspect all of the successful draw calls submitted to the context.
 
 ```ts
 ctx.drawImage(img, 0, 0);
@@ -151,6 +151,17 @@ ctx.__clearEvents();
 // Clear draw calls
 ctx.__clearDrawCalls();
 ```
+
+Finally, it's possible to inspect the clipping region calls by using the `__getClippingRegion`
+function.
+
+```ts
+const clippingRegion = ctx.__getClippingRegion();
+expect(clippingRegion).toMatchSnapshot();
+```
+
+The clipping region cannot be cleared because it's based on the stack values and when the `.clip()`
+function is called.
 
 ## Override default mock return value
 
