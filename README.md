@@ -78,7 +78,7 @@ expect(() => ctx.arc(1, 2, 3, 4)).toThrow(TypeError);
 expect(() => ctx.arc(0, 0, -10, 0, Math.PI * 2)).toThrow(DOMException);
 ```
 
-The function will do `Number` type coercion and verify the inputs exactly like the browser does. So
+The function will do `Number` type conversion and verify the inputs exactly like the browser does. So
 this is valid input.
 
 ```ts
