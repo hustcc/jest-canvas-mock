@@ -37,4 +37,20 @@ describe('CanvasGradient', () => {
       grd.addColorStop(1, "badcolor");
     }).toThrow(SyntaxError);
   });
+
+  test('should accept all valid CSS colors as a color stop', () => {
+    const grd = ctx.createLinearGradient(0, 0, 0, 0);
+    expect(() => {
+      grd.addColorStop(0.0, 'transparent');
+      grd.addColorStop(0.1, 'pink');
+      grd.addColorStop(0.2, '#ff0000');
+      grd.addColorStop(0.3, 'rgb(10, 10, 10)');
+      grd.addColorStop(0.4, 'hsl(0, 100%, 50%)');
+    }).not.toThrow(SyntaxError);
+  });
+
+  test('should not accept an invalid CSS color as a color stop', () => {
+    const grd = ctx.createLinearGradient(0, 0, 0, 0);
+    expect(() => grd.addColorStop(0.5, "invalid")).toThrow(SyntaxError);
+  });
 });

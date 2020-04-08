@@ -11,7 +11,7 @@ export default class CanvasGradient {
       throw new DOMException('IndexSizeError', 'Failed to execute \'addColorStop\' on \'CanvasGradient\': The provided value (\'' + numoffset + '\') is outside the range (0.0, 1.0)');
     }
     const output = parseColor(colorstr);
-    if (!output.hex) {
+    if (!output.hex && output.keyword !== "transparent") {
       throw new SyntaxError('Failed to execute \'addColorStop\' on \'CanvasGradient\': The value provided (\'' + color + '\') could not be parsed as a color.')
     }
   }
