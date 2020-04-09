@@ -11,7 +11,7 @@ beforeEach(() => {
 describe('strokeStyle', () => {
   it('should parse a css color string \'blue\'', () => {
     ctx.strokeStyle = 'blue';
-    expect(ctx.strokeStyle).toBe('#00f');
+    expect(ctx.strokeStyle).toBe('blue');
   });
 
   it('should not parse invalid colors', () => {
@@ -28,9 +28,9 @@ describe('strokeStyle', () => {
     ctx.strokeStyle = 'green';
     ctx.save();
     ctx.strokeStyle = 'red';
-    expect(ctx.strokeStyle).toBe('#f00');
+    expect(ctx.strokeStyle).toBe('red');
     ctx.restore();
-    expect(ctx.strokeStyle).toBe('#008000');
+    expect(ctx.strokeStyle).toBe('green');
   });
 
   it('should accept CanvasPatterns as valid strokeStyle values', () => {

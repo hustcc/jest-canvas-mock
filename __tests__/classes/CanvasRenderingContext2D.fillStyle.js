@@ -11,7 +11,7 @@ beforeEach(() => {
 describe('fillStyle', () => {
   it('should parse a css color string \'blue\'', () => {
     ctx.fillStyle = 'blue';
-    expect(ctx.fillStyle).toBe('#00f');
+    expect(ctx.fillStyle).toBe('blue');
   });
 
   it('should not parse invalid colors', () => {
@@ -28,9 +28,9 @@ describe('fillStyle', () => {
     ctx.fillStyle = 'green';
     ctx.save();
     ctx.fillStyle = 'red';
-    expect(ctx.fillStyle).toBe('#f00');
+    expect(ctx.fillStyle).toBe('red');
     ctx.restore();
-    expect(ctx.fillStyle).toBe('#008000');
+    expect(ctx.fillStyle).toBe('green');
   });
 
   it('should accept CanvasPatterns as valid fillStyle values', () => {

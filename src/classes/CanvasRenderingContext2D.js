@@ -1,30 +1,12 @@
 import DOMMatrix from './DOMMatrix';
 import CanvasPattern from './CanvasPattern';
-import parseColor from 'parse-color';
+import validateColor from 'validate-color';
 import cssfontparser from 'cssfontparser';
 import TextMetrics from './TextMetrics';
 import createCanvasEvent from '../mock/createCanvasEvent';
 import Path2D from "./Path2D";
 
-function parseCSSColor(value) {
-  const result = parseColor(value);
 
-  if (result.rgba && result.rgba[3] !== 1) {
-    return 'rgba(' + result.rgba.join(', ') + ')';
-  }
-
-  if (result.hex) {
-    const hex = result.hex;
-
-    // shorthand #ABC
-    if (hex[1] === hex[2] && hex[3] === hex[4] && hex[5] === hex[6]) {
-      return '#' + hex[1] + hex[3] + hex[5];
-    }
-    return result.hex;
-  }
-
-  return void 0;
-}
 
 const testFuncs = ['setLineDash', 'getLineDash', 'setTransform', 'getTransform', 'getImageData', 'save', 'restore', 'createPattern', 'createRadialGradient', 'addHitRegion', 'arc', 'arcTo', 'beginPath', 'clip', 'closePath', 'scale', 'stroke', 'clearHitRegions', 'clearRect', 'fillRect', 'strokeRect', 'rect', 'resetTransform', 'translate', 'moveTo', 'lineTo', 'bezierCurveTo', 'createLinearGradient', 'ellipse', 'measureText', 'rotate', 'drawImage', 'drawFocusIfNeeded', 'isPointInPath', 'isPointInStroke', 'putImageData', 'strokeText', 'fillText', 'quadraticCurveTo', 'removeHitRegion', 'fill', 'transform', 'scrollPathIntoView', 'createImageData'];
 const compositeOperations = ['source-over', 'source-in', 'source-out', 'source-atop', 'destination-over', 'destination-in', 'destination-out', 'destination-atop', 'lighter', 'copy', 'xor', 'multiply', 'screen', 'overlay', 'darken', 'lighten', 'color-dodge', 'color-burn', 'hard-light', 'soft-light', 'difference', 'exclusion', 'hue', 'saturation', 'color', 'luminosity'];
@@ -636,14 +618,7 @@ export default class CanvasRenderingContext2D {
 
   set fillStyle(value) {
     let valid = false;
-    if (typeof value === 'string') {
-      const result = parseCSSColor(value);
-
-      if (result) {
-        valid = true;
-        value = this._fillStyleStack[this._stackIndex] = result;
-      }
-    } else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
+    if ( (typeof value === 'string' && validateColor(value)) || value instanceof CanvasGradient || value instanceof CanvasPattern) {
       valid = true;
       this._fillStyleStack[this._stackIndex] = value;
     }
@@ -1281,18 +1256,14 @@ export default class CanvasRenderingContext2D {
   }
 
   set shadowColor(value) {
-    if (typeof value === 'string') {
-      const result = parseCSSColor(value);
-
-      if (result) {
-        this._shadowColorStack[this._stackIndex] = result;
-        const event = createCanvasEvent(
-          'shadowColor',
-          getTransformSlice(this),
-          { value: result },
-        );
-        this._events.push(event);
-      }
+    if (typeof value === 'string' && validateColor(value)) {
+      this._shadowColorStack[this._stackIndex] = value;
+      const event = createCanvasEvent(
+        'shadowColor',
+        getTransformSlice(this),
+        { value: value },
+      );
+      this._events.push(event);
     }
   }
 
@@ -1372,14 +1343,7 @@ export default class CanvasRenderingContext2D {
 
   set strokeStyle(value) {
     let valid = false;
-    if (typeof value === 'string') {
-      const result = parseCSSColor(value);
-
-      if (result) {
-        valid = true;
-        value = this._strokeStyleStack[this._stackIndex] = result;
-      }
-    } else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
+    if ( (typeof value === 'string' && validateColor(value)) || value instanceof CanvasGradient || value instanceof CanvasPattern) {
       valid = true;
       this._strokeStyleStack[this._stackIndex] = value;
     }
