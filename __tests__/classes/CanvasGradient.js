@@ -26,7 +26,7 @@ describe('CanvasGradient', () => {
     test('CanvasGradient should throw if offset is ' + value, () => {
       expect(() => {
         var grd = ctx.createLinearGradient(1, 2, 3, 4);
-        grd.addColorStop(value, "blue");
+        grd.addColorStop(value, 'blue');
       }).toThrow(DOMException);
     });
   });
@@ -50,15 +50,15 @@ describe('CanvasGradient', () => {
   test('CanvasGradient should throw if color cannot be parsed', () => {
     const grd = ctx.createLinearGradient(1, 2, 3, 4);
     expect(() => {
-      grd.addColorStop(0.5, "invalid");
+      grd.addColorStop(0.5, 'invalid');
     }).toThrow(SyntaxError);
 
     expect(() => {
-      grd.addColorStop(0.5, "rgb(50%, 0, 50%)");
+      grd.addColorStop(0.5, 'rgb(50%, 0, 50%)');
     }).toThrow(SyntaxError);
 
     expect(() => {
-      grd.addColorStop(0.5, "hsl(180, 50%, 50)");
+      grd.addColorStop(0.5, 'hsl(180, 50%, 50)');
     }).toThrow(SyntaxError);
   });
 });

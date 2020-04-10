@@ -1,4 +1,4 @@
-import { MooColor } from "moo-color";
+import { MooColor } from 'moo-color';
 
 export default class CanvasGradient {
   constructor() {
