@@ -15,10 +15,9 @@ function getTransformSlice(ctx) {
 }
 
 function serializeColor(value) {
-  const mooColor = new MooColor(value);
-  return (mooColor.getAlpha() === 1)
-    ? mooColor.toHex()
-    : mooColor.toRgb();
+  return (value.getAlpha() === 1)
+    ? value.toHex()
+    : value.toRgb();
 }
 
 export default class CanvasRenderingContext2D {
@@ -628,7 +627,7 @@ export default class CanvasRenderingContext2D {
       try {
         const result = new MooColor(value);
         valid = true;
-        value = this._fillStyleStack[this._stackIndex] = result.toHex();
+        value = this._fillStyleStack[this._stackIndex] = serializeColor(result);
       }
       catch(e) { return; }
     }
@@ -648,11 +647,7 @@ export default class CanvasRenderingContext2D {
   }
 
   get fillStyle() {
-    const color = this._fillStyleStack[this._stackIndex];
-    if(typeof color === 'string') {
-      return serializeColor(color);
-    }
-    return color;
+    return this._fillStyleStack[this._stackIndex];
   }
 
   fillText(text, x, y, maxWidth) {
@@ -1277,7 +1272,7 @@ export default class CanvasRenderingContext2D {
     if (typeof value === 'string') {
       try { 
         const result = new MooColor(value);
-        value = this._shadowColorStack[this._stackIndex] = result.toHex();
+        value = this._shadowColorStack[this._stackIndex] = serializeColor(result);
       } catch (e) { return; }
 
       const event = createCanvasEvent(
@@ -1290,7 +1285,7 @@ export default class CanvasRenderingContext2D {
   }
 
   get shadowColor() {
-    return serializeColor(this._shadowColorStack[this._stackIndex]);
+    return this._shadowColorStack[this._stackIndex];
   }
 
   set shadowOffsetX(value) {
@@ -1367,10 +1362,9 @@ export default class CanvasRenderingContext2D {
     let valid = false;
     if (typeof value === 'string') {
       try {
-        const colorObject = new MooColor(value);
-        value = new MooColor(value);
+        const result = new MooColor(value);
         valid = true;
-        value = this._strokeStyleStack[this._stackIndex] = colorObject.toHex();
+        value = this._strokeStyleStack[this._stackIndex] = serializeColor(result);
       }
       catch(e) { return; }
     }
@@ -1390,11 +1384,7 @@ export default class CanvasRenderingContext2D {
   }
 
   get strokeStyle() {
-    const color = this._strokeStyleStack[this._stackIndex];
-    if (typeof color === 'string') {
-      return serializeColor(color)
-    }
-    return color;
+    return this._strokeStyleStack[this._stackIndex];
   }
 
   strokeText(text, x, y, maxWidth) {
