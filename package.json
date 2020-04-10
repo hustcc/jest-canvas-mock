@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "cssfontparser": "^1.2.1",
-    "validate-color": "^1.0.6"
+    "moo-color": "^1.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",

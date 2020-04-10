@@ -1,11 +1,10 @@
 import DOMMatrix from './DOMMatrix';
 import CanvasPattern from './CanvasPattern';
-import validateColor from 'validate-color';
 import cssfontparser from 'cssfontparser';
 import TextMetrics from './TextMetrics';
 import createCanvasEvent from '../mock/createCanvasEvent';
 import Path2D from "./Path2D";
-
+import { MooColor } from "moo-color";
 
 
 const testFuncs = ['setLineDash', 'getLineDash', 'setTransform', 'getTransform', 'getImageData', 'save', 'restore', 'createPattern', 'createRadialGradient', 'addHitRegion', 'arc', 'arcTo', 'beginPath', 'clip', 'closePath', 'scale', 'stroke', 'clearHitRegions', 'clearRect', 'fillRect', 'strokeRect', 'rect', 'resetTransform', 'translate', 'moveTo', 'lineTo', 'bezierCurveTo', 'createLinearGradient', 'ellipse', 'measureText', 'rotate', 'drawImage', 'drawFocusIfNeeded', 'isPointInPath', 'isPointInStroke', 'putImageData', 'strokeText', 'fillText', 'quadraticCurveTo', 'removeHitRegion', 'fill', 'transform', 'scrollPathIntoView', 'createImageData'];
@@ -79,7 +78,7 @@ export default class CanvasRenderingContext2D {
   }
 
   _directionStack = ['inherit'];
-  _fillStyleStack = ['#000'];
+  _fillStyleStack = [ new MooColor("#000") ];
   _filterStack = ['none'];
   _fontStack = ['10px sans-serif'];
   _globalAlphaStack = [1.0];
@@ -93,11 +92,11 @@ export default class CanvasRenderingContext2D {
   _lineWidthStack = [1];
   _miterLimitStack = [10];
   _shadowBlurStack = [0];
-  _shadowColorStack = ['rgba(0, 0, 0, 0)'];
+  _shadowColorStack = [ new MooColor("rgba(0,0,0,0)") ];
   _shadowOffsetXStack = [0];
   _shadowOffsetYStack = [0];
   _stackIndex = 0;
-  _strokeStyleStack = ['#000'];
+  _strokeStyleStack = [ new MooColor("#000") ];
   _textAlignStack = ['start'];
   _textBaselineStack = ['alphabetic'];
   _transformStack = [[1, 0, 0, 1, 0, 0]];
@@ -618,7 +617,15 @@ export default class CanvasRenderingContext2D {
 
   set fillStyle(value) {
     let valid = false;
-    if ( (typeof value === 'string' && validateColor(value)) || value instanceof CanvasGradient || value instanceof CanvasPattern) {
+    if (typeof value === 'string') {
+      try {
+        value = new MooColor(value);
+        valid = true;
+        this._fillStyleStack[this._stackIndex] = value;
+      }
+      catch(e) { return; }
+    }
+    else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
       valid = true;
       this._fillStyleStack[this._stackIndex] = value;
     }
@@ -634,7 +641,14 @@ export default class CanvasRenderingContext2D {
   }
 
   get fillStyle() {
-    return this._fillStyleStack[this._stackIndex];
+    let color = this._fillStyleStack[this._stackIndex];
+    if(color instanceof MooColor) {
+      if(color.getAlpha() == 1) {
+        return color.toHex();
+      }
+      return color.toRgb();
+    }
+    return color;
   }
 
   fillText(text, x, y, maxWidth) {
@@ -1256,19 +1270,27 @@ export default class CanvasRenderingContext2D {
   }
 
   set shadowColor(value) {
-    if (typeof value === 'string' && validateColor(value)) {
-      this._shadowColorStack[this._stackIndex] = value;
+    if (typeof value === 'string') {
+      try { 
+        value = new MooColor(value);
+        this._shadowColorStack[this._stackIndex] = value;
+      } catch (e) { return; }
+
       const event = createCanvasEvent(
         'shadowColor',
         getTransformSlice(this),
-        { value: value },
+        { value },
       );
       this._events.push(event);
     }
   }
 
   get shadowColor() {
-    return this._shadowColorStack[this._stackIndex];
+    const color = this._shadowColorStack[this._stackIndex];
+    if (color.getAlpha() === 1) {
+      return color.toHex();
+    }
+    return color.toRgb();
   }
 
   set shadowOffsetX(value) {
@@ -1343,7 +1365,15 @@ export default class CanvasRenderingContext2D {
 
   set strokeStyle(value) {
     let valid = false;
-    if ( (typeof value === 'string' && validateColor(value)) || value instanceof CanvasGradient || value instanceof CanvasPattern) {
+    if (typeof value === 'string') {
+      try {
+        value = new MooColor(value);
+        valid = true;
+        this._strokeStyleStack[this._stackIndex] = value;
+      }
+      catch(e) { return; }
+    }
+    else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
       valid = true;
       this._strokeStyleStack[this._stackIndex] = value;
     }
@@ -1359,7 +1389,15 @@ export default class CanvasRenderingContext2D {
   }
 
   get strokeStyle() {
-    return this._strokeStyleStack[this._stackIndex];
+    let color = this._strokeStyleStack[this._stackIndex];
+    if (color instanceof MooColor) {
+      if (color.getAlpha() == 1) {
+        return color.toHex("full");
+      } else {
+        return color.toRgb();
+      }
+    }
+    return color;
   }
 
   strokeText(text, x, y, maxWidth) {
