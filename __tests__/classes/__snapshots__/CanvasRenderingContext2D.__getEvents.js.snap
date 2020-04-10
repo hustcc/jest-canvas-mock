@@ -1010,18 +1010,7 @@ exports[`__getEvents should have an event when fillStyle is set 1`] = `
 Array [
   Object {
     "props": Object {
-      "value": MooColor {
-        "color": Object {
-          "alpha": 1,
-          "model": "rgb",
-          "values": Array [
-            0,
-            0,
-            255,
-          ],
-        },
-        "resolveHwb": [Function],
-      },
+      "value": "#0000ff",
     },
     "transform": Array [
       1,
@@ -1885,18 +1874,7 @@ exports[`__getEvents should have an event when the shadowColor is valid 1`] = `
 Array [
   Object {
     "props": Object {
-      "value": MooColor {
-        "color": Object {
-          "alpha": 1,
-          "model": "rgb",
-          "values": Array [
-            255,
-            0,
-            0,
-          ],
-        },
-        "resolveHwb": [Function],
-      },
+      "value": "#ff0000",
     },
     "transform": Array [
       1,
@@ -1953,18 +1931,7 @@ exports[`__getEvents should have an event when the strokeStyle is set 1`] = `
 Array [
   Object {
     "props": Object {
-      "value": MooColor {
-        "color": Object {
-          "alpha": 1,
-          "model": "rgb",
-          "values": Array [
-            0,
-            0,
-            255,
-          ],
-        },
-        "resolveHwb": [Function],
-      },
+      "value": "#0000ff",
     },
     "transform": Array [
       1,
