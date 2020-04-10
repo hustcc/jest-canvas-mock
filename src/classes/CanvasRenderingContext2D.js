@@ -14,6 +14,9 @@ function getTransformSlice(ctx) {
   return ctx._transformStack[ctx._stackIndex].slice();
 }
 
+/**
+ * Returns the string serialization of a CSS color, according to https://www.w3.org/TR/2dcontext/#serialization-of-a-color
+ */
 function serializeColor(value) {
   return (value.getAlpha() === 1)
     ? value.toHex()
