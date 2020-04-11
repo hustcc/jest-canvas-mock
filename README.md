@@ -173,6 +173,12 @@ canvas.toDataURL.mockReturnValueOnce(
 );
 ```
 
+## Contributors
+
+* [@hustcc](https://github.com/hustcc)
+* [@jtenner](https://github.com/jtenner)
+* [@evanoc0](https://github.com/evanoc0)
+
 ## License
 
 MIT@[hustcc](https://github.com/hustcc).
