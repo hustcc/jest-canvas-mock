@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Version 2.3.0
+
+- Switched to `moo-color` for color parsing
+- Added contributors to markdown document
+
 ## Version 2.2.0
 
 - Bug: Slice canvas transform value when pushing (#50)

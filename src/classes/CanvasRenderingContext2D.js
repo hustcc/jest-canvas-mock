@@ -1,36 +1,26 @@
 import DOMMatrix from './DOMMatrix';
 import CanvasPattern from './CanvasPattern';
-import parseColor from 'parse-color';
 import cssfontparser from 'cssfontparser';
 import TextMetrics from './TextMetrics';
 import createCanvasEvent from '../mock/createCanvasEvent';
 import Path2D from "./Path2D";
+import { MooColor } from 'moo-color';
 
-function parseCSSColor(value) {
-  const result = parseColor(value);
-
-  if (result.rgba && result.rgba[3] !== 1) {
-    return 'rgba(' + result.rgba.join(', ') + ')';
-  }
-
-  if (result.hex) {
-    const hex = result.hex;
-
-    // shorthand #ABC
-    if (hex[1] === hex[2] && hex[3] === hex[4] && hex[5] === hex[6]) {
-      return '#' + hex[1] + hex[3] + hex[5];
-    }
-    return result.hex;
-  }
-
-  return void 0;
-}
 
 const testFuncs = ['setLineDash', 'getLineDash', 'setTransform', 'getTransform', 'getImageData', 'save', 'restore', 'createPattern', 'createRadialGradient', 'addHitRegion', 'arc', 'arcTo', 'beginPath', 'clip', 'closePath', 'scale', 'stroke', 'clearHitRegions', 'clearRect', 'fillRect', 'strokeRect', 'rect', 'resetTransform', 'translate', 'moveTo', 'lineTo', 'bezierCurveTo', 'createLinearGradient', 'ellipse', 'measureText', 'rotate', 'drawImage', 'drawFocusIfNeeded', 'isPointInPath', 'isPointInStroke', 'putImageData', 'strokeText', 'fillText', 'quadraticCurveTo', 'removeHitRegion', 'fill', 'transform', 'scrollPathIntoView', 'createImageData'];
 const compositeOperations = ['source-over', 'source-in', 'source-out', 'source-atop', 'destination-over', 'destination-in', 'destination-out', 'destination-atop', 'lighter', 'copy', 'xor', 'multiply', 'screen', 'overlay', 'darken', 'lighten', 'color-dodge', 'color-burn', 'hard-light', 'soft-light', 'difference', 'exclusion', 'hue', 'saturation', 'color', 'luminosity'];
 
 function getTransformSlice(ctx) {
   return ctx._transformStack[ctx._stackIndex].slice();
+}
+
+/**
+ * Returns the string serialization of a CSS color, according to https://www.w3.org/TR/2dcontext/#serialization-of-a-color
+ */
+function serializeColor(value) {
+  return (value.getAlpha() === 1)
+    ? value.toHex()
+    : value.toRgb();
 }
 
 export default class CanvasRenderingContext2D {
@@ -97,7 +87,7 @@ export default class CanvasRenderingContext2D {
   }
 
   _directionStack = ['inherit'];
-  _fillStyleStack = ['#000'];
+  _fillStyleStack = [ '#000000' ];
   _filterStack = ['none'];
   _fontStack = ['10px sans-serif'];
   _globalAlphaStack = [1.0];
@@ -111,11 +101,11 @@ export default class CanvasRenderingContext2D {
   _lineWidthStack = [1];
   _miterLimitStack = [10];
   _shadowBlurStack = [0];
-  _shadowColorStack = ['rgba(0, 0, 0, 0)'];
+  _shadowColorStack = [ 'rgba(0, 0, 0, 0)' ];
   _shadowOffsetXStack = [0];
   _shadowOffsetYStack = [0];
   _stackIndex = 0;
-  _strokeStyleStack = ['#000'];
+  _strokeStyleStack = [ '#000000' ];
   _textAlignStack = ['start'];
   _textBaselineStack = ['alphabetic'];
   _transformStack = [[1, 0, 0, 1, 0, 0]];
@@ -637,13 +627,14 @@ export default class CanvasRenderingContext2D {
   set fillStyle(value) {
     let valid = false;
     if (typeof value === 'string') {
-      const result = parseCSSColor(value);
-
-      if (result) {
+      try {
+        const result = new MooColor(value);
         valid = true;
-        value = this._fillStyleStack[this._stackIndex] = result;
+        value = this._fillStyleStack[this._stackIndex] = serializeColor(result);
       }
-    } else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
+      catch(e) { return; }
+    }
+    else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
       valid = true;
       this._fillStyleStack[this._stackIndex] = value;
     }
@@ -1282,17 +1273,17 @@ export default class CanvasRenderingContext2D {
 
   set shadowColor(value) {
     if (typeof value === 'string') {
-      const result = parseCSSColor(value);
+      try { 
+        const result = new MooColor(value);
+        value = this._shadowColorStack[this._stackIndex] = serializeColor(result);
+      } catch (e) { return; }
 
-      if (result) {
-        this._shadowColorStack[this._stackIndex] = result;
-        const event = createCanvasEvent(
-          'shadowColor',
-          getTransformSlice(this),
-          { value: result },
-        );
-        this._events.push(event);
-      }
+      const event = createCanvasEvent(
+        'shadowColor',
+        getTransformSlice(this),
+        { value },
+      );
+      this._events.push(event);
     }
   }
 
@@ -1373,13 +1364,14 @@ export default class CanvasRenderingContext2D {
   set strokeStyle(value) {
     let valid = false;
     if (typeof value === 'string') {
-      const result = parseCSSColor(value);
-
-      if (result) {
+      try {
+        const result = new MooColor(value);
         valid = true;
-        value = this._strokeStyleStack[this._stackIndex] = result;
+        value = this._strokeStyleStack[this._stackIndex] = serializeColor(result);
       }
-    } else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
+      catch(e) { return; }
+    }
+    else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
       valid = true;
       this._strokeStyleStack[this._stackIndex] = value;
     }

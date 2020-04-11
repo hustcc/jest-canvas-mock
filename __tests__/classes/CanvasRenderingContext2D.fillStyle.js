@@ -11,12 +11,12 @@ beforeEach(() => {
 describe('fillStyle', () => {
   it('should parse a css color string \'blue\'', () => {
     ctx.fillStyle = 'blue';
-    expect(ctx.fillStyle).toBe('#00f');
+    expect(ctx.fillStyle).toBe('#0000ff');
   });
 
   it('should not parse invalid colors', () => {
     ctx.fillStyle = 'invalid!';
-    expect(ctx.fillStyle).toBe('#000');
+    expect(ctx.fillStyle).toBe('#000000');
   });
 
   it('should parse css colors with alpha values', () => {
@@ -28,7 +28,7 @@ describe('fillStyle', () => {
     ctx.fillStyle = 'green';
     ctx.save();
     ctx.fillStyle = 'red';
-    expect(ctx.fillStyle).toBe('#f00');
+    expect(ctx.fillStyle).toBe('#ff0000');
     ctx.restore();
     expect(ctx.fillStyle).toBe('#008000');
   });
@@ -49,6 +49,6 @@ describe('fillStyle', () => {
 
   it('should ignore invalid fillStyle values', () => {
     ctx.fillStyle = null;
-    expect(ctx.fillStyle).toBe('#000');
+    expect(ctx.fillStyle).toBe('#000000');
   });
 });

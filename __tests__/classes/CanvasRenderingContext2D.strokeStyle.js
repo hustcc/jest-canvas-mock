@@ -11,12 +11,12 @@ beforeEach(() => {
 describe('strokeStyle', () => {
   it('should parse a css color string \'blue\'', () => {
     ctx.strokeStyle = 'blue';
-    expect(ctx.strokeStyle).toBe('#00f');
+    expect(ctx.strokeStyle).toBe('#0000ff');
   });
 
   it('should not parse invalid colors', () => {
     ctx.strokeStyle = 'invalid!';
-    expect(ctx.strokeStyle).toBe('#000');
+    expect(ctx.strokeStyle).toBe('#000000');
   });
 
   it('should parse css colors with alpha values', () => {
@@ -28,7 +28,7 @@ describe('strokeStyle', () => {
     ctx.strokeStyle = 'green';
     ctx.save();
     ctx.strokeStyle = 'red';
-    expect(ctx.strokeStyle).toBe('#f00');
+    expect(ctx.strokeStyle).toBe('#ff0000');
     ctx.restore();
     expect(ctx.strokeStyle).toBe('#008000');
   });
@@ -49,6 +49,6 @@ describe('strokeStyle', () => {
 
   it('should ignore invalid strokeStyle values', () => {
     ctx.strokeStyle = null;
-    expect(ctx.strokeStyle).toBe('#000');
+    expect(ctx.strokeStyle).toBe('#000000');
   });
 });
