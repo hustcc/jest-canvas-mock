@@ -19,21 +19,20 @@ describe('fill', () => {
   });
 
   it('should fill paths', () => {
-      expect(() => ctx.fill(p)).not.toThrow();
+    expect(() => ctx.fill(p)).not.toThrow();
   });
 
   it('should throw if fillRule is not valid fillRule', () => {
-    [null, 1, Infinity, NaN, void 0, 'bad!'].forEach(e => {
+    [null, 1, Infinity, NaN, void 0, 'bad!'].forEach((e) => {
       expect(() => ctx.fill(p, e)).toThrow(TypeError);
       expect(() => ctx.fill(e)).toThrow(TypeError);
     });
   });
 
   it('should accept valid fillRules', () => {
-    ['evenodd', 'nonzero'].forEach(e => {
+    ['evenodd', 'nonzero'].forEach((e) => {
       expect(() => ctx.fill(e)).not.toThrow();
       expect(() => ctx.fill(p, e)).not.toThrow();
     });
   });
 });
-

@@ -14,21 +14,21 @@ describe('miterLimit', () => {
   });
 
   it('should ignore non finite values', () => {
-    [Infinity, -Infinity, null, void 0, NaN].forEach(e => {
+    [Infinity, -Infinity, null, void 0, NaN].forEach((e) => {
       ctx.miterLimit = e;
       expect(ctx.miterLimit).toBe(10);
     });
   });
 
   it('should ignore out of range values', () => {
-    [-1, -10, -300, 0].forEach(e => {
+    [-1, -10, -300, 0].forEach((e) => {
       ctx.miterLimit = e;
       expect(ctx.miterLimit).toBe(10);
     });
   });
 
   it('should not ignore values that are within range', () => {
-    [1, 10, '30', '10.2'].forEach(e => {
+    [1, 10, '30', '10.2'].forEach((e) => {
       ctx.miterLimit = e;
       expect(ctx.miterLimit).toBe(Number(e));
     });
@@ -42,5 +42,4 @@ describe('miterLimit', () => {
     ctx.restore();
     expect(ctx.miterLimit).toBe(2);
   });
-
-})
+});

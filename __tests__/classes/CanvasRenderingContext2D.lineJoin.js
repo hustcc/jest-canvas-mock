@@ -9,16 +9,16 @@ beforeEach(() => {
 });
 
 describe('lineJoin', () => {
-  it('should set the default value lineJoin to \'miter\'', () => {
+  it("should set the default value lineJoin to 'miter'", () => {
     expect(ctx.lineJoin).toBe('miter');
   });
 
-  it('should set the lineJoin if it\'s a valid lineJoin', () => {
+  it("should set the lineJoin if it's a valid lineJoin", () => {
     ctx.lineJoin = 'wrong!';
     expect(ctx.lineJoin).toBe('miter');
   });
 
-  it('should set the lineJoin if it\'s a valid lineJoin', () => {
+  it("should set the lineJoin if it's a valid lineJoin", () => {
     ctx.lineJoin = 'round';
     expect(ctx.lineJoin).toBe('round');
     ctx.lineJoin = 'bevel';

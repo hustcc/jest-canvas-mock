@@ -18,7 +18,7 @@ describe('arcTo', () => {
     expect(ctx.arcTo).toBeCalled();
   });
 
-  it('shouldn\'t accept parameters less than 5', () => {
+  it("shouldn't accept parameters less than 5", () => {
     expect(() => ctx.arcTo(1, 2, 3)).toThrow(DOMException);
   });
 
@@ -31,7 +31,7 @@ describe('arcTo', () => {
       [1, 2, 3, 4, 5],
       [null, void 0, '', NaN, Infinity],
       [-100, -100, 100, 0, 0],
-    ].forEach(e => {
+    ].forEach((e) => {
       expect(() => ctx.arcTo(...e)).not.toThrow();
     });
   });
@@ -42,8 +42,8 @@ describe('arcTo', () => {
       [1, NaN, 2, 3, -1],
       [1, 2, NaN, 3, -1],
       [1, 2, 3, NaN, -1],
-    ].forEach(e => {
+    ].forEach((e) => {
       expect(() => ctx.arcTo(...e)).not.toThrow();
     });
   });
-})
+});

@@ -10,17 +10,19 @@ beforeEach(() => {
 
 describe('imageSmoothingQuality', () => {
   it('should accept valid imageSmoothingQuality values', () => {
-    ['high', 'medium', 'low'].forEach(e => {
+    ['high', 'medium', 'low'].forEach((e) => {
       ctx.imageSmoothingQuality = e;
       expect(ctx.imageSmoothingQuality).toBe(e);
     });
   });
 
   it('should ignore invalid imageSmoothingQuality values', () => {
-    [true, false, 1, 0, null, '', Infinity, void 0, NaN, 'invalid!'].forEach(e => {
-      ctx.imageSmoothingQuality = e;
-      expect(ctx.imageSmoothingQuality).toBe('low');
-    });
+    [true, false, 1, 0, null, '', Infinity, void 0, NaN, 'invalid!'].forEach(
+      (e) => {
+        ctx.imageSmoothingQuality = e;
+        expect(ctx.imageSmoothingQuality).toBe('low');
+      }
+    );
   });
 
   it('should save and restore imageSmoothingQuality values', () => {

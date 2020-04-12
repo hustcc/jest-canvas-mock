@@ -3,7 +3,7 @@
  * Contract: i@hust.cc
  */
 
-import mockWindow  from './window';
+import mockWindow from './window';
 
 // mock global window
 // TODO: Force coverage to ignore this branch

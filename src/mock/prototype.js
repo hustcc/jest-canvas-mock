@@ -41,17 +41,26 @@ export default function mockPrototype() {
    * we don't know if the canvas is tainted. These kinds of errors will be silent.
    */
   const toBlobOverride = jest.fn(function toBlobOverride(callback, mimetype) {
-    if (arguments.length < 1) throw new TypeError('Failed to execute \'toBlob\' on \'HTMLCanvasElement\': 1 argument required, but only 0 present.');
-    if (typeof callback !== 'function') throw new TypeError('Failed to execute \'toBlob\' on \'HTMLCanvasElement\': The callback provided as parameter 1 is not a function.');
+    if (arguments.length < 1)
+      throw new TypeError(
+        "Failed to execute 'toBlob' on 'HTMLCanvasElement': 1 argument required, but only 0 present."
+      );
+    if (typeof callback !== 'function')
+      throw new TypeError(
+        "Failed to execute 'toBlob' on 'HTMLCanvasElement': The callback provided as parameter 1 is not a function."
+      );
 
     /**
      * Mime type must be image/jpeg or image/webp exactly for the browser to accept it, otherwise
      * it's image/png.
      */
     switch (mimetype) {
-      case 'image/webp': break;
-      case 'image/jpeg': break;
-      default: mimetype = 'image/png';
+      case 'image/webp':
+        break;
+      case 'image/jpeg':
+        break;
+      default:
+        mimetype = 'image/png';
     }
 
     /**
@@ -75,11 +84,17 @@ export default function mockPrototype() {
    * This section creates a dataurl with a validated mime type. This is not actually valid, because
    * jpeg size is variable, and so is png. TODO: Is there a better way to do this?
    */
-  const toDataURLOverride = jest.fn(function toDataURLOverride(type, encoderOptions) {
-    switch(type) {
-      case 'image/jpeg': break;
-      case 'image/webp': break;
-      default: type = 'image/png';
+  const toDataURLOverride = jest.fn(function toDataURLOverride(
+    type,
+    encoderOptions
+  ) {
+    switch (type) {
+      case 'image/jpeg':
+        break;
+      case 'image/webp':
+        break;
+      default:
+        type = 'image/png';
     }
 
     /**

@@ -33,10 +33,10 @@ describe('setTransform', () => {
       [1, 2, 3, 4, 5, 6],
       [-1, 2, 3, 4, 5, 6],
       [Infinity, null, 'test', 'bad', NaN, 34],
-    ].forEach(e => {
+    ].forEach((e) => {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.setTransform(...e);
-      if (every(e, val => Number.isFinite(Number(val)))) {
+      if (every(e, (val) => Number.isFinite(Number(val)))) {
         expect(ctx.getTransform()).toEqual(new DOMMatrix(e));
       } else {
         expect(ctx.getTransform().isIdentity).toBeTruthy();
@@ -50,7 +50,7 @@ describe('setTransform', () => {
     expect(ctx.getTransform()).toEqual(new DOMMatrix([1, 2, 3, 4, 5, 6]));
   });
 
-  it('should throw when setTransform doesn\'t receive valid DOMMatrix', () => {
+  it("should throw when setTransform doesn't receive valid DOMMatrix", () => {
     expect(() => ctx.setTransform({})).toThrow(TypeError);
   });
 
@@ -70,7 +70,7 @@ describe('setTransform', () => {
       [1, 2, 3, NaN, 5, 6],
       [1, 2, 3, 4, NaN, 6],
       [1, 2, 3, 4, 5, NaN],
-    ].forEach(e => {
+    ].forEach((e) => {
       ctx.setTransform(...e);
       expect(ctx.getTransform()).toEqual(identity);
     });

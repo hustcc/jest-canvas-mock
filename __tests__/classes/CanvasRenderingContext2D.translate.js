@@ -35,4 +35,3 @@ describe('translate', () => {
     expect(ctx.currentTransform).toEqual(new DOMMatrix([1, 0, 0, 1, 0, 0]));
   });
 });
-

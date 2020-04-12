@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 
 describe('globalCompositeOperation', () => {
-  it('should change the global composite operation when it\'s valid', () => {
+  it("should change the global composite operation when it's valid", () => {
     const validOperations = [
       'source-over',
       'source-in',
@@ -38,14 +38,14 @@ describe('globalCompositeOperation', () => {
       'color',
       'luminosity',
     ];
-    validOperations.forEach(e => {
+    validOperations.forEach((e) => {
       ctx.globalCompositeOperation = e;
       expect(ctx.globalCompositeOperation).toBe(e);
     });
   });
 
   it('should ignore non valid values', () => {
-    [null, -1, void 0, Infinity, NaN, 'blah', ''].forEach(e => {
+    [null, -1, void 0, Infinity, NaN, 'blah', ''].forEach((e) => {
       ctx.globalCompositeOperation = e;
       expect(ctx.globalCompositeOperation).toBe('source-over');
     });

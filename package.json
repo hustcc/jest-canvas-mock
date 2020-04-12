@@ -8,24 +8,26 @@
     "test": "jest --no-cache",
     "build": "babel src --out-dir lib",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "cssfontparser": "^1.2.1",
     "moo-color": "^1.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/plugin-proposal-class-properties": "^7.7.0",
-    "@babel/preset-env": "^7.7.1",
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-angular": "^8.2.0",
-    "babel-jest": "^24.9.0",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-angular": "^8.3.4",
+    "babel-jest": "^25.3.0",
     "babel-plugin-version": "^0.2.3",
-    "coveralls": "^3.0.8",
-    "husky": "^3.1.0",
-    "jest": "^24.9.0"
+    "coveralls": "^3.0.11",
+    "husky": "^4.2.5",
+    "jest": "^25.3.0",
+    "prettier": "^2.0.4"
   },
   "commitlint": {
     "extends": [
@@ -35,7 +37,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run test && npm run build"
+      "pre-commit": "npm run prettier && npm run test && npm run build"
     }
   },
   "jest": {
@@ -60,6 +62,11 @@
     "canvas",
     "test",
     "unit"
+  ],
+  "files": [
+    "CHANGELOG.md",
+    "lib/",
+    "types/"
   ],
   "author": "hustcc",
   "license": "MIT",

@@ -18,10 +18,10 @@ describe('arc', () => {
     expect(ctx.arc).toBeCalled();
   });
 
-  it('shouldn\'t accept parameters less than 7', () => {
+  it("shouldn't accept parameters less than 7", () => {
     expect(() => ctx.arc()).toThrow(TypeError);
     expect(() => ctx.arc(1)).toThrow(TypeError);
-    expect(() => ctx.arc(1, 2,)).toThrow(TypeError);
+    expect(() => ctx.arc(1, 2)).toThrow(TypeError);
     expect(() => ctx.arc(1, 2, 3)).toThrow(TypeError);
     expect(() => ctx.arc(1, 2, 3, 4)).toThrow(TypeError);
   });
@@ -37,7 +37,7 @@ describe('arc', () => {
       [1, 2, NaN, 4, 5],
       [1, 2, 3, NaN, 5],
       [1, 2, 3, 4, NaN],
-    ].forEach(e => {
+    ].forEach((e) => {
       expect(() => ctx.arc(...e)).not.toThrow();
     });
   });

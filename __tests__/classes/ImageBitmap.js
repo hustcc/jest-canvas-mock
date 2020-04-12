@@ -44,15 +44,21 @@ describe('image bitmaps', () => {
   });
 
   it('should reject non images', () => {
-    return Promise.all([0, null, void 0, '', 'test', window, Infinity, document]
-      .map(e => createImageBitmap(e).then(throwError).catch(expectTypeError))
+    return Promise.all(
+      [0, null, void 0, '', 'test', window, Infinity, document].map((e) =>
+        createImageBitmap(e).then(throwError).catch(expectTypeError)
+      )
     );
   });
 
   it('should reject if second parameter is not an object', () => {
-    return Promise.all(['', 0, NaN, Infinity].map(e => {
-      return createImageBitmap(img, e).then(throwError).catch(expectTypeError);
-    }));
+    return Promise.all(
+      ['', 0, NaN, Infinity].map((e) => {
+        return createImageBitmap(img, e)
+          .then(throwError)
+          .catch(expectTypeError);
+      })
+    );
   });
 
   it('should throw if arity is 3 or 4', () => {
@@ -68,36 +74,46 @@ describe('image bitmaps', () => {
 
   it('should throw if width or height is not finite or 0', () => {
     return Promise.all([
-      createImageBitmap(img, 1, 2, NaN, 3).then(throwError).catch(expectRangeError),
-      createImageBitmap(img, 1, 2, 0, 3).then(throwError).catch(expectRangeError),
-      createImageBitmap(img, 1, 2, 3, NaN).then(throwError).catch(expectRangeError),
-      createImageBitmap(img, 1, 2, 3, 0).then(throwError).catch(expectRangeError),
+      createImageBitmap(img, 1, 2, NaN, 3)
+        .then(throwError)
+        .catch(expectRangeError),
+      createImageBitmap(img, 1, 2, 0, 3)
+        .then(throwError)
+        .catch(expectRangeError),
+      createImageBitmap(img, 1, 2, 3, NaN)
+        .then(throwError)
+        .catch(expectRangeError),
+      createImageBitmap(img, 1, 2, 3, 0)
+        .then(throwError)
+        .catch(expectRangeError),
     ]);
   });
 
   it('should throw if last parameter is not object if source rect is provided', () => {
     return Promise.all(
-      ['', 0, NaN, Infinity].map(
-        e => createImageBitmap(img, 1, 2, 3, 4, e).then(throwError).catch(expectTypeError)
+      ['', 0, NaN, Infinity].map((e) =>
+        createImageBitmap(img, 1, 2, 3, 4, e)
+          .then(throwError)
+          .catch(expectTypeError)
       )
     );
   });
 
   it('should have a close function', () => {
-    return createImageBitmap(img).then(e => {
+    return createImageBitmap(img).then((e) => {
       expect(typeof e.close).toBe('function');
     });
   });
 
   it('should have a callable close function', () => {
-    return createImageBitmap(img).then(e => {
+    return createImageBitmap(img).then((e) => {
       e.close();
       expect(e.close).toBeCalled();
     });
   });
 
   it('should close the bitmap', () => {
-    return createImageBitmap(img).then(e => {
+    return createImageBitmap(img).then((e) => {
       e.close();
       expect(e.width).toBe(0);
       expect(e.height).toBe(0);
@@ -106,26 +122,34 @@ describe('image bitmaps', () => {
   });
 
   it('should create image bitmaps from valid sources', () => {
-    return Promise.all([
-      document.createElement('img'),
-      new Image(),
-      document.createElement('canvas'),
-      document.createElement('video'),
-      new Blob([new Uint8Array(1)]),
-      new ImageData(400, 300),
-      new ImageBitmap(100, 100), // this is just to verify class input
-    ].map(e => createImageBitmap(e).then(expectImageBitmap)));
+    return Promise.all(
+      [
+        document.createElement('img'),
+        new Image(),
+        document.createElement('canvas'),
+        document.createElement('video'),
+        new Blob([new Uint8Array(1)]),
+        new ImageData(400, 300),
+        new ImageBitmap(100, 100), // this is just to verify class input
+      ].map((e) => createImageBitmap(e).then(expectImageBitmap))
+    );
   });
 
   it('should reject if sixth parameter is not an object', () => {
-    return Promise.all(['', 0, NaN, Infinity].map(e => {
-      return createImageBitmap(img, 1, 2, 3, 4, e).then(throwError).catch(expectTypeError);
-    }));
+    return Promise.all(
+      ['', 0, NaN, Infinity].map((e) => {
+        return createImageBitmap(img, 1, 2, 3, 4, e)
+          .then(throwError)
+          .catch(expectTypeError);
+      })
+    );
   });
 
   it('should accept if sixth parameter is null, undefined, or object', () => {
-    return Promise.all([null, void 0, {}].map(e => {
-      return createImageBitmap(img, 1, 2, 3, 4, e).then(expectImageBitmap);
-    }));
+    return Promise.all(
+      [null, void 0, {}].map((e) => {
+        return createImageBitmap(img, 1, 2, 3, 4, e).then(expectImageBitmap);
+      })
+    );
   });
 });

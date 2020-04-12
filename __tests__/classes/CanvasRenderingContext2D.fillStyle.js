@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 
 describe('fillStyle', () => {
-  it('should parse a css color string \'blue\'', () => {
+  it("should parse a css color string 'blue'", () => {
     ctx.fillStyle = 'blue';
     expect(ctx.fillStyle).toBe('#0000ff');
   });

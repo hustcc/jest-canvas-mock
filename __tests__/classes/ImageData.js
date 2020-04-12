@@ -4,8 +4,9 @@ describe('ImageData', () => {
   });
 
   it('should throw if more than 3 arguments are provided', () => {
-    expect(() => new ImageData(new Uint8ClampedArray([0, 0, 0, 1]), 1, 1, 1))
-      .toThrow(TypeError);
+    expect(
+      () => new ImageData(new Uint8ClampedArray([0, 0, 0, 1]), 1, 1, 1)
+    ).toThrow(TypeError);
   });
 
   describe('new ImageData(width, height)', () => {
@@ -57,23 +58,27 @@ describe('ImageData', () => {
     });
 
     it('should throw if width is not finite', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(4), Infinity))
-        .toThrow(RangeError);
+      expect(() => new ImageData(new Uint8ClampedArray(4), Infinity)).toThrow(
+        RangeError
+      );
     });
 
     it('should throw if width is 0', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(4), 0))
-        .toThrow(RangeError);
+      expect(() => new ImageData(new Uint8ClampedArray(4), 0)).toThrow(
+        RangeError
+      );
     });
 
     it('should throw if source length is 0', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(0), 100))
-        .toThrow(RangeError);
-    })
+      expect(() => new ImageData(new Uint8ClampedArray(0), 100)).toThrow(
+        RangeError
+      );
+    });
 
     it('should throw if source length is not a multiple of 4', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(801), 200))
-        .toThrow(RangeError);
+      expect(() => new ImageData(new Uint8ClampedArray(801), 200)).toThrow(
+        RangeError
+      );
     });
   });
 
@@ -90,23 +95,27 @@ describe('ImageData', () => {
     });
 
     it('should throw if width is not finite', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(4), Infinity, 100))
-        .toThrow(RangeError);
+      expect(
+        () => new ImageData(new Uint8ClampedArray(4), Infinity, 100)
+      ).toThrow(RangeError);
     });
 
     it('should throw if width is 0', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(4), 0, 100))
-        .toThrow(RangeError);
+      expect(() => new ImageData(new Uint8ClampedArray(4), 0, 100)).toThrow(
+        RangeError
+      );
     });
 
     it('should throw if height is not finite', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(4), 1, Infinity))
-        .toThrow(RangeError);
+      expect(
+        () => new ImageData(new Uint8ClampedArray(4), 1, Infinity)
+      ).toThrow(RangeError);
     });
 
     it('should throw if height is 0', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(4), 100, 0))
-        .toThrow(RangeError);
+      expect(() => new ImageData(new Uint8ClampedArray(4), 100, 0)).toThrow(
+        RangeError
+      );
     });
 
     it('should throw if first argument is not a Uint8ClampedArray', () => {
@@ -114,22 +123,27 @@ describe('ImageData', () => {
     });
 
     it('should throw if source length is 0', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(0), 100, 100))
-        .toThrow(RangeError);
+      expect(() => new ImageData(new Uint8ClampedArray(0), 100, 100)).toThrow(
+        RangeError
+      );
     });
 
     it('should throw if source length is not a multiple of 4', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(801), 200, 1))
-        .toThrow(RangeError);
+      expect(() => new ImageData(new Uint8ClampedArray(801), 200, 1)).toThrow(
+        RangeError
+      );
     });
 
-    it('should throw if width and height aren\'t compatible with source length ', () => {
-      expect(() => new ImageData(new Uint8ClampedArray(8), 2, 2))
-        .toThrow(RangeError);
-      expect(() => new ImageData(new Uint8ClampedArray(8), 1, 7))
-        .toThrow(RangeError);
-      expect(() => new ImageData(new Uint8ClampedArray(8), 7, 1))
-        .toThrow(RangeError);
+    it("should throw if width and height aren't compatible with source length ", () => {
+      expect(() => new ImageData(new Uint8ClampedArray(8), 2, 2)).toThrow(
+        RangeError
+      );
+      expect(() => new ImageData(new Uint8ClampedArray(8), 1, 7)).toThrow(
+        RangeError
+      );
+      expect(() => new ImageData(new Uint8ClampedArray(8), 7, 1)).toThrow(
+        RangeError
+      );
     });
   });
 });

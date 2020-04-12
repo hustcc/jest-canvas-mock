@@ -14,7 +14,7 @@ describe('lineDashOffset', () => {
   });
 
   it('should cast js values to numbers and ignore non-finite values when setting the lineDashOffset property', () => {
-    [0, 10, -Infinity, 'null', null, NaN].forEach(e => {
+    [0, 10, -Infinity, 'null', null, NaN].forEach((e) => {
       ctx.lineDashOffset = 0;
       ctx.lineDashOffset = e;
       const cast = Number(e);

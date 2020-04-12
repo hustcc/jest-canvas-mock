@@ -53,13 +53,13 @@ describe('drawImage', () => {
       [img, 1, 2, 3, 4, 5],
       [img, 1, 2, 3, 4, 5, 6],
       [img, 1, 2, 3, 4, 5, 6, 7],
-    ].forEach(e => {
+    ].forEach((e) => {
       expect(() => ctx.drawImage(...e)).toThrow(TypeError);
     });
   });
 
   it('should not accept nulls or invalid image types', () => {
-    [null, 1, NaN, Infinity, 'testing'].forEach(e => {
+    [null, 1, NaN, Infinity, 'testing'].forEach((e) => {
       expect(() => ctx.drawImage(e, 1, 2)).toThrow(TypeError);
     });
   });

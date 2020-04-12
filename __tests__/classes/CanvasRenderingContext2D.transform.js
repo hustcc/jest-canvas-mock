@@ -21,7 +21,9 @@ describe('transform', () => {
 
   it('should transform the current transform', () => {
     ctx.transform(1, 2, 3, 4, 5, 6);
-    expect(ctx.currentTransform).toEqual(new DOMMatrix([7, 10, 15, 22, 28, 40]));
+    expect(ctx.currentTransform).toEqual(
+      new DOMMatrix([7, 10, 15, 22, 28, 40])
+    );
   });
 
   it('should throw if argument count is less than 6', () => {
@@ -41,10 +43,9 @@ describe('transform', () => {
       [1, 2, 3, NaN, 4, 5],
       [1, 2, 3, 4, NaN, 6],
       [1, 2, 3, 4, 5, NaN],
-    ].forEach(e => {
+    ].forEach((e) => {
       ctx.transform(...e);
       expect(ctx.currentTransform).toEqual(new DOMMatrix([1, 2, 3, 4, 5, 6]));
     });
   });
 });
-

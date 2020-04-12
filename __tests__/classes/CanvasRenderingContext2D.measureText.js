@@ -29,7 +29,7 @@ describe('measureText', () => {
   });
 
   it('should return a text metrics object for different kinds of input', () => {
-    [NaN, 1, null, void 0, 'bleh'].forEach(val => {
+    [NaN, 1, null, void 0, 'bleh'].forEach((val) => {
       expect(() => ctx.measureText(val)).not.toThrow();
     });
   });

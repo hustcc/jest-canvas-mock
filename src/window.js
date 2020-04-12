@@ -14,7 +14,7 @@ import ImageBitmap from './classes/ImageBitmap';
 import mockPrototype from './mock/prototype';
 import createImageBitmap from './mock/createImageBitmap';
 
-export default win => {
+export default (win) => {
   const d = win.document;
   const f = win.document.createElement;
 
@@ -47,7 +47,8 @@ export default win => {
   if (!win.Path2D) win.Path2D = Path2D;
   if (!win.CanvasGradient) win.CanvasGradient = CanvasGradient;
   if (!win.CanvasPattern) win.CanvasPattern = CanvasPattern;
-  if (!win.CanvasRenderingContext2D) win.CanvasRenderingContext2D = CanvasRenderingContext2D;
+  if (!win.CanvasRenderingContext2D)
+    win.CanvasRenderingContext2D = CanvasRenderingContext2D;
   if (!win.DOMMatrix) win.DOMMatrix = DOMMatrix;
   if (!win.ImageData) win.ImageData = ImageData;
   if (!win.TextMetrics) win.TextMetrics = TextMetrics;
@@ -57,4 +58,4 @@ export default win => {
   mockPrototype();
 
   return win;
-}
+};

@@ -20,23 +20,24 @@ function every(items, callback) {
 
 function map(items, callback) {
   const result = [];
-  for(let i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     result.push(callback(items[i]));
   }
   return result;
 }
 
-const isSequence = (value) => [
-  Array,
-  Int8Array,
-  Uint8Array,
-  Int16Array,
-  Uint16Array,
-  Int32Array,
-  Uint32Array,
-  Float32Array,
-  Float64Array,
-].reduce((left, right) => left || value instanceof right, false);
+const isSequence = (value) =>
+  [
+    Array,
+    Int8Array,
+    Uint8Array,
+    Int16Array,
+    Uint16Array,
+    Int32Array,
+    Uint32Array,
+    Float32Array,
+    Float64Array,
+  ].reduce((left, right) => left || value instanceof right, false);
 
 describe('lineDash', () => {
   it('should accept valid lineDash values ignore invalid lineDash values', () => {
@@ -54,14 +55,16 @@ describe('lineDash', () => {
       null,
     ];
 
-    examples.forEach(e => {
+    examples.forEach((e) => {
       ctx.setLineDash([]); // reset the linedash
-      if(!isSequence(e)) {
+      if (!isSequence(e)) {
         expect(() => ctx.setLineDash(e)).toThrow(TypeError);
       } else {
         ctx.setLineDash(e);
-        let result = map(e, val => Number(val));
-        const containsFiniteValues = every(result, val => Number.isFinite(val));
+        let result = map(e, (val) => Number(val));
+        const containsFiniteValues = every(result, (val) =>
+          Number.isFinite(val)
+        );
         if (containsFiniteValues) {
           result = result.length % 2 === 1 ? result.concat(result) : result;
         } else {

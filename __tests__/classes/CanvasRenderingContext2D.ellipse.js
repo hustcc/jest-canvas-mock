@@ -18,10 +18,10 @@ describe('ellipse', () => {
     expect(ctx.ellipse).toBeCalled();
   });
 
-  it('shouldn\'t accept parameters less than 7', () => {
+  it("shouldn't accept parameters less than 7", () => {
     expect(() => ctx.ellipse()).toThrow(TypeError);
     expect(() => ctx.ellipse(1)).toThrow(TypeError);
-    expect(() => ctx.ellipse(1, 2,)).toThrow(TypeError);
+    expect(() => ctx.ellipse(1, 2)).toThrow(TypeError);
     expect(() => ctx.ellipse(1, 2, 3)).toThrow(TypeError);
     expect(() => ctx.ellipse(1, 2, 3, 4)).toThrow(TypeError);
     expect(() => ctx.ellipse(1, 2, 3, 4, 5)).toThrow(TypeError);
@@ -42,7 +42,7 @@ describe('ellipse', () => {
       [1, 2, 3, 4, NaN, 6, 7],
       [1, 2, 3, 4, 5, NaN, 7],
       [1, 2, 3, 4, 5, 6, NaN],
-    ].forEach(e => {
+    ].forEach((e) => {
       expect(() => ctx.ellipse(...e)).not.toThrow();
     });
   });

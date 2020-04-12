@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 
 describe('filter', () => {
-  it('should have a filter property default value \'none\'', () => {
+  it("should have a filter property default value 'none'", () => {
     expect(ctx.filter).toBe('none');
   });
 
