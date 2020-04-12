@@ -26,10 +26,18 @@ describe('createLinearGradient', () => {
   });
 
   it('should not create a linear gradient when any argument is not finite', () => {
-    expect(() => ctx.createLinearGradient(Infinity, 1, 2, 3)).toThrow(TypeError);
-    expect(() => ctx.createLinearGradient(0, Infinity, 2, 3)).toThrow(TypeError);
-    expect(() => ctx.createLinearGradient(0, 1, Infinity, 3)).toThrow(TypeError);
-    expect(() => ctx.createLinearGradient(0, 1, 2, Infinity)).toThrow(TypeError);
+    expect(() => ctx.createLinearGradient(Infinity, 1, 2, 3)).toThrow(
+      TypeError
+    );
+    expect(() => ctx.createLinearGradient(0, Infinity, 2, 3)).toThrow(
+      TypeError
+    );
+    expect(() => ctx.createLinearGradient(0, 1, Infinity, 3)).toThrow(
+      TypeError
+    );
+    expect(() => ctx.createLinearGradient(0, 1, 2, Infinity)).toThrow(
+      TypeError
+    );
   });
 
   it('should create a linear gradient with string values', () => {

@@ -11,7 +11,6 @@ beforeEach(() => {
 });
 
 describe('CanvasPattern', () => {
-
   test('CanvasPattern', () => {
     const ptrn = ctx.createPattern(img, 'no-repeat');
     expect(ptrn).toBeDefined();

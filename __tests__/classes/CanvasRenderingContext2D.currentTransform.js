@@ -13,7 +13,7 @@ describe('currentTransform', () => {
     expect(ctx.currentTransform).toBeInstanceOf(DOMMatrix);
   });
 
-  it('should ignore setting currentTransform if it\'s not a valid DOMMatrix', () => {
+  it("should ignore setting currentTransform if it's not a valid DOMMatrix", () => {
     ctx.currentTransform = null;
     expect(ctx._transformStack[0][0]).toBe(1);
     expect(ctx._transformStack[0][1]).toBe(0);

@@ -9,16 +9,16 @@ beforeEach(() => {
 });
 
 describe('direction', () => {
-  it('should set the default value direction to \'inherit\'', () => {
+  it("should set the default value direction to 'inherit'", () => {
     expect(ctx.direction).toBe('inherit');
   });
 
-  it('should set the direction if it\'s a valid direction', () => {
+  it("should set the direction if it's a valid direction", () => {
     ctx.direction = 'wrong!';
     expect(ctx.direction).toBe('inherit');
   });
 
-  it('should set the direction if it\'s a valid direction', () => {
+  it("should set the direction if it's a valid direction", () => {
     ctx.direction = 'ltr';
     expect(ctx.direction).toBe('ltr');
     ctx.direction = 'rtl';

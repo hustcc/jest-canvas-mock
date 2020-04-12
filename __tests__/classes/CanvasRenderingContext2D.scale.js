@@ -36,4 +36,3 @@ describe('scale', () => {
     expect(ctx.currentTransform).toEqual(new DOMMatrix([1, 2, 3, 4, 5, 6]));
   });
 });
-

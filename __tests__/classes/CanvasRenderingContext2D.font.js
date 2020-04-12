@@ -16,7 +16,7 @@ describe('font', () => {
 
   it('should accept valid fonts', () => {
     ctx.font = '12pt Times New Roman';
-    expect(ctx.font).toBe('16px \"Times New Roman\"');
+    expect(ctx.font).toBe('16px "Times New Roman"');
   });
 
   it('should save and restore font values', () => {

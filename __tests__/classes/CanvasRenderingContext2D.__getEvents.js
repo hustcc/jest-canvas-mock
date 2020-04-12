@@ -1,8 +1,7 @@
 let ctx;
 beforeEach(() => {
   // get a new context each test
-  ctx = document.createElement('canvas')
-    .getContext('2d');
+  ctx = document.createElement('canvas').getContext('2d');
 });
 
 const img = new Image();

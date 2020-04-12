@@ -16,13 +16,13 @@ describe('createImagePattern', () => {
     expect(result).toBeInstanceOf(CanvasPattern);
   });
 
-  it('shouldn\'t create image patterns when argument length is 1', () => {
+  it("shouldn't create image patterns when argument length is 1", () => {
     const img = new Image();
     img.src = 'http://some-domain.com/my-image.png';
     expect(() => ctx.createPattern(img)).toThrow(TypeError);
   });
 
-  it('shouldn\'t create image patterns when second argument is undefined', () => {
+  it("shouldn't create image patterns when second argument is undefined", () => {
     const img = new Image();
     img.src = 'http://some-domain.com/my-image.png';
     expect(() => ctx.createPattern(img, void 0)).toThrow(TypeError);
@@ -40,7 +40,7 @@ describe('createImagePattern', () => {
     expect(ctx.createPattern(img, '')).toBeInstanceOf(CanvasPattern);
   });
 
-  it('shouldn\'t create imagePattern when image is not valid', () => {
+  it("shouldn't create imagePattern when image is not valid", () => {
     expect(() => ctx.createPattern(null, 'repeat')).toThrow();
   });
 
@@ -55,7 +55,9 @@ describe('createImagePattern', () => {
   });
 
   it('should create a pattern when image is ImageBitmap', () => {
-    expect(ctx.createPattern(new ImageBitmap(400, 300), 'repeat')).toBeInstanceOf(CanvasPattern);
+    expect(
+      ctx.createPattern(new ImageBitmap(400, 300), 'repeat')
+    ).toBeInstanceOf(CanvasPattern);
   });
 
   it('should not create a pattern if the image bitmap is closed', () => {
@@ -68,8 +70,8 @@ describe('createImagePattern', () => {
     const image = new Image();
     image.src = 'test/myImage.jpg';
 
-    ['repeat', 'repeat-x', 'repeat-y', 'no-repeat'].forEach(e => {
+    ['repeat', 'repeat-x', 'repeat-y', 'no-repeat'].forEach((e) => {
       expect(ctx.createPattern(image, e)).toBeInstanceOf(CanvasPattern);
     });
   });
-})
+});

@@ -14,20 +14,20 @@ describe('shadowOffsetY', () => {
   });
 
   it('should ignore non finite values', () => {
-    [Infinity, -Infinity, null, void 0, NaN].forEach(e => {
+    [Infinity, -Infinity, null, void 0, NaN].forEach((e) => {
       ctx.shadowOffsetY = e;
       expect(ctx.shadowOffsetY).toBe(0);
     });
   });
 
   it('should not ignore values that are within range', () => {
-    [1, 10, '30', '10.2', '-3'].forEach(e => {
+    [1, 10, '30', '10.2', '-3'].forEach((e) => {
       ctx.shadowOffsetY = e;
       expect(ctx.shadowOffsetY).toBe(Number(e));
     });
   });
 
-  it ('should save and restore values', () => {
+  it('should save and restore values', () => {
     ctx.shadowOffsetY = 2;
     ctx.save();
     ctx.shadowOffsetY = 10;

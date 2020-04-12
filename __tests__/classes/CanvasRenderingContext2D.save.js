@@ -14,7 +14,7 @@ describe('save', () => {
   });
 
   it('should be callable', () => {
-    ctx.save()
+    ctx.save();
     expect(ctx.save).toBeCalled();
   });
 });

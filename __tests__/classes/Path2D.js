@@ -13,7 +13,6 @@ let borrowedFromCanvas = [
 ];
 
 describe('Path2D', () => {
-
   test('Path2D', () => {
     const path = new Path2D();
     expect(path).toBeInstanceOf(Path2D);
@@ -32,7 +31,7 @@ describe('Path2D', () => {
 
   it('should borrow some path functions from CanvasRenderingContext2D', () => {
     const p = new Path2D();
-    borrowedFromCanvas.forEach(func => {
+    borrowedFromCanvas.forEach((func) => {
       expect(typeof p[func]).toBe('function');
     });
   });
@@ -43,7 +42,7 @@ describe('Path2D', () => {
 
   it('should throw if first argument is not Path2D', () => {
     const p = new Path2D();
-    [null, 1, void 0, NaN, Infinity, {}, []].forEach(item => {
+    [null, 1, void 0, NaN, Infinity, {}, []].forEach((item) => {
       expect(() => p.addPath(item)).toThrow(TypeError);
     });
   });

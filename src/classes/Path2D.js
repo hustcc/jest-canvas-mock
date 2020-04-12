@@ -1,9 +1,7 @@
 import CanvasRenderingContext2D from './CanvasRenderingContext2D';
 
 // Path2D.prototype
-const Path2DFunc = [
-  'addPath',
-];
+const Path2DFunc = ['addPath'];
 
 const borrowedFromCanvas = [
   'closePath',
@@ -33,8 +31,14 @@ export default class Path2D {
   }
 
   addPath(path) {
-    if (arguments.length < 1) throw new TypeError('Failed to execute \'addPath\' on \'Path2D\': 1 argument required, but only 0 present.');
-    if (!(path instanceof Path2D)) throw new TypeError('Failed to execute \'addPath\' on \'Path2D\': parameter 1 is not of type \'Path2D\'.');
+    if (arguments.length < 1)
+      throw new TypeError(
+        "Failed to execute 'addPath' on 'Path2D': 1 argument required, but only 0 present."
+      );
+    if (!(path instanceof Path2D))
+      throw new TypeError(
+        "Failed to execute 'addPath' on 'Path2D': parameter 1 is not of type 'Path2D'."
+      );
     this._path = this._path.concat(path._path);
   }
 }

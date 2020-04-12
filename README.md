@@ -82,7 +82,7 @@ The function will do `Number` type coercion and verify the inputs exactly like t
 this is valid input.
 
 ```ts
-expect(() => ctx.arc("10", "10", "20", "0", "6.14")).not.toThrow();
+expect(() => ctx.arc('10', '10', '20', '0', '6.14')).not.toThrow();
 ```
 
 Another part of the strategy is to validate input types. When using the
@@ -90,15 +90,15 @@ Another part of the strategy is to validate input types. When using the
 `TypeError` just like the browser does.
 
 ```ts
-expect(() => ctx.fill("invalid!")).toThrow(TypeError);
-expect(() => ctx.fill(new Path2D(), "invalid!")).toThrow(TypeError);
+expect(() => ctx.fill('invalid!')).toThrow(TypeError);
+expect(() => ctx.fill(new Path2D(), 'invalid!')).toThrow(TypeError);
 ```
 
 We try to follow the ECMAScript specification as closely as possible.
 
 ## Snapshots
 
-There are multiple ways to validate canvas state using snapshots. There are currently three  methods
+There are multiple ways to validate canvas state using snapshots. There are currently three methods
 attached to the `CanvasRenderingContext2D` class. The first way to use this feature is by using the
 `__getEvents` method.
 
@@ -175,9 +175,9 @@ canvas.toDataURL.mockReturnValueOnce(
 
 ## Contributors
 
-* [@hustcc](https://github.com/hustcc)
-* [@jtenner](https://github.com/jtenner)
-* [@evanoc0](https://github.com/evanoc0)
+- [@hustcc](https://github.com/hustcc)
+- [@jtenner](https://github.com/jtenner)
+- [@evanoc0](https://github.com/evanoc0)
 
 ## License
 

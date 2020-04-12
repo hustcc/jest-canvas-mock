@@ -6,7 +6,7 @@ describe('DOMMatrix class', () => {
     expect(matrix).toBeInstanceOf(DOMMatrix);
   });
 
-  it ('should construct a 2d matrix properly', () => {
+  it('should construct a 2d matrix properly', () => {
     const matrix = new DOMMatrix([1, 2, 3, 4, 5, 6]);
     expect(matrix.a).toBe(1);
     expect(matrix.b).toBe(2);
@@ -31,7 +31,24 @@ describe('DOMMatrix class', () => {
   });
 
   it('should accept an array of 16 length', () => {
-    const matrix = new DOMMatrix([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+    const matrix = new DOMMatrix([
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+    ]);
     expect(matrix).toBeInstanceOf(DOMMatrix);
   });
 

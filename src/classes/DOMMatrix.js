@@ -51,21 +51,26 @@ export default class DOMMatrix {
     }
 
     if (transform) {
-      throw new TypeError('Failed to construct \'DOMMatrix\': The sequence must contain 6 elements for a 2D matrix or 16 elements for a 3D matrix.');
+      throw new TypeError(
+        "Failed to construct 'DOMMatrix': The sequence must contain 6 elements for a 2D matrix or 16 elements for a 3D matrix."
+      );
     }
     this._is2D = false;
   }
 
   get isIdentity() {
     if (this._is2D) {
-      return this.m11 == 1.0
-        && this.m12 == 0.0
-        && this.m21 == 0.0
-        && this.m22 == 1.0
-        && this.m41 == 0.0
-        && this.m42 == 0.0;
+      return (
+        this.m11 == 1.0 &&
+        this.m12 == 0.0 &&
+        this.m21 == 0.0 &&
+        this.m22 == 1.0 &&
+        this.m41 == 0.0 &&
+        this.m42 == 0.0
+      );
     } else {
-      return this.m11 = 1.0 &&
+      return (this.m11 =
+        1.0 &&
         this.m12 === 0.0 &&
         this.m13 === 0.0 &&
         this.m14 === 0.0 &&
@@ -80,7 +85,7 @@ export default class DOMMatrix {
         this.m41 === 0.0 &&
         this.m42 === 0.0 &&
         this.m43 === 0.0 &&
-        this.m44 === 1.0;
+        this.m44 === 1.0);
     }
   }
 

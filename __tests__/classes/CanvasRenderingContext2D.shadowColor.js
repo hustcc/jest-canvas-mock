@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 
 describe('shadowColor', () => {
-  it('should parse a css color string \'blue\'', () => {
+  it("should parse a css color string 'blue'", () => {
     ctx.shadowColor = 'blue';
     expect(ctx.shadowColor).toBe('#0000ff');
   });

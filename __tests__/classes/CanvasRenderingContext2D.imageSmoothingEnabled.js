@@ -10,7 +10,7 @@ beforeEach(() => {
 
 describe('imageSmoothingQuality', () => {
   it('should set the imageSmoothingEnabled values to truthy values', () => {
-    [true, false, 1, 0, null, '', Infinity, void 0, NaN].forEach(e => {
+    [true, false, 1, 0, null, '', Infinity, void 0, NaN].forEach((e) => {
       ctx.imageSmoothingEnabled = e;
       expect(ctx.imageSmoothingEnabled).toBe(!!e);
     });

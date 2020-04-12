@@ -23,17 +23,33 @@ describe('createRadialGradient', () => {
   });
 
   it('should not create a radial gradient when any argument is not finite', () => {
-    expect(() => ctx.createRadialGradient(Infinity, 1, 2, 3, 4, 5)).toThrow(TypeError);
-    expect(() => ctx.createRadialGradient(0, Infinity, 2, 3, 4, 5)).toThrow(TypeError);
-    expect(() => ctx.createRadialGradient(0, 1, Infinity, 3, 4, 5)).toThrow(TypeError);
-    expect(() => ctx.createRadialGradient(0, 1, 2, Infinity, 4, 5)).toThrow(TypeError);
-    expect(() => ctx.createRadialGradient(0, 1, 2, 3, Infinity, 5)).toThrow(TypeError);
-    expect(() => ctx.createRadialGradient(0, 1, 2, 3, 4, Infinity)).toThrow(TypeError);
+    expect(() => ctx.createRadialGradient(Infinity, 1, 2, 3, 4, 5)).toThrow(
+      TypeError
+    );
+    expect(() => ctx.createRadialGradient(0, Infinity, 2, 3, 4, 5)).toThrow(
+      TypeError
+    );
+    expect(() => ctx.createRadialGradient(0, 1, Infinity, 3, 4, 5)).toThrow(
+      TypeError
+    );
+    expect(() => ctx.createRadialGradient(0, 1, 2, Infinity, 4, 5)).toThrow(
+      TypeError
+    );
+    expect(() => ctx.createRadialGradient(0, 1, 2, 3, Infinity, 5)).toThrow(
+      TypeError
+    );
+    expect(() => ctx.createRadialGradient(0, 1, 2, 3, 4, Infinity)).toThrow(
+      TypeError
+    );
   });
 
   it('should not create a radial gradient if any of the radius values are < 0', () => {
-    expect(() => ctx.createRadialGradient(0, 0, -1, 0, 0, 0)).toThrow(DOMException);
-    expect(() => ctx.createRadialGradient(0, 0, 0, 0, 0, -1)).toThrow(DOMException);
+    expect(() => ctx.createRadialGradient(0, 0, -1, 0, 0, 0)).toThrow(
+      DOMException
+    );
+    expect(() => ctx.createRadialGradient(0, 0, 0, 0, 0, -1)).toThrow(
+      DOMException
+    );
   });
 
   it('should create a radial gradient with string values', () => {

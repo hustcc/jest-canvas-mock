@@ -10,17 +10,19 @@ beforeEach(() => {
 
 describe('lineCap', () => {
   it('should accept valid lineCap values', () => {
-    ['butt', 'round', 'square'].forEach(e => {
+    ['butt', 'round', 'square'].forEach((e) => {
       ctx.lineCap = e;
       expect(ctx.lineCap).toBe(e);
     });
   });
 
   it('should ignore invalid lineCap values', () => {
-    [true, false, 1, 0, null, '', Infinity, void 0, NaN, 'invalid!'].forEach(e => {
-      ctx.lineCap = e;
-      expect(ctx.lineCap).toBe('butt');
-    });
+    [true, false, 1, 0, null, '', Infinity, void 0, NaN, 'invalid!'].forEach(
+      (e) => {
+        ctx.lineCap = e;
+        expect(ctx.lineCap).toBe('butt');
+      }
+    );
   });
 
   it('should save and restore lineCap values', () => {

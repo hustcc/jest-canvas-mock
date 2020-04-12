@@ -24,8 +24,8 @@ describe('stroke', () => {
   });
 
   it('should throw if an arguments is passed to it and it is not a Path2D', () => {
-    [1, Infinity, 'test', null, void 0, [], {}].forEach(e => {
+    [1, Infinity, 'test', null, void 0, [], {}].forEach((e) => {
       expect(() => ctx.stroke(e)).toThrow(TypeError);
     });
   });
-})
+});

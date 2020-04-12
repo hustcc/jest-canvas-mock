@@ -1,8 +1,7 @@
 let ctx;
 beforeEach(() => {
   // get a new context each test
-  ctx = document.createElement('canvas')
-    .getContext('2d');
+  ctx = document.createElement('canvas').getContext('2d');
 });
 
 afterEach(() => {
@@ -11,11 +10,11 @@ afterEach(() => {
 });
 
 describe('__getClippingRegion', () => {
-  it("should be empty when there are no path elements", () => {
+  it('should be empty when there are no path elements', () => {
     ctx.clip();
   });
 
-  it("should store the clipping region", () => {
+  it('should store the clipping region', () => {
     ctx.rect(1, 2, 3, 4);
     ctx.arc(1, 2, 3, 4, 5);
     ctx.clip();
@@ -30,7 +29,7 @@ describe('__getClippingRegion', () => {
     ctx.clip();
   });
 
-  it("should save the clipping region correctly when saved", () => {
+  it('should save the clipping region correctly when saved', () => {
     ctx.rect(1, 2, 3, 4);
     ctx.arc(1, 2, 3, 4, 5);
     ctx.clip();
@@ -39,7 +38,7 @@ describe('__getClippingRegion', () => {
     expect(region).toStrictEqual(ctx.__getClippingRegion());
   });
 
-  it("should save the clipping region correctly when saved", () => {
+  it('should save the clipping region correctly when saved', () => {
     ctx.rect(1, 2, 3, 4);
     ctx.arc(1, 2, 3, 4, 5);
     ctx.clip();

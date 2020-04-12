@@ -3,12 +3,83 @@ import CanvasPattern from './CanvasPattern';
 import cssfontparser from 'cssfontparser';
 import TextMetrics from './TextMetrics';
 import createCanvasEvent from '../mock/createCanvasEvent';
-import Path2D from "./Path2D";
+import Path2D from './Path2D';
 import { MooColor } from 'moo-color';
 
-
-const testFuncs = ['setLineDash', 'getLineDash', 'setTransform', 'getTransform', 'getImageData', 'save', 'restore', 'createPattern', 'createRadialGradient', 'addHitRegion', 'arc', 'arcTo', 'beginPath', 'clip', 'closePath', 'scale', 'stroke', 'clearHitRegions', 'clearRect', 'fillRect', 'strokeRect', 'rect', 'resetTransform', 'translate', 'moveTo', 'lineTo', 'bezierCurveTo', 'createLinearGradient', 'ellipse', 'measureText', 'rotate', 'drawImage', 'drawFocusIfNeeded', 'isPointInPath', 'isPointInStroke', 'putImageData', 'strokeText', 'fillText', 'quadraticCurveTo', 'removeHitRegion', 'fill', 'transform', 'scrollPathIntoView', 'createImageData'];
-const compositeOperations = ['source-over', 'source-in', 'source-out', 'source-atop', 'destination-over', 'destination-in', 'destination-out', 'destination-atop', 'lighter', 'copy', 'xor', 'multiply', 'screen', 'overlay', 'darken', 'lighten', 'color-dodge', 'color-burn', 'hard-light', 'soft-light', 'difference', 'exclusion', 'hue', 'saturation', 'color', 'luminosity'];
+const testFuncs = [
+  'setLineDash',
+  'getLineDash',
+  'setTransform',
+  'getTransform',
+  'getImageData',
+  'save',
+  'restore',
+  'createPattern',
+  'createRadialGradient',
+  'addHitRegion',
+  'arc',
+  'arcTo',
+  'beginPath',
+  'clip',
+  'closePath',
+  'scale',
+  'stroke',
+  'clearHitRegions',
+  'clearRect',
+  'fillRect',
+  'strokeRect',
+  'rect',
+  'resetTransform',
+  'translate',
+  'moveTo',
+  'lineTo',
+  'bezierCurveTo',
+  'createLinearGradient',
+  'ellipse',
+  'measureText',
+  'rotate',
+  'drawImage',
+  'drawFocusIfNeeded',
+  'isPointInPath',
+  'isPointInStroke',
+  'putImageData',
+  'strokeText',
+  'fillText',
+  'quadraticCurveTo',
+  'removeHitRegion',
+  'fill',
+  'transform',
+  'scrollPathIntoView',
+  'createImageData',
+];
+const compositeOperations = [
+  'source-over',
+  'source-in',
+  'source-out',
+  'source-atop',
+  'destination-over',
+  'destination-in',
+  'destination-out',
+  'destination-atop',
+  'lighter',
+  'copy',
+  'xor',
+  'multiply',
+  'screen',
+  'overlay',
+  'darken',
+  'lighten',
+  'color-dodge',
+  'color-burn',
+  'hard-light',
+  'soft-light',
+  'difference',
+  'exclusion',
+  'hue',
+  'saturation',
+  'color',
+  'luminosity',
+];
 
 function getTransformSlice(ctx) {
   return ctx._transformStack[ctx._stackIndex].slice();
@@ -18,9 +89,7 @@ function getTransformSlice(ctx) {
  * Returns the string serialization of a CSS color, according to https://www.w3.org/TR/2dcontext/#serialization-of-a-color
  */
 function serializeColor(value) {
-  return (value.getAlpha() === 1)
-    ? value.toHex()
-    : value.toRgb();
+  return value.getAlpha() === 1 ? value.toHex() : value.toRgb();
 }
 
 export default class CanvasRenderingContext2D {
@@ -37,7 +106,7 @@ export default class CanvasRenderingContext2D {
    * Clear the list of draw calls
    */
   __clearDrawCalls() {
-    this._drawCalls = []
+    this._drawCalls = [];
   }
 
   /**
@@ -69,11 +138,7 @@ export default class CanvasRenderingContext2D {
    * Clear the path and reset it to a single beginPath event.
    */
   __clearPath() {
-    const event = createCanvasEvent(
-      'beginPath',
-      getTransformSlice(this),
-      { },
-    );
+    const event = createCanvasEvent('beginPath', getTransformSlice(this), {});
     // The clipping path should start after the initial beginPath instruction
     this._clipIndex = 1;
     this._path = [event];
@@ -87,7 +152,7 @@ export default class CanvasRenderingContext2D {
   }
 
   _directionStack = ['inherit'];
-  _fillStyleStack = [ '#000000' ];
+  _fillStyleStack = ['#000000'];
   _filterStack = ['none'];
   _fontStack = ['10px sans-serif'];
   _globalAlphaStack = [1.0];
@@ -101,18 +166,18 @@ export default class CanvasRenderingContext2D {
   _lineWidthStack = [1];
   _miterLimitStack = [10];
   _shadowBlurStack = [0];
-  _shadowColorStack = [ 'rgba(0, 0, 0, 0)' ];
+  _shadowColorStack = ['rgba(0, 0, 0, 0)'];
   _shadowOffsetXStack = [0];
   _shadowOffsetYStack = [0];
   _stackIndex = 0;
-  _strokeStyleStack = [ '#000000' ];
+  _strokeStyleStack = ['#000000'];
   _textAlignStack = ['start'];
   _textBaselineStack = ['alphabetic'];
   _transformStack = [[1, 0, 0, 1, 0, 0]];
-  _clipStack=[[]];
+  _clipStack = [[]];
 
   constructor(canvas) {
-    testFuncs.forEach(key => {
+    testFuncs.forEach((key) => {
       this[key] = jest.fn(CanvasRenderingContext2D.prototype[key].bind(this));
     });
     this._canvas = canvas;
@@ -127,21 +192,46 @@ export default class CanvasRenderingContext2D {
       cursor,
       control,
       label,
-      role
+      role,
     } = options;
-    if (!path && !id) throw new DOMException('ConstraintError', 'Failed to execute \'addHitRegion\' on \'' + this.constructor.name + '\': Both id and control are null.');
-    if (fillRule && fillRule !== 'evenodd' && fillRule !== 'nonzero') throw new TypeError('Failed to execute \'addHitRegion\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
+    if (!path && !id)
+      throw new DOMException(
+        'ConstraintError',
+        "Failed to execute 'addHitRegion' on '" +
+          this.constructor.name +
+          "': Both id and control are null."
+      );
+    if (fillRule && fillRule !== 'evenodd' && fillRule !== 'nonzero')
+      throw new TypeError(
+        "Failed to execute 'addHitRegion' on '" +
+          this.constructor.name +
+          "': The provided value '" +
+          fillRule +
+          "' is not a valid enum value of type CanvasFillRule."
+      );
     this._events.push(
-      createCanvasEvent(
-        'addHitRegion',
-        getTransformSlice(this),
-        { path, fillRule, id, parentID, cursor, control, label, role },
-      ),
+      createCanvasEvent('addHitRegion', getTransformSlice(this), {
+        path,
+        fillRule,
+        id,
+        parentID,
+        cursor,
+        control,
+        label,
+        role,
+      })
     );
   }
 
   arc(x, y, radius, startAngle, endAngle, anticlockwise = false) {
-    if (arguments.length < 5) throw new TypeError('Failed to execute \'arc\' on \'' + this.constructor.name + '\': 5 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 5)
+      throw new TypeError(
+        "Failed to execute 'arc' on '" +
+          this.constructor.name +
+          "': 5 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
 
     const xResult = Number(x);
     const yResult = Number(y);
@@ -151,35 +241,73 @@ export default class CanvasRenderingContext2D {
     const anticlockwiseResult = Boolean(anticlockwise);
 
     // quick is finite check
-    if (!Number.isFinite(xResult + yResult + radiusResult + startAngleResult + endAngleResult)) return;
+    if (
+      !Number.isFinite(
+        xResult + yResult + radiusResult + startAngleResult + endAngleResult
+      )
+    )
+      return;
 
-    if (Number(radius) < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'arc\' on \'' + this.constructor.name + '\': The radius provided (' + radius + ') is negative.');
+    if (Number(radius) < 0)
+      throw new DOMException(
+        'IndexSizeError',
+        "Failed to execute 'arc' on '" +
+          this.constructor.name +
+          "': The radius provided (" +
+          radius +
+          ') is negative.'
+      );
 
-    const event = createCanvasEvent(
-      'arc',
-      getTransformSlice(this),
-      { x: xResult, y: yResult, radius: radiusResult, startAngle: startAngleResult, endAngle: endAngleResult, anticlockwise: anticlockwiseResult },
-    );
+    const event = createCanvasEvent('arc', getTransformSlice(this), {
+      x: xResult,
+      y: yResult,
+      radius: radiusResult,
+      startAngle: startAngleResult,
+      endAngle: endAngleResult,
+      anticlockwise: anticlockwiseResult,
+    });
     this._path.push(event);
     this._events.push(event);
   }
 
   arcTo(cpx1, cpy1, cpx2, cpy2, radius) {
-    if (arguments.length < 5) throw new DOMException('IndexSizeError', 'Failed to execute \'arcTo\' on \'' + this.constructor.name + '\': 5 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 5)
+      throw new DOMException(
+        'IndexSizeError',
+        "Failed to execute 'arcTo' on '" +
+          this.constructor.name +
+          "': 5 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const cpx1Result = Number(cpx1);
     const cpy1Result = Number(cpy1);
     const cpx2Result = Number(cpx2);
     const cpy2Result = Number(cpy2);
     const radiusResult = Number(radius);
 
-    if (!Number.isFinite(cpx1Result + cpx2Result + cpy1Result + cpy2Result + radiusResult)) return;
-    if (radiusResult < 0) throw new TypeError('Failed to execute \'arcTo\' on \'' + this.constructor.name + '\': The radius provided (' + radius + ') is negative.');
+    if (
+      !Number.isFinite(
+        cpx1Result + cpx2Result + cpy1Result + cpy2Result + radiusResult
+      )
+    )
+      return;
+    if (radiusResult < 0)
+      throw new TypeError(
+        "Failed to execute 'arcTo' on '" +
+          this.constructor.name +
+          "': The radius provided (" +
+          radius +
+          ') is negative.'
+      );
 
-    const event = createCanvasEvent(
-      'arcTo',
-      getTransformSlice(this),
-      { cpx1: cpx1Result, cpy1: cpy1Result, cpx2: cpx2Result, cpy2: cpy2Result, radius: radiusResult },
-    );
+    const event = createCanvasEvent('arcTo', getTransformSlice(this), {
+      cpx1: cpx1Result,
+      cpy1: cpy1Result,
+      cpx2: cpx2Result,
+      cpy2: cpy2Result,
+      radius: radiusResult,
+    });
 
     this._path.push(event);
     this._events.push(event);
@@ -192,7 +320,14 @@ export default class CanvasRenderingContext2D {
   }
 
   bezierCurveTo(cpx1, cpy1, cpx2, cpy2, x, y) {
-    if (arguments.length < 6) throw new TypeError('Failed to execute \'bezierCurveTo\' on \'' + this.constructor.name + '\': 6 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 6)
+      throw new TypeError(
+        "Failed to execute 'bezierCurveTo' on '" +
+          this.constructor.name +
+          "': 6 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const cpx1Result = Number(cpx1);
     const cpy1Result = Number(cpy1);
     const cpx2Result = Number(cpx2);
@@ -200,13 +335,21 @@ export default class CanvasRenderingContext2D {
     const xResult = Number(x);
     const yResult = Number(y);
 
-    if (!Number.isFinite(cpx1Result + cpy1Result + cpx2Result + cpy2Result + xResult + yResult)) return;
+    if (
+      !Number.isFinite(
+        cpx1Result + cpy1Result + cpx2Result + cpy2Result + xResult + yResult
+      )
+    )
+      return;
 
-    const event = createCanvasEvent(
-      'bezierCurveTo',
-      getTransformSlice(this),
-      { cpx1, cpy1, cpx2, cpy2, x, y },
-    );
+    const event = createCanvasEvent('bezierCurveTo', getTransformSlice(this), {
+      cpx1,
+      cpy1,
+      cpx2,
+      cpy2,
+      x,
+      y,
+    });
 
     this._path.push(event);
     this._events.push(event);
@@ -220,13 +363,20 @@ export default class CanvasRenderingContext2D {
     const event = createCanvasEvent(
       'clearHitRegions',
       getTransformSlice(this),
-      { },
+      {}
     );
     this._events.push(event);
   }
 
   clearRect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Failed to execute \'clearRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4)
+      throw new TypeError(
+        "Failed to execute 'clearRect' on '" +
+          this.constructor.name +
+          "': 4 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
 
     const xResult = Number(x);
     const yResult = Number(y);
@@ -235,14 +385,12 @@ export default class CanvasRenderingContext2D {
 
     if (!Number.isFinite(x + y + width + height)) return;
 
-    const event = createCanvasEvent(
-      'clearRect',
-      getTransformSlice(this),
-      { x: xResult,
-        y: yResult,
-        width: widthResult,
-        height: heightResult, },
-    );
+    const event = createCanvasEvent('clearRect', getTransformSlice(this), {
+      x: xResult,
+      y: yResult,
+      width: widthResult,
+      height: heightResult,
+    });
 
     this._events.push(event);
     this._drawCalls.push(event);
@@ -265,23 +413,36 @@ export default class CanvasRenderingContext2D {
       if (arguments.length === 1) fillRule = 'nonzero';
       if (path instanceof Path2D) {
         fillRule = String(fillRule);
-        if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'clip\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
+        if (fillRule !== 'nonzero' && fillRule !== 'evenodd')
+          throw new TypeError(
+            "Failed to execute 'clip' on '" +
+              this.constructor.name +
+              "': The provided value '" +
+              fillRule +
+              "' is not a valid enum value of type CanvasFillRule."
+          );
         path = path._path.slice();
         clipPath = path;
       } else {
         fillRule = String(path);
-        if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'clip\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
+        if (fillRule !== 'nonzero' && fillRule !== 'evenodd')
+          throw new TypeError(
+            "Failed to execute 'clip' on '" +
+              this.constructor.name +
+              "': The provided value '" +
+              fillRule +
+              "' is not a valid enum value of type CanvasFillRule."
+          );
         path = this._path.slice();
         clipPath = path.slice(this._clipIndex);
         this._clipIndex = path.length;
       }
     }
 
-    const event = createCanvasEvent(
-      'clip',
-      getTransformSlice(this),
-      { path, fillRule },
-    );
+    const event = createCanvasEvent('clip', getTransformSlice(this), {
+      path,
+      fillRule,
+    });
 
     this._path.push(event);
     this._events.push(event);
@@ -290,20 +451,26 @@ export default class CanvasRenderingContext2D {
   }
 
   closePath() {
-    const event = createCanvasEvent(
-      'closePath',
-      getTransformSlice(this),
-      { },
-    );
+    const event = createCanvasEvent('closePath', getTransformSlice(this), {});
 
     this._events.push(event);
     this._path.push(event);
   }
 
   createImageData(width, height) {
-    if (arguments.length < 1) throw new TypeError('Failed to execute \'createImageData\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
+    if (arguments.length < 1)
+      throw new TypeError(
+        "Failed to execute 'createImageData' on '" +
+          this.constructor.name +
+          "': 1 argument required, but only 0 present."
+      );
     else if (arguments.length === 1) {
-      if (!(width instanceof ImageData)) throw new TypeError('Failed to execute \'createImageData\' on \'' + this.constructor.name + '\': parameter 1 is not of type \'ImageData\'.');
+      if (!(width instanceof ImageData))
+        throw new TypeError(
+          "Failed to execute 'createImageData' on '" +
+            this.constructor.name +
+            "': parameter 1 is not of type 'ImageData'."
+        );
       let result = new ImageData(width.width, width.height);
       result.data.set(width.data);
       const event = createCanvasEvent(
@@ -316,8 +483,18 @@ export default class CanvasRenderingContext2D {
     } else {
       width = Math.abs(Number(width));
       height = Math.abs(Number(height));
-      if (!Number.isFinite(width) || width === 0) throw new TypeError('Failed to execute \'createImageData\' on \'' + this.constructor.name + '\': The source width is 0.');
-      if (!Number.isFinite(height) || height === 0) throw new TypeError('Failed to execute \'createImageData\' on \'' + this.constructor.name + '\': The source height is 0.');
+      if (!Number.isFinite(width) || width === 0)
+        throw new TypeError(
+          "Failed to execute 'createImageData' on '" +
+            this.constructor.name +
+            "': The source width is 0."
+        );
+      if (!Number.isFinite(height) || height === 0)
+        throw new TypeError(
+          "Failed to execute 'createImageData' on '" +
+            this.constructor.name +
+            "': The source height is 0."
+        );
       const event = createCanvasEvent(
         'createImageData',
         getTransformSlice(this),
@@ -329,18 +506,30 @@ export default class CanvasRenderingContext2D {
   }
 
   createLinearGradient(x0, y0, x1, y1) {
-    if (arguments.length < 4) throw new TypeError('Failed to execute \'createLinearGradient\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4)
+      throw new TypeError(
+        "Failed to execute 'createLinearGradient' on '" +
+          this.constructor.name +
+          "': 4 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const x0Result = Number(x0);
     const y0Result = Number(y0);
     const x1Result = Number(x1);
     const y1Result = Number(y1);
 
-    if (!Number.isFinite(x0Result + y0Result + x1Result + y1Result)) throw new TypeError('Failed to execute \'createLinearGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
+    if (!Number.isFinite(x0Result + y0Result + x1Result + y1Result))
+      throw new TypeError(
+        "Failed to execute 'createLinearGradient' on '" +
+          this.constructor.name +
+          "': The provided double value is non-finite."
+      );
 
     const event = createCanvasEvent(
       'createLinearGradient',
       getTransformSlice(this),
-      { x0: x0Result, y0: y0Result, x1: x1Result, y1: y1Result },
+      { x0: x0Result, y0: y0Result, x1: x1Result, y1: y1Result }
     );
 
     this._events.push(event);
@@ -349,18 +538,32 @@ export default class CanvasRenderingContext2D {
   }
 
   createPattern(image, type) {
-    if (arguments.length === 1) throw new TypeError('Failed to execute \'createPattern\' on \'' + this.constructor.name + '\': 2 arguments required, but only 1 present.');
+    if (arguments.length === 1)
+      throw new TypeError(
+        "Failed to execute 'createPattern' on '" +
+          this.constructor.name +
+          "': 2 arguments required, but only 1 present."
+      );
     if (type === null) type = 'repeat';
     if (type === '') type = 'repeat';
 
-    if (type === 'repeat' || type === 'repeat-x' || type === 'repeat-y' || type === 'no-repeat') {
+    if (
+      type === 'repeat' ||
+      type === 'repeat-x' ||
+      type === 'repeat-y' ||
+      type === 'no-repeat'
+    ) {
       const event = createCanvasEvent(
         'createPattern',
         getTransformSlice(this),
-        { image, type },
+        { image, type }
       );
       if (image instanceof ImageBitmap) {
-        if (image._closed) throw new DOMException('InvalidStateError', 'Failed to execute \'createPattern\' on \'CanvasRenderingContext2D\': The image source is detached.');
+        if (image._closed)
+          throw new DOMException(
+            'InvalidStateError',
+            "Failed to execute 'createPattern' on 'CanvasRenderingContext2D': The image source is detached."
+          );
         this._events.push(event);
         return new CanvasPattern();
       }
@@ -377,14 +580,31 @@ export default class CanvasRenderingContext2D {
         return new CanvasPattern();
       }
     } else {
-      throw new TypeError('Failed to execute \'createPattern\' on \'' + this.constructor.name + '\': The provided type (\'' + type + '\') is not one of \'repeat\', \'no-repeat\', \'repeat-x\', or \'repeat-y\'.');
+      throw new TypeError(
+        "Failed to execute 'createPattern' on '" +
+          this.constructor.name +
+          "': The provided type ('" +
+          type +
+          "') is not one of 'repeat', 'no-repeat', 'repeat-x', or 'repeat-y'."
+      );
     }
 
-    throw new TypeError('Failed to execute \'createPattern\' on \'' + this.constructor.name + '\': The provided value is not of type \'(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)\'');
+    throw new TypeError(
+      "Failed to execute 'createPattern' on '" +
+        this.constructor.name +
+        "': The provided value is not of type '(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)'"
+    );
   }
 
   createRadialGradient(x0, y0, r0, x1, y1, r1) {
-    if (arguments.length < 6) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': 6 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 6)
+      throw new TypeError(
+        "Failed to execute 'createRadialGradient' on '" +
+          this.constructor.name +
+          "': 6 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const x0Result = Number(x0);
     const y0Result = Number(y0);
     const r0Result = Number(r0);
@@ -392,19 +612,42 @@ export default class CanvasRenderingContext2D {
     const y1Result = Number(y1);
     const r1Result = Number(r1);
 
-    if (!Number.isFinite(x0Result + y0Result + r0Result + x1Result + y1Result + r1Result)) throw new TypeError('Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The provided double value is non-finite.');
-    if (r0Result < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The r0 provided is less than 0.');
-    if (r1Result < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'createRadialGradient\' on \'' + this.constructor.name + '\': The r1 provided is less than 0.');
+    if (
+      !Number.isFinite(
+        x0Result + y0Result + r0Result + x1Result + y1Result + r1Result
+      )
+    )
+      throw new TypeError(
+        "Failed to execute 'createRadialGradient' on '" +
+          this.constructor.name +
+          "': The provided double value is non-finite."
+      );
+    if (r0Result < 0)
+      throw new DOMException(
+        'IndexSizeError',
+        "Failed to execute 'createRadialGradient' on '" +
+          this.constructor.name +
+          "': The r0 provided is less than 0."
+      );
+    if (r1Result < 0)
+      throw new DOMException(
+        'IndexSizeError',
+        "Failed to execute 'createRadialGradient' on '" +
+          this.constructor.name +
+          "': The r1 provided is less than 0."
+      );
 
     const event = createCanvasEvent(
       'createRadialGradient',
       getTransformSlice(this),
-      { x0: x0Result,
+      {
+        x0: x0Result,
         y0: y0Result,
         r0: r0Result,
         x1: x1Result,
         y1: y1Result,
-        r1: r1Result, },
+        r1: r1Result,
+      }
     );
     this._events.push(event);
     return new CanvasGradient();
@@ -421,12 +664,14 @@ export default class CanvasRenderingContext2D {
       const event = createCanvasEvent(
         'currentTransform',
         getTransformSlice(this),
-        { a: value.a,
+        {
+          a: value.a,
           b: value.b,
           c: value.c,
           d: value.d,
           e: value.e,
-          f: value.f, },
+          f: value.f,
+        }
       );
       this._events.push(event);
     }
@@ -439,11 +684,9 @@ export default class CanvasRenderingContext2D {
   set direction(value) {
     if (value === 'rtl' || value === 'ltr' || value === 'inherit') {
       this._directionStack[this._stackIndex] = value;
-      const event = createCanvasEvent(
-        'direction',
-        getTransformSlice(this),
-        { value },
-      );
+      const event = createCanvasEvent('direction', getTransformSlice(this), {
+        value,
+      });
       this._events.push(event);
     }
   }
@@ -453,36 +696,77 @@ export default class CanvasRenderingContext2D {
   }
 
   drawFocusIfNeeded(path, element) {
-    if (arguments.length === 0) throw new TypeError('Failed to execute \'drawFocusIfNeeded\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
-    if (arguments.length === 2 && !(path instanceof Path2D)) throw new TypeError('Failed to execute \'drawFocusIfNeeded\' on \'' + this.constructor.name + '\': parameter 1 is not of type \'Path2D\'.');
+    if (arguments.length === 0)
+      throw new TypeError(
+        "Failed to execute 'drawFocusIfNeeded' on '" +
+          this.constructor.name +
+          "': 1 argument required, but only 0 present."
+      );
+    if (arguments.length === 2 && !(path instanceof Path2D))
+      throw new TypeError(
+        "Failed to execute 'drawFocusIfNeeded' on '" +
+          this.constructor.name +
+          "': parameter 1 is not of type 'Path2D'."
+      );
 
     if (arguments.length === 1) {
       element = path;
       path = null;
     }
 
-    if (!(element instanceof Element)) throw new TypeError('Failed to execute \'drawFocusIfNeeded\' on \'' + this.constructor.name + '\': parameter ' + arguments.length + ' is not of type \'Element\'.');
+    if (!(element instanceof Element))
+      throw new TypeError(
+        "Failed to execute 'drawFocusIfNeeded' on '" +
+          this.constructor.name +
+          "': parameter " +
+          arguments.length +
+          " is not of type 'Element'."
+      );
     const event = createCanvasEvent(
       'drawFocusIfNeeded',
       getTransformSlice(this),
-      { path: path ? path._path : null, element },
+      { path: path ? path._path : null, element }
     );
     this._events.push(event);
   }
 
   drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
-    if (arguments.length < 3) throw new TypeError('Failed to execute \'drawImage\' on \'' + this.constructor.name + '\': 3 arguments required, but only ' + arguments.length + ' present.');
-    if (arguments.length === 4 || arguments.length > 5 && arguments.length < 9) throw new TypeError('Failed to execute \'drawImage\' on \'' + this.constructor.name + '\': Valid arities are: [3, 5, 9], but 4 arguments provided.');
+    if (arguments.length < 3)
+      throw new TypeError(
+        "Failed to execute 'drawImage' on '" +
+          this.constructor.name +
+          "': 3 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
+    if (
+      arguments.length === 4 ||
+      (arguments.length > 5 && arguments.length < 9)
+    )
+      throw new TypeError(
+        "Failed to execute 'drawImage' on '" +
+          this.constructor.name +
+          "': Valid arities are: [3, 5, 9], but 4 arguments provided."
+      );
 
     let valid = false;
-    if (img instanceof HTMLImageElement) valid = true;;
+    if (img instanceof HTMLImageElement) valid = true;
     if (img instanceof ImageBitmap) {
-      if (img._closed) throw new DOMException('InvalidStateError', 'DOMException: Failed to execute \'drawImage\' on \'CanvasRenderingContext2D\': The image source is detached.');
+      if (img._closed)
+        throw new DOMException(
+          'InvalidStateError',
+          "DOMException: Failed to execute 'drawImage' on 'CanvasRenderingContext2D': The image source is detached."
+        );
       valid = true;
     }
     if (img instanceof HTMLVideoElement) valid = true;
     if (img instanceof HTMLCanvasElement) valid = true;
-    if (!valid) throw new TypeError('Failed to execute \'drawImage\' on \'' + this.constructor.name + '\': The provided value is not of type \'(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)\'');
+    if (!valid)
+      throw new TypeError(
+        "Failed to execute 'drawImage' on '" +
+          this.constructor.name +
+          "': The provided value is not of type '(CSSImageValue or HTMLImageElement or SVGImageElement or HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas)'"
+      );
 
     const sxResult = Number(sx);
     const syResult = Number(sy);
@@ -504,7 +788,8 @@ export default class CanvasRenderingContext2D {
       dWidth = img.width;
       dHeight = img.height;
     } else if (arguments.length === 5) {
-      if (!Number.isFinite(sxResult + syResult + sWidthResult + sHeightResult)) return;
+      if (!Number.isFinite(sxResult + syResult + sWidthResult + sHeightResult))
+        return;
       sx = 0;
       sy = 0;
       sWidth = img.width;
@@ -514,7 +799,12 @@ export default class CanvasRenderingContext2D {
       dWidth = sWidth;
       dHeight = sHeight;
     } else {
-      if (!Number.isFinite(sx + sy + sWidth + sHeight + dx + dy + dWidth + dHeight)) return;
+      if (
+        !Number.isFinite(
+          sx + sy + sWidth + sHeight + dx + dy + dWidth + dHeight
+        )
+      )
+        return;
       sx = sxResult;
       sy = syResult;
       sWidth = sWidthResult;
@@ -525,25 +815,39 @@ export default class CanvasRenderingContext2D {
       dHeight = dHeightResult;
     }
 
-    const event = createCanvasEvent(
-      'drawImage',
-      getTransformSlice(this),
-      { img,
-        sx,
-        sy,
-        sWidth,
-        sHeight,
-        dx,
-        dy,
-        dWidth,
-        dHeight, },
-    );
+    const event = createCanvasEvent('drawImage', getTransformSlice(this), {
+      img,
+      sx,
+      sy,
+      sWidth,
+      sHeight,
+      dx,
+      dy,
+      dWidth,
+      dHeight,
+    });
     this._events.push(event);
     this._drawCalls.push(event);
   }
 
-  ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise = false) {
-    if (arguments.length < 7) throw new TypeError('Failed to execute \'ellipse\' on \'' + this.constructor.name + '\': 6 arguments required, but only ' + arguments.length + ' present.');
+  ellipse(
+    x,
+    y,
+    radiusX,
+    radiusY,
+    rotation,
+    startAngle,
+    endAngle,
+    anticlockwise = false
+  ) {
+    if (arguments.length < 7)
+      throw new TypeError(
+        "Failed to execute 'ellipse' on '" +
+          this.constructor.name +
+          "': 6 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const xResult = Number(x);
     const yResult = Number(y);
     const radiusXResult = Number(radiusX);
@@ -553,23 +857,48 @@ export default class CanvasRenderingContext2D {
     const endAngleResult = Number(endAngle);
     const anticlockwiseResult = Boolean(anticlockwise);
 
-    if (!Number.isFinite(xResult + yResult + radiusXResult + radiusYResult + rotationResult + startAngleResult + endAngleResult)) return;
+    if (
+      !Number.isFinite(
+        xResult +
+          yResult +
+          radiusXResult +
+          radiusYResult +
+          rotationResult +
+          startAngleResult +
+          endAngleResult
+      )
+    )
+      return;
 
-    if (Number(radiusX) < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'ellipse\' on \'' + this.constructor.name + '\': The major-axis radius provided (' + radiusX + ') is negative.');
-    if (Number(radiusY) < 0) throw new DOMException('IndexSizeError', 'Failed to execute \'ellipse\' on \'' + this.constructor.name + '\': The minor-axis radius provided (' + radiusY + ') is negative.');
+    if (Number(radiusX) < 0)
+      throw new DOMException(
+        'IndexSizeError',
+        "Failed to execute 'ellipse' on '" +
+          this.constructor.name +
+          "': The major-axis radius provided (" +
+          radiusX +
+          ') is negative.'
+      );
+    if (Number(radiusY) < 0)
+      throw new DOMException(
+        'IndexSizeError',
+        "Failed to execute 'ellipse' on '" +
+          this.constructor.name +
+          "': The minor-axis radius provided (" +
+          radiusY +
+          ') is negative.'
+      );
 
-    const event = createCanvasEvent(
-      'ellipse',
-      getTransformSlice(this),
-      { x: xResult,
-        y: yResult,
-        radiusX: radiusXResult,
-        radiusY: radiusYResult,
-        rotation: rotationResult,
-        startAngle: startAngleResult,
-        endAngle: endAngleResult,
-        anticlockwise: anticlockwiseResult, },
-    );
+    const event = createCanvasEvent('ellipse', getTransformSlice(this), {
+      x: xResult,
+      y: yResult,
+      radiusX: radiusXResult,
+      radiusY: radiusYResult,
+      rotation: rotationResult,
+      startAngle: startAngleResult,
+      endAngle: endAngleResult,
+      anticlockwise: anticlockwiseResult,
+    });
     this._path.push(event);
     this._events.push(event);
   }
@@ -582,27 +911,47 @@ export default class CanvasRenderingContext2D {
       if (arguments.length === 1) fillRule = 'nonzero';
       if (path instanceof Path2D) {
         fillRule = String(fillRule);
-        if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'clip\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
+        if (fillRule !== 'nonzero' && fillRule !== 'evenodd')
+          throw new TypeError(
+            "Failed to execute 'clip' on '" +
+              this.constructor.name +
+              "': The provided value '" +
+              fillRule +
+              "' is not a valid enum value of type CanvasFillRule."
+          );
         path = path._path.slice();
       } else {
         fillRule = String(path);
-        if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'clip\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
+        if (fillRule !== 'nonzero' && fillRule !== 'evenodd')
+          throw new TypeError(
+            "Failed to execute 'clip' on '" +
+              this.constructor.name +
+              "': The provided value '" +
+              fillRule +
+              "' is not a valid enum value of type CanvasFillRule."
+          );
         path = this._path.slice();
       }
     }
 
-    const event = createCanvasEvent(
-      'fill',
-      getTransformSlice(this),
-      { path, fillRule },
-    );
+    const event = createCanvasEvent('fill', getTransformSlice(this), {
+      path,
+      fillRule,
+    });
 
     this._events.push(event);
     this._drawCalls.push(event);
   }
 
   fillRect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Failed to execute \'fillRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4)
+      throw new TypeError(
+        "Failed to execute 'fillRect' on '" +
+          this.constructor.name +
+          "': 4 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
 
     const xResult = Number(x);
     const yResult = Number(y);
@@ -611,14 +960,12 @@ export default class CanvasRenderingContext2D {
 
     if (!Number.isFinite(x + y + width + height)) return;
 
-    const event = createCanvasEvent(
-      'fillRect',
-      getTransformSlice(this),
-      { x: xResult,
-        y: yResult,
-        width: widthResult,
-        height: heightResult, },
-    );
+    const event = createCanvasEvent('fillRect', getTransformSlice(this), {
+      x: xResult,
+      y: yResult,
+      width: widthResult,
+      height: heightResult,
+    });
 
     this._events.push(event);
     this._drawCalls.push(event);
@@ -631,20 +978,21 @@ export default class CanvasRenderingContext2D {
         const result = new MooColor(value);
         valid = true;
         value = this._fillStyleStack[this._stackIndex] = serializeColor(result);
+      } catch (e) {
+        return;
       }
-      catch(e) { return; }
-    }
-    else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
+    } else if (
+      value instanceof CanvasGradient ||
+      value instanceof CanvasPattern
+    ) {
       valid = true;
       this._fillStyleStack[this._stackIndex] = value;
     }
 
     if (valid) {
-      const event = createCanvasEvent(
-        'fillStyle',
-        getTransformSlice(this),
-        { value },
-      );
+      const event = createCanvasEvent('fillStyle', getTransformSlice(this), {
+        value,
+      });
       this._events.push(event);
     }
   }
@@ -654,33 +1002,41 @@ export default class CanvasRenderingContext2D {
   }
 
   fillText(text, x, y, maxWidth) {
-    if (arguments.length < 3) throw new TypeError('Failed to execute \'fillText\' on \'' + this.constructor.name + '\': 3 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 3)
+      throw new TypeError(
+        "Failed to execute 'fillText' on '" +
+          this.constructor.name +
+          "': 3 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const textResult = String(text);
     const xResult = Number(x);
     const yResult = Number(y);
     const maxWidthResult = Number(maxWidth);
     if (arguments.length === 3 && !Number.isFinite(xResult + yResult)) return;
-    if (arguments.length > 3 && !Number.isFinite(xResult + yResult + maxWidthResult)) return;
-    const event = createCanvasEvent(
-      'fillText',
-      getTransformSlice(this),
-      { text: textResult,
-        x: xResult,
-        y: yResult,
-        maxWidth: arguments.length === 3 ? null : maxWidthResult, },
-    );
+    if (
+      arguments.length > 3 &&
+      !Number.isFinite(xResult + yResult + maxWidthResult)
+    )
+      return;
+    const event = createCanvasEvent('fillText', getTransformSlice(this), {
+      text: textResult,
+      x: xResult,
+      y: yResult,
+      maxWidth: arguments.length === 3 ? null : maxWidthResult,
+    });
     this._events.push(event);
     this._drawCalls.push(event);
   }
 
   set filter(value) {
     if (value === '') value = 'none';
-    value = this._filterStack[this._stackIndex] = typeof value === 'string' ? value : 'none';
-    const event = createCanvasEvent(
-      'filter',
-      getTransformSlice(this),
-      { value, },
-    );
+    value = this._filterStack[this._stackIndex] =
+      typeof value === 'string' ? value : 'none';
+    const event = createCanvasEvent('filter', getTransformSlice(this), {
+      value,
+    });
     this._events.push(event);
   }
 
@@ -694,11 +1050,9 @@ export default class CanvasRenderingContext2D {
     try {
       const result = cssfontparser(value);
       value = this._fontStack[this._stackIndex] = result.toString();
-      const event = createCanvasEvent(
-        'font',
-        getTransformSlice(this),
-        { value, },
-      );
+      const event = createCanvasEvent('font', getTransformSlice(this), {
+        value,
+      });
       this._events.push(event);
     } catch (ex) {}
   }
@@ -725,11 +1079,9 @@ export default class CanvasRenderingContext2D {
     if (value < 0) return;
     if (value > 1) return;
     this._globalAlphaStack[this._stackIndex] = value;
-    const event = createCanvasEvent(
-      'globalAlpha',
-      getTransformSlice(this),
-      { value, },
-    );
+    const event = createCanvasEvent('globalAlpha', getTransformSlice(this), {
+      value,
+    });
     this._events.push(event);
   }
 
@@ -743,7 +1095,7 @@ export default class CanvasRenderingContext2D {
       const event = createCanvasEvent(
         'globalCompositeOperation',
         getTransformSlice(this),
-        { value, },
+        { value }
       );
       this._events.push(event);
     }
@@ -758,7 +1110,7 @@ export default class CanvasRenderingContext2D {
     const event = createCanvasEvent(
       'imageSmoothingEnabled',
       getTransformSlice(this),
-      { value, },
+      { value }
     );
     this._events.push(event);
   }
@@ -773,7 +1125,7 @@ export default class CanvasRenderingContext2D {
       const event = createCanvasEvent(
         'imageSmoothingQuality',
         getTransformSlice(this),
-        { value, },
+        { value }
       );
       this._events.push(event);
     }
@@ -784,7 +1136,14 @@ export default class CanvasRenderingContext2D {
   }
 
   isPointInPath(path, x, y, fillRule = 'nonzero') {
-    if (arguments.length < 2) throw new TypeError('Failed to execute \'isPointInPath\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2)
+      throw new TypeError(
+        "Failed to execute 'isPointInPath' on '" +
+          this.constructor.name +
+          "': 2 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     if (!(path instanceof Path2D)) {
       if (arguments.length > 2) {
         fillRule = y;
@@ -792,33 +1151,43 @@ export default class CanvasRenderingContext2D {
       y = x;
       x = path;
     }
-    if (fillRule !== 'nonzero' && fillRule !== 'evenodd') throw new TypeError('Failed to execute \'isPointInPath\' on \'' + this.constructor.name + '\': The provided value \'' + fillRule + '\' is not a valid enum value of type CanvasFillRule.');
+    if (fillRule !== 'nonzero' && fillRule !== 'evenodd')
+      throw new TypeError(
+        "Failed to execute 'isPointInPath' on '" +
+          this.constructor.name +
+          "': The provided value '" +
+          fillRule +
+          "' is not a valid enum value of type CanvasFillRule."
+      );
 
-    const event = createCanvasEvent(
-      'isPointInPath',
-      getTransformSlice(this),
-      { x: Number(x),
-        y: Number(y),
-        fillRule,
-        path: path instanceof Path2D ? path._path.slice() : this._path.slice(), },
-    );
+    const event = createCanvasEvent('isPointInPath', getTransformSlice(this), {
+      x: Number(x),
+      y: Number(y),
+      fillRule,
+      path: path instanceof Path2D ? path._path.slice() : this._path.slice(),
+    });
     this._events.push(event);
     return false; // return false in a mocking environment, unless I can verify a point is actually within the path
   }
 
   isPointInStroke(path, x, y) {
-    if (arguments.length < 2) throw new TypeError('Failed to execute \'isPointInStroke\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2)
+      throw new TypeError(
+        "Failed to execute 'isPointInStroke' on '" +
+          this.constructor.name +
+          "': 2 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     if (!(path instanceof Path2D)) {
       y = x;
       x = path;
     }
-    const event = createCanvasEvent(
-      'isPointInPath',
-      getTransformSlice(this),
-      { x: Number(x),
-        y: Number(y),
-        path: path instanceof Path2D ? path._path.slice() : this._path.slice(), },
-    );
+    const event = createCanvasEvent('isPointInPath', getTransformSlice(this), {
+      x: Number(x),
+      y: Number(y),
+      path: path instanceof Path2D ? path._path.slice() : this._path.slice(),
+    });
     this._events.push(event);
     return false; // return false in a mocking environment, unless I can verify a point is actually within the path
   }
@@ -826,11 +1195,9 @@ export default class CanvasRenderingContext2D {
   set lineCap(value) {
     if (value === 'butt' || value === 'round' || value === 'square') {
       this._lineCapStack[this._stackIndex] = value;
-      const event = createCanvasEvent(
-        'lineCap',
-        getTransformSlice(this),
-        { value, },
-      );
+      const event = createCanvasEvent('lineCap', getTransformSlice(this), {
+        value,
+      });
       this._events.push(event);
     }
   }
@@ -847,7 +1214,7 @@ export default class CanvasRenderingContext2D {
       const event = createCanvasEvent(
         'lineDashOffset',
         getTransformSlice(this),
-        { value, },
+        { value }
       );
       this._events.push(event);
     }
@@ -860,11 +1227,9 @@ export default class CanvasRenderingContext2D {
   set lineJoin(value) {
     if (value === 'round' || value === 'bevel' || value === 'miter') {
       this._lineJoinStack[this._stackIndex] = value;
-      const event = createCanvasEvent(
-        'lineJoin',
-        getTransformSlice(this),
-        { value, },
-      );
+      const event = createCanvasEvent('lineJoin', getTransformSlice(this), {
+        value,
+      });
       this._events.push(event);
     }
   }
@@ -874,16 +1239,22 @@ export default class CanvasRenderingContext2D {
   }
 
   lineTo(x, y) {
-    if (arguments.length < 2) throw new TypeError('Failed to execute \'lineTo\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2)
+      throw new TypeError(
+        "Failed to execute 'lineTo' on '" +
+          this.constructor.name +
+          "': 2 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const xResult = Number(x);
     const yResult = Number(y);
 
     if (!Number.isFinite(xResult + yResult)) return;
-    const event = createCanvasEvent(
-      'lineTo',
-      getTransformSlice(this),
-      { x: xResult, y: yResult, },
-    );
+    const event = createCanvasEvent('lineTo', getTransformSlice(this), {
+      x: xResult,
+      y: yResult,
+    });
     this._events.push(event);
     this._path.push(event);
   }
@@ -893,11 +1264,9 @@ export default class CanvasRenderingContext2D {
 
     if (Number.isFinite(result) && result > 0) {
       this._lineWidthStack[this._stackIndex] = result;
-      const event = createCanvasEvent(
-        'lineWidth',
-        getTransformSlice(this),
-        { value: result, },
-      );
+      const event = createCanvasEvent('lineWidth', getTransformSlice(this), {
+        value: result,
+      });
       this._events.push(event);
     }
   }
@@ -907,14 +1276,17 @@ export default class CanvasRenderingContext2D {
   }
 
   measureText(text) {
-    if (arguments.length < 1) throw new TypeError('Failed to execute \'measureText\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
+    if (arguments.length < 1)
+      throw new TypeError(
+        "Failed to execute 'measureText' on '" +
+          this.constructor.name +
+          "': 1 argument required, but only 0 present."
+      );
     text = text == null ? '' : text;
     text = text.toString();
-    const event = createCanvasEvent(
-      'measureText',
-      getTransformSlice(this),
-      { text },
-    );
+    const event = createCanvasEvent('measureText', getTransformSlice(this), {
+      text,
+    });
     this._events.push(event);
     return new TextMetrics(text);
   }
@@ -924,11 +1296,9 @@ export default class CanvasRenderingContext2D {
 
     if (Number.isFinite(result) && result > 0) {
       this._miterLimitStack[this._stackIndex] = result;
-      const event = createCanvasEvent(
-        'lineWidth',
-        getTransformSlice(this),
-        { value: result, },
-      );
+      const event = createCanvasEvent('lineWidth', getTransformSlice(this), {
+        value: result,
+      });
       this._events.push(event);
     }
   }
@@ -938,25 +1308,49 @@ export default class CanvasRenderingContext2D {
   }
 
   moveTo(x, y) {
-    if (arguments.length < 2) throw new TypeError('Failed to execute \'moveTo\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2)
+      throw new TypeError(
+        "Failed to execute 'moveTo' on '" +
+          this.constructor.name +
+          "': 2 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const xResult = Number(x);
     const yResult = Number(y);
 
     if (!Number.isFinite(x + y)) return;
-    const event = createCanvasEvent(
-      'moveTo',
-      getTransformSlice(this),
-      { x: xResult,
-        y: yResult, },
-    );
+    const event = createCanvasEvent('moveTo', getTransformSlice(this), {
+      x: xResult,
+      y: yResult,
+    });
     this._events.push(event);
     this._path.push(event);
   }
 
   putImageData(data, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight) {
-    if (arguments.length < 3) throw new TypeError('Failed to execute \'putImageData\' on \'' + this.constructor.name + '\': 3 arguments required, but only ' + arguments.length + ' present.');
-    if (arguments.length > 3 && arguments.length < 7) throw new TypeError('Failed to execute \'putImageData\' on \'' + this.constructor.name + '\': Valid arities are: [3, 7], but ' + arguments.length + ' arguments provided.');
-    if (!(data instanceof ImageData)) throw new TypeError('Failed to execute \'putImageData\' on \'' + this.constructor.name + '\': parameter 1 is not of type \'ImageData\'.');
+    if (arguments.length < 3)
+      throw new TypeError(
+        "Failed to execute 'putImageData' on '" +
+          this.constructor.name +
+          "': 3 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
+    if (arguments.length > 3 && arguments.length < 7)
+      throw new TypeError(
+        "Failed to execute 'putImageData' on '" +
+          this.constructor.name +
+          "': Valid arities are: [3, 7], but " +
+          arguments.length +
+          ' arguments provided.'
+      );
+    if (!(data instanceof ImageData))
+      throw new TypeError(
+        "Failed to execute 'putImageData' on '" +
+          this.constructor.name +
+          "': parameter 1 is not of type 'ImageData'."
+      );
 
     const xResult = Number(x);
     const yResult = Number(y);
@@ -968,24 +1362,39 @@ export default class CanvasRenderingContext2D {
     if (arguments.length === 3) {
       if (!Number.isFinite(xResult + yResult)) return;
     } else {
-      if (!Number.isFinite(xResult + yResult + dirtyXResult + dirtyYResult + dirtyWidthResult + dirtyHeightResult)) return;
+      if (
+        !Number.isFinite(
+          xResult +
+            yResult +
+            dirtyXResult +
+            dirtyYResult +
+            dirtyWidthResult +
+            dirtyHeightResult
+        )
+      )
+        return;
     }
 
-    const event = createCanvasEvent(
-      'putImageData',
-      getTransformSlice(this),
-      { x: xResult,
-        y: yResult,
-        dirtyX: dirtyXResult,
-        dirtyY: dirtyYResult,
-        dirtyWidth: dirtyWidthResult,
-        dirtyHeight: dirtyHeightResult, },
-    );
+    const event = createCanvasEvent('putImageData', getTransformSlice(this), {
+      x: xResult,
+      y: yResult,
+      dirtyX: dirtyXResult,
+      dirtyY: dirtyYResult,
+      dirtyWidth: dirtyWidthResult,
+      dirtyHeight: dirtyHeightResult,
+    });
     this._events.push(event);
   }
 
   quadraticCurveTo(cpx, cpy, x, y) {
-    if (arguments.length < 4) throw new TypeError('Failed to execute \'quadraticCurveTo\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4)
+      throw new TypeError(
+        "Failed to execute 'quadraticCurveTo' on '" +
+          this.constructor.name +
+          "': 4 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const cpxResult = Number(cpx);
     const cpyResult = Number(cpy);
     const xResult = Number(x);
@@ -996,41 +1405,50 @@ export default class CanvasRenderingContext2D {
     const event = createCanvasEvent(
       'quadraticCurveTo',
       getTransformSlice(this),
-      { cpx: cpxResult,
-        cpy: cpyResult,
-        x: xResult,
-        y: yResult, },
+      { cpx: cpxResult, cpy: cpyResult, x: xResult, y: yResult }
     );
     this._events.push(event);
   }
 
   rect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Failed to execute \'rect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4)
+      throw new TypeError(
+        "Failed to execute 'rect' on '" +
+          this.constructor.name +
+          "': 4 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     if (!Number.isFinite(x + y + width + height)) return;
 
     const xResult = Number(x);
     const yResult = Number(y);
     const widthResult = Number(width);
     const heightResult = Number(height);
-    const event = createCanvasEvent(
-      'rect',
-      getTransformSlice(this),
-      { x: xResult,
-        y: yResult,
-        width: widthResult,
-        height: heightResult, },
-    );
+    const event = createCanvasEvent('rect', getTransformSlice(this), {
+      x: xResult,
+      y: yResult,
+      width: widthResult,
+      height: heightResult,
+    });
 
     this._events.push(event);
     this._path.push(event);
   }
 
   removeHitRegion(id) {
-    if (arguments.length < 1) throw new TypeError('Failed to execute \'removeHitRegion\' on \'' + this.constructor.name + '\': 1 argument required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 1)
+      throw new TypeError(
+        "Failed to execute 'removeHitRegion' on '" +
+          this.constructor.name +
+          "': 1 argument required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const event = createCanvasEvent(
       'removeHitRegion',
       getTransformSlice(this),
-      { id },
+      { id }
     );
 
     this._events.push(event);
@@ -1044,16 +1462,14 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][4] = 0;
     this._transformStack[this._stackIndex][5] = 0;
 
-    const event = createCanvasEvent(
-      'resetTransform',
-      getTransformSlice(this),
-      { a: 1,
-        b: 0,
-        c: 0,
-        d: 1,
-        e: 0,
-        f: 0, },
-    );
+    const event = createCanvasEvent('resetTransform', getTransformSlice(this), {
+      a: 1,
+      b: 0,
+      c: 0,
+      d: 1,
+      e: 0,
+      f: 0,
+    });
     this._events.push(event);
   }
 
@@ -1084,16 +1500,17 @@ export default class CanvasRenderingContext2D {
     this._textBaselineStack.pop();
     this._stackIndex -= 1;
 
-    const event = createCanvasEvent(
-      'restore',
-      getTransformSlice(this),
-      { },
-    );
+    const event = createCanvasEvent('restore', getTransformSlice(this), {});
     this._events.push(event);
   }
 
   rotate(angle) {
-    if (arguments.length < 1) throw new TypeError('Failed to execute \'rotate\' on \'' + this.constructor.name + '\': 1 argument required, but only 0 present.');
+    if (arguments.length < 1)
+      throw new TypeError(
+        "Failed to execute 'rotate' on '" +
+          this.constructor.name +
+          "': 1 argument required, but only 0 present."
+      );
     angle = Number(angle);
     if (!Number.isFinite(angle)) return;
     const a = this._transformStack[this._stackIndex][0];
@@ -1107,11 +1524,9 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][2] = c * cos - a * sin;
     this._transformStack[this._stackIndex][3] = d * cos - b * sin;
 
-    const event = createCanvasEvent(
-      'rotate',
-      getTransformSlice(this),
-      { angle },
-    );
+    const event = createCanvasEvent('rotate', getTransformSlice(this), {
+      angle,
+    });
     this._events.push(event);
   }
 
@@ -1123,9 +1538,15 @@ export default class CanvasRenderingContext2D {
     this._filterStack.push(this._filterStack[stackIndex]);
     this._fontStack.push(this._fontStack[stackIndex]);
     this._globalAlphaStack.push(this._globalAlphaStack[stackIndex]);
-    this._globalCompositeOperationStack.push(this._globalCompositeOperationStack[stackIndex]);
-    this._imageSmoothingEnabledStack.push(this._imageSmoothingEnabledStack[stackIndex]);
-    this._imageSmoothingQualityStack.push(this._imageSmoothingQualityStack[stackIndex]);
+    this._globalCompositeOperationStack.push(
+      this._globalCompositeOperationStack[stackIndex]
+    );
+    this._imageSmoothingEnabledStack.push(
+      this._imageSmoothingEnabledStack[stackIndex]
+    );
+    this._imageSmoothingQualityStack.push(
+      this._imageSmoothingQualityStack[stackIndex]
+    );
     this._lineCapStack.push(this._lineCapStack[stackIndex]);
     this._lineDashStack.push(this._lineDashStack[stackIndex]);
     this._lineDashOffsetStack.push(this._lineDashOffsetStack[stackIndex]);
@@ -1142,16 +1563,19 @@ export default class CanvasRenderingContext2D {
     this._clipStack.push(this._clipStack[stackIndex].slice());
     this._stackIndex = stackIndex + 1;
 
-    const event = createCanvasEvent(
-      'save',
-      getTransformSlice(this),
-      { },
-    );
+    const event = createCanvasEvent('save', getTransformSlice(this), {});
     this._events.push(event);
   }
 
   scale(x, y) {
-    if (arguments.length < 2) throw new TypeError('Failed to execute \'scale\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2)
+      throw new TypeError(
+        "Failed to execute 'scale' on '" +
+          this.constructor.name +
+          "': 2 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const xResult = Number(x);
     const yResult = Number(y);
 
@@ -1161,31 +1585,44 @@ export default class CanvasRenderingContext2D {
       this._transformStack[this._stackIndex][2] *= yResult;
       this._transformStack[this._stackIndex][3] *= yResult;
 
-      const event = createCanvasEvent(
-        'scale',
-        getTransformSlice(this),
-        { x: xResult,
-          y: yResult, },
-      );
+      const event = createCanvasEvent('scale', getTransformSlice(this), {
+        x: xResult,
+        y: yResult,
+      });
       this._events.push(event);
     }
   }
 
   scrollPathIntoView(path) {
-    if (arguments.length > 0 && path instanceof Path2D) path = path._path.slice();
+    if (arguments.length > 0 && path instanceof Path2D)
+      path = path._path.slice();
     else path = this._path.slice();
     const event = createCanvasEvent(
       'scrollPathIntoView',
       getTransformSlice(this),
-      { path },
+      { path }
     );
     this._events.push(event);
   }
 
   setLineDash(lineDash) {
-    const isSequence = [Array, Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, Float64Array]
-      .reduce((left, right) => left || lineDash instanceof right, false);
-    if (!isSequence) throw new TypeError('Failed to execute \'setLineDash\' on \'' + this.constructor.name + '\': The provided value cannot be converted to a sequence.');
+    const isSequence = [
+      Array,
+      Int8Array,
+      Uint8Array,
+      Int16Array,
+      Uint16Array,
+      Int32Array,
+      Uint32Array,
+      Float32Array,
+      Float64Array,
+    ].reduce((left, right) => left || lineDash instanceof right, false);
+    if (!isSequence)
+      throw new TypeError(
+        "Failed to execute 'setLineDash' on '" +
+          this.constructor.name +
+          "': The provided value cannot be converted to a sequence."
+      );
     let result = [];
 
     for (let i = 0; i < lineDash.length; i++) {
@@ -1198,17 +1635,15 @@ export default class CanvasRenderingContext2D {
       }
     }
 
-    result = this._lineDashStack[this._stackIndex] = result.length % 2 === 1 ? result.concat(result) : result;
-    const event = createCanvasEvent(
-      'setLineDash',
-      getTransformSlice(this),
-      { value: result.slice() },
-    );
+    result = this._lineDashStack[this._stackIndex] =
+      result.length % 2 === 1 ? result.concat(result) : result;
+    const event = createCanvasEvent('setLineDash', getTransformSlice(this), {
+      value: result.slice(),
+    });
     this._events.push(event);
   }
 
   setTransform(a, b, c, d, e, f) {
-
     if (arguments.length === 0) {
       a = 1;
       b = 0;
@@ -1226,10 +1661,22 @@ export default class CanvasRenderingContext2D {
         e = transform.e;
         f = transform.f;
       } else {
-        throw new TypeError('Failed to execute \'setTransform\' on \'' + this.constructor.name + '\': parameter ' + a + ' (\'transform\') is not an object.');
+        throw new TypeError(
+          "Failed to execute 'setTransform' on '" +
+            this.constructor.name +
+            "': parameter " +
+            a +
+            " ('transform') is not an object."
+        );
       }
     } else if (arguments.length < 6) {
-      throw new TypeError('Failed to execute \'setTransform\' on \'' + this.constructor.name + '\': Valid arities are: [0, 1, 6], but ' + arguments.length + ' arguments provided.');
+      throw new TypeError(
+        "Failed to execute 'setTransform' on '" +
+          this.constructor.name +
+          "': Valid arities are: [0, 1, 6], but " +
+          arguments.length +
+          ' arguments provided.'
+      );
     }
     a = Number(a);
     b = Number(b);
@@ -1245,11 +1692,14 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][4] = e;
     this._transformStack[this._stackIndex][5] = f;
 
-    const event = createCanvasEvent(
-      'setTransform',
-      getTransformSlice(this),
-      { a, b, c, d, e, f },
-    );
+    const event = createCanvasEvent('setTransform', getTransformSlice(this), {
+      a,
+      b,
+      c,
+      d,
+      e,
+      f,
+    });
     this._events.push(event);
   }
 
@@ -1258,11 +1708,9 @@ export default class CanvasRenderingContext2D {
 
     if (Number.isFinite(result) && result > 0) {
       this._shadowBlurStack[this._stackIndex] = result;
-      const event = createCanvasEvent(
-        'shadowBlur',
-        getTransformSlice(this),
-        { value: result },
-      );
+      const event = createCanvasEvent('shadowBlur', getTransformSlice(this), {
+        value: result,
+      });
       this._events.push(event);
     }
   }
@@ -1273,16 +1721,18 @@ export default class CanvasRenderingContext2D {
 
   set shadowColor(value) {
     if (typeof value === 'string') {
-      try { 
+      try {
         const result = new MooColor(value);
-        value = this._shadowColorStack[this._stackIndex] = serializeColor(result);
-      } catch (e) { return; }
+        value = this._shadowColorStack[this._stackIndex] = serializeColor(
+          result
+        );
+      } catch (e) {
+        return;
+      }
 
-      const event = createCanvasEvent(
-        'shadowColor',
-        getTransformSlice(this),
-        { value },
-      );
+      const event = createCanvasEvent('shadowColor', getTransformSlice(this), {
+        value,
+      });
       this._events.push(event);
     }
   }
@@ -1299,7 +1749,7 @@ export default class CanvasRenderingContext2D {
       const event = createCanvasEvent(
         'shadowOffsetX',
         getTransformSlice(this),
-        { value: result },
+        { value: result }
       );
       this._events.push(event);
     }
@@ -1317,7 +1767,7 @@ export default class CanvasRenderingContext2D {
       const event = createCanvasEvent(
         'shadowOffsetY',
         getTransformSlice(this),
-        { value: result },
+        { value: result }
       );
       this._events.push(event);
     }
@@ -1331,32 +1781,43 @@ export default class CanvasRenderingContext2D {
     if (arguments.length === 0) {
       path = this._path.slice();
     } else {
-      if (!(path instanceof Path2D)) throw new TypeError('Failed to execute \'stroke\' on \'' + this.constructor.name + '\': parameter 1 is not of type \'Path2D\'.');
+      if (!(path instanceof Path2D))
+        throw new TypeError(
+          "Failed to execute 'stroke' on '" +
+            this.constructor.name +
+            "': parameter 1 is not of type 'Path2D'."
+        );
       path = path._path.slice();
     }
 
-    const event = createCanvasEvent(
-      'stroke',
-      getTransformSlice(this),
-      { path },
-    );
+    const event = createCanvasEvent('stroke', getTransformSlice(this), {
+      path,
+    });
     this._events.push(event);
     this._drawCalls.push(event);
   }
 
   strokeRect(x, y, width, height) {
-    if (arguments.length < 4) throw new TypeError('Failed to execute \'strokeRect\' on \'' + this.constructor.name + '\': 4 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 4)
+      throw new TypeError(
+        "Failed to execute 'strokeRect' on '" +
+          this.constructor.name +
+          "': 4 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     x = Number(x);
     y = Number(y);
     width = Number(width);
     height = Number(height);
 
     if (!Number.isFinite(x + y + width + height)) return;
-    const event = createCanvasEvent(
-      'strokeRect',
-      getTransformSlice(this),
-      { x, y, width, height },
-    );
+    const event = createCanvasEvent('strokeRect', getTransformSlice(this), {
+      x,
+      y,
+      width,
+      height,
+    });
     this._events.push(event);
     this._drawCalls.push(event);
   }
@@ -1367,21 +1828,24 @@ export default class CanvasRenderingContext2D {
       try {
         const result = new MooColor(value);
         valid = true;
-        value = this._strokeStyleStack[this._stackIndex] = serializeColor(result);
+        value = this._strokeStyleStack[this._stackIndex] = serializeColor(
+          result
+        );
+      } catch (e) {
+        return;
       }
-      catch(e) { return; }
-    }
-    else if (value instanceof CanvasGradient || value instanceof CanvasPattern) {
+    } else if (
+      value instanceof CanvasGradient ||
+      value instanceof CanvasPattern
+    ) {
       valid = true;
       this._strokeStyleStack[this._stackIndex] = value;
     }
 
     if (valid) {
-      const event = createCanvasEvent(
-        'strokeStyle',
-        getTransformSlice(this),
-        { value },
-      );
+      const event = createCanvasEvent('strokeStyle', getTransformSlice(this), {
+        value,
+      });
       this._events.push(event);
     }
   }
@@ -1391,33 +1855,46 @@ export default class CanvasRenderingContext2D {
   }
 
   strokeText(text, x, y, maxWidth) {
-    if (arguments.length < 3) throw new TypeError('Failed to execute \'strokeText\' on \'' + this.constructor.name + '\': 3 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 3)
+      throw new TypeError(
+        "Failed to execute 'strokeText' on '" +
+          this.constructor.name +
+          "': 3 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const textResult = String(text);
     const xResult = Number(x);
     const yResult = Number(y);
     const maxWidthResult = Number(maxWidth);
     if (arguments.length === 3 && !Number.isFinite(xResult + yResult)) return;
-    if (arguments.length > 3 && !Number.isFinite(xResult + yResult + maxWidthResult)) return;
-    const event = createCanvasEvent(
-      'strokeText',
-      getTransformSlice(this),
-      { text: textResult,
-        x: xResult,
-        y: yResult,
-        maxWidth: arguments.length === 3 ? null : maxWidthResult, },
-    );
+    if (
+      arguments.length > 3 &&
+      !Number.isFinite(xResult + yResult + maxWidthResult)
+    )
+      return;
+    const event = createCanvasEvent('strokeText', getTransformSlice(this), {
+      text: textResult,
+      x: xResult,
+      y: yResult,
+      maxWidth: arguments.length === 3 ? null : maxWidthResult,
+    });
     this._events.push(event);
     this._drawCalls.push(event);
   }
 
   set textAlign(value) {
-    if (value === 'left' || value === 'right' || value === 'center' || value === 'start' || value === 'end') {
+    if (
+      value === 'left' ||
+      value === 'right' ||
+      value === 'center' ||
+      value === 'start' ||
+      value === 'end'
+    ) {
       this._textAlignStack[this._stackIndex] = value;
-      const event = createCanvasEvent(
-        'textAlign',
-        getTransformSlice(this),
-        { value, },
-      );
+      const event = createCanvasEvent('textAlign', getTransformSlice(this), {
+        value,
+      });
       this._events.push(event);
     }
   }
@@ -1427,13 +1904,18 @@ export default class CanvasRenderingContext2D {
   }
 
   set textBaseline(value) {
-    if (value === 'top' || value === 'hanging' || value === 'middle' || value === 'alphabetic' || value === 'ideographic' || value === 'bottom') {
+    if (
+      value === 'top' ||
+      value === 'hanging' ||
+      value === 'middle' ||
+      value === 'alphabetic' ||
+      value === 'ideographic' ||
+      value === 'bottom'
+    ) {
       this._textBaselineStack[this._stackIndex] = value;
-      const event = createCanvasEvent(
-        'textBaseline',
-        getTransformSlice(this),
-        { value, },
-      );
+      const event = createCanvasEvent('textBaseline', getTransformSlice(this), {
+        value,
+      });
       this._events.push(event);
     }
   }
@@ -1443,7 +1925,14 @@ export default class CanvasRenderingContext2D {
   }
 
   transform(a, b, c, d, e, f) {
-    if (arguments.length < 6) throw new TypeError('Failed to execute \'transform\' on \'' + this.constructor.name + '\': 6 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 6)
+      throw new TypeError(
+        "Failed to execute 'transform' on '" +
+          this.constructor.name +
+          "': 6 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
 
     a = Number(a);
     b = Number(b);
@@ -1467,16 +1956,26 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][4] = sa * e + sc * f + se;
     this._transformStack[this._stackIndex][5] = sb * e + sd * f + sf;
 
-    const event = createCanvasEvent(
-      'transform',
-      getTransformSlice(this),
-      { a, b, c, d, e, f },
-    );
+    const event = createCanvasEvent('transform', getTransformSlice(this), {
+      a,
+      b,
+      c,
+      d,
+      e,
+      f,
+    });
     this._events.push(event);
   }
 
   translate(x, y) {
-    if (arguments.length < 2) throw new TypeError('Failed to execute \'translate\' on \'' + this.constructor.name + '\': 2 arguments required, but only ' + arguments.length + ' present.');
+    if (arguments.length < 2)
+      throw new TypeError(
+        "Failed to execute 'translate' on '" +
+          this.constructor.name +
+          "': 2 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
     const xResult = Number(x);
     const yResult = Number(y);
     const a = this._transformStack[this._stackIndex][0];
@@ -1488,11 +1987,10 @@ export default class CanvasRenderingContext2D {
       this._transformStack[this._stackIndex][4] += a * xResult + c * yResult;
       this._transformStack[this._stackIndex][5] += b * xResult + d * yResult;
 
-      const event = createCanvasEvent(
-        'translate',
-        getTransformSlice(this),
-        { x: xResult, y: yResult },
-      );
+      const event = createCanvasEvent('translate', getTransformSlice(this), {
+        x: xResult,
+        y: yResult,
+      });
       this._events.push(event);
     }
   }

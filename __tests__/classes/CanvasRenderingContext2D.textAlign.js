@@ -9,17 +9,17 @@ beforeEach(() => {
 });
 
 describe('textAlign', () => {
-  it('should set the default value to \'start\'', () => {
+  it("should set the default value to 'start'", () => {
     expect(ctx.textAlign).toBe('start');
   });
 
-  it('should not set the value if it\'s not a valid textAlign', () => {
+  it("should not set the value if it's not a valid textAlign", () => {
     ctx.textAlign = 'wrong!';
     expect(ctx.textAlign).toBe('start');
   });
 
-  it('should set the textAlign if it\'s a valid textAlign', () => {
-    ['left', 'right', 'center', 'start', 'end'].forEach(e => {
+  it("should set the textAlign if it's a valid textAlign", () => {
+    ['left', 'right', 'center', 'start', 'end'].forEach((e) => {
       ctx.textAlign = e;
       expect(ctx.textAlign).toBe(e);
     });

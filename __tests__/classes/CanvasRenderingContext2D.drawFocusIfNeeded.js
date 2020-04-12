@@ -25,13 +25,13 @@ describe('drawFocusIfNeeded', () => {
   });
 
   it('should throw if first argument is not Element', () => {
-    [1, NaN, Infinity, 'test', {}, []].forEach(e => {
+    [1, NaN, Infinity, 'test', {}, []].forEach((e) => {
       expect(() => ctx.drawFocusIfNeeded(e)).toThrow(TypeError);
     });
   });
 
   it('should throw if two parameters are provided and the first parameter is not a path', () => {
-    [1, NaN, Infinity, 'test', {}, []].forEach(e => {
+    [1, NaN, Infinity, 'test', {}, []].forEach((e) => {
       expect(() => ctx.drawFocusIfNeeded(e, elem)).toThrow(TypeError);
     });
   });

@@ -20,13 +20,13 @@ describe('mock', () => {
   });
 
   it('should expect toBlob to be callable', () => {
-    canvas.toBlob(e => {});
+    canvas.toBlob((e) => {});
     expect(canvas.toBlob).toBeCalled();
   });
 
   it('should expect toBlob to return Blob', () => {
     return new Promise((resolve, reject) => {
-      canvas.toBlob(e => {
+      canvas.toBlob((e) => {
         var ex;
         try {
           expect(e).toBeInstanceOf(window.Blob);
@@ -35,7 +35,7 @@ describe('mock', () => {
         }
         resolve();
       });
-    })
+    });
   });
 
   it('should throw if toBlob is provided less than 1 argument', () => {
@@ -48,7 +48,7 @@ describe('mock', () => {
 
   it('should accept image/jpeg', () => {
     return new Promise((resolve, reject) => {
-      canvas.toBlob(e => {
+      canvas.toBlob((e) => {
         var ex;
         try {
           expect(e.type).toBe('image/jpeg');
@@ -62,10 +62,10 @@ describe('mock', () => {
 
   it('should accept image/webp', () => {
     return new Promise((resolve, reject) => {
-      canvas.toBlob(e => {
+      canvas.toBlob((e) => {
         var ex;
         try {
-          expect(e.type).toBe('image/webp')
+          expect(e.type).toBe('image/webp');
         } catch (ex) {
           return reject(ex);
         }
@@ -113,8 +113,8 @@ describe('mock', () => {
   });
 
   it('should return the same context if getContext("2d") is called twice', () => {
-    const first = canvas.getContext("2d");
-    const second = canvas.getContext("2d");
+    const first = canvas.getContext('2d');
+    const second = canvas.getContext('2d');
     expect(first).toBe(second);
   });
 });

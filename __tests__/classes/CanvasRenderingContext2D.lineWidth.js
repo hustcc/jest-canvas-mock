@@ -14,21 +14,21 @@ describe('lineWidth', () => {
   });
 
   it('should ignore non finite lineWidth values', () => {
-    [Infinity, -Infinity, null, void 0, NaN].forEach(e => {
+    [Infinity, -Infinity, null, void 0, NaN].forEach((e) => {
       ctx.lineWidth = e;
       expect(ctx.lineWidth).toBe(1);
     });
   });
 
   it('should ignore out of range lineWidth values', () => {
-    [-1, -10, -300, 0].forEach(e => {
+    [-1, -10, -300, 0].forEach((e) => {
       ctx.lineWidth = e;
       expect(ctx.lineWidth).toBe(1);
     });
   });
 
   it('should not ignore lineWidth values that are within range', () => {
-    [1, 10, '30', '10.2'].forEach(e => {
+    [1, 10, '30', '10.2'].forEach((e) => {
       ctx.lineWidth = e;
       expect(ctx.lineWidth).toBe(Number(e));
     });

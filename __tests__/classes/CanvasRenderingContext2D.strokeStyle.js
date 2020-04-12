@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 
 describe('strokeStyle', () => {
-  it('should parse a css color string \'blue\'', () => {
+  it("should parse a css color string 'blue'", () => {
     ctx.strokeStyle = 'blue';
     expect(ctx.strokeStyle).toBe('#0000ff');
   });

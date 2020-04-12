@@ -42,7 +42,7 @@ describe('createImageData', () => {
       [NaN, 1],
       [1, NaN],
       ['test', null],
-    ].forEach(value => {
+    ].forEach((value) => {
       expect(() => ctx.createImageData(...value)).toThrow(TypeError);
     });
   });

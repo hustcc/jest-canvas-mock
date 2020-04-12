@@ -22,12 +22,18 @@ describe('addHitRegion', () => {
     expect(() => ctx.addHitRegion()).toThrow(DOMException);
   });
 
-  it('should throw if fillRule is set and isn\'t \'evenodd\' or \'nonzero\'', () => {
-    expect(() => ctx.addHitRegion({ id: 'test', fillRule: 'wrong!' })).toThrow();
+  it("should throw if fillRule is set and isn't 'evenodd' or 'nonzero'", () => {
+    expect(() =>
+      ctx.addHitRegion({ id: 'test', fillRule: 'wrong!' })
+    ).toThrow();
   });
 
   it('should not throw if fillRule is valid', () => {
-    expect(() => ctx.addHitRegion({ id: 'test', fillRule: 'evenodd' })).not.toThrow();
-    expect(() => ctx.addHitRegion({ id: 'test', fillRule: 'nonzero' })).not.toThrow();
+    expect(() =>
+      ctx.addHitRegion({ id: 'test', fillRule: 'evenodd' })
+    ).not.toThrow();
+    expect(() =>
+      ctx.addHitRegion({ id: 'test', fillRule: 'nonzero' })
+    ).not.toThrow();
   });
 });
