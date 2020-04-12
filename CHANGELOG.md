@@ -2,8 +2,12 @@
 
 ## Version 2.3.0
 
+- Added Prettier code style
+- Deleted .npmignore and switched to `package.json` files field
+- Added [CONTRIBUTING](./CONTRIBUTING.md) and [CODE_OF_CONDUCT](./CODE_OF_CONDUCT.md) docs
 - Switched to `moo-color` for color parsing
 - Added contributors to markdown document
+  - New Contributor [@evanoc0](https://github.com/evanoc0)
 
 ## Version 2.2.0
 
