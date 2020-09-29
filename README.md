@@ -178,6 +178,7 @@ canvas.toDataURL.mockReturnValueOnce(
 - [@hustcc](https://github.com/hustcc)
 - [@jtenner](https://github.com/jtenner)
 - [@evanoc0](https://github.com/evanoc0)
+- [@FeliciousX](https://github.com/FeliciousX)
 
 ## License
 

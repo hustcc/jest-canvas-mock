@@ -8,6 +8,8 @@
 - Switched to `moo-color` for color parsing
 - Added contributors to markdown document
   - New Contributor [@evanoc0](https://github.com/evanoc0)
+  - New Contributor [@FeliciousX](https://github.com/FeliciousX)
+- Add 2 methods of DOMMatrix [#70](https://github.com/hustcc/jest-canvas-mock/pull/70)
 
 ## Version 2.2.0
 
