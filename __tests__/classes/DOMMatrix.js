@@ -52,6 +52,22 @@ describe('DOMMatrix class', () => {
     expect(matrix).toBeInstanceOf(DOMMatrix);
   });
 
+  it('should return Float32Array', () => {
+    const matrix32 = new DOMMatrix().toFloat32Array();
+    expect(matrix32).toBeInstanceOf(Float32Array);
+    expect(matrix32).toStrictEqual(
+      new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1])
+    );
+  });
+
+  it('should return Float64Array', () => {
+    const matrix64 = new DOMMatrix().toFloat64Array();
+    expect(matrix64).toBeInstanceOf(Float64Array);
+    expect(matrix64).toStrictEqual(
+      new Float64Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1])
+    );
+  });
+
   it('should know if a 2d matrix is an identity matrix', () => {
     const matrix = new DOMMatrix([1, 0, 0, 1, 0, 0]);
     expect(matrix.isIdentity).toBeTruthy();
