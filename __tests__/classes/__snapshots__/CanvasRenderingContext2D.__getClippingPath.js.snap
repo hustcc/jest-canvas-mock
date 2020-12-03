@@ -2,9 +2,27 @@
 
 exports[`__getClippingRegion should be empty when there are no path elements 1`] = `Array []`;
 
-exports[`__getClippingRegion should delete current clipping region when restored 1`] = `Array []`;
-
-exports[`__getClippingRegion should restore the clipping region correctly when restored 1`] = `Array []`;
+exports[`__getClippingRegion should delete current clipping region when restored 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "height": 4,
+      "width": 3,
+      "x": 1,
+      "y": 2,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "rect",
+  },
+]
+`;
 
 exports[`__getClippingRegion should save the clipping region correctly when saved 1`] = `
 Array [

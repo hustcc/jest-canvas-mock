@@ -52,18 +52,9 @@ describe('__getClippingRegion', () => {
     expect(region).toStrictEqual(ctx.__getClippingRegion());
   });
 
-  it('should restore the clipping region correctly when restored', () => {
-    const region = ctx.__getClippingRegion();
-    ctx.save();
-    ctx.rect(1, 2, 3, 4);
-    ctx.arc(1, 2, 3, 4, 5);
-    ctx.clip();
-    expect(region).not.toStrictEqual(ctx.__getClippingRegion());
-    ctx.restore();
-    expect(region).toStrictEqual(ctx.__getClippingRegion());
-  });
-
   it('should delete current clipping region when restored', () => {
+    ctx.rect(1, 2, 3, 4);
+    ctx.clip();
     ctx.save();
     ctx.rect(1, 2, 3, 4);
     ctx.arc(1, 2, 3, 4, 5);
