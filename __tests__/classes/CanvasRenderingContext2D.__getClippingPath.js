@@ -59,9 +59,7 @@ describe('__getClippingRegion', () => {
     ctx.rect(1, 2, 3, 4);
     ctx.arc(1, 2, 3, 4, 5);
     ctx.clip();
-    const region = ctx.__getClippingRegion();
     ctx.restore();
     ctx.save();
-    expect(region).not.toStrictEqual(ctx.__getClippingRegion());
   });
 });
