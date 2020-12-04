@@ -1477,6 +1477,7 @@ export default class CanvasRenderingContext2D {
     if (this._stackIndex <= 0) return;
 
     this._transformStack.pop();
+    this._clipStack.pop();
     this._directionStack.pop();
     this._fillStyleStack.pop();
     this._filterStack.pop();
