@@ -1639,7 +1639,7 @@ export default class CanvasRenderingContext2D {
     result = this._lineDashStack[this._stackIndex] =
       result.length % 2 === 1 ? result.concat(result) : result;
     const event = createCanvasEvent('setLineDash', getTransformSlice(this), {
-      value: result.slice(),
+      segments: result.slice(),
     });
     this._events.push(event);
   }
