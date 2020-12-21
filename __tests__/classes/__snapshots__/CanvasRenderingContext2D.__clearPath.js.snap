@@ -4,14 +4,6 @@ exports[`__clearEvents should clear the list of events 1`] = `
 Array [
   Object {
     "props": Object {},
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "beginPath",
   },
 ]
@@ -21,14 +13,6 @@ exports[`__clearEvents should not prevent additional events from being collected
 Array [
   Object {
     "props": Object {},
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "beginPath",
   },
   Object {
@@ -40,14 +24,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "arc",
   },
 ]
