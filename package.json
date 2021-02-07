@@ -1,6 +1,6 @@
 {
   "name": "jest-canvas-mock",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Mock a canvas in your jest tests.",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
@@ -16,6 +16,7 @@
     "moo-color": "^1.0.2"
   },
   "devDependencies": {
+    "@antv/g2plot": "^2.3.11",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
