@@ -1561,7 +1561,7 @@ exports[`__getEvents should have an event when setLineDash is called 1`] = `
 Array [
   Object {
     "props": Object {
-      "value": Array [
+      "segments": Array [
         1,
         2,
         3,
