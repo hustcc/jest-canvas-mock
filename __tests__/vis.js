@@ -2,7 +2,7 @@
  * test vis @AntV/G2Plot
  */
 
- import { Line } from '@antv/g2plot'; 
+import { Line } from '@antv/g2plot';
 
 describe('vis', () => {
   it('vis can pass', () => {
