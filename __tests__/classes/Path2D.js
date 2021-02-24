@@ -58,4 +58,19 @@ describe('Path2D', () => {
     mockWindow(window);
     expect(saved === window.Path2D).toBe(true);
   });
+
+  test('Path2D addPath calls _path.push', () => {
+    const path1 = new Path2D();
+    path1.moveTo(10, 10);
+    path1.lineTo(20, 20);
+    const path2 = new Path2D();
+    path2.moveTo(30, 30);
+    path2.lineTo(40, 40);
+    expect(path1._path.length).toBe(2);
+    path1.addPath(path2);
+    expect(path1._path.length).toBe(4);
+    expect(path1._path[2]).toBe(path2._path[0]);
+    expect(path1._path[3]).toBe(path2._path[1]);
+  });
+
 });
