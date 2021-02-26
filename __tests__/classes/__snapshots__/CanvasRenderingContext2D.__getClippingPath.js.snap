@@ -11,14 +11,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "rect",
   },
 ]
@@ -33,14 +25,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "rect",
   },
   Object {
@@ -52,14 +36,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "arc",
   },
 ]
@@ -74,14 +50,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "rect",
   },
   Object {
@@ -93,14 +61,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "arc",
   },
 ]
@@ -115,14 +75,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "rect",
   },
   Object {
@@ -134,14 +86,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "arc",
   },
 ]
@@ -156,14 +100,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "rect",
   },
   Object {
@@ -175,14 +111,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "arc",
   },
   Object {
@@ -191,14 +119,6 @@ Array [
       "path": Array [
         Object {
           "props": Object {},
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
           "type": "beginPath",
         },
         Object {
@@ -208,14 +128,6 @@ Array [
             "x": 1,
             "y": 2,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
           "type": "rect",
         },
         Object {
@@ -227,26 +139,10 @@ Array [
             "x": 1,
             "y": 2,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
           "type": "arc",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "clip",
   },
   Object {
@@ -256,14 +152,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "rect",
   },
   Object {
@@ -275,14 +163,6 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
     "type": "arc",
   },
 ]
