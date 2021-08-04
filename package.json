@@ -9,7 +9,8 @@
     "build": "babel src --out-dir lib",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prepare": "npm run build",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "prettier:ci": "prettier --check ."
   },
   "dependencies": {
     "cssfontparser": "^1.2.1",

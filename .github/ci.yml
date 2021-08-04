@@ -1,0 +1,44 @@
+name: Master Pull Request
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - main
+
+concurrency:
+  group: ci-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: cacheKey-${{ hashFiles('yarn.lock') }}
+
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn prettier:ci
+
+      - run: yarn test
+
+      - run: yarn build
+#      - name: Coveralls
+#        uses: coverallsapp/github-action@master
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          path-to-lcov: ./coverage/lcov.info
+#          flag-name: Unit on master branch
