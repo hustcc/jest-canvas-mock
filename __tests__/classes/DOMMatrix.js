@@ -32,22 +32,7 @@ describe('DOMMatrix class', () => {
 
   it('should accept an array of 16 length', () => {
     const matrix = new DOMMatrix([
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
     ]);
     expect(matrix).toBeInstanceOf(DOMMatrix);
   });
@@ -159,5 +144,52 @@ describe('DOMMatrix class', () => {
     const matrix = new DOMMatrix([1, 0, 0, 1, 0, 0]);
     matrix.m42 = 2;
     expect(matrix.f).toBe(2);
+  });
+
+  describe(`translate`, function () {
+    it(`should return a new DOMMatrix instance`, function () {
+      const matrix = new DOMMatrix();
+      const translatedMatrix = matrix.translate(100, 100);
+      expect(translatedMatrix instanceof DOMMatrix).toBeTruthy();
+      expect(translatedMatrix === matrix).toBeFalsy();
+    });
+
+    it(`should apply 2d changes`, function () {
+      const x = 100;
+      const y = 200;
+      const matrix = new DOMMatrix();
+      const translatedMatrix = matrix.translate(x, y);
+      expect(translatedMatrix.e).toEqual(x + matrix.m11);
+      expect(translatedMatrix.f).toEqual(y + matrix.m22);
+    });
+
+    it(`should apply 3d changes`, function () {
+      const x = 100;
+      const y = 200;
+      const z = 300;
+      const matrix = new DOMMatrix();
+      const translatedMatrix = matrix.translate(x, y, z);
+      expect(translatedMatrix.m41).toEqual(x + matrix.m11);
+      expect(translatedMatrix.m42).toEqual(y + matrix.m22);
+      expect(translatedMatrix.m43).toEqual(z + matrix.m33);
+    });
+  });
+
+  describe(`scale`, function () {
+    it(`should return a new DOMMatrix instance`, function () {
+      const matrix = new DOMMatrix();
+      const translatedMatrix = matrix.scale(0.5, 0.7);
+      expect(translatedMatrix instanceof DOMMatrix).toBeTruthy();
+      expect(translatedMatrix === matrix).toBeFalsy();
+    });
+
+    it(`should apply 2d changes`, function () {
+      const scaleX = 0.75;
+      const scaleY = 0.5;
+      const matrix = new DOMMatrix();
+      const translatedMatrix = matrix.scale(scaleX, scaleY);
+      expect(translatedMatrix.a).toEqual(scaleX);
+      expect(translatedMatrix.d).toEqual(scaleY);
+    });
   });
 });

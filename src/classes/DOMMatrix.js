@@ -1,3 +1,24 @@
+function create3DMatrixArray(domMatrix) {
+  let translateArray = [];
+  for (let i = 1; i <= 4; i++) {
+    for (let j = 1; j <= 4; j++) {
+      translateArray.push(domMatrix[`m${i}${j}`]);
+    }
+  }
+  return translateArray;
+}
+
+function create2DMatrixArray(domMatrix) {
+  let translateArray = [];
+  for (let i = 1; i <= 4; i++) {
+    if (i === 3) continue;
+    for (let j = 1; j <= 2; j++) {
+      translateArray.push(domMatrix[`m${i}${j}`]);
+    }
+  }
+  return translateArray;
+}
+
 export default class DOMMatrix {
   _is2D = true;
   m11 = 1.0;
@@ -181,5 +202,39 @@ export default class DOMMatrix {
       this.m43,
       this.m44,
     ]);
+  }
+
+  translate(x, y, z) {
+    let translateArray;
+    if (z !== undefined) {
+      translateArray = create3DMatrixArray(this);
+
+      translateArray[12] += x + translateArray[0];
+      translateArray[13] += y + translateArray[5];
+      translateArray[14] += z + translateArray[10];
+    } else {
+      translateArray = create2DMatrixArray(this);
+
+      translateArray[4] += x + translateArray[0];
+      translateArray[5] += y + translateArray[3];
+    }
+    return new DOMMatrix(translateArray);
+  }
+
+  scale(x, y, z) {
+    let translateArray;
+    if (z !== undefined) {
+      translateArray = create3DMatrixArray(this);
+
+      translateArray[0] *= x;
+      translateArray[5] *= y;
+      translateArray[10] *= z;
+    } else {
+      translateArray = create2DMatrixArray(this);
+
+      translateArray[0] *= x;
+      translateArray[3] *= y;
+    }
+    return new DOMMatrix(translateArray);
   }
 }
