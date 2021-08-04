@@ -184,16 +184,8 @@ export default class CanvasRenderingContext2D {
   }
 
   addHitRegion(options = {}) {
-    const {
-      path,
-      fillRule,
-      id,
-      parentID,
-      cursor,
-      control,
-      label,
-      role,
-    } = options;
+    const { path, fillRule, id, parentID, cursor, control, label, role } =
+      options;
     if (!path && !id)
       throw new DOMException(
         'ConstraintError',
@@ -1724,9 +1716,8 @@ export default class CanvasRenderingContext2D {
     if (typeof value === 'string') {
       try {
         const result = new MooColor(value);
-        value = this._shadowColorStack[this._stackIndex] = serializeColor(
-          result
-        );
+        value = this._shadowColorStack[this._stackIndex] =
+          serializeColor(result);
       } catch (e) {
         return;
       }
@@ -1829,9 +1820,8 @@ export default class CanvasRenderingContext2D {
       try {
         const result = new MooColor(value);
         valid = true;
-        value = this._strokeStyleStack[this._stackIndex] = serializeColor(
-          result
-        );
+        value = this._strokeStyleStack[this._stackIndex] =
+          serializeColor(result);
       } catch (e) {
         return;
       }
