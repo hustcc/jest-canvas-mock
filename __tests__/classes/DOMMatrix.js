@@ -185,18 +185,30 @@ describe('DOMMatrix class', () => {
   describe(`scale`, function () {
     it(`should return a new DOMMatrix instance`, function () {
       const matrix = new DOMMatrix();
-      const translatedMatrix = matrix.scale(0.5, 0.7);
-      expect(translatedMatrix instanceof DOMMatrix).toBeTruthy();
-      expect(translatedMatrix === matrix).toBeFalsy();
+      const scaledMatrix = matrix.scale(0.5, 0.7);
+      expect(scaledMatrix instanceof DOMMatrix).toBeTruthy();
+      expect(scaledMatrix === matrix).toBeFalsy();
     });
 
     it(`should apply 2d changes`, function () {
       const scaleX = 0.75;
       const scaleY = 0.5;
+      const matrix = new DOMMatrix([7, 8, 9, 20, 4, 7]);
+      const expectedMatrix = new DOMMatrix([5.25, 6, 4.5, 10, 4, 7]);
+      const scaledMatrix = matrix.scale(scaleX, scaleY);
+      expect(scaledMatrix).toEqual(expectedMatrix);
+    });
+
+    it(`should apply 3d changes`, function () {
+      const scaleX = 0.65;
+      const scaleY = 0.55;
+      const scaleZ = 0.9;
       const matrix = new DOMMatrix();
-      const translatedMatrix = matrix.scale(scaleX, scaleY);
-      expect(translatedMatrix.a).toEqual(scaleX);
-      expect(translatedMatrix.d).toEqual(scaleY);
+      const expectedMatrix = new DOMMatrix([
+        0.65, 0, 0, 0, 0, 0.55, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 1,
+      ]);
+      const scaledMatrix = matrix.scale(scaleX, scaleY, scaleZ);
+      expect(scaledMatrix).toEqual(expectedMatrix);
     });
   });
 

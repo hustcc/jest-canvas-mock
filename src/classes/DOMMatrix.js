@@ -286,20 +286,28 @@ export default class DOMMatrix {
     return this;
   }
 
-  scale(x, y, z) {
-    let translateArray;
-    if (z !== undefined) {
-      translateArray = create3DMatrixArray(this);
-
-      translateArray[0] *= x;
-      translateArray[5] *= y;
-      translateArray[10] *= z;
+  scale(scaleX, scaleY, scaleZ, originX, originY, originZ) {
+    let scaledMatrix;
+    if (this.is2D) {
+      scaledMatrix = new DOMMatrix([
+        this.a,
+        this.b,
+        this.c,
+        this.d,
+        this.e,
+        this.f,
+      ]);
     } else {
-      translateArray = create2DMatrixArray(this);
-
-      translateArray[0] *= x;
-      translateArray[3] *= y;
+      scaledMatrix = new DOMMatrix(this.toFloat32Array());
     }
-    return new DOMMatrix(translateArray);
+
+    return scaledMatrix.scaleSelf(
+      scaleX,
+      scaleY,
+      scaleZ,
+      originX,
+      originY,
+      originZ
+    );
   }
 }
