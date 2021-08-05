@@ -27,6 +27,18 @@ function create2DMatrixArray(domMatrix) {
   return translateArray;
 }
 
+function multiplyMatrices(leftMatrix, rightMatrix) {
+  for (let i = 1; i <= 4; i++) {
+    for (let j = 1; j <= 4; j++) {
+      leftMatrix[`m${i}${j}`] = sumMultipleOfMatricesCells(
+        leftMatrix,
+        rightMatrix,
+        { i, j }
+      );
+    }
+  }
+}
+
 export default class DOMMatrix {
   _is2D = true;
   m11 = 1.0;
@@ -222,15 +234,7 @@ export default class DOMMatrix {
     translationMatrix.m42 = ty;
     translationMatrix.m43 = tz;
 
-    for (let i = 1; i <= 4; i++) {
-      for (let j = 1; j <= 4; j++) {
-        this[`m${i}${j}`] = sumMultipleOfMatricesCells(
-          this,
-          translationMatrix,
-          { i, j }
-        );
-      }
-    }
+    multiplyMatrices(this, translationMatrix);
 
     if (tz) {
       this._is2D = false;
@@ -241,12 +245,45 @@ export default class DOMMatrix {
   translate(x, y, z) {
     let translatedMatrix;
     if (this.is2D) {
-      translatedMatrix = new DOMMatrix([this.a, this.b, this.c, this.d, this.e, this.f]);
+      translatedMatrix = new DOMMatrix([
+        this.a,
+        this.b,
+        this.c,
+        this.d,
+        this.e,
+        this.f,
+      ]);
     } else {
       translatedMatrix = new DOMMatrix(this.toFloat32Array());
     }
 
-    return translatedMatrix.translateSelf(x,y,z);
+    return translatedMatrix.translateSelf(x, y, z);
+  }
+
+  scaleSelf(scaleX, scaleY, scaleZ, originX, originY, originZ) {
+    const sx = Number(scaleX),
+      sy = isNaN(Number(scaleY)) ? sx : Number(scaleY),
+      sz = isNaN(Number(scaleZ)) ? 1 : Number(scaleZ);
+
+    const ox = isNaN(Number(originX)) ? 0 : Number(originX),
+      oy = isNaN(Number(originY)) ? 0 : Number(originY),
+      oz = isNaN(Number(originZ)) ? 0 : Number(originZ);
+
+    this.translateSelf(ox, oy, oz);
+
+    const scaleMatrix = new DOMMatrix();
+    scaleMatrix.m11 = sx;
+    scaleMatrix.m22 = sy;
+    scaleMatrix.m33 = sz;
+
+    multiplyMatrices(this, scaleMatrix);
+
+    this.translateSelf(-ox, -oy, -oz);
+
+    if (Math.abs(sz) !== 1) {
+      this._is2D = false;
+    }
+    return this;
   }
 
   scale(x, y, z) {
