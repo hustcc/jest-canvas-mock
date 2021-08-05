@@ -157,10 +157,11 @@ describe('DOMMatrix class', () => {
     it(`should apply 2d changes`, function () {
       const x = 100;
       const y = 200;
-      const matrix = new DOMMatrix();
+      const matrix = new DOMMatrix([4,5,1,3,10,9]);
+      const expectedMatrix = new DOMMatrix([4, 5, 0, 0, 1, 3, 0, 0, 0, 0, 1, 0, 610, 1109, 0, 1]);
       const translatedMatrix = matrix.translate(x, y);
-      expect(translatedMatrix.e).toEqual(x + matrix.m11);
-      expect(translatedMatrix.f).toEqual(y + matrix.m22);
+      expect(translatedMatrix.toFloat32Array()).toEqual(expectedMatrix.toFloat32Array());
+      expect(translatedMatrix.is2D).toEqual(true);
     });
 
     it(`should apply 3d changes`, function () {
@@ -168,10 +169,10 @@ describe('DOMMatrix class', () => {
       const y = 200;
       const z = 300;
       const matrix = new DOMMatrix();
+      const expectedMatrix = new DOMMatrix([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 100, 200, 300, 1]);
       const translatedMatrix = matrix.translate(x, y, z);
-      expect(translatedMatrix.m41).toEqual(x + matrix.m11);
-      expect(translatedMatrix.m42).toEqual(y + matrix.m22);
-      expect(translatedMatrix.m43).toEqual(z + matrix.m33);
+      expect(translatedMatrix).toEqual(expectedMatrix);
+      expect(translatedMatrix.is2D).toEqual(false);
     });
   });
 
