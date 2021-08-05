@@ -6,27 +6,6 @@ function sumMultipleOfMatricesCells(matrix1, matrix2, { i, j }) {
   return sum;
 }
 
-function create3DMatrixArray(domMatrix) {
-  let translateArray = [];
-  for (let i = 1; i <= 4; i++) {
-    for (let j = 1; j <= 4; j++) {
-      translateArray.push(domMatrix[`m${i}${j}`]);
-    }
-  }
-  return translateArray;
-}
-
-function create2DMatrixArray(domMatrix) {
-  let translateArray = [];
-  for (let i = 1; i <= 4; i++) {
-    if (i === 3) continue;
-    for (let j = 1; j <= 2; j++) {
-      translateArray.push(domMatrix[`m${i}${j}`]);
-    }
-  }
-  return translateArray;
-}
-
 function multiplyMatrices(leftMatrix, rightMatrix) {
   for (let i = 1; i <= 4; i++) {
     for (let j = 1; j <= 4; j++) {
