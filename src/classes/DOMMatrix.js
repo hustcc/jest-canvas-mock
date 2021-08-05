@@ -1,3 +1,11 @@
+function sumMultipleOfMatricesCells(matrix1, matrix2, { i, j }) {
+  let sum = 0;
+  for (let k = 1; k <= 4; k++) {
+    sum += matrix1[`m${k}${j}`] * matrix2[`m${i}${k}`];
+  }
+  return sum;
+}
+
 function create3DMatrixArray(domMatrix) {
   let translateArray = [];
   for (let i = 1; i <= 4; i++) {
@@ -202,6 +210,32 @@ export default class DOMMatrix {
       this.m43,
       this.m44,
     ]);
+  }
+
+  translateSelf(x, y, z) {
+    const tx = Number(x),
+      ty = Number(y),
+      tz = isNaN(Number(z)) ? 0 : Number(z);
+
+    const translationMatrix = new DOMMatrix();
+    translationMatrix.m41 = tx;
+    translationMatrix.m42 = ty;
+    translationMatrix.m43 = tz;
+
+    for (let i = 1; i <= 4; i++) {
+      for (let j = 1; j <= 4; j++) {
+        this[`m${i}${j}`] = sumMultipleOfMatricesCells(
+          this,
+          translationMatrix,
+          { i, j }
+        );
+      }
+    }
+
+    if (tz) {
+      this._is2D = false;
+    }
+    return this;
   }
 
   translate(x, y, z) {

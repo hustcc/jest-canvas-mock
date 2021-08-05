@@ -192,4 +192,50 @@ describe('DOMMatrix class', () => {
       expect(translatedMatrix.d).toEqual(scaleY);
     });
   });
+
+  describe(`translateSelf`, function () {
+    it(`should return dot product of a 2d matrix multiplication`, function () {
+      const matrix2D = new DOMMatrix([1, 2, 3, 4, 5, 6]);
+      const tx = 2,
+        ty = 3;
+      const expectedMatrix = new DOMMatrix([1, 2, 3, 4, 16, 22]);
+      matrix2D.translateSelf(tx, ty);
+      expect(matrix2D.toFloat32Array()).toEqual(
+        expectedMatrix.toFloat32Array()
+      );
+      expect(matrix2D.is2D).toEqual(true);
+    });
+
+    it(`should return do product of a 3d matrix`, function () {
+      const matrix3D = new DOMMatrix([
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+      ]);
+      const tx = 2,
+        ty = 3,
+        tz = 4;
+      const expectedMatrix = new DOMMatrix([
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 66, 76, 86, 96,
+      ]);
+      matrix3D.translateSelf(tx, ty, tz);
+      expect(matrix3D.toFloat32Array()).toEqual(
+        expectedMatrix.toFloat32Array()
+      );
+      expect(matrix3D.is2D).toEqual(false);
+    });
+
+    it(`should convert 2d matrix to 3d matrix when sent tz`, function () {
+      const matrix2D = new DOMMatrix([1, 2, 3, 4, 5, 6]);
+      const tx = 2,
+        ty = 3,
+        tz = 4;
+      const expectedMatrix = new DOMMatrix([
+        1, 2, 0, 0, 3, 4, 0, 0, 0, 0, 1, 0, 16, 22, 4, 1,
+      ]);
+      matrix2D.translateSelf(tx, ty, tz);
+      expect(matrix2D.toFloat32Array()).toEqual(
+        expectedMatrix.toFloat32Array()
+      );
+      expect(matrix2D.is2D).toEqual(false);
+    });
+  });
 });
