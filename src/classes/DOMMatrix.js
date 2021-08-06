@@ -1,17 +1,21 @@
-function sumMultipleOfMatricesCells(matrix1, matrix2, { i, j }) {
+function sumMultipleOfMatricesCells(matrix1Array, matrix2Array, { i, j }) {
   let sum = 0;
-  for (let k = 1; k <= 4; k++) {
-    sum += matrix1[`m${k}${j}`] * matrix2[`m${i}${k}`];
+  for (let k = 0; k < 4; k++) {
+    const matrix1Index = (j - 1) + k * 4;
+    const matrix2Index = (i-1) * 4 + k;
+    sum += matrix1Array[matrix1Index] * matrix2Array[matrix2Index];
   }
   return sum;
 }
 
 function multiplyMatrices(leftMatrix, rightMatrix) {
+  const leftMatrixArray = leftMatrix.toFloat64Array();
+  const rightMatrixArray = rightMatrix.toFloat64Array();
   for (let i = 1; i <= 4; i++) {
     for (let j = 1; j <= 4; j++) {
       leftMatrix[`m${i}${j}`] = sumMultipleOfMatricesCells(
-        leftMatrix,
-        rightMatrix,
+        leftMatrixArray,
+        rightMatrixArray,
         { i, j }
       );
     }
