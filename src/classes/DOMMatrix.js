@@ -1,8 +1,8 @@
 function sumMultipleOfMatricesCells(matrix1Array, matrix2Array, { i, j }) {
   let sum = 0;
   for (let k = 0; k < 4; k++) {
-    const matrix1Index = (j - 1) + k * 4;
-    const matrix2Index = (i-1) * 4 + k;
+    const matrix1Index = j - 1 + k * 4;
+    const matrix2Index = (i - 1) * 4 + k;
     sum += matrix1Array[matrix1Index] * matrix2Array[matrix2Index];
   }
   return sum;
