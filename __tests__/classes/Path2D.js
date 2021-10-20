@@ -72,5 +72,4 @@ describe('Path2D', () => {
     expect(path1._path[2]).toBe(path2._path[0]);
     expect(path1._path[3]).toBe(path2._path[1]);
   });
-
 });
