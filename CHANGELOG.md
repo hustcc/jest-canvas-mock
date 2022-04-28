@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Version 2.4.0
+
+- fix(window): avoid global.window redefinition (#91)
+- feat: add translate, translateSelf, scale and scaleSelf to DOMMatrix (#83)
+- optimize(Path2D): replace reassign-concat with for-push (#76)
+- test: add test for vis @antv/g2plot (#79)
+- fix(setLineDash): rename parameter value to segments (#74)
+- fix(clip): delete clipping region with restore (#73)
+
 ## Version 2.3.0
 
 - Added Prettier code style
