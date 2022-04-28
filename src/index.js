@@ -8,7 +8,7 @@ import mockWindow from './window';
 // mock global window
 // TODO: Force coverage to ignore this branch
 if (typeof window !== 'undefined') {
-  global.window = mockWindow(window);
+  mockWindow(global.window);
 }
 
 export const ver = '__VERSION__';

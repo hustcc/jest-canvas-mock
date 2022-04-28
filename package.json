@@ -48,7 +48,8 @@
       "src/mock/**/*.js"
     ],
     "setupFiles": [
-      "./src/index.js"
+      "./src/index.js",
+      "./__mocks__/worker.js"
     ]
   },
   "repository": {
