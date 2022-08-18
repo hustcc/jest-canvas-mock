@@ -1,4 +1,4 @@
-export default function mockPrototype() {
+export default function mockPrototype(win) {
   /**
    * This weakmap is designed to contain all of the generated canvas contexts. It's keys are the
    * jsdom canvases obtained by using the `this` keyword inside the `#getContext('2d')` function
@@ -29,12 +29,12 @@ export default function mockPrototype() {
     return getContext2D.internal.call(this, type);
   });
 
-  if (!jest.isMockFunction(HTMLCanvasElement.prototype.getContext)) {
-    getContext2D.internal = HTMLCanvasElement.prototype.getContext;
+  if (!jest.isMockFunction(win.HTMLCanvasElement.prototype.getContext)) {
+    getContext2D.internal = win.HTMLCanvasElement.prototype.getContext;
   } else {
-    getContext2D.internal = HTMLCanvasElement.prototype.getContext.internal;
+    getContext2D.internal = win.HTMLCanvasElement.prototype.getContext.internal;
   }
-  HTMLCanvasElement.prototype.getContext = getContext2D;
+  win.HTMLCanvasElement.prototype.getContext = getContext2D;
 
   /**
    * This function technically throws SecurityError at runtime, but it cannot be mocked, because
@@ -73,12 +73,12 @@ export default function mockPrototype() {
     setTimeout(() => callback(blob), 0);
   });
 
-  if (!jest.isMockFunction(HTMLCanvasElement.prototype.toBlob)) {
-    toBlobOverride.internal = HTMLCanvasElement.prototype.toBlob;
+  if (!jest.isMockFunction(win.HTMLCanvasElement.prototype.toBlob)) {
+    toBlobOverride.internal = win.HTMLCanvasElement.prototype.toBlob;
   } else {
-    toBlobOverride.internal = HTMLCanvasElement.prototype.toBlob.internal;
+    toBlobOverride.internal = win.HTMLCanvasElement.prototype.toBlob.internal;
   }
-  HTMLCanvasElement.prototype.toBlob = toBlobOverride;
+  win.HTMLCanvasElement.prototype.toBlob = toBlobOverride;
 
   /**
    * This section creates a dataurl with a validated mime type. This is not actually valid, because
@@ -103,10 +103,11 @@ export default function mockPrototype() {
     return 'data:' + type + ';base64,00';
   });
 
-  if (!jest.isMockFunction(HTMLCanvasElement.prototype.toDataURL)) {
-    toDataURLOverride.internal = HTMLCanvasElement.prototype.toDataURL;
+  if (!jest.isMockFunction(win.HTMLCanvasElement.prototype.toDataURL)) {
+    toDataURLOverride.internal = win.HTMLCanvasElement.prototype.toDataURL;
   } else {
-    toDataURLOverride.internal = HTMLCanvasElement.prototype.toDataURL.internal;
+    toDataURLOverride.internal =
+      win.HTMLCanvasElement.prototype.toDataURL.internal;
   }
-  HTMLCanvasElement.prototype.toDataURL = toDataURLOverride;
+  win.HTMLCanvasElement.prototype.toDataURL = toDataURLOverride;
 }
