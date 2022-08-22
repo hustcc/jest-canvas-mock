@@ -12,6 +12,6 @@ if (typeof window !== 'undefined') {
 }
 
 export const ver = '__VERSION__';
-export function setupCanvasMock() {
-  mockWindow(global.window);
+export function setupCanvasMock(window) {
+  mockWindow(window || global.window);
 }
