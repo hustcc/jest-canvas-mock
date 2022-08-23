@@ -1,4 +1,4 @@
-export function setupCanvasMock() {}
+export function setupCanvasMock(window?: Window) {}
 
 export interface CanvasRenderingContext2DEvent {
   /**
