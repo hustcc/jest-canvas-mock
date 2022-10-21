@@ -12,6 +12,7 @@ if (typeof window !== 'undefined') {
 }
 
 export const ver = '__VERSION__';
-export function setupCanvasMock(window) {
+
+export function setJestCanvasMock(window) {
   mockWindow(window || global.window);
 }
