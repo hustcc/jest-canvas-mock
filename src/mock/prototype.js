@@ -106,7 +106,7 @@ export default function mockPrototype() {
   if (!jest.isMockFunction(HTMLCanvasElement.prototype.toDataURL)) {
     toDataURLOverride.internal = HTMLCanvasElement.prototype.toDataURL;
   } else {
-    toDataURLOverride.internal = HTMLCanvasElement.prototype.toBlob.internal;
+    toDataURLOverride.internal = HTMLCanvasElement.prototype.toDataURL.internal;
   }
   HTMLCanvasElement.prototype.toDataURL = toDataURLOverride;
 }
