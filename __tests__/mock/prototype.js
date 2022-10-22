@@ -101,7 +101,7 @@ describe('mock', () => {
 
   /**
    * This test is very special, because it helps increase the code coverage to 100%. It patches
-   * console.error to supress calls to console.error, sets an internal dataset value to force the
+   * console.error to suppress calls to console.error, sets an internal dataset value to force the
    * getContext() function to call it's internal getContext() provided by jsdom.
    */
   it('should call internal function if "canvas" is installed', () => {
