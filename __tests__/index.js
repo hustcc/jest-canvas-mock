@@ -2,7 +2,7 @@
  * test canvas
  */
 
-import { ver, setJestCanvasMock } from '../src';
+import { ver, setupJestCanvasMock } from '../src';
 import pkg from '../package.json';
 
 let canvas;
@@ -17,11 +17,11 @@ describe('canvas', () => {
   });
 });
 
-describe('setupCanvasMock', () => {
+describe('setupJestCanvasMock', () => {
   it('should setup after resetAllMocks', () => {
     jest.resetAllMocks();
     expect(document.createElement('canvas').getContext('2d')).toBe(undefined);
-    setJestCanvasMock();
+    setupJestCanvasMock();
     expect(document.createElement('canvas').getContext('2d')).toHaveProperty(
       'createImageData'
     );
