@@ -1,6 +1,6 @@
 export interface CanvasRenderingContext2DEvent {
   /**
-   * This is the type of canvas event that occured.
+   * This is the type of canvas event that occurred.
    */
   type: string;
   /**

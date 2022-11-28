@@ -20,7 +20,7 @@ export default (win) => {
 
   // jsdom@11.6.2 || jest@^22.0.0, console.error in Function getContext();
   // https://github.com/jsdom/jsdom/blob/4c7698f760fc64f20b2a0ddff450eddbdd193176/lib/jsdom/living/nodes/HTMLCanvasElement-impl.js#L55-L58
-  // cosole.error will make ci error.
+  // console.error will make ci error.
   // try {
   //   // get the context 2d.
   //   const ctx = d.createElement('canvas').getContext('2d');

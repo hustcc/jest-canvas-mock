@@ -13,7 +13,7 @@ export default function mockPrototype() {
   const getContext2D = jest.fn(function getContext2d(type) {
     if (type === '2d') {
       /**
-       * Contexts must be indempotent. Once they are generated, they should be returned when
+       * Contexts must be idempotent. Once they are generated, they should be returned when
        * getContext() is called on the same canvas object multiple times.
        */
       if (generatedContexts.has(this)) return generatedContexts.get(this);
