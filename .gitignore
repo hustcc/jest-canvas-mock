@@ -5,3 +5,6 @@ coverage
 package-lock.json
 yarn.lock
 lib
+.yarn
+.pnp.cjs
+.pnp.loader.mjs

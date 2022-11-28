@@ -63,6 +63,20 @@ Add that file to your `setupFiles` array:
 }
 ```
 
+## Reset
+
+If you reset the jest mocks (for example, with `jest.resetAllMocks()`), you can
+call `setupJestCanvasMock()` to re-create it.
+
+```
+import { setupJestCanvasMock } from 'jest-canvas-mock';
+
+beforeEach(() => {
+  jest.resetAllMocks();
+  setupJestCanvasMock();
+});
+```
+
 ## Mock Strategy
 
 This mock strategy implements all the canvas functions and actually verifies the parameters. If a
