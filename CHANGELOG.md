@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Version 2.5.0
+
+- feat: export a function to re-initialize mocks (#98)
+- docs: fix some typos (#104)
+- fix: copy & paste mistake: toBlob -> toDataURL (#101)
+- chore: add Contributors LitoMore (#94)
+
 ## Version 2.4.0
 
 - fix(window): avoid global.window redefinition (#91)
