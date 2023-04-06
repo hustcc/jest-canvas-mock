@@ -1,4 +1,4 @@
-export function setupJestCanvasMock(window?: Window) {}
+export function setupJestCanvasMock(window?: Window): void
 
 export interface CanvasRenderingContext2DEvent {
   /**
