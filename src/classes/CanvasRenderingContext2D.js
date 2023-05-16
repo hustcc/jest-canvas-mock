@@ -1053,8 +1053,16 @@ export default class CanvasRenderingContext2D {
     return this._fontStack[this._stackIndex];
   }
 
-  getImageData() {
-    return new ImageData(this._canvas.width, this._canvas.height);
+  getImageData(x, y, w, h) {
+    if (arguments.length < 4)
+      throw new TypeError(
+        "Failed to execute 'getImageData' on '" +
+          this.constructor.name +
+          "': 4 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
+    return new ImageData(w, h);
   }
 
   getLineDash() {

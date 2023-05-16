@@ -195,6 +195,7 @@ canvas.toDataURL.mockReturnValueOnce(
 - [@lekha](https://github.com/lekha)
 - [@yonatankra](https://github.com/yonatankra)
 - [@LitoMore](https://github.com/LitoMore)
+- [@danielrentz](https://github.com/danielrentz)
 
 ## License
 
