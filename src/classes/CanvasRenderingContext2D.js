@@ -1062,7 +1062,16 @@ export default class CanvasRenderingContext2D {
           arguments.length +
           ' present.'
       );
-    return new ImageData(w, h);
+    if (w == 0 || h == 0)
+      throw new DOMException(
+        "Failed to execute 'getImageData' on '" +
+          this.constructor.name +
+          "': The source " +
+          (w == 0 ? 'width' : 'height') +
+          ' is 0.',
+        'IndexSizeError'
+      );
+    return new ImageData(Math.abs(w), Math.abs(h));
   }
 
   getLineDash() {

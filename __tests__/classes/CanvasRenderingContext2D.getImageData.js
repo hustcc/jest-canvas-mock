@@ -35,4 +35,18 @@ describe('getImageData', () => {
     expect(data.height).toBe(20);
     expect(data.data.length).toBe(10 * 20 * 4);
   });
+
+  it('should return image data from getImageData if size is negative', () => {
+    const data = ctx.getImageData(0, 0, -10, -20);
+    expect(data.width).toBe(10);
+    expect(data.height).toBe(20);
+    expect(data.data.length).toBe(10 * 20 * 4);
+  });
+
+  it('should throw if width or height are zero', () => {
+    expect(() => ctx.getImageData(0, 0, 0, 1)).toThrow(DOMException);
+    expect(() => ctx.getImageData(0, 0, 0, 1)).toThrow('source width is 0');
+    expect(() => ctx.getImageData(0, 0, 1, 0)).toThrow('source height is 0');
+    expect(() => ctx.getImageData(0, 0, 0, 0)).toThrow('source width is 0');
+  });
 });
