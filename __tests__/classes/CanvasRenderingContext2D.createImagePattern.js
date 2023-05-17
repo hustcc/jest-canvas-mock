@@ -63,7 +63,9 @@ describe('createImagePattern', () => {
   it('should not create a pattern if the image bitmap is closed', () => {
     const bmp = new ImageBitmap(400, 300);
     bmp.close();
-    expect(() => ctx.createPattern(bmp, 'repeat')).toThrow(DOMException);
+    const fn = () => ctx.createPattern(bmp, 'repeat');
+    expect(fn).toThrow(DOMException);
+    expect(fn).toThrow('The image source is detached.');
   });
 
   it('should create a valid pattern for all repeat types', () => {

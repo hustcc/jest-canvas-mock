@@ -43,13 +43,16 @@ describe('createRadialGradient', () => {
     );
   });
 
-  it('should not create a radial gradient if any of the radius values are < 0', () => {
-    expect(() => ctx.createRadialGradient(0, 0, -1, 0, 0, 0)).toThrow(
-      DOMException
-    );
-    expect(() => ctx.createRadialGradient(0, 0, 0, 0, 0, -1)).toThrow(
-      DOMException
-    );
+  it('should not create a radial gradient if r0 value is < 0', () => {
+    const fn = () => ctx.createRadialGradient(0, 0, -1, 0, 0, 0);
+    expect(fn).toThrow(DOMException);
+    expect(fn).toThrow('The r0 provided is less than 0.');
+  });
+
+  it('should not create a radial gradient if r1 value is < 0', () => {
+    const fn = () => ctx.createRadialGradient(0, 0, 0, 0, 0, -1);
+    expect(fn).toThrow(DOMException);
+    expect(fn).toThrow('The r1 provided is less than 0.');
   });
 
   it('should create a radial gradient with string values', () => {

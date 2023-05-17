@@ -24,10 +24,12 @@ describe('CanvasGradient', () => {
 
   [Infinity, NaN, -Infinity].forEach((value) => {
     test('CanvasGradient should throw if offset is ' + value, () => {
-      expect(() => {
+      const fn = () => {
         var grd = ctx.createLinearGradient(1, 2, 3, 4);
         grd.addColorStop(value, 'blue');
-      }).toThrow(DOMException);
+      };
+      expect(fn).toThrow(DOMException);
+      expect(fn).toThrow('is outside the range');
     });
   });
 
