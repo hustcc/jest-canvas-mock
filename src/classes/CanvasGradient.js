@@ -9,10 +9,10 @@ export default class CanvasGradient {
     const numoffset = Number(offset);
     if (!Number.isFinite(numoffset) || numoffset < 0 || numoffset > 1) {
       throw new DOMException(
-        'IndexSizeError',
         "Failed to execute 'addColorStop' on 'CanvasGradient': The provided value ('" +
           numoffset +
-          "') is outside the range (0.0, 1.0)"
+          "') is outside the range (0.0, 1.0)",
+        'IndexSizeError'
       );
     }
     try {

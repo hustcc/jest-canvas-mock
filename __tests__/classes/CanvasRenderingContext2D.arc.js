@@ -18,7 +18,7 @@ describe('arc', () => {
     expect(ctx.arc).toBeCalled();
   });
 
-  it("shouldn't accept parameters less than 7", () => {
+  it("shouldn't accept parameters less than 5", () => {
     expect(() => ctx.arc()).toThrow(TypeError);
     expect(() => ctx.arc(1)).toThrow(TypeError);
     expect(() => ctx.arc(1, 2)).toThrow(TypeError);
@@ -27,7 +27,9 @@ describe('arc', () => {
   });
 
   it('should throw when radius is negative', () => {
-    expect(() => ctx.arc(1, 2, -1, 4, 5)).toThrow(DOMException);
+    const fn = () => ctx.arc(1, 2, -1, 4, 5);
+    expect(fn).toThrow(DOMException);
+    expect(fn).toThrow('The radius provided (-1) is negative.');
   });
 
   it('should not throw if any value is `NaN`', () => {

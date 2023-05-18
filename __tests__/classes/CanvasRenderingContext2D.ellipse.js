@@ -28,9 +28,16 @@ describe('ellipse', () => {
     expect(() => ctx.ellipse(1, 2, 3, 4, 5, 6)).toThrow(TypeError);
   });
 
-  it('should throw when radius is negative', () => {
-    expect(() => ctx.ellipse(1, 2, -1, 4, 5, 6, 7)).toThrow(DOMException);
-    expect(() => ctx.ellipse(1, 2, 3, -1, 5, 6, 7)).toThrow(DOMException);
+  it('should throw when major axis radius is negative', () => {
+    const fn = () => ctx.ellipse(1, 2, -1, 4, 5, 6, 7);
+    expect(fn).toThrow(DOMException);
+    expect(fn).toThrow('The major-axis radius provided (-1) is negative.');
+  });
+
+  it('should throw when minor axis radius is negative', () => {
+    const fn = () => ctx.ellipse(1, 2, 3, -1, 5, 6, 7);
+    expect(fn).toThrow(DOMException);
+    expect(fn).toThrow('The minor-axis radius provided (-1) is negative.');
   });
 
   it('should not throw if any value is `NaN`', () => {

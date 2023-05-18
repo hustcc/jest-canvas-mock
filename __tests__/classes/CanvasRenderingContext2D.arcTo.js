@@ -19,11 +19,17 @@ describe('arcTo', () => {
   });
 
   it("shouldn't accept parameters less than 5", () => {
-    expect(() => ctx.arcTo(1, 2, 3)).toThrow(DOMException);
+    expect(() => ctx.arcTo()).toThrow(TypeError);
+    expect(() => ctx.arcTo(1)).toThrow(TypeError);
+    expect(() => ctx.arcTo(1, 2)).toThrow(TypeError);
+    expect(() => ctx.arcTo(1, 2, 3)).toThrow(TypeError);
+    expect(() => ctx.arcTo(1, 2, 3, 4)).toThrow(TypeError);
   });
 
   it('should throw when radius is negative', () => {
-    expect(() => ctx.arcTo(1, 2, -1, 3, -1)).toThrow(TypeError);
+    const fn = () => ctx.arcTo(1, 2, 3, 4, -1);
+    expect(fn).toThrow(DOMException);
+    expect(fn).toThrow('The radius provided (-1) is negative.');
   });
 
   it('should accept 5 parameters regardless of type', () => {

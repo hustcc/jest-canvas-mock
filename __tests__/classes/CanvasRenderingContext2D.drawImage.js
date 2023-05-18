@@ -36,7 +36,9 @@ describe('drawImage', () => {
   it('should not draw if the image bitmap is closed', () => {
     const bmp = new ImageBitmap(100, 100);
     bmp.close();
-    expect(() => ctx.drawImage(bmp, 1, 2)).toThrow(DOMException);
+    const fn = () => ctx.drawImage(bmp, 1, 2);
+    expect(fn).toThrow(DOMException);
+    expect(fn).toThrow('The image source is detached.');
   });
 
   it('should accept 3, 5, and 9 parameters', () => {

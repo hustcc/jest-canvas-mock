@@ -19,13 +19,15 @@ describe('addHitRegion', () => {
   });
 
   it('should throw if called with no parameters', () => {
-    expect(() => ctx.addHitRegion()).toThrow(DOMException);
+    const fn = () => ctx.addHitRegion();
+    expect(fn).toThrow(DOMException);
+    expect(fn).toThrow('Both id and control are null');
   });
 
   it("should throw if fillRule is set and isn't 'evenodd' or 'nonzero'", () => {
-    expect(() =>
-      ctx.addHitRegion({ id: 'test', fillRule: 'wrong!' })
-    ).toThrow();
+    const fn = () => ctx.addHitRegion({ id: 'test', fillRule: 'wrong!' });
+    expect(fn).toThrow(TypeError);
+    expect(fn).toThrow('is not a valid enum value of type CanvasFillRule');
   });
 
   it('should not throw if fillRule is valid', () => {
