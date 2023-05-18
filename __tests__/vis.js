@@ -7,7 +7,6 @@
 describe('vis', () => {
   it('vis can pass', () => {
     // const div = document.createElement('canvas');
-
     // const line = new Line(div, {
     //   data: [
     //     { x: 'A', y: 10 },
@@ -17,13 +16,9 @@ describe('vis', () => {
     //   xField: 'x',
     //   yField: 'y',
     // });
-
     // line.render();
-
     // expect(line.container.querySelector('canvas')).not.toBe(null);
-
     // line.destroy();
-
     // expect(line.container.querySelector('canvas')).toBe(null);
   });
 });
