@@ -55,7 +55,7 @@ export default (win) => {
   if (!win.ImageBitmap) win.ImageBitmap = ImageBitmap;
   if (!win.createImageBitmap) win.createImageBitmap = createImageBitmap;
 
-  mockPrototype();
+  mockPrototype(win);
 
   return win;
 };
