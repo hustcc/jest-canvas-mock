@@ -14,18 +14,39 @@ describe('getImageData', () => {
   });
 
   it('should be callable', () => {
-    ctx.getImageData();
+    ctx.getImageData(0, 0, 10, 20);
     expect(ctx.getImageData).toBeCalled();
   });
 
+  it('should throw if less than 4 parameters are given', () => {
+    expect(() => ctx.getImageData()).toThrow(TypeError);
+    expect(() => ctx.getImageData(0)).toThrow(TypeError);
+    expect(() => ctx.getImageData(0, 0)).toThrow(TypeError);
+    expect(() => ctx.getImageData(0, 0, 0)).toThrow(TypeError);
+  });
+
   it('should return a image data from getImageData', () => {
-    expect(ctx.getImageData()).toBeInstanceOf(ImageData);
+    expect(ctx.getImageData(0, 0, 10, 20)).toBeInstanceOf(ImageData);
   });
 
   it('should return a image data from getImageData of proper size', () => {
-    const data = ctx.getImageData();
-    expect(data.width).toBe(400);
-    expect(data.height).toBe(300);
-    expect(data.data.length).toBe(400 * 300 * 4);
+    const data = ctx.getImageData(0, 0, 10, 20);
+    expect(data.width).toBe(10);
+    expect(data.height).toBe(20);
+    expect(data.data.length).toBe(10 * 20 * 4);
+  });
+
+  it('should return image data from getImageData if size is negative', () => {
+    const data = ctx.getImageData(0, 0, -10, -20);
+    expect(data.width).toBe(10);
+    expect(data.height).toBe(20);
+    expect(data.data.length).toBe(10 * 20 * 4);
+  });
+
+  it('should throw if width or height are zero', () => {
+    expect(() => ctx.getImageData(0, 0, 0, 1)).toThrow(DOMException);
+    expect(() => ctx.getImageData(0, 0, 0, 1)).toThrow('source width is 0');
+    expect(() => ctx.getImageData(0, 0, 1, 0)).toThrow('source height is 0');
+    expect(() => ctx.getImageData(0, 0, 0, 0)).toThrow('source width is 0');
   });
 });
