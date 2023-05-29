@@ -1,3 +1,6 @@
+import { JSDOM } from 'jsdom';
+import mockPrototype from '../../src/mock/prototype';
+
 let canvas;
 
 beforeEach(() => {
@@ -116,5 +119,34 @@ describe('mock', () => {
     const first = canvas.getContext('2d');
     const second = canvas.getContext('2d');
     expect(first).toBe(second);
+  });
+
+  it('should work in both cases where passed in window object has and does not have .HTMLCanvasElement.prototype', () => {
+    // arrange/act
+    const mockWin = new JSDOM().window;
+    mockPrototype();
+    // assert (should not have effected the mockWindow since we did not pass it in )
+    expect(
+      jest.isMockFunction(mockWin.HTMLCanvasElement.prototype.getContext)
+    ).toBe(false);
+    expect(
+      jest.isMockFunction(mockWin.HTMLCanvasElement.prototype.toBlob)
+    ).toBe(false);
+    expect(
+      jest.isMockFunction(mockWin.HTMLCanvasElement.prototype.toDataURL)
+    ).toBe(false);
+
+    // act
+    mockPrototype(mockWin);
+    // assert ( should mock out expected fields in passed in window object )
+    expect(
+      jest.isMockFunction(mockWin.HTMLCanvasElement.prototype.getContext)
+    ).toBe(true);
+    expect(
+      jest.isMockFunction(mockWin.HTMLCanvasElement.prototype.toBlob)
+    ).toBe(true);
+    expect(
+      jest.isMockFunction(mockWin.HTMLCanvasElement.prototype.toDataURL)
+    ).toBe(true);
   });
 });
