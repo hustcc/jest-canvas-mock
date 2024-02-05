@@ -42,6 +42,9 @@ export default class DOMMatrix {
   m44 = 1.0;
 
   constructor(transform) {
+    if (transform instanceof DOMMatrix) {
+      return transform;
+    }
     if (transform && transform.length === 6) {
       this.m11 = transform[0];
       this.m12 = transform[1];
