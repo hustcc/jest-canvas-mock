@@ -29,6 +29,7 @@ const testFuncs = [
   'fillRect',
   'strokeRect',
   'rect',
+  'roundRect',
   'resetTransform',
   'translate',
   'moveTo',
@@ -1512,6 +1513,41 @@ export default class CanvasRenderingContext2D {
 
     const event = createCanvasEvent('restore', getTransformSlice(this), {});
     this._events.push(event);
+  }
+
+  roundRect(x, y, width, height, radii) {
+    if (arguments.length < 4)
+      throw new TypeError(
+        "Failed to execute 'roundRect' on '" +
+          this.constructor.name +
+          "': 4 arguments required, but only " +
+          arguments.length +
+          ' present.'
+      );
+    if (radii.constructor === Array && (radii.length === 0 || radii.length > 4))
+      throw new TypeError(
+        "Failed to execute 'roundRect' on '" +
+          this.constructor.name +
+          "': " +
+          radii.length +
+          ' radii provided. Between one and four radii are necessary.'
+      );
+    if (!Number.isFinite(x + y + width + height)) return;
+
+    const xResult = Number(x);
+    const yResult = Number(y);
+    const widthResult = Number(width);
+    const heightResult = Number(height);
+    const event = createCanvasEvent('roundRect', getTransformSlice(this), {
+      x: xResult,
+      y: yResult,
+      width: widthResult,
+      height: heightResult,
+      radii: radii,
+    });
+
+    this._events.push(event);
+    this._path.push(event);
   }
 
   rotate(angle) {
