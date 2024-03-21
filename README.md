@@ -1,6 +1,8 @@
 # jest-canvas-mock
 
-> Mock `canvas` when run unit test cases with jest. For more browser environment, you can use [jest-electron](https://github.com/hustcc/jest-electron) for real browser runtime.
+> Mock `canvas` when run unit test cases with jest. For more browser environment.
+> - [jest-random-mock](https://github.com/hustcc/jest-random-mock) Mock `Math.random` in jest, with deterministic random generator.
+> - [jest-date-mock](https://github.com/hustcc/jest-date-mock) Mock `Date` when run unit test with jest, test `Date` easily.
 
 [![Build Status](https://github.com/hustcc/jest-canvas-mock/workflows/build/badge.svg)](https://github.com/hustcc/jest-canvas-mock/actions/workflows/build.yml)
 [![Coverage Status](https://coveralls.io/repos/github/hustcc/jest-canvas-mock/badge.svg?branch=master)](https://coveralls.io/github/hustcc/jest-canvas-mock)
