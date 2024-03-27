@@ -83,7 +83,18 @@ const compositeOperations = [
 ];
 
 function getTransformSlice(ctx) {
-  return ctx._transformStack[ctx._stackIndex].slice();
+  return ctx._transformIsIdentic[ctx._stackIndex]
+    ? undefined
+    : ctx._transformStack[ctx._stackIndex].slice()
+  ;
+}
+
+function updateTransformIsIdentic(ctx) {
+  const t = ctx._transformStack[ctx._stackIndex];
+  ctx._transformIsIdentic[ctx._stackIndex] = (
+    t[0] == 1 && t[1] == 0 && t[2] == 0 &&
+    t[3] == 1 && t[4] == 0 && t[5] == 0
+  );
 }
 
 /**
@@ -130,7 +141,8 @@ export default class CanvasRenderingContext2D {
    * This array keeps track of the current path, so that fill and stroke operations can store the
    * path.
    */
-  _path = [createCanvasEvent('beginPath', [1, 0, 0, 1, 0, 0], {})];
+  // TODO why is the initial _path array not empty?
+  _path = [createCanvasEvent('beginPath', undefined, {})];
   __getPath() {
     return this._path.slice();
   }
@@ -175,6 +187,7 @@ export default class CanvasRenderingContext2D {
   _textAlignStack = ['start'];
   _textBaselineStack = ['alphabetic'];
   _transformStack = [[1, 0, 0, 1, 0, 0]];
+  _transformIsIdentic = [true];
   _clipStack = [[]];
 
   constructor(canvas) {
@@ -654,6 +667,9 @@ export default class CanvasRenderingContext2D {
       this._transformStack[this._stackIndex][3] = value.d;
       this._transformStack[this._stackIndex][4] = value.e;
       this._transformStack[this._stackIndex][5] = value.f;
+
+      updateTransformIsIdentic(this);
+
       const event = createCanvasEvent(
         'currentTransform',
         getTransformSlice(this),
@@ -1472,7 +1488,9 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][4] = 0;
     this._transformStack[this._stackIndex][5] = 0;
 
-    const event = createCanvasEvent('resetTransform', getTransformSlice(this), {
+    this._transformIsIdentic[this._stackIndex] = true;
+
+    const event = createCanvasEvent('resetTransform', undefined, {
       a: 1,
       b: 0,
       c: 0,
@@ -1487,6 +1505,7 @@ export default class CanvasRenderingContext2D {
     if (this._stackIndex <= 0) return;
 
     this._transformStack.pop();
+    this._transformIsIdentic.pop();
     this._clipStack.pop();
     this._directionStack.pop();
     this._fillStyleStack.pop();
@@ -1570,6 +1589,8 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][2] = c * cos - a * sin;
     this._transformStack[this._stackIndex][3] = d * cos - b * sin;
 
+    updateTransformIsIdentic(this);
+
     const event = createCanvasEvent('rotate', getTransformSlice(this), {
       angle,
     });
@@ -1579,6 +1600,7 @@ export default class CanvasRenderingContext2D {
   save() {
     const stackIndex = this._stackIndex;
     this._transformStack.push(this._transformStack[stackIndex].slice());
+    this._transformIsIdentic.push(this._transformIsIdentic[stackIndex]);
     this._directionStack.push(this._directionStack[stackIndex]);
     this._fillStyleStack.push(this._fillStyleStack[stackIndex]);
     this._filterStack.push(this._filterStack[stackIndex]);
@@ -1630,6 +1652,8 @@ export default class CanvasRenderingContext2D {
       this._transformStack[this._stackIndex][1] *= xResult;
       this._transformStack[this._stackIndex][2] *= yResult;
       this._transformStack[this._stackIndex][3] *= yResult;
+
+      updateTransformIsIdentic(this);
 
       const event = createCanvasEvent('scale', getTransformSlice(this), {
         x: xResult,
@@ -1737,6 +1761,8 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][3] = d;
     this._transformStack[this._stackIndex][4] = e;
     this._transformStack[this._stackIndex][5] = f;
+
+    updateTransformIsIdentic(this);
 
     const event = createCanvasEvent('setTransform', getTransformSlice(this), {
       a,
@@ -2000,6 +2026,8 @@ export default class CanvasRenderingContext2D {
     this._transformStack[this._stackIndex][4] = sa * e + sc * f + se;
     this._transformStack[this._stackIndex][5] = sb * e + sd * f + sf;
 
+    updateTransformIsIdentic(this);
+
     const event = createCanvasEvent('transform', getTransformSlice(this), {
       a,
       b,
@@ -2030,6 +2058,8 @@ export default class CanvasRenderingContext2D {
     if (Number.isFinite(xResult + yResult)) {
       this._transformStack[this._stackIndex][4] += a * xResult + c * yResult;
       this._transformStack[this._stackIndex][5] += b * xResult + d * yResult;
+
+      updateTransformIsIdentic(this);
 
       const event = createCanvasEvent('translate', getTransformSlice(this), {
         x: xResult,

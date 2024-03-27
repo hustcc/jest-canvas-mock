@@ -20,6 +20,7 @@ export default class Path2D {
   _events = [];
   _stackIndex = 0;
   _transformStack = [[1, 0, 0, 1, 0, 0]];
+  _transformIsIdentic = [true];
 
   constructor() {
     borrowedFromCanvas.forEach((key) => {
