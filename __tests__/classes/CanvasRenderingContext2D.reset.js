@@ -19,6 +19,6 @@ describe('reset', () => {
   });
 
   it('should throw if any parameters are given', () => {
-    expect(() => ctx.reset(1)).toThrow(TypeError);
+    expect(() => ctx.reset(1)).toThrow(/Failed to execute 'reset' on/);
   });
 });
