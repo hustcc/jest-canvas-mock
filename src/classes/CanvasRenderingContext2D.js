@@ -1458,8 +1458,8 @@ export default class CanvasRenderingContext2D {
       );
     }
 
-    const event = createCanvasEvent('reset')
-    this._events.push(event)
+    const event = createCanvasEvent('reset');
+    this._events.push(event);
   }
 
   removeHitRegion(id) {

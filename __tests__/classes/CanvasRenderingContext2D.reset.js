@@ -14,11 +14,11 @@ describe('reset', () => {
   });
 
   it('should be callable', () => {
-    ctx.rect();
+    ctx.reset();
     expect(ctx.reset).toHaveBeenCalled();
   });
 
   it('should throw if any parameters are given', () => {
-    expect(() => ctx.rect(1)).toThrow(TypeError);
+    expect(() => ctx.reset(1)).toThrow(TypeError);
   });
 });
