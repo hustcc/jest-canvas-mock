@@ -29,6 +29,7 @@ const testFuncs = [
   'fillRect',
   'strokeRect',
   'rect',
+  'reset',
   'roundRect',
   'resetTransform',
   'translate',
@@ -1444,6 +1445,21 @@ export default class CanvasRenderingContext2D {
 
     this._events.push(event);
     this._path.push(event);
+  }
+
+  reset() {
+    if (arguments.length > 0) {
+      throw new TypeError(
+        "Failed to execute 'reset' on '" +
+          this.constructor.name +
+          "': 0 arguments required, but " +
+          arguments.length +
+          ' present.'
+      );
+    }
+
+    const event = createCanvasEvent('reset');
+    this._events.push(event);
   }
 
   removeHitRegion(id) {
