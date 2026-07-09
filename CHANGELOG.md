@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Version 2.5.8
+
+- fix(CanvasRenderingContext2D): change miterLimit event type from 'lineWidth' to 'miterLimit' (#127)
+- feat(canvas): add roundRect (#105) (#119)
+- fix(jest-canvas-mock): improve constructor for DOMMatrix (#118)
+- chore: add LICENSE (#125)
+- docs: update readme
+
+> Note: version numbers 2.5.3, 2.6.3 and 2.7.3 already exist on the npm registry (published outside the normal release flow), so this release skips ahead to 2.5.8.
+
 ## Version 2.5.0
 
 - feat: export a function to re-initialize mocks (#98)
