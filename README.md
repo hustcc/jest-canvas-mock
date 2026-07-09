@@ -1,6 +1,7 @@
 # jest-canvas-mock
 
 > Mock `canvas` when run unit test cases with jest. For more browser environment.
+>
 > - [jest-random-mock](https://github.com/hustcc/jest-random-mock) Mock `Math.random` in jest, with deterministic random generator.
 > - [jest-date-mock](https://github.com/hustcc/jest-date-mock) Mock `Date` when run unit test with jest, test `Date` easily.
 
