@@ -1306,7 +1306,7 @@ export default class CanvasRenderingContext2D {
 
     if (Number.isFinite(result) && result > 0) {
       this._miterLimitStack[this._stackIndex] = result;
-      const event = createCanvasEvent('lineWidth', getTransformSlice(this), {
+      const event = createCanvasEvent('miterLimit', getTransformSlice(this), {
         value: result,
       });
       this._events.push(event);
