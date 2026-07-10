@@ -130,6 +130,13 @@ export default class CanvasRenderingContext2D {
    * This array keeps track of the current path, so that fill and stroke operations can store the
    * path.
    */
+  // NOTE the initial _path array is not empty
+  // for consistency between the CanvasRenderingContext2D class and the Path class
+  // but this is probably wrong because:
+  // - the path2d.beginPath method does not exist
+  // - the _path array should only contain events that were actually emitted
+  // see also
+  // https://github.com/hustcc/jest-canvas-mock/pull/77
   _path = [createCanvasEvent('beginPath', [1, 0, 0, 1, 0, 0], {})];
   __getPath() {
     return this._path.slice();
