@@ -19,7 +19,9 @@ export default class Path2D {
   _path = [];
   _events = [];
   _stackIndex = 0;
+  // TODO identity transform or undefined or null
   _transformStack = [[1, 0, 0, 1, 0, 0]];
+  _transformIsIdentic = [true];
 
   constructor() {
     borrowedFromCanvas.forEach((key) => {

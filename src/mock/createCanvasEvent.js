@@ -6,7 +6,9 @@
  * @example
  * interface CanvasRenderingContext2DEvent {
  *   type: string;
- *   transform: [number, number, number, number, number, number]; // the resulting current transform
+ *   // the resulting current transform
+ *   // when undefined, defaults to the identity transform [1, 0, 0, 1, 0, 0]
+ *   transform?: [number, number, number, number, number, number];
  *   props: {
  *     // if the event is a property was set, `event.props.value` would be set
  *     [propName: string]: any;
