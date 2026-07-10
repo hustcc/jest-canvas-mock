@@ -30,14 +30,7 @@ Array [
     "props": Object {
       "value": "rtl",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "direction",
   },
 ]
@@ -58,26 +51,12 @@ Array [
             "x": 100,
             "y": 101,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "arc",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "drawFocusIfNeeded",
   },
 ]
@@ -90,14 +69,7 @@ Array [
       "element": <button />,
       "path": null,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "drawFocusIfNeeded",
   },
 ]
@@ -121,14 +93,7 @@ Array [
       "sx": 0,
       "sy": 0,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "drawImage",
   },
 ]
@@ -152,14 +117,7 @@ Array [
       "sx": 0,
       "sy": 0,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "drawImage",
   },
 ]
@@ -183,14 +141,7 @@ Array [
       "sx": 0,
       "sy": 0,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "drawImage",
   },
 ]
@@ -200,14 +151,7 @@ exports[`__getEvents should have a event when fill() is called 1`] = `
 Array [
   Object {
     "props": Object {},
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "beginPath",
   },
   Object {
@@ -219,14 +163,7 @@ Array [
       "x": 100,
       "y": 101,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "arc",
   },
   Object {
@@ -235,14 +172,7 @@ Array [
       "path": Array [
         Object {
           "props": Object {},
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "beginPath",
         },
         Object {
@@ -254,26 +184,12 @@ Array [
             "x": 100,
             "y": 101,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "arc",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "fill",
   },
 ]
@@ -283,14 +199,7 @@ exports[`__getEvents should have a event when fill() is called with a fillRule 1
 Array [
   Object {
     "props": Object {},
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "beginPath",
   },
   Object {
@@ -302,14 +211,7 @@ Array [
       "x": 100,
       "y": 101,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "arc",
   },
   Object {
@@ -318,14 +220,7 @@ Array [
       "path": Array [
         Object {
           "props": Object {},
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "beginPath",
         },
         Object {
@@ -337,26 +232,12 @@ Array [
             "x": 100,
             "y": 101,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "arc",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "fill",
   },
 ]
@@ -371,14 +252,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "fillRect",
   },
 ]
@@ -399,26 +273,12 @@ Array [
             "x": 100,
             "y": 101,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "arc",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "fill",
   },
 ]
@@ -433,14 +293,7 @@ Array [
       "x": 0,
       "y": 0,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "fillText",
   },
 ]
@@ -455,14 +308,7 @@ Array [
       "x": 0,
       "y": 0,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "fillText",
   },
 ]
@@ -483,26 +329,12 @@ Array [
             "x": 100,
             "y": 101,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "arc",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "fill",
   },
 ]
@@ -521,14 +353,7 @@ Array [
       "path": undefined,
       "role": undefined,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "addHitRegion",
   },
 ]
@@ -545,14 +370,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "arc",
   },
 ]
@@ -568,14 +386,7 @@ Array [
       "cpy2": 4,
       "radius": 5,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "arcTo",
   },
 ]
@@ -585,14 +396,7 @@ exports[`__getEvents should have an event when beginPath is called 1`] = `
 Array [
   Object {
     "props": Object {},
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "beginPath",
   },
 ]
@@ -609,14 +413,7 @@ Array [
       "x": 5,
       "y": 6,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "bezierCurveTo",
   },
 ]
@@ -626,14 +423,7 @@ exports[`__getEvents should have an event when clearHitRegions is called 1`] = `
 Array [
   Object {
     "props": Object {},
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "clearHitRegions",
   },
 ]
@@ -648,14 +438,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "clearRect",
   },
 ]
@@ -670,14 +453,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "rect",
   },
   Object {
@@ -686,14 +462,7 @@ Array [
       "path": Array [
         Object {
           "props": Object {},
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "beginPath",
         },
         Object {
@@ -703,26 +472,12 @@ Array [
             "x": 1,
             "y": 2,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "rect",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "clip",
   },
 ]
@@ -737,14 +492,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "rect",
   },
   Object {
@@ -753,14 +501,7 @@ Array [
       "path": Array [
         Object {
           "props": Object {},
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "beginPath",
         },
         Object {
@@ -770,26 +511,12 @@ Array [
             "x": 1,
             "y": 2,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "rect",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "clip",
   },
 ]
@@ -810,26 +537,12 @@ Array [
             "x": 100,
             "y": 101,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "arc",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "clip",
   },
 ]
@@ -850,26 +563,12 @@ Array [
             "x": 100,
             "y": 101,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "arc",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "clip",
   },
 ]
@@ -879,14 +578,7 @@ exports[`__getEvents should have an event when closePath is called 1`] = `
 Array [
   Object {
     "props": Object {},
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "closePath",
   },
 ]
@@ -899,14 +591,7 @@ Array [
       "height": 100,
       "width": 100,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "createImageData",
   },
 ]
@@ -921,14 +606,7 @@ Array [
       "y0": 2,
       "y1": 4,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "createLinearGradient",
   },
 ]
@@ -945,14 +623,7 @@ Array [
       />,
       "type": "no-repeat",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "createPattern",
   },
 ]
@@ -967,14 +638,7 @@ Array [
       "y0": 2,
       "y1": 4,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "createLinearGradient",
   },
 ]
@@ -993,14 +657,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "ellipse",
   },
 ]
@@ -1012,14 +669,7 @@ Array [
     "props": Object {
       "value": "#0000ff",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "fillStyle",
   },
 ]
@@ -1031,14 +681,7 @@ Array [
     "props": Object {
       "value": "test",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "filter",
   },
 ]
@@ -1050,14 +693,7 @@ Array [
     "props": Object {
       "value": "16px \\"Comic Sans\\"",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "font",
   },
 ]
@@ -1069,14 +705,7 @@ Array [
     "props": Object {
       "value": 0.5,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "globalAlpha",
   },
 ]
@@ -1090,28 +719,14 @@ Array [
       "path": Array [
         Object {
           "props": Object {},
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "beginPath",
         },
       ],
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "isPointInPath",
   },
 ]
@@ -1124,28 +739,14 @@ Array [
       "path": Array [
         Object {
           "props": Object {},
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "beginPath",
         },
       ],
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "isPointInPath",
   },
 ]
@@ -1157,14 +758,7 @@ Array [
     "props": Object {
       "value": "round",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "lineCap",
   },
 ]
@@ -1176,14 +770,7 @@ Array [
     "props": Object {
       "value": 10,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "lineDashOffset",
   },
 ]
@@ -1195,14 +782,7 @@ Array [
     "props": Object {
       "value": "round",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "lineJoin",
   },
 ]
@@ -1215,14 +795,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "lineTo",
   },
 ]
@@ -1234,14 +807,7 @@ Array [
     "props": Object {
       "value": 10,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "lineWidth",
   },
 ]
@@ -1253,14 +819,7 @@ Array [
     "props": Object {
       "text": "hello world!",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "measureText",
   },
 ]
@@ -1272,14 +831,7 @@ Array [
     "props": Object {
       "value": 12,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "miterLimit",
   },
 ]
@@ -1292,14 +844,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "moveTo",
   },
 ]
@@ -1316,14 +861,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "putImageData",
   },
 ]
@@ -1340,14 +878,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "putImageData",
   },
 ]
@@ -1362,14 +893,7 @@ Array [
       "x": 3,
       "y": 4,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "quadraticCurveTo",
   },
 ]
@@ -1384,14 +908,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "rect",
   },
 ]
@@ -1403,14 +920,7 @@ Array [
     "props": Object {
       "id": "test",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "removeHitRegion",
   },
 ]
@@ -1427,14 +937,7 @@ Array [
       "e": 0,
       "f": 0,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "resetTransform",
   },
 ]
@@ -1512,14 +1015,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      2,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "scale",
   },
 ]
@@ -1532,26 +1028,12 @@ Array [
       "path": Array [
         Object {
           "props": Object {},
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "beginPath",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "scrollPathIntoView",
   },
 ]
@@ -1570,14 +1052,7 @@ Array [
         3,
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "setLineDash",
   },
 ]
@@ -1613,14 +1088,7 @@ Array [
     "props": Object {
       "value": 1,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "shadowBlur",
   },
 ]
@@ -1630,14 +1098,7 @@ exports[`__getEvents should have an event when stroke is called 1`] = `
 Array [
   Object {
     "props": Object {},
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "beginPath",
   },
   Object {
@@ -1649,14 +1110,7 @@ Array [
       "x": 100,
       "y": 101,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "arc",
   },
   Object {
@@ -1664,14 +1118,7 @@ Array [
       "path": Array [
         Object {
           "props": Object {},
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "beginPath",
         },
         Object {
@@ -1683,26 +1130,12 @@ Array [
             "x": 100,
             "y": 101,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "arc",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "stroke",
   },
 ]
@@ -1722,26 +1155,12 @@ Array [
             "x": 100,
             "y": 101,
           },
-          "transform": Array [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0,
-          ],
+          "transform": undefined,
           "type": "arc",
         },
       ],
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "stroke",
   },
 ]
@@ -1756,14 +1175,7 @@ Array [
       "x": 1,
       "y": 2,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "strokeRect",
   },
 ]
@@ -1778,14 +1190,7 @@ Array [
       "x": 0,
       "y": 0,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "strokeText",
   },
 ]
@@ -1800,14 +1205,7 @@ Array [
       "x": 0,
       "y": 0,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "strokeText",
   },
 ]
@@ -1819,14 +1217,7 @@ Array [
     "props": Object {
       "value": "source-in",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "globalCompositeOperation",
   },
 ]
@@ -1838,14 +1229,7 @@ Array [
     "props": Object {
       "value": true,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "imageSmoothingEnabled",
   },
 ]
@@ -1857,14 +1241,7 @@ Array [
     "props": Object {
       "value": "high",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "imageSmoothingQuality",
   },
 ]
@@ -1876,14 +1253,7 @@ Array [
     "props": Object {
       "value": "#ff0000",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "shadowColor",
   },
 ]
@@ -1895,14 +1265,7 @@ Array [
     "props": Object {
       "value": 10,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "shadowOffsetX",
   },
 ]
@@ -1914,14 +1277,7 @@ Array [
     "props": Object {
       "value": 10,
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "shadowOffsetY",
   },
 ]
@@ -1933,14 +1289,7 @@ Array [
     "props": Object {
       "value": "#0000ff",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "strokeStyle",
   },
 ]
@@ -1952,14 +1301,7 @@ Array [
     "props": Object {
       "value": "right",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "textAlign",
   },
 ]
@@ -1971,14 +1313,7 @@ Array [
     "props": Object {
       "value": "hanging",
     },
-    "transform": Array [
-      1,
-      0,
-      0,
-      1,
-      0,
-      0,
-    ],
+    "transform": undefined,
     "type": "textBaseline",
   },
 ]
